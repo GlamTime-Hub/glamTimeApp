@@ -6,15 +6,18 @@ import {
   Theme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
-import { Platform } from "react-native";
+import { Dimensions, Platform } from "react-native";
 import { PortalHost } from "@rn-primitives/portal";
 import { NAV_THEME } from "@/lib/constants";
 import { useColorScheme } from "@/lib/useColorScheme";
 import { setAndroidNavigationBar } from "@/lib/android-navigation-bar";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { useLayoutEffect } from "react";
+import Toast, { BaseToast, ToastConfig } from "react-native-toast-message";
+
+const screenWidth = Dimensions.get("window").width;
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -30,19 +33,31 @@ export {
   ErrorBoundary,
 } from "expo-router";
 
+const toastConfig: ToastConfig = {
+  success: (props) => (
+    <BaseToast
+      {...props}
+      style={{
+        width: screenWidth,
+        padding: 0,
+        margin: 0,
+        borderLeftColor: "#FE6700",
+        borderRadius: 0,
+      }}
+      text1Style={{ fontSize: 18, color: "#FE6700" }}
+      text2Style={{ fontSize: 14 }}
+    />
+  ),
+};
+
 export default function RootLayout() {
   const hasMounted = React.useRef(false);
   const { colorScheme, isDarkColorScheme } = useColorScheme();
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
 
-  useIsomorphicLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (hasMounted.current) {
       return;
-    }
-
-    if (Platform.OS === "web") {
-      // Adds the background color to the html element to prevent white background on overscroll.
-      document.documentElement.classList.add("bg-background");
     }
     setAndroidNavigationBar(colorScheme);
     setIsColorSchemeLoaded(true);
@@ -56,21 +71,31 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
       <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-      <Stack>
+      <Stack initialRouteName="glam/(tabs)">
         <Stack.Screen
-          name="index"
+          name="login/index"
           options={{
-            title: "Starter Base",
-            headerRight: () => <ThemeToggle />,
+            title: "Conéctate con tu estilo",
+            headerTitleAlign: "center",
+            headerBackButtonDisplayMode: "minimal",
+          }}
+        />
+        <Stack.Screen
+          name="sign-up"
+          options={{
+            headerTitleAlign: "center",
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="glam/(tabs)"
+          options={{
+            headerShown: false,
           }}
         />
       </Stack>
       <PortalHost />
+      <Toast topOffset={0} config={toastConfig} />
     </ThemeProvider>
   );
 }
-
-const useIsomorphicLayoutEffect =
-  Platform.OS === "web" && typeof window === "undefined"
-    ? React.useEffect
-    : React.useLayoutEffect;

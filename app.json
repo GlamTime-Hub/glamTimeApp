@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.glamTimeApps"
     },
     "web": {
       "bundler": "metro",
@@ -31,6 +32,24 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "@react-native-community/datetimepicker",
+        {
+          "android": {
+            "datePicker": {
+              "textColor": "#000000",
+              "colorAccent": {
+                "light": "#000000",
+                "dark": "#FFFFFF"
+              },
+              "textColorPrimary": {
+                "light": "#FFFFFF",
+                "dark": "#000000"
+              }
+            }
+          }
         }
       ]
     ],
