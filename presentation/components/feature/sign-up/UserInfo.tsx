@@ -57,7 +57,7 @@ export const UserInfo = () => {
   };
 
   return (
-    <View className="px-10 py-5 h-full flex justify-between">
+    <View className="px-10 py-5 flex-1 flex justify-between">
       <View>
         <Text className="text-center text-2xl font-bold my-4">
           ¡Hey! Cuéntanos
@@ -250,7 +250,7 @@ export const UserInfo = () => {
           )}
         </View>
       </View>
-      <View className="mb-5">
+      <View>
         <Button onPress={handleSubmit(onSubmit)}>
           <Text>Continuar</Text>
         </Button>

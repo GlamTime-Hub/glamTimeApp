@@ -14,7 +14,7 @@ export const Credentials = () => {
   const isIos = Platform.OS === "ios";
 
   return (
-    <View className="px-10 py-5 h-full flex justify-between">
+    <View className="px-10 py-5 flex-1 flex justify-between">
       <View>
         <Text className="text-center text-2xl font-bold my-4">
           Planea tu look sin estrés
@@ -93,7 +93,7 @@ export const Credentials = () => {
         </View>
       </View>
 
-      <View className="mb-10">
+      <View>
         <Button onPress={handleSubmit(onSubmit)}>
           <Text>Continuar</Text>
         </Button>

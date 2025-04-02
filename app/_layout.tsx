@@ -6,7 +6,7 @@ import {
   Theme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { router, Stack } from "expo-router";
+import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import * as React from "react";
 import { Dimensions, Platform } from "react-native";
@@ -40,11 +40,25 @@ const toastConfig: ToastConfig = {
       style={{
         width: screenWidth,
         padding: 0,
-        margin: 0,
+        marginTop: Platform.OS === "android" ? 45 : 0,
         borderLeftColor: "#FE6700",
         borderRadius: 0,
       }}
       text1Style={{ fontSize: 18, color: "#FE6700" }}
+      text2Style={{ fontSize: 14 }}
+    />
+  ),
+  error: (props) => (
+    <BaseToast
+      {...props}
+      style={{
+        width: screenWidth,
+        padding: 0,
+        marginTop: 45,
+        borderLeftColor: "red",
+        borderRadius: 0,
+      }}
+      text1Style={{ fontSize: 18, color: "red" }}
       text2Style={{ fontSize: 14 }}
     />
   ),
@@ -67,6 +81,8 @@ export default function RootLayout() {
   if (!isColorSchemeLoaded) {
     return null;
   }
+
+  console.log("perrazao");
 
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>

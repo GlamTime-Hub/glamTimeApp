@@ -16,6 +16,8 @@ import {
   ListFilter,
   ArrowDownWideNarrow,
   Share2,
+  MapPinned,
+  MessageCircleMore,
 } from "lucide-react-native";
 import { iconWithClassName } from "./iconWithClassName";
 
@@ -36,6 +38,8 @@ iconWithClassName(Star);
 iconWithClassName(ListFilter);
 iconWithClassName(ArrowDownWideNarrow);
 iconWithClassName(Share2);
+iconWithClassName(MapPinned);
+iconWithClassName(MessageCircleMore);
 
 export {
   Share2,
@@ -55,4 +59,6 @@ export {
   Star,
   ListFilter,
   ArrowDownWideNarrow,
+  MapPinned,
+  MessageCircleMore,
 };

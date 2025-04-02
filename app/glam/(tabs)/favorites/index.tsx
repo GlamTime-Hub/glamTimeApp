@@ -1,10 +1,5 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { FavoritesTabs } from "@/presentation/components/feature";
 
 export default function FavoritesScreen() {
-  return (
-    <View>
-      <Text>FavoritesScreen</Text>
-    </View>
-  );
+  return <FavoritesTabs />;
 }

@@ -18,19 +18,6 @@ export default function _layout() {
           borderBottomWidth: 1,
           borderBottomColor: isDarkColorScheme ? "#FFF" : "transparent",
         },
-        tabBarStyle: {
-          position: "absolute",
-          bottom: 20,
-          left: 20,
-          right: 20,
-          borderRadius: 25,
-          height: 60,
-          marginHorizontal: 10,
-          display: "flex",
-          flexDirection: "row",
-          borderWidth: 1,
-          borderColor: isDarkColorScheme ? "#FFF" : "transparent",
-        },
         tabBarItemStyle: {
           flex: 1,
           alignItems: "center",
@@ -50,7 +37,6 @@ export default function _layout() {
           tabBarIcon: ({ focused }) => (
             <House
               className={cn("text-foreground")}
-              size={focused ? 30 : 23}
               strokeWidth={focused ? 3 : 1.25}
             />
           ),

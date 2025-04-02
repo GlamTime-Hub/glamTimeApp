@@ -1,39 +1,46 @@
 import { ThemeToggle } from "@/presentation/components/ThemeToggle";
 import { Stack } from "expo-router";
 
-const BusinessScreen = () => {
+const DetailScreen = () => {
   return (
     <Stack
-      initialRouteName="list/index"
+      initialRouteName="home/[id]"
       screenOptions={{
         headerRight: () => <ThemeToggle />,
       }}
     >
       <Stack.Screen
-        name="list/index"
-        options={{
-          headerTitleAlign: "center",
-          title: "Negocios",
-        }}
-      />
-      <Stack.Screen
-        name="detail"
+        name="home/[id]"
         options={{
           headerTitleAlign: "center",
           title: "Detalle",
-          headerShown: false,
         }}
       />
       <Stack.Screen
-        name="filter/index"
+        name="booking"
+        options={{
+          headerTitleAlign: "center",
+          title: "Reserva tu Cita",
+        }}
+      />
+      <Stack.Screen
+        name="comments/[id]"
         options={{
           headerTitleAlign: "center",
           presentation: "modal",
-          title: "Filtrar por",
+          title: "Comentarios",
+        }}
+      />
+      <Stack.Screen
+        name="professional-detail/[id]"
+        options={{
+          headerTitleAlign: "center",
+          presentation: "modal",
+          title: "Detalle de profesional",
         }}
       />
     </Stack>
   );
 };
 
-export default BusinessScreen;
+export default DetailScreen;

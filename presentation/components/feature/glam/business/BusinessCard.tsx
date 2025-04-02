@@ -16,11 +16,12 @@ interface Props {
     name: string;
     imageUrl: string;
     rating: number;
+    liked: boolean;
   };
 }
 
 const BusinessCard = ({ business }: Props) => {
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(business.liked);
 
   const toggleLike = () => setLiked(!liked);
 
@@ -32,7 +33,7 @@ const BusinessCard = ({ business }: Props) => {
         className="w-full h-[300px] rounded-lg"
         onPress={() =>
           router.push({
-            pathname: "/glam/(tabs)/business/detail/[id]",
+            pathname: "/glam/(tabs)/business/detail/home/[id]",
             params: { id: 1 },
           })
         }

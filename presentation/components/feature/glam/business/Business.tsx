@@ -6,7 +6,7 @@ import { router } from "expo-router";
 
 export const Business = () => {
   return (
-    <View className="my-10">
+    <View className="my-10 flex-1">
       <View className="px-10 ">
         <Text className="text-center">
           Te mostramos negocios según tu ubicación.
@@ -19,7 +19,7 @@ export const Business = () => {
 
       <View className="mt-4 flex flex-row justify-between">
         <TouchableOpacity
-          className="flex flex-row px-10 items-center gap-2"
+          className="flex flex-row px-4 items-center gap-2"
           onPress={() => router.push("/glam/business/filter")}
         >
           <ListFilter size={25} color={"#232427"} />
@@ -27,42 +27,47 @@ export const Business = () => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          className="flex flex-row px-10 items-center gap-2"
+          className="flex flex-row px-4 items-center gap-2"
           onPress={() => console.log("")}
         >
           <ArrowDownWideNarrow size={25} color={"#232427"} />
           <Text>Ordenar</Text>
         </TouchableOpacity>
       </View>
-      <ScrollView
-        className="px-10 mt-4 max-h-[700px]"
-        showsVerticalScrollIndicator={false}
-      >
-        <BusinessCard
-          business={{
-            name: "Peluquería Luxury",
-            imageUrl:
-              "https://images.pexels.com/photos/31323301/pexels-photo-31323301/free-photo-of-diseno-interior-de-peluqueria-moderna-y-elegante.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            rating: 5,
-          }}
-        />
-        <BusinessCard
-          business={{
-            name: "Spa y Masajes",
-            imageUrl:
-              "https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            rating: 5,
-          }}
-        />
-        <BusinessCard
-          business={{
-            name: "Belleza y algo más",
-            imageUrl:
-              "https://images.pexels.com/photos/2061820/pexels-photo-2061820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            rating: 5,
-          }}
-        />
-      </ScrollView>
+      <View className="flex-1">
+        <ScrollView
+          className="px-4 mt-4 h-full "
+          showsVerticalScrollIndicator={false}
+        >
+          <BusinessCard
+            business={{
+              name: "Peluquería Luxury",
+              imageUrl:
+                "https://images.pexels.com/photos/31323301/pexels-photo-31323301/free-photo-of-diseno-interior-de-peluqueria-moderna-y-elegante.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+              rating: 5,
+              liked: true,
+            }}
+          />
+          <BusinessCard
+            business={{
+              name: "Spa y Masajes",
+              imageUrl:
+                "https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+              rating: 5,
+              liked: false,
+            }}
+          />
+          <BusinessCard
+            business={{
+              name: "Belleza y algo más",
+              imageUrl:
+                "https://images.pexels.com/photos/2061820/pexels-photo-2061820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+              rating: 5,
+              liked: true,
+            }}
+          />
+        </ScrollView>
+      </View>
     </View>
   );
 };

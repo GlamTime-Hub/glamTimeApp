@@ -2,14 +2,24 @@ import { cn } from "@/lib/util";
 import * as AvatarPrimitive from "@rn-primitives/avatar";
 import * as React from "react";
 
+const sizeClasses: Record<string, string> = {
+  default: "h-20 w-20",
+  sm: "h-10 w-10",
+  md: "h-16 w-16",
+  lg: "h-20 w-20",
+  xl: "h-28 w-28",
+  "2xl": "h-36 w-36",
+};
+
 const Avatar = React.forwardRef<
   AvatarPrimitive.RootRef,
-  AvatarPrimitive.RootProps
->(({ className, ...props }, ref) => (
+  AvatarPrimitive.RootProps & { size?: keyof typeof sizeClasses }
+>(({ className, size = "default", ...props }, ref) => (
   <AvatarPrimitive.Root
     ref={ref}
     className={cn(
-      "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",
+      "relative flex shrink-0 overflow-hidden rounded-full",
+      sizeClasses[size],
       className
     )}
     {...props}
