@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 
-export default function FilterScreen() {
+export default function MyBusinessScreen() {
   return (
     <View>
-      <Text>FilterScreen</Text>
+      <Text>MyBusinessScreen</Text>
     </View>
   );
 }

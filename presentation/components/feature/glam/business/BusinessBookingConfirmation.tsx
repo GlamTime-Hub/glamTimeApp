@@ -10,6 +10,7 @@ import { Text } from "@/presentation/components/ui/text";
 import { useBusinessBookingStore } from "@/presentation/store/useBusinessBooking.store";
 import { formatTime } from "@/presentation/utils/format-time.util";
 import { cn } from "@/lib/util";
+import { BusinessBookingConfirmationCard } from "../shared/BusinessBookingConfirmationCard";
 
 export const BusinessBookingConfirmation = () => {
   const { slot, service, professional } = useBusinessBookingStore();
@@ -37,49 +38,11 @@ export const BusinessBookingConfirmation = () => {
       </View>
 
       <View className="flex-1">
-        <Card>
-          <CardContent className="p-0 m-0">
-            <View className="flex p-6 gap-4 flex-row items-center justify-center">
-              <Avatar alt="Imagen de profesional" size="xl">
-                <AvatarImage
-                  source={{
-                    uri: professional.urlPhoto,
-                  }}
-                ></AvatarImage>
-                <AvatarFallback>
-                  <Text>ZN</Text>
-                </AvatarFallback>
-              </Avatar>
-
-              <View>
-                <View className="flex flex-row items-center">
-                  <Text className="font-bold text-lg">Profesional: </Text>
-                  <Text className="text-lg">{professional.name}</Text>
-                </View>
-
-                <View className="flex flex-row items-center">
-                  <Text className="font-bold text-lg">Servicio: </Text>
-                  <Text className="text-lg">{service.name}</Text>
-                </View>
-
-                <View className="flex flex-row items-center">
-                  <Text className="font-bold text-lg">Dia: </Text>
-                  <Text className="text-lg">{slot.date}</Text>
-                </View>
-
-                <View className="flex flex-row items-center">
-                  <Text className="font-bold text-lg">Hora: </Text>
-                  <View className="flex flex-row">
-                    <Text>{formatTime(slot.startTime)}</Text>
-                    <Text>-</Text>
-                    <Text>{formatTime(slot.endTime)}</Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </CardContent>
-        </Card>
-
+        <BusinessBookingConfirmationCard
+          service={service}
+          professional={professional}
+          slot={slot}
+        />
         <Text className="text-center font-bold text-xl mt-4">
           !Nos vemos pronto¡
         </Text>

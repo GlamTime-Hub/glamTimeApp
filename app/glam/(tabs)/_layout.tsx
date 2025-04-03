@@ -3,6 +3,8 @@ import { Tabs } from "expo-router";
 import { CalendarDays, House, User, Heart, Store } from "@/lib/icons/Icons";
 import { useColorScheme } from "@/lib/useColorScheme";
 import { cn } from "@/lib/util";
+import { View } from "react-native";
+import { NotificationIcon } from "@/presentation/components/feature";
 
 export default function _layout() {
   const { isDarkColorScheme } = useColorScheme();
@@ -11,7 +13,12 @@ export default function _layout() {
     <Tabs
       initialRouteName="home/index"
       screenOptions={{
-        headerRight: () => <ThemeToggle />,
+        headerRight: () => (
+          <View className="flex flex-row gap-2 justify-end px-0 relative -right-6">
+            <NotificationIcon />
+            <ThemeToggle />
+          </View>
+        ),
         headerTitleAlign: "center",
         tabBarShowLabel: false,
         headerStyle: {
@@ -59,7 +66,7 @@ export default function _layout() {
       <Tabs.Screen
         name="booking/index"
         options={{
-          title: "Reservas",
+          title: "Mis Reservas",
           tabBarIcon: ({ focused }) => (
             <CalendarDays
               className="text-foreground"
@@ -83,9 +90,10 @@ export default function _layout() {
         }}
       />
       <Tabs.Screen
-        name="profile/index"
+        name="profile"
         options={{
           title: "Perfil",
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <User
               className="text-foreground"
@@ -93,6 +101,14 @@ export default function _layout() {
               strokeWidth={focused ? 3 : 1.25}
             />
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="notifications/index"
+        options={{
+          title: "Notificaciones",
+          headerShown: false,
+          href: null,
         }}
       />
     </Tabs>

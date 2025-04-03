@@ -15,7 +15,6 @@ interface Props {
 
 export const CustomCollapsible = ({ title, children }: Props) => {
   const [open, setOpen] = useState(false);
-  const { isDarkColorScheme } = useColorScheme();
 
   return (
     <Collapsible
@@ -25,9 +24,9 @@ export const CustomCollapsible = ({ title, children }: Props) => {
       <CollapsibleTrigger className="flex flex-row justify-between">
         <Text className="font-bold text-xl">{title}</Text>
         {open ? (
-          <ChevronDown color={isDarkColorScheme ? "white" : "black"} />
+          <ChevronDown className="text-foreground" />
         ) : (
-          <ChevronUp color={isDarkColorScheme ? "white" : "black"} />
+          <ChevronUp className="text-foreground" />
         )}
       </CollapsibleTrigger>
       <CollapsibleContent className="my-2">{children}</CollapsibleContent>

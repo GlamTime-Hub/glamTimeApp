@@ -17,6 +17,7 @@ interface Props {
     imageUrl: string;
     rating: number;
     liked: boolean;
+    likes?: number;
   };
 }
 
@@ -48,11 +49,17 @@ const BusinessCard = ({ business }: Props) => {
           >
             <View>
               <Text className={"text-white text-xl"}>{business.name}</Text>
-              <View className="flex flex-row items-center gap-1">
-                <Text className={"text-white"}>
-                  {business.rating.toFixed(1)}
-                </Text>
-                <Star color="#FFD700" size={18} fill={"gold"} />
+              <View className="flex flex-row gap-2">
+                <View className="flex flex-row items-center gap-1">
+                  <Text className={"text-white"}>
+                    {business.rating.toFixed(1)}
+                  </Text>
+                  <Star color="#FFD700" size={18} fill={"gold"} />
+                </View>
+                <View className="flex flex-row items-center gap-1">
+                  <Text className={"text-white"}>{business.likes}</Text>
+                  <Heart color="red" size={18} fill={"red"} />
+                </View>
               </View>
             </View>
             <TouchableOpacity onPress={toggleLike}>

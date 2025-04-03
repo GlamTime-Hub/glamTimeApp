@@ -1,10 +1,5 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { Booking } from "@/presentation/components/feature";
 
 export default function BookingScreen() {
-  return (
-    <View>
-      <Text>BookingScreen</Text>
-    </View>
-  );
+  return <Booking />;
 }

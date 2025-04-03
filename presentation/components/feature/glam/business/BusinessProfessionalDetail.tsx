@@ -13,7 +13,6 @@ import {
   MessageCircleMore,
   Star,
 } from "@/lib/icons/Icons";
-import { useColorScheme } from "@/lib/useColorScheme";
 import { BusinessProfessionalTab } from "./BusinessProfessionalTabs";
 import { useEffect } from "react";
 import { professionals } from "@/BD/professional.constant";
@@ -26,8 +25,6 @@ export const BusinessProfessionalDetail = () => {
   console.log("idsito", id);
 
   const { professional, addProfessional } = useBusinessBookingStore();
-
-  const { isDarkColorScheme } = useColorScheme();
 
   useEffect(() => {
     const professionalSelected = professionals.find(
@@ -67,18 +64,12 @@ export const BusinessProfessionalDetail = () => {
         </View>
         <View className="flex  flex-row gap-1">
           <Text className="text-xl ">{professional.completedReservations}</Text>
-          <CalendarDays
-            size={25}
-            color={isDarkColorScheme ? "white" : "black"}
-          />
+          <CalendarDays size={25} className="text-foreground" />
         </View>
 
         <View className="flex  flex-row gap-1">
           <Text className="text-xl ">{professional.receivedComments}</Text>
-          <MessageCircleMore
-            size={25}
-            color={isDarkColorScheme ? "white" : "black"}
-          />
+          <MessageCircleMore size={25} className="text-foreground" />
         </View>
 
         <View className="flex flex-row items-center gap-1">

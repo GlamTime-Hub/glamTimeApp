@@ -64,10 +64,7 @@ export const BusinessProfessionalCard = ({
                 {professional.receivedComments}
               </Text>
               <Button variant={"ghost"} size={"icon"}>
-                <MessageCircleMore
-                  size={20}
-                  color={isDarkColorScheme && !selected ? "white" : "black"}
-                />
+                <MessageCircleMore size={20} className="text-foreground" />
               </Button>
             </View>
           </View>

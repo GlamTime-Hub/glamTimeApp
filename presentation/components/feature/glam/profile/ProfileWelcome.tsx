@@ -1,10 +1,10 @@
-import React from "react";
-import { router, useNavigation } from "expo-router";
+import { router } from "expo-router";
 import { View } from "react-native";
+
 import { Text } from "@/presentation/components/ui/text";
 import { Button } from "@/presentation/components/ui/button";
 
-export default function ProfileScreen() {
+export const ProfileWelcome = () => {
   return (
     <View className="flex-1 items-center justify-center p-6">
       <Text className="text-2xl font-semibold text-gray-700 dark:text-gray-300">
@@ -22,4 +22,4 @@ export default function ProfileScreen() {
       </Button>
     </View>
   );
-}
+};

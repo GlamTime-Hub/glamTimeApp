@@ -9,6 +9,12 @@ import { FavoritesTabs } from "./glam/favorites/FavoritesTabs";
 import { BusinessBookingProfessional } from "./glam/business/BusinessBookingProfessional";
 import { BusinessBookingConfirmation } from "./glam/business/BusinessBookingConfirmation";
 import { BusinessProfessionalSlots } from "./glam/business/BusinessProfessionalSlots";
+import { Booking } from "./glam/booking/Booking";
+import { Home } from "./home/Home";
+import { ProfileWelcome } from "./glam/profile/ProfileWelcome";
+import { Profile } from "./glam/profile/Profile";
+import { NotificationIcon } from "./glam/notification/NotificationIcon";
+import { Notifications } from "./glam/notification/Notifications";
 
 export {
   Login,
@@ -22,4 +28,10 @@ export {
   BusinessBookingProfessional,
   BusinessBookingConfirmation,
   BusinessProfessionalSlots,
+  Booking,
+  Home,
+  ProfileWelcome,
+  Profile,
+  NotificationIcon,
+  Notifications,
 };

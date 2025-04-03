@@ -114,10 +114,7 @@ export const BusinessDetail = () => {
               >
                 Ver ubicación
               </Text>
-              <MapPinned
-                size={25}
-                color={isDarkColorScheme ? "white" : "black"}
-              />
+              <MapPinned size={25} className="text-foreground" />
             </TouchableOpacity>
           </View>
           <View className="flex mx-5 flex-row my-2 gap-6 justify-center py-2 rounded-lg">
@@ -127,18 +124,12 @@ export const BusinessDetail = () => {
             </View>
             <View className="flex  flex-row gap-1 items-center">
               <Text className="text-lg ">200</Text>
-              <CalendarDays
-                size={20}
-                color={isDarkColorScheme ? "white" : "black"}
-              />
+              <CalendarDays size={20} className="text-foreground" />
             </View>
 
             <View className="flex  flex-row gap-1 items-center">
               <Text className="text-lg ">5000</Text>
-              <MessageCircleMore
-                size={20}
-                color={isDarkColorScheme ? "white" : "black"}
-              />
+              <MessageCircleMore size={20} className="text-foreground" />
             </View>
           </View>
 

@@ -82,8 +82,6 @@ export default function RootLayout() {
     return null;
   }
 
-  console.log("perrazao");
-
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
       <StatusBar style={isDarkColorScheme ? "light" : "dark"} />

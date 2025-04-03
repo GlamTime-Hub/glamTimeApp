@@ -24,14 +24,6 @@ const BusinessScreen = () => {
           headerShown: false,
         }}
       />
-      <Stack.Screen
-        name="filter/index"
-        options={{
-          headerTitleAlign: "center",
-          presentation: "modal",
-          title: "Filtrar por",
-        }}
-      />
     </Stack>
   );
 };

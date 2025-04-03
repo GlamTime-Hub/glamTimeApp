@@ -1,4 +1,7 @@
+import { router } from "expo-router";
+import { useState } from "react";
 import { View, ScrollView, Platform } from "react-native";
+
 import { useBusinessBookingStore } from "@/presentation/store/useBusinessBooking.store";
 import { getFullAvailableSlots } from "@/BD/slots";
 import { CustomCollapsible } from "@/presentation/components/ui/CustomCollapsible";
@@ -6,19 +9,12 @@ import { BusinessProfessionalSlot } from "./BusinessProfessionalSlot";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Button } from "@/presentation/components/ui/button";
 import { Text } from "@/presentation/components/ui/text";
-import { router } from "expo-router";
-import { useState } from "react";
 
 export const BusinessProfessionalSlots = () => {
   const { slot, professional, service, addSlot } = useBusinessBookingStore();
   const [error, setError] = useState(false);
 
-  console.log("professional", professional);
-  console.log("service", service);
-
   const slots = getFullAvailableSlots(professional, service);
-
-  console.log("slots", slots);
 
   const isIOS = Platform.OS === "ios";
 
@@ -29,7 +25,6 @@ export const BusinessProfessionalSlots = () => {
   };
 
   const onContinue = () => {
-    console.log("slot", slot);
     if (!slot) {
       setError(true);
       return;

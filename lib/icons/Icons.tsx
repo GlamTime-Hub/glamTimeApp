@@ -18,6 +18,16 @@ import {
   Share2,
   MapPinned,
   MessageCircleMore,
+  AArrowDown,
+  ChevronRight,
+  ChevronLeft,
+  MessageCircleHeart,
+  Building2,
+  Bell,
+  TicketCheck,
+  BadgeHelp,
+  FileText,
+  Award,
 } from "lucide-react-native";
 import { iconWithClassName } from "./iconWithClassName";
 
@@ -40,6 +50,16 @@ iconWithClassName(ArrowDownWideNarrow);
 iconWithClassName(Share2);
 iconWithClassName(MapPinned);
 iconWithClassName(MessageCircleMore);
+iconWithClassName(AArrowDown);
+iconWithClassName(ChevronRight);
+iconWithClassName(ChevronLeft);
+iconWithClassName(MessageCircleHeart);
+iconWithClassName(Building2);
+iconWithClassName(Bell);
+iconWithClassName(TicketCheck);
+iconWithClassName(BadgeHelp);
+iconWithClassName(FileText);
+iconWithClassName(Award);
 
 export {
   Share2,
@@ -61,4 +81,14 @@ export {
   ArrowDownWideNarrow,
   MapPinned,
   MessageCircleMore,
+  AArrowDown,
+  ChevronRight,
+  ChevronLeft,
+  MessageCircleHeart,
+  Building2,
+  Bell,
+  TicketCheck,
+  BadgeHelp,
+  FileText,
+  Award,
 };
