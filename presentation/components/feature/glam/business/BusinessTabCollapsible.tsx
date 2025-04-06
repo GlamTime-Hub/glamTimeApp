@@ -3,7 +3,7 @@ import { Button } from "@/presentation/components/ui/button";
 import { View } from "react-native";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Href, router } from "expo-router";
-import { useBusinessBookingStore } from "@/presentation/store/useBusinessBooking.store";
+import { useBusinessBookingStore } from "@/presentation/store/use-business-booking.store";
 import { CustomCollapsible } from "@/presentation/components/ui/CustomCollapsible";
 import { Separator } from "@/presentation/components/ui/separator";
 

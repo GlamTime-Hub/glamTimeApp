@@ -26,10 +26,11 @@ const LayoutScreen = () => {
       />
 
       <Stack.Screen
-        name="my-business/index"
+        name="my-business"
         options={{
           headerTitleAlign: "center",
           title: "Mis Negocios",
+          headerShown: false,
         }}
       />
       <Stack.Screen
@@ -54,6 +55,14 @@ const LayoutScreen = () => {
         options={{
           headerTitleAlign: "center",
           title: "Gestionar Notificaciones",
+        }}
+      />
+
+      <Stack.Screen
+        name="my-services/index"
+        options={{
+          headerTitleAlign: "center",
+          title: "Mis Servicios",
         }}
       />
 

@@ -3,7 +3,7 @@ import { Button } from "@/presentation/components/ui/button";
 import { Text } from "@/presentation/components/ui/text";
 import { formatTime } from "../../../../utils/format-time.util";
 import { Separator } from "@/presentation/components/ui/separator";
-import { useBusinessBookingStore } from "@/presentation/store/useBusinessBooking.store";
+import { useBusinessBookingStore } from "@/presentation/store/use-business-booking.store";
 import { cn } from "@/lib/util";
 import { useColorScheme } from "@/lib/useColorScheme";
 

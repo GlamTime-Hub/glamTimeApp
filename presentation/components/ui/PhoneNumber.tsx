@@ -1,5 +1,5 @@
 import { useColorScheme } from "@/lib/useColorScheme";
-import { CountryPhone } from "@/presentation/interfaces/country-phone.interface";
+import { CountryPhone } from "@/core/interfaces/country-phone.interface";
 import React, { useEffect, useState } from "react";
 import PhoneInput, {
   ICountry,
@@ -11,10 +11,13 @@ interface Props {
   initialPhoneNumber?: string;
   onChangePhone?: (phoneNumber: string) => void;
   onChangeCountry?: (country: CountryPhone) => void;
+
+  disabled?: boolean;
 }
 
 export const PhoneNumber = ({
   initialPhoneNumber,
+  disabled = false,
   onChangePhone,
   onChangeCountry,
 }: Props) => {
@@ -52,11 +55,13 @@ export const PhoneNumber = ({
   }
 
   useEffect(() => {
+    console.log("initialPhoneNumber", initialPhoneNumber);
     setInputValue(initialPhoneNumber ?? "");
   }, []);
 
   return (
     <PhoneInput
+      disabled={disabled}
       language={languageCodeFinal}
       defaultCountry={countryCodeFinal}
       value={inputValue}
@@ -67,8 +72,6 @@ export const PhoneNumber = ({
       phoneInputStyles={{
         container: {
           borderRadius: 5,
-          borderWidth: 1,
-          borderColor: "#232427",
           backgroundColor: bgColorContainer,
           height: 40,
           width: "100%",

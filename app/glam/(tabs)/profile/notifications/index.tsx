@@ -1,9 +1,5 @@
-import { View, Text } from "react-native";
+import { ProfileNotifications } from "@/presentation/components/feature";
 
 export default function NotificationsScreen() {
-  return (
-    <View>
-      <Text>NotificationsScreen</Text>
-    </View>
-  );
+  return <ProfileNotifications />;
 }

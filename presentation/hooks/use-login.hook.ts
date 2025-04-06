@@ -7,7 +7,10 @@ import Toast from "react-native-toast-message";
 import { router } from "expo-router";
 
 const schema = z.object({
-  email: z.string().nonempty("Correo requerido").email(),
+  email: z
+    .string()
+    .nonempty("Correo requerido")
+    .email("Formato de correo inválido"),
   password: z.string().nonempty("Contraseña requerida"),
 });
 
@@ -23,7 +26,6 @@ export const useLogin = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmit = async (data: FormData) => {
-    console.log("Datos del formulario:", data);
     setLoading(true);
 
     const response = await AuthService.loginWithEmail(
@@ -31,13 +33,20 @@ export const useLogin = () => {
       data.password
     );
 
-    if (response) {
-      console.error("Error al iniciar sesión", response);
+    const errors: { [key: string]: string } = {
+      empty: "",
+      invalid_credentials: "Correo o contraseña incorrectos",
+      email_not_confirmed: "Debes confirmar el correo antes de iniciar sesión",
+    };
 
+    const errorMessage =
+      errors[response && response.code ? response?.code : "empty"];
+
+    if (errorMessage.length > 0) {
       Toast.show({
         type: "error",
         text1: "Error",
-        text2: "Error iniciando sesión",
+        text2: errorMessage,
       });
 
       return;

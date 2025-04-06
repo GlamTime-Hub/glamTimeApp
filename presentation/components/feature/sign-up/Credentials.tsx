@@ -3,13 +3,13 @@ import { Text } from "../../ui/text";
 import { Controller } from "react-hook-form";
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
-import { useCredentials } from "@/presentation/hooks/useCredentials";
+import { useSignUp } from "@/presentation/hooks/use-sign-up.hook";
 import { CheckCheck, CircleX } from "@/lib/icons/Icons";
 import { router } from "expo-router";
 
 export const Credentials = () => {
   const { control, password, criteria, errors, handleSubmit, onSubmit } =
-    useCredentials();
+    useSignUp();
 
   const isIos = Platform.OS === "ios";
 

@@ -17,7 +17,7 @@ import { BusinessProfessionalTab } from "./BusinessProfessionalTabs";
 import { useEffect } from "react";
 import { professionals } from "@/BD/professional.constant";
 import { groupedByCategory } from "@/BD/service.constant";
-import { useBusinessBookingStore } from "@/presentation/store/useBusinessBooking.store";
+import { useBusinessBookingStore } from "@/presentation/store/use-business-booking.store";
 
 export const BusinessProfessionalDetail = () => {
   const { id } = useLocalSearchParams();

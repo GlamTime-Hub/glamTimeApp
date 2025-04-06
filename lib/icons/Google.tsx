@@ -1,10 +1,8 @@
 import { View } from "react-native";
-import { useColorScheme } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
 export const Google = ({ size = 24 }) => {
-  const colorScheme = useColorScheme();
-  const fillColor = colorScheme === "dark" ? "#000000" : "#FFFFFF";
+  const fillColor = "#FFFFFF";
 
   return (
     <View>

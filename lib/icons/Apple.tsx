@@ -1,10 +1,8 @@
 import React from "react";
 import { Svg, Path } from "react-native-svg";
-import { useColorScheme } from "@/lib/useColorScheme";
 
 export const Apple = ({ size = 24 }) => {
-  const { isDarkColorScheme } = useColorScheme();
-  const fillColor = isDarkColorScheme ? "#000" : "#FFF";
+  const fillColor = "#FFF";
   return (
     <Svg width={size} height={size} viewBox="0 0 1920 1920" fill="none">
       <Path
