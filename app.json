@@ -5,7 +5,8 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "com.glamTime",
+    "deepLinking": true,
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -16,7 +17,12 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.glamTimeApps"
+      "package": "com.anonymous.glamTimeApps",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyAsW7SWTUZDXYgQpn67ifBBY3c-vghx2XQ"
+        }
+      }
     },
     "web": {
       "bundler": "metro",

@@ -7,7 +7,7 @@ import {
 import { Button } from "@/presentation/components/ui/button";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Text } from "@/presentation/components/ui/text";
-import { useBusinessBookingStore } from "@/presentation/store/useBusinessBooking.store";
+import { useBusinessBookingStore } from "@/presentation/store/use-business-booking.store";
 import { formatTime } from "@/presentation/utils/format-time.util";
 import { cn } from "@/lib/util";
 import { BusinessBookingConfirmationCard } from "../shared/BusinessBookingConfirmationCard";

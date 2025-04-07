@@ -143,8 +143,12 @@ export const UserInfo = () => {
                         <SelectGroup>
                           <SelectLabel>Mes</SelectLabel>
                           {MONTHS.map((month) => (
-                            <SelectItem key={month} label={month} value={month}>
-                              <Text>{month}</Text>
+                            <SelectItem
+                              key={month.label}
+                              label={month.label}
+                              value={`${month.value}`}
+                            >
+                              <Text>{month.label}</Text>
                             </SelectItem>
                           ))}
                         </SelectGroup>
@@ -183,8 +187,12 @@ export const UserInfo = () => {
                     <SelectGroup>
                       <SelectLabel>Género</SelectLabel>
                       {GENDER.map((gender) => (
-                        <SelectItem key={gender} label={gender} value={gender}>
-                          {gender}
+                        <SelectItem
+                          key={gender.value}
+                          label={gender.label}
+                          value={gender.value}
+                        >
+                          {gender.label}
                         </SelectItem>
                       ))}
                     </SelectGroup>
@@ -252,7 +260,7 @@ export const UserInfo = () => {
       </View>
       <View>
         <Button onPress={handleSubmit(onSubmit)}>
-          <Text>Continuar</Text>
+          <Text>Guardar</Text>
         </Button>
 
         {isIos && (

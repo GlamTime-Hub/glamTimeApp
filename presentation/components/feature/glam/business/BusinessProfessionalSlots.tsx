@@ -2,7 +2,7 @@ import { router } from "expo-router";
 import { useState } from "react";
 import { View, ScrollView, Platform } from "react-native";
 
-import { useBusinessBookingStore } from "@/presentation/store/useBusinessBooking.store";
+import { useBusinessBookingStore } from "@/presentation/store/use-business-booking.store";
 import { getFullAvailableSlots } from "@/BD/slots";
 import { CustomCollapsible } from "@/presentation/components/ui/CustomCollapsible";
 import { BusinessProfessionalSlot } from "./BusinessProfessionalSlot";

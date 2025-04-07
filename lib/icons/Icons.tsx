@@ -28,6 +28,12 @@ import {
   BadgeHelp,
   FileText,
   Award,
+  SquarePen,
+  Image,
+  Mail,
+  BookLock,
+  SquareScissors,
+  X,
 } from "lucide-react-native";
 import { iconWithClassName } from "./iconWithClassName";
 
@@ -60,6 +66,12 @@ iconWithClassName(TicketCheck);
 iconWithClassName(BadgeHelp);
 iconWithClassName(FileText);
 iconWithClassName(Award);
+iconWithClassName(SquarePen);
+iconWithClassName(Image);
+iconWithClassName(Mail);
+iconWithClassName(BookLock);
+iconWithClassName(SquareScissors);
+iconWithClassName(X);
 
 export {
   Share2,
@@ -91,4 +103,10 @@ export {
   BadgeHelp,
   FileText,
   Award,
+  SquarePen,
+  Image,
+  Mail,
+  BookLock,
+  SquareScissors,
+  X,
 };

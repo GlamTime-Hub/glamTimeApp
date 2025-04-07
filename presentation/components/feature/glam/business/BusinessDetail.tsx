@@ -20,7 +20,7 @@ import {
   View,
 } from "react-native";
 import { BusinessTab } from "./BussinessTab";
-import { useBusinessBookingStore } from "@/presentation/store/useBusinessBooking.store";
+import { useBusinessBookingStore } from "@/presentation/store/use-business-booking.store";
 import { useEffect } from "react";
 import { groupedByCategory } from "@/BD/service.constant";
 import { professionals } from "@/BD/professional.constant";

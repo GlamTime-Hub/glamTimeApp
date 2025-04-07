@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/presentation/components/ui/card";
 import { BusinessProfessionalCard } from "./BusinessProfessionalCard";
 import { Button } from "@/presentation/components/ui/button";
 import { professionals } from "@/BD/professional.constant";
-import { useBusinessBookingStore } from "@/presentation/store/useBusinessBooking.store";
+import { useBusinessBookingStore } from "@/presentation/store/use-business-booking.store";
 
 export const BusinessBookingProfessional = () => {
   const { professional, addProfessional } = useBusinessBookingStore();

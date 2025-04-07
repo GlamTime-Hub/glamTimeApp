@@ -15,6 +15,14 @@ import { ProfileWelcome } from "./glam/profile/ProfileWelcome";
 import { Profile } from "./glam/profile/Profile";
 import { NotificationIcon } from "./glam/notification/NotificationIcon";
 import { Notifications } from "./glam/notification/Notifications";
+import { MyBusiness } from "./glam/profile/MyBusiness";
+import { MyBusinessDetail } from "./glam/profile/MyBusinessDetail";
+import { MyBusinessLocation } from "./glam/profile/MyBusinessLocation";
+import { ProfileLoading } from "./glam/profile/ProfileLoading";
+import { ProfileDetail } from "./glam/profile/ProfileDetail";
+import { Error } from "./glam/shared/Error";
+import { LoadingIndicator } from "./glam/shared/LoadingIndicator";
+import { ProfileNotifications } from "./glam/profile/ProfileNotifications";
 
 export {
   Login,
@@ -34,4 +42,12 @@ export {
   Profile,
   NotificationIcon,
   Notifications,
+  MyBusiness,
+  MyBusinessDetail,
+  MyBusinessLocation,
+  ProfileLoading,
+  ProfileDetail,
+  Error,
+  LoadingIndicator,
+  ProfileNotifications,
 };

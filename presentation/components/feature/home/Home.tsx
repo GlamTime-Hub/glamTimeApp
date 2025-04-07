@@ -1,4 +1,4 @@
-import { FlatList, useWindowDimensions, View } from "react-native";
+import { useWindowDimensions, View } from "react-native";
 import { Text } from "../../ui/text";
 import { HomeBusinessCard } from "./HomeBusinessCard";
 import Carousel, { ICarouselInstance } from "react-native-reanimated-carousel";

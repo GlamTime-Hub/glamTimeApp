@@ -8,14 +8,17 @@ import {
 } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import * as React from "react";
 import { Dimensions, Platform } from "react-native";
 import { PortalHost } from "@rn-primitives/portal";
 import { NAV_THEME } from "@/lib/constants";
 import { useColorScheme } from "@/lib/useColorScheme";
 import { setAndroidNavigationBar } from "@/lib/android-navigation-bar";
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Toast, { BaseToast, ToastConfig } from "react-native-toast-message";
+import { useDeepLinking } from "@/hooks/use-deep-link.hook";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import useAuthStore from "@/core/store/auth.store";
+import { queryClient } from "@/core/config/query-client";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -40,11 +43,11 @@ const toastConfig: ToastConfig = {
       style={{
         width: screenWidth,
         padding: 0,
-        marginTop: Platform.OS === "android" ? 45 : 0,
-        borderLeftColor: "#FE6700",
+        marginTop: 45,
+        borderLeftColor: "#28a745",
         borderRadius: 0,
       }}
-      text1Style={{ fontSize: 18, color: "#FE6700" }}
+      text1Style={{ fontSize: 18, color: "#28a745" }}
       text2Style={{ fontSize: 14 }}
     />
   ),
@@ -65,9 +68,13 @@ const toastConfig: ToastConfig = {
 };
 
 export default function RootLayout() {
-  const hasMounted = React.useRef(false);
+  const hasMounted = useRef(false);
   const { colorScheme, isDarkColorScheme } = useColorScheme();
-  const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
+  const [isColorSchemeLoaded, setIsColorSchemeLoaded] = useState(false);
+
+  useDeepLinking();
+
+  const { restoreSession } = useAuthStore();
 
   useLayoutEffect(() => {
     if (hasMounted.current) {
@@ -78,38 +85,49 @@ export default function RootLayout() {
     hasMounted.current = true;
   }, []);
 
+  useEffect(() => {
+    restoreSession();
+  }, []);
+
   if (!isColorSchemeLoaded) {
     return null;
   }
 
   return (
-    <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-      <Stack initialRouteName="glam/(tabs)">
-        <Stack.Screen
-          name="login/index"
-          options={{
-            title: "Conéctate con tu estilo",
-            headerTitleAlign: "center",
-            headerBackButtonDisplayMode: "minimal",
-          }}
-        />
-        <Stack.Screen
-          name="sign-up"
-          options={{
-            headerTitleAlign: "center",
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="glam/(tabs)"
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Stack>
-      <PortalHost />
-      <Toast topOffset={0} config={toastConfig} />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+        <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
+        <Stack initialRouteName="glam/(tabs)">
+          <Stack.Screen
+            name="login/index"
+            options={{
+              title: "Conéctate con tu estilo",
+              headerTitleAlign: "center",
+              headerBackButtonDisplayMode: "minimal",
+            }}
+          />
+          <Stack.Screen
+            name="sign-up"
+            options={{
+              headerTitleAlign: "center",
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="glam/(tabs)"
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          <Stack.Screen
+            name="confirm-email/index"
+            options={{ title: "Confirmation", headerTitleAlign: "center" }}
+          />
+        </Stack>
+        <PortalHost />
+        <Toast topOffset={0} config={toastConfig} />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }

@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 
-export default function MyBusinessScreen() {
+export default function MyServicesScreen() {
   return (
     <View>
-      <Text>MyBusinessScreen</Text>
+      <Text>MyServicesScreen</Text>
     </View>
   );
 }

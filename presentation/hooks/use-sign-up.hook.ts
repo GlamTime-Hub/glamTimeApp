@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "expo-router";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useSignUpStore } from "../store/use-sign-up.store";
 
 type FormData = z.infer<typeof schema>;
 
@@ -22,7 +23,7 @@ const schema = z
     path: ["confirmPassword"],
   });
 
-export const useCredentials = () => {
+export const useSignUp = () => {
   const {
     control,
     handleSubmit,
@@ -36,6 +37,8 @@ export const useCredentials = () => {
       confirmPassword: "",
     },
   });
+
+  const { addCredentials } = useSignUpStore();
 
   const password = watch("password");
 
@@ -56,7 +59,8 @@ export const useCredentials = () => {
   ];
 
   const onSubmit = (data: FormData) => {
-    console.log("Form Data:", data);
+    const { email, password } = data;
+    addCredentials(email, password);
     router.push("/sign-up/user-info");
   };
 
