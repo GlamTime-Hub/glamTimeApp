@@ -4,6 +4,7 @@ import { useUserInfo } from "./use-user-info.hook";
 import { useProfileHome } from "./use-profile-home.hook";
 import { useImage } from "./use-image.hook";
 import { useNotifications } from "./use-notifications";
+import { useBusiness } from "./use-business.hook";
 
 export {
   useSignUp,
@@ -12,4 +13,5 @@ export {
   useProfileHome,
   useImage,
   useNotifications,
+  useBusiness,
 };
