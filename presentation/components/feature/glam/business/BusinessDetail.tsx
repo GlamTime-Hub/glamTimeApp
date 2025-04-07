@@ -4,6 +4,7 @@ import {
   MapPinned,
   MessageCircleMore,
   Star,
+  ThumbsUp,
 } from "@/lib/icons/Icons";
 import Share from "@/lib/icons/Share";
 import { WhatsAppIcon } from "@/lib/icons/WhatsApp";
@@ -120,7 +121,7 @@ export const BusinessDetail = () => {
           <View className="flex mx-5 flex-row my-2 gap-6 justify-center py-2 rounded-lg">
             <View className="flex flex-row items-center gap-1">
               <Text className="text-lg ">180</Text>
-              <Heart fill={"red"} size={20} color={"red"} />
+              <ThumbsUp size={18} className="text-foreground" />
             </View>
             <View className="flex  flex-row gap-1 items-center">
               <Text className="text-lg ">200</Text>

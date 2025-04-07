@@ -6,7 +6,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { Card } from "@/presentation/components/ui/card";
-import { Heart, Star } from "@/lib/icons/Icons";
+import { Heart, Star, ThumbsUp } from "@/lib/icons/Icons";
 import { Text } from "@/presentation/components/ui/text";
 import { useColorScheme } from "@/lib/useColorScheme";
 import { router } from "expo-router";
@@ -58,7 +58,7 @@ const BusinessCard = ({ business }: Props) => {
                 </View>
                 <View className="flex flex-row items-center gap-1">
                   <Text className={"text-white"}>{business.likes}</Text>
-                  <Heart color="red" size={18} fill={"red"} />
+                  <ThumbsUp size={18} className="color-white" />
                 </View>
               </View>
             </View>

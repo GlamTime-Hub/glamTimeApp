@@ -12,6 +12,7 @@ import {
   Heart,
   MessageCircleMore,
   Star,
+  ThumbsUp,
 } from "@/lib/icons/Icons";
 import { BusinessProfessionalTab } from "./BusinessProfessionalTabs";
 import { useEffect } from "react";
@@ -60,7 +61,7 @@ export const BusinessProfessionalDetail = () => {
       <View className="flex  mx-5 flex-row my-5 gap-6 justify-center py-2 rounded-lg">
         <View className="flex flex-row gap-1">
           <Text className="text-xl ">{professional.likes}</Text>
-          <Heart fill={"red"} size={25} color={"red"} />
+          <ThumbsUp size={25} className="text-foreground" />
         </View>
         <View className="flex  flex-row gap-1">
           <Text className="text-xl ">{professional.completedReservations}</Text>

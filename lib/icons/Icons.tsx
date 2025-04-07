@@ -34,6 +34,7 @@ import {
   BookLock,
   SquareScissors,
   X,
+  ThumbsUp,
 } from "lucide-react-native";
 import { iconWithClassName } from "./iconWithClassName";
 
@@ -72,6 +73,7 @@ iconWithClassName(Mail);
 iconWithClassName(BookLock);
 iconWithClassName(SquareScissors);
 iconWithClassName(X);
+iconWithClassName(ThumbsUp);
 
 export {
   Share2,
@@ -109,4 +111,5 @@ export {
   BookLock,
   SquareScissors,
   X,
+  ThumbsUp,
 };
