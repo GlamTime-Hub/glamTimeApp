@@ -34,20 +34,23 @@ export const Profile = ({
             id={user!.userAuthId}
             isUserImage={true}
             callback={updateImage}
+            className={
+              isProfessional
+                ? "border-[3px] border-yellow-600"
+                : "border-[1px] border-foreground"
+            }
           />
-          {isProfessional && (
-            <Text className=" text-sm text-yellow-600 p-2 rounded-full   font-bold">
-              Profesional
-            </Text>
-          )}
+
           <Text
-            className={cn(
-              "text-2xl font-bod",
-              isProfessional ? "mb-2" : "my-2"
-            )}
+            className={cn("text-2xl font-bod", isProfessional ? "" : "my-2")}
           >
             {user?.name}
           </Text>
+          {isProfessional && (
+            <Text className=" text-lg text-yellow-600 font-bold mb-2">
+              Profesional
+            </Text>
+          )}
           <Button
             variant={"outline"}
             size={"sm"}

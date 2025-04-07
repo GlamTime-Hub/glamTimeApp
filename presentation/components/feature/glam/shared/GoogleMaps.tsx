@@ -1,35 +1,43 @@
-import { View, Dimensions, StyleSheet } from "react-native";
 import "react-native-get-random-values";
-
 import MapView, { Marker } from "react-native-maps";
+import { useRef } from "react";
+import { View, Dimensions, StyleSheet } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { useRef, useState } from "react";
-import { Button } from "@/presentation/components/ui/button";
-import { Text } from "@/presentation/components/ui/text";
-import { Href, router } from "expo-router";
 
-export const MyBusinessLocation = ({ path }: { path: string }) => {
-  const [region, setRegion] = useState({
-    latitude: 4.711,
-    longitude: -74.0721,
-    latitudeDelta: 0.05,
-    longitudeDelta: 0.05,
-  });
+interface Props {
+  region: {
+    address: string;
+    latitude: number;
+    longitude: number;
+    latitudeDelta: number;
+    longitudeDelta: number;
+  };
+  setRegion: React.Dispatch<
+    React.SetStateAction<{
+      address: string;
+      latitude: number;
+      longitude: number;
+      latitudeDelta: number;
+      longitudeDelta: number;
+    }>
+  >;
+}
 
+export const GoogleMaps = ({ region, setRegion }: Props) => {
   const mapRef = useRef<any>(null);
 
   return (
-    <View className="flex-1 m-4 flex flex-col justify-between">
+    <View className="flex flex-col justify-between">
       <View className="">
         <GooglePlacesAutocomplete
           placeholder="Buscar dirección"
           fetchDetails={true}
           onPress={(data, details: any) => {
-            console.log("Dirección:", data.description);
-            console.log("Coordenadas:", details?.geometry.location);
+            console.log("data", data);
             const { lat, lng } = details.geometry.location;
 
             const newRegion = {
+              address: data.description,
               latitude: lat,
               longitude: lng,
               latitudeDelta: 0.01,
@@ -63,7 +71,7 @@ export const MyBusinessLocation = ({ path }: { path: string }) => {
             },
           }}
         />
-        <View className="my-10">
+        <View className="">
           <MapView
             ref={mapRef}
             style={styles.mapStyle}
@@ -81,11 +89,11 @@ export const MyBusinessLocation = ({ path }: { path: string }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: 0,
   },
   mapStyle: {
-    width: Dimensions.get("window").width - 30,
-    marginRight: 15,
-    height: 500,
+    width: Dimensions.get("window").width - 60,
+    marginRight: 0,
+    height: 350,
   },
 });

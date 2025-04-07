@@ -7,7 +7,10 @@ import { router } from "expo-router";
 
 export const MyBusinessCard = () => {
   const onSelectBusiness = () => {
-    router.push("/glam/(tabs)/profile/my-business/detail");
+    router.push({
+      pathname: "/glam/(tabs)/profile/my-business/detail/[id]",
+      params: { id: "67f3c7d0aef66c5ead739166" },
+    });
   };
 
   return (

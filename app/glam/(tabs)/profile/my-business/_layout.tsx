@@ -18,18 +18,10 @@ export default function MyBusinessLayout() {
       />
 
       <Stack.Screen
-        name="detail/index"
+        name="detail/[id]"
         options={{
           headerTitleAlign: "center",
-          title: "Detalle ",
-        }}
-      />
-
-      <Stack.Screen
-        name="location/index"
-        options={{
-          headerTitleAlign: "center",
-          title: "Ubicación del Negocio",
+          title: "Tu negocio ",
         }}
       />
     </Stack>

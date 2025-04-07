@@ -7,7 +7,6 @@ import { useLocation } from "./use-location.hook";
 import { useEffect, useState } from "react";
 import { CountryPhone } from "@/core/interfaces/country-phone.interface";
 import Toast from "react-native-toast-message";
-import { set } from "lodash-es";
 import { updateUser } from "@/core/actions/user/update-user.action";
 import { queryClient } from "@/core/config/query-client";
 

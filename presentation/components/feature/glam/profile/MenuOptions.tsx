@@ -10,6 +10,7 @@ import {
   BookLock,
   Award,
   SquareScissors,
+  CalendarDays,
 } from "@/lib/icons/Icons";
 
 export const MENU_OPTIONS = [
@@ -38,6 +39,12 @@ export const MENU_OPTIONS = [
         icon: <SquareScissors className="text-foreground" />,
         text: "Mis Servicios",
         href: "/glam/(tabs)/profile/my-services",
+        roles: ["professional", "admin"],
+      },
+      {
+        icon: <CalendarDays className="text-foreground" />,
+        text: "Mis Horarios",
+        href: "/glam/(tabs)/profile/my-schedule",
         roles: ["professional", "admin"],
       },
     ],

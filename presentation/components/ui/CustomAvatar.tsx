@@ -13,6 +13,8 @@ interface Props {
   id: string;
   defaultImage?: string;
   callback: (publicUrl: string) => void;
+
+  className?: string;
 }
 
 export const CustomAvatar = ({
@@ -20,6 +22,7 @@ export const CustomAvatar = ({
   isUserImage,
   defaultImage,
   callback,
+  className,
 }: Props) => {
   const { image, setImage, onUpdateImage } = useImage(
     isUserImage,
@@ -51,11 +54,7 @@ export const CustomAvatar = ({
   return (
     <TouchableOpacity onPress={onSelectImage}>
       <View className="flex items-center my-4 relative">
-        <Avatar
-          alt="Imagen de profesional"
-          size="2xl"
-          className="border-[1px] border-foreground"
-        >
+        <Avatar alt="Imagen de profesional" size="2xl" className={className}>
           <AvatarImage
             source={{
               uri: image,
