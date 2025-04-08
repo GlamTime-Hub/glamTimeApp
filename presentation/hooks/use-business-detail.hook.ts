@@ -12,6 +12,8 @@ import { router } from "expo-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getBusinessByIdAction } from "@/core/actions/business/get-business-by-id.action";
 import { updateImageAction } from "@/core/actions/business/update-image.action";
+import { updateBusinessAction } from "@/core/actions/business/update-business.action";
+import { useBusinessLocation } from "./use-business-location";
 
 const schema = z.object({
   name: z.string().nonempty("Debes ingresar el nombre"),
@@ -21,7 +23,7 @@ const schema = z.object({
   country: z.string(),
   city: z.string().nonempty("Debes ingresar tu ciudad"),
   location: z.object({
-    address: z.string().nonempty("Debes ingresar la dirección"),
+    address: z.string(),
     latitude: z.number(),
     longitude: z.number(),
     latitudeDelta: z.number(),
@@ -43,13 +45,8 @@ export const useBusinessDetail = (id: string) => {
 
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
-  const [region, setRegion] = useState({
-    address: "",
-    latitude: 4.711,
-    longitude: -74.0721,
-    latitudeDelta: 0.05,
-    longitudeDelta: 0.05,
-  });
+
+  const { region, setRegion, setBusinessId } = useBusinessLocation();
 
   const insets = useSafeAreaInsets();
   const queryClient = useQueryClient();
@@ -65,6 +62,7 @@ export const useBusinessDetail = (id: string) => {
     control,
     handleSubmit,
     setValue,
+    getValues,
     clearErrors,
     resetField,
     reset,
@@ -110,6 +108,8 @@ export const useBusinessDetail = (id: string) => {
   const updateImage = async (publicUrl: string) => {
     await updateImageAction(data!.data.id, publicUrl);
 
+    console.log("id", id);
+
     queryClient.invalidateQueries({ queryKey: ["business", id] });
     queryClient.invalidateQueries({ queryKey: ["business"] });
 
@@ -123,7 +123,10 @@ export const useBusinessDetail = (id: string) => {
   const onSubmit = async (data: FormData) => {
     setLoading(true);
 
-    const response = await newBusinessAction(data);
+    const response =
+      id === "new"
+        ? await newBusinessAction(data)
+        : await updateBusinessAction({ id, ...data });
 
     Toast.show({
       type: "success",
@@ -145,43 +148,35 @@ export const useBusinessDetail = (id: string) => {
     setLoading(false);
   };
 
+  const onUpdateRegion = () => {
+    const location = getValues("location");
+    setRegion(location);
+    setBusinessId(id);
+
+    router.push("/glam/(tabs)/profile/my-business/location");
+  };
+
   useEffect(() => {
     resetField("city");
   }, [countryId]);
 
   useEffect(() => {
-    setValue("location", {
-      address: region.address,
-      latitude: region.latitude,
-      longitude: region.longitude,
-      latitudeDelta: region.latitudeDelta,
-      longitudeDelta: region.longitudeDelta,
-    });
-  }, [region]);
-
-  useEffect(() => {
     if (data) {
-      setRegion({
-        address: data.data.location.address,
-        latitude: data.data.location.latitude,
-        longitude: data.data.location.longitude,
-        latitudeDelta: data.data.location.latitudeDelta,
-        longitudeDelta: data.data.location.longitudeDelta,
-      });
+      const business = data.data;
 
       reset({
-        name: data.data.name,
-        phoneNumber: data.data.phoneNumber,
-        phoneNumberExtension: data.data.phoneNumberExtension,
-        country: data.data.country,
-        city: data.data.city,
-        email: data.data.email,
+        name: business.name,
+        phoneNumber: business.phoneNumber,
+        phoneNumberExtension: business.phoneNumberExtension,
+        country: business.country,
+        city: business.city,
+        email: business.email,
         location: {
-          address: data.data.location.address,
-          latitude: data.data.location.latitude,
-          longitude: data.data.location.longitude,
-          latitudeDelta: data.data.location.latitudeDelta,
-          longitudeDelta: data.data.location.longitudeDelta,
+          address: business.location.address,
+          latitude: business.location.latitude,
+          longitude: business.location.longitude,
+          latitudeDelta: business.location.latitudeDelta,
+          longitudeDelta: business.location.longitudeDelta,
         },
       });
     }
@@ -203,6 +198,6 @@ export const useBusinessDetail = (id: string) => {
     onChangePhone,
     onChangeCountry,
     onSubmit,
-    setRegion,
+    onUpdateRegion,
   };
 };

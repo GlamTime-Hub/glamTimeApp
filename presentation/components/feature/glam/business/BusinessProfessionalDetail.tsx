@@ -21,7 +21,10 @@ import { groupedByCategory } from "@/BD/service.constant";
 import { useBusinessBookingStore } from "@/presentation/store/use-business-booking.store";
 
 export const BusinessProfessionalDetail = () => {
-  const { id } = useLocalSearchParams();
+  const { id, businessId } = useLocalSearchParams();
+
+  console.log("id", id);
+  console.log("businessId", businessId);
 
   const { professional, addProfessional } = useBusinessBookingStore();
 

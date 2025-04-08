@@ -1,4 +1,6 @@
 import { ScrollView, View } from "react-native";
+import { Controller } from "react-hook-form";
+import { router } from "expo-router";
 
 import { CustomAvatar } from "@/presentation/components/ui/CustomAvatar";
 import { Input } from "@/presentation/components/ui/input";
@@ -14,13 +16,16 @@ import {
 } from "@/presentation/components/ui/select";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Button } from "@/presentation/components/ui/button";
-import { SquarePen } from "@/lib/icons/Icons";
+import { SquarePen, AlertTriangle } from "@/lib/icons/Icons";
 import { MyBusinessDetailProfessionalCard } from "./MyBusinessDetailProfessionalCard";
 import { useBusinessDetail } from "@/presentation/hooks";
-import { Controller } from "react-hook-form";
-import { GoogleMaps } from "../shared/GoogleMaps";
-import { CustomDialog } from "@/presentation/components/ui/CustomDialog";
 import { MyBusinessDetailLoading } from "./MyBusinessDetailLoading";
+import { LoadingIndicator } from "../shared/LoadingIndicator";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/presentation/components/ui/alert";
 
 export const MyBusinessDetail = ({ id }: { id: string }) => {
   const {
@@ -32,13 +37,12 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
     contentInsets,
     countries,
     cities,
-    region,
     updateImage,
     onChangeCountry,
     onChangePhone,
     handleSubmit,
     onSubmit,
-    setRegion,
+    onUpdateRegion,
   } = useBusinessDetail(id);
 
   if (isLoading) {
@@ -56,7 +60,7 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
 
         {id !== "new" && (
           <View>
-            <Text className="font-bold my-4 text-lg">
+            <Text className="font-bold my-4 text-lg text-center">
               Selecciona la imagen de tu negocio
             </Text>
             <View className="flex items-center">
@@ -67,6 +71,21 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
                 callback={updateImage}
               />
             </View>
+          </View>
+        )}
+        {id !== "new" && !business?.location.address && (
+          <View className="my-4">
+            <Alert
+              icon={AlertTriangle}
+              variant="destructive"
+              className="max-w-xl"
+            >
+              <AlertTitle>Recuerda!</AlertTitle>
+              <AlertDescription>
+                Debes seleccionar la ubicación y la imagen de tu negocio para
+                que los clientes puedan encontrarte.
+              </AlertDescription>
+            </Alert>
           </View>
         )}
 
@@ -98,7 +117,7 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
             <View className="my-2">
               <Text className="font-bold">Ingresa número de contacto</Text>
               <PhoneNumber
-                initialPhoneNumber={`${business?.phoneNumber}`}
+                initialPhoneNumber={business ? `${business?.phoneNumber}` : ""}
                 onChangeCountry={onChangeCountry}
                 onChangePhone={onChangePhone}
                 disabled={loading}
@@ -230,38 +249,31 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
           </CardContent>
         </Card>
         <View className="flex-1 my-4">
-          {id === "new" && (
-            <CustomDialog
-              isIcon={false}
-              title="Selecciona tu ubicación"
-              closeLabel="Confirmar"
+          {id !== "new" && !business?.location && (
+            <Button
+              onPress={() =>
+                router.push("/glam/(tabs)/profile/my-business/location")
+              }
             >
-              <GoogleMaps region={region} setRegion={setRegion} />
-            </CustomDialog>
+              <Text>Selecciona la ubicación de tu negocio</Text>
+            </Button>
           )}
 
-          {errors.location?.address && (
-            <Text className="text-red-500 text-sm">
-              {errors.location.address.message}
-            </Text>
-          )}
-
-          {region.address && (
+          {business?.location && (
             <View className="my-4">
               <Card>
                 <CardContent className="py-4">
                   <View className="relative">
                     <Text className="font-bold text-lg">Direccion:</Text>
-                    <Text>{region.address}</Text>
+                    <Text>{business.location.address}</Text>
                     <View className="absolute top-0 right-0">
-                      <CustomDialog
-                        isIcon={true}
-                        icon={<SquarePen className="text-foreground" />}
-                        title="Selecciona tu ubicación"
-                        closeLabel="Confirmar"
+                      <Button
+                        onPress={onUpdateRegion}
+                        variant={"ghost"}
+                        size={"icon"}
                       >
-                        <GoogleMaps region={region} setRegion={setRegion} />
-                      </CustomDialog>
+                        <SquarePen className="text-foreground" />
+                      </Button>
                     </View>
                   </View>
                 </CardContent>
@@ -273,25 +285,25 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
         {/* only available after creating a business */}
 
         {id !== "new" && (
-          <View>
-            <View>
-              <View className="my-2">
-                <Text className="font-bold">Invitar Profesional</Text>
-                <Input placeholder="Email del profesional" />
-              </View>
-              <Button variant={"outline"} className="mb-5">
-                <Text>Invitar</Text>
-              </Button>
-            </View>
-            <View>
-              <MyBusinessDetailProfessionalCard />
-              <MyBusinessDetailProfessionalCard />
-            </View>
-          </View>
+          <Button
+            onPress={() =>
+              router.push({
+                pathname:
+                  "/glam/(tabs)/profile/my-business/my-professionals/[businessId]",
+                params: { businessId: id },
+              })
+            }
+          >
+            <Text>Mis Profesionales</Text>
+          </Button>
         )}
       </ScrollView>
 
-      <Button onPress={handleSubmit(onSubmit)} className="my-5">
+      <Button
+        onPress={handleSubmit(onSubmit)}
+        className="my-5 flex flex-row gap-2"
+      >
+        {loading && <LoadingIndicator />}
         <Text>Guardar</Text>
       </Button>
     </View>

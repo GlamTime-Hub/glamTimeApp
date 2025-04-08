@@ -35,6 +35,8 @@ import {
   SquareScissors,
   X,
   ThumbsUp,
+  AlertTriangle,
+  Trash2,
 } from "lucide-react-native";
 import { iconWithClassName } from "./iconWithClassName";
 
@@ -74,6 +76,8 @@ iconWithClassName(BookLock);
 iconWithClassName(SquareScissors);
 iconWithClassName(X);
 iconWithClassName(ThumbsUp);
+iconWithClassName(AlertTriangle);
+iconWithClassName(Trash2);
 
 export {
   Share2,
@@ -112,4 +116,6 @@ export {
   SquareScissors,
   X,
   ThumbsUp,
+  AlertTriangle,
+  Trash2,
 };

@@ -3,31 +3,22 @@ import MapView, { Marker } from "react-native-maps";
 import { useRef } from "react";
 import { View, Dimensions, StyleSheet } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { Region } from "@/core/interfaces/region.interface";
+import { Button } from "@/presentation/components/ui/button";
+import { Text } from "@/presentation/components/ui/text";
 
 interface Props {
-  region: {
-    address: string;
-    latitude: number;
-    longitude: number;
-    latitudeDelta: number;
-    longitudeDelta: number;
-  };
-  setRegion: React.Dispatch<
-    React.SetStateAction<{
-      address: string;
-      latitude: number;
-      longitude: number;
-      latitudeDelta: number;
-      longitudeDelta: number;
-    }>
-  >;
+  region: Region;
+  setRegion: (region: Region) => void;
+
+  callback: () => void;
 }
 
-export const GoogleMaps = ({ region, setRegion }: Props) => {
+export const GoogleMaps = ({ region, setRegion, callback }: Props) => {
   const mapRef = useRef<any>(null);
 
   return (
-    <View className="flex flex-col justify-between">
+    <View className="flex flex-1 flex-col justify-between">
       <View className="">
         <GooglePlacesAutocomplete
           placeholder="Buscar dirección"
@@ -57,7 +48,8 @@ export const GoogleMaps = ({ region, setRegion }: Props) => {
               top: 0,
               width: "100%",
               alignSelf: "center",
-              zIndex: 1,
+              zIndex: 9999,
+              elevation: 5,
             },
             textInput: {
               height: 40,
@@ -81,6 +73,9 @@ export const GoogleMaps = ({ region, setRegion }: Props) => {
           </MapView>
         </View>
       </View>
+      <Button onPress={callback}>
+        <Text>Guardar</Text>
+      </Button>
     </View>
   );
 };
@@ -89,10 +84,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 0,
+    borderRadius: 8,
   },
   mapStyle: {
-    width: Dimensions.get("window").width - 60,
+    width: Dimensions.get("window").width - 30,
     marginRight: 0,
-    height: 350,
+    height: 500,
   },
 });

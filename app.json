@@ -61,12 +61,25 @@
       [
         "expo-asset",
         {
-          "assets": ["./assets/images/default.png"]
+          "assets": [
+            "./assets/images/default.png"
+          ]
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "supabaseUrl": "",
+      "supabaseAnonKey": "",
+      "googleMapsApiKey": "",
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "16801931-9cf1-46b8-b59d-63acc55a47f5"
+      }
     }
   }
 }

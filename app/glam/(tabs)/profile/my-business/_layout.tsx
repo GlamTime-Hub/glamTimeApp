@@ -24,6 +24,21 @@ export default function MyBusinessLayout() {
           title: "Tu negocio ",
         }}
       />
+
+      <Stack.Screen
+        name="location/index"
+        options={{
+          headerTitleAlign: "center",
+          title: "Ubica tu negocio",
+        }}
+      />
+      <Stack.Screen
+        name="my-professionals/[businessId]"
+        options={{
+          headerTitleAlign: "center",
+          title: "Mis Profesionales",
+        }}
+      />
     </Stack>
   );
 }

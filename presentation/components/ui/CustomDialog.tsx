@@ -10,15 +10,15 @@ import {
 } from "@/presentation/components/ui/dialog";
 import { Button } from "./button";
 import { Text } from "./text";
-import { View } from "react-native";
 
 interface Props {
-  title: string;
+  title?: string;
   isIcon: boolean;
   children: React.ReactNode;
   icon?: React.ReactNode;
   closeLabel: string;
   callback?: () => void;
+  disabled?: boolean;
 }
 
 export const CustomDialog = ({
@@ -27,16 +27,18 @@ export const CustomDialog = ({
   children,
   icon,
   closeLabel,
+  disabled = false,
+  callback,
 }: Props) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
         {!isIcon ? (
-          <Button variant="default">
+          <Button disabled={disabled} variant="default">
             <Text className="font-bold">{title}</Text>
           </Button>
         ) : (
-          <Button variant="ghost" size={"icon"}>
+          <Button disabled={disabled} variant="ghost" size={"icon"}>
             <Text className="font-bold">{icon}</Text>
           </Button>
         )}
@@ -48,7 +50,7 @@ export const CustomDialog = ({
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant={"outline"} className="flex flex-row gap-2">
+            <Button onPress={callback} className="flex flex-row gap-2">
               <Text>{closeLabel}</Text>
             </Button>
           </DialogClose>
