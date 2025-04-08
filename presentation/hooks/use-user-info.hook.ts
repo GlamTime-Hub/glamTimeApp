@@ -34,8 +34,6 @@ export const useUserInfo = () => {
     path: "confirm-email",
   });
 
-  console.log("redirectTo", redirectTo);
-
   const {
     control,
     handleSubmit,
@@ -56,7 +54,6 @@ export const useUserInfo = () => {
   });
 
   const onSubmit = async (data: FormData) => {
-    console.log("data", data);
     setLoading(true);
     const user = {
       ...data,
@@ -76,7 +73,7 @@ export const useUserInfo = () => {
       Toast.show({
         type: "error",
         text1: "Error",
-        text2: response.message,
+        text2: response.data.message,
       });
       setLoading(false);
       return;

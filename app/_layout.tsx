@@ -18,7 +18,6 @@ import Toast, { BaseToast, ToastConfig } from "react-native-toast-message";
 import { useDeepLinking } from "@/hooks/use-deep-link.hook";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import useAuthStore from "@/core/store/auth.store";
-import { queryClient } from "@/core/config/query-client";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -92,6 +91,8 @@ export default function RootLayout() {
   if (!isColorSchemeLoaded) {
     return null;
   }
+
+  const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -16,4 +16,7 @@ export interface Business {
   city: string;
   isActive: boolean;
   urlPhoto: string;
+  rating: number;
+
+  receivedReviews: number;
 }

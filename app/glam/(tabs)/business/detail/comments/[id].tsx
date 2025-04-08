@@ -6,8 +6,6 @@ import { BusinessProfessionalComments } from "@/presentation/components/feature"
 export default function CommentsScreen() {
   const { id } = useLocalSearchParams();
 
-  console.log("idComments", id);
-
   return (
     <Card className="m-4 flex-1">
       <CardContent className="flex-1">

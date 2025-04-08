@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { CountryPhone } from "@/core/interfaces/country-phone.interface";
 import Toast from "react-native-toast-message";
 import { updateUser } from "@/core/actions/user/update-user.action";
-import { queryClient } from "@/core/config/query-client";
+import { useQueryClient } from "@tanstack/react-query";
 
 const schema = z.object({
   name: z.string().nonempty("Debes ingresar tu nombre"),
@@ -28,6 +28,8 @@ export const useProfileDetail = () => {
   const { user, error } = useUser();
 
   const [loading, setLoading] = useState(false);
+
+  const queryClient = useQueryClient();
 
   const {
     control,
@@ -80,8 +82,6 @@ export const useProfileDetail = () => {
   };
 
   const onSave = async (data: FormData) => {
-    console.log("data", data);
-
     const userBody = {
       ...data,
       id: user?.id,

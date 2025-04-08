@@ -2,7 +2,6 @@ import { create } from "zustand";
 import Supabase from "../api/supabase.api";
 import { Session } from "@supabase/supabase-js";
 import SecureStoreAdapter from "../adapters/secureStoreAdapter";
-import { queryClient } from "../config/query-client";
 
 interface AuthState {
   session: Session | null;
@@ -16,7 +15,6 @@ const useAuthStore = create<AuthState>((set) => ({
 
   restoreSession: async () => {
     const session = await SecureStoreAdapter.getItem("session");
-    console.log("restoreSession", session);
     if (session) {
       set({ session: JSON.parse(session) });
     }
@@ -29,8 +27,6 @@ const useAuthStore = create<AuthState>((set) => ({
   logout: async () => {
     await Supabase.auth.signOut();
     await SecureStoreAdapter.removeItem("session");
-    queryClient.clear();
-    queryClient.removeQueries();
     set({ session: null });
   },
 }));

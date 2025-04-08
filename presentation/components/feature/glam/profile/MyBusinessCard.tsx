@@ -1,15 +1,25 @@
 import { Image, TouchableOpacity, View } from "react-native";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Text } from "@/presentation/components/ui/text";
-import { Heart, Star, MessageCircleMore, SquarePen } from "@/lib/icons/Icons";
-import { Button } from "@/presentation/components/ui/button";
+import {
+  Heart,
+  Star,
+  MessageCircleMore,
+  SquarePen,
+  Image as ImageIcon,
+} from "@/lib/icons/Icons";
 import { router } from "expo-router";
+import { Business } from "@/core/interfaces/business.interface";
 
-export const MyBusinessCard = () => {
+interface Props {
+  business: Business;
+}
+
+export const MyBusinessCard = ({ business }: Props) => {
   const onSelectBusiness = () => {
     router.push({
       pathname: "/glam/(tabs)/profile/my-business/detail/[id]",
-      params: { id: "67f3c7d0aef66c5ead739166" },
+      params: { id: business.id },
     });
   };
 
@@ -17,41 +27,55 @@ export const MyBusinessCard = () => {
     <TouchableOpacity onPress={onSelectBusiness}>
       <Card className="my-2">
         <CardContent className="p-0 flex flex-row">
-          <Image
-            source={{
-              uri: "https://images.pexels.com/photos/31323301/pexels-photo-31323301/free-photo-of-diseno-interior-de-peluqueria-moderna-y-elegante.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            }}
-            style={{
-              width: 150,
-              height: 100,
-              justifyContent: "flex-end",
-              borderTopLeftRadius: 5,
-              borderBottomLeftRadius: 5,
-            }}
-          />
-          <View className="flex flex-row justify-between relative">
-            <View className="py-4 px-6">
-              <Text className="font-bold text-lg">Peluquería Luxury</Text>
-              <Text className="text-sm">Calle 123, Ciudad</Text>
+          {business.urlPhoto ? (
+            <View className="flex w-32 justify-center items-center">
+              <Image
+                source={{
+                  uri: business.urlPhoto,
+                }}
+                style={{
+                  width: 100,
+                  height: 100,
+                  justifyContent: "flex-end",
+                  borderTopLeftRadius: 5,
+                  borderBottomLeftRadius: 5,
+                  padding: 10,
+                }}
+              />
+            </View>
+          ) : (
+            <View className="flex w-32 justify-center ">
+              <ImageIcon
+                className="text-foreground"
+                size={120}
+                strokeWidth={0.5}
+              />
+            </View>
+          )}
+
+          <View className="flex flex-row justify-between relative flex-1">
+            <View className="py-4 px-4 ">
+              <Text className="font-bold text-lg" numberOfLines={2}>
+                {business.name}
+              </Text>
+              <Text className="text-sm">{business.location.address}</Text>
               <View className="flex flex-row mt-2 gap-2">
                 <View className="flex flex-row items-center gap-1 ">
                   <Text>150</Text>
                   <Heart color="red" size={18} fill={"red"} />
                 </View>
                 <View className="flex flex-row items-center gap-1">
-                  <Text>4.5</Text>
+                  <Text>{business.rating}</Text>
                   <Star color="#FFD700" size={18} fill={"gold"} />
                 </View>
                 <View className="flex flex-row items-center gap-1">
-                  <Text>120</Text>
+                  <Text>{business.receivedReviews}</Text>
                   <MessageCircleMore size={18} className="text-foreground" />
                 </View>
               </View>
             </View>
             <View className="absolute top-4 -right-20">
-              <Button variant={"ghost"} size={"icon"}>
-                <SquarePen size={20} className="text-foreground" />
-              </Button>
+              <SquarePen size={20} className="text-foreground" />
             </View>
           </View>
         </CardContent>

@@ -1,15 +1,17 @@
 import axiosClient from "@/core/api/axios-client";
 import { BusinessMapper } from "@/core/mappers/business.mapper";
 
-export const getBusinessByIdAction = async (id: string) => {
+export const getBusinessAction = async () => {
   try {
-    const { data } = await axiosClient.get("business/get-business-by-id/" + id);
+    const { data } = await axiosClient.get("business/get-business-by-user-id");
 
-    const newBusiness = BusinessMapper.fromTheBusinessDBToBusiness(data.data);
+    const business = data.data.map((business: any) =>
+      BusinessMapper.fromTheBusinessDBToBusiness(business)
+    );
 
     return {
       status: true,
-      data: newBusiness,
+      data: business,
     };
   } catch (error) {
     throw new Error(

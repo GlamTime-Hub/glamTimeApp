@@ -20,6 +20,8 @@ export class BusinessMapper {
       city: business.city,
       isActive: business.isActive,
       urlPhoto: business.urlPhoto,
+      rating: business.rating,
+      receivedReviews: business.receivedReviews,
     };
   };
 }

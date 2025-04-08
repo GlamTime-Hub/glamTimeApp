@@ -8,7 +8,6 @@ export const BusinessProfessionalList = ({
   professionals: any;
 }) => {
   const onSelectProfessional = (id: string) => {
-    console.log("id", id);
     router.push({
       pathname: "/glam/(tabs)/business/detail/professional-detail/[id]",
       params: { id },

@@ -2,11 +2,13 @@ import Toast from "react-native-toast-message";
 import { useUser } from "./use-user.hook";
 import { useState } from "react";
 import { updateNotificationAction } from "@/core/actions/user/update-notifications.action";
-import { queryClient } from "@/core/config/query-client";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const useNotifications = () => {
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
+
+  const queryClient = useQueryClient();
 
   const onSaveNotifications = async (
     notificationsPush: boolean,

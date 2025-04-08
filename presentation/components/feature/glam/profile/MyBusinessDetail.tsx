@@ -1,4 +1,4 @@
-import { ScrollView, TouchableOpacity, View } from "react-native";
+import { ScrollView, View } from "react-native";
 
 import { CustomAvatar } from "@/presentation/components/ui/CustomAvatar";
 import { Input } from "@/presentation/components/ui/input";
@@ -14,33 +14,21 @@ import {
 } from "@/presentation/components/ui/select";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Button } from "@/presentation/components/ui/button";
-import { router } from "expo-router";
-
 import { SquarePen } from "@/lib/icons/Icons";
 import { MyBusinessDetailProfessionalCard } from "./MyBusinessDetailProfessionalCard";
-import { useBusiness } from "@/presentation/hooks";
+import { useBusinessDetail } from "@/presentation/hooks";
 import { Controller } from "react-hook-form";
 import { GoogleMaps } from "../shared/GoogleMaps";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/presentation/components/ui/dialog";
 import { CustomDialog } from "@/presentation/components/ui/CustomDialog";
+import { MyBusinessDetailLoading } from "./MyBusinessDetailLoading";
 
 export const MyBusinessDetail = ({ id }: { id: string }) => {
-  console.log("id", id);
-
   const {
-    user,
+    business,
     control,
     errors,
     loading,
+    isLoading,
     contentInsets,
     countries,
     cities,
@@ -51,7 +39,11 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
     handleSubmit,
     onSubmit,
     setRegion,
-  } = useBusiness(id);
+  } = useBusinessDetail(id);
+
+  if (isLoading) {
+    return <MyBusinessDetailLoading />;
+  }
 
   return (
     <View className="flex-1 flex-col justify-evenly px-4">
@@ -67,12 +59,14 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
             <Text className="font-bold my-4 text-lg">
               Selecciona la imagen de tu negocio
             </Text>
-            <CustomAvatar
-              defaultImage={user?.urlPhoto}
-              id={user!.userAuthId}
-              isUserImage={false}
-              callback={updateImage}
-            />
+            <View className="flex items-center">
+              <CustomAvatar
+                defaultImage={business?.urlPhoto}
+                id={business?.id ?? ""}
+                isUserImage={false}
+                callback={updateImage}
+              />
+            </View>
           </View>
         )}
 
@@ -104,7 +98,7 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
             <View className="my-2">
               <Text className="font-bold">Ingresa número de contacto</Text>
               <PhoneNumber
-                initialPhoneNumber={`${user?.phoneNumber}`}
+                initialPhoneNumber={`${business?.phoneNumber}`}
                 onChangeCountry={onChangeCountry}
                 onChangePhone={onChangePhone}
                 disabled={loading}

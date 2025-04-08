@@ -24,6 +24,7 @@ import { Error } from "./glam/shared/Error";
 import { LoadingIndicator } from "./glam/shared/LoadingIndicator";
 import { ProfileNotifications } from "./glam/profile/ProfileNotifications";
 import { GoogleMaps } from "./glam/shared/GoogleMaps";
+import { MyBusinessLoading } from "./glam/profile/MyBusinessLoading";
 
 export {
   Login,
@@ -52,4 +53,5 @@ export {
   LoadingIndicator,
   ProfileNotifications,
   GoogleMaps,
+  MyBusinessLoading,
 };

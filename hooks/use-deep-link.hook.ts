@@ -13,7 +13,6 @@ export const useDeepLinking = () => {
     const sub = Linking.addEventListener("url", handleDeepLink);
 
     Linking.getInitialURL().then((url) => {
-      console.log("url");
       if (url?.includes("confirm-email")) {
         router.navigate("/confirm-email");
       }

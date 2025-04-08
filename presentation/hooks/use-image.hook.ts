@@ -28,8 +28,6 @@ export const useImage = (
   const [image, setImage] = useState<string>(defaultImage);
 
   const onUpdateImage = async (uri: string) => {
-    console.log("amigooo");
-
     const imageFromFyleSystem = await FileSystem.readAsStringAsync(uri, {
       encoding: "base64",
     });

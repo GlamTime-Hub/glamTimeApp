@@ -1,6 +1,6 @@
 import { TouchableOpacity, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { SquarePen } from "@/lib/icons/Icons";
+import { SquarePen, Image as ImageIcon } from "@/lib/icons/Icons";
 import {
   Avatar,
   AvatarFallback,
@@ -13,7 +13,6 @@ interface Props {
   id: string;
   defaultImage?: string;
   callback: (publicUrl: string) => void;
-
   className?: string;
 }
 
@@ -47,7 +46,6 @@ export const CustomAvatar = ({
       setImage(result.assets[0].uri);
       const publicUrl = await onUpdateImage(result.assets[0].uri);
       callback(publicUrl!);
-      console.log("publicUrl", publicUrl);
     }
   };
 
@@ -60,10 +58,16 @@ export const CustomAvatar = ({
               uri: image,
             }}
           ></AvatarImage>
-          <AvatarFallback></AvatarFallback>
+          <AvatarFallback>
+            <ImageIcon
+              className="text-foreground"
+              size={80}
+              strokeWidth={0.8}
+            />
+          </AvatarFallback>
         </Avatar>
 
-        <SquarePen className="text-foreground absolute top-0 -right-5" />
+        <SquarePen className="text-foreground absolute top-0 -right-5 " />
       </View>
     </TouchableOpacity>
   );

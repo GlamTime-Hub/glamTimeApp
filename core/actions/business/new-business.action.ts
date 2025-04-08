@@ -4,13 +4,7 @@ import { BusinessMapper } from "@/core/mappers/business.mapper";
 export const newBusinessAction = async (business: any) => {
   try {
     const { data } = await axiosClient.post("business", business);
-
-    console.log("data back", data);
-
     const newBusiness = BusinessMapper.fromTheBusinessDBToBusiness(data.data);
-
-    console.log("newBusiness", newBusiness);
-
     return {
       status: true,
       data: newBusiness,

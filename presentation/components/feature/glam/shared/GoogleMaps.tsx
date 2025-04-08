@@ -33,7 +33,6 @@ export const GoogleMaps = ({ region, setRegion }: Props) => {
           placeholder="Buscar dirección"
           fetchDetails={true}
           onPress={(data, details: any) => {
-            console.log("data", data);
             const { lat, lng } = details.geometry.location;
 
             const newRegion = {

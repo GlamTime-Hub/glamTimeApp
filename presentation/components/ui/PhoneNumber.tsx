@@ -55,7 +55,6 @@ export const PhoneNumber = ({
   }
 
   useEffect(() => {
-    console.log("initialPhoneNumber", initialPhoneNumber);
     setInputValue(initialPhoneNumber ?? "");
   }, []);
 

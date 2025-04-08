@@ -4,8 +4,22 @@ import { Text } from "@/presentation/components/ui/text";
 import { Button } from "@/presentation/components/ui/button";
 import { Separator } from "@/presentation/components/ui/separator";
 import { router } from "expo-router";
+import { useBusiness } from "@/presentation/hooks";
+import { MyBusinessLoading } from "./MyBusinessLoading";
+import { Business } from "@/core/interfaces/business.interface";
 
 export const MyBusiness = () => {
+  const { data, isError, isLoading } = useBusiness();
+
+  if (isError) {
+    router.push("/glam/(tabs)/profile/home");
+    return;
+  }
+
+  if (isLoading) {
+    return <MyBusinessLoading />;
+  }
+
   return (
     <View className="flex-1 px-4 my-4">
       <View className="flex flex-row justify-between items-center">
@@ -27,9 +41,9 @@ export const MyBusiness = () => {
 
       <View className="flex-1 ">
         <ScrollView showsVerticalScrollIndicator={false}>
-          <MyBusinessCard />
-          <MyBusinessCard />
-          <MyBusinessCard />
+          {data.map((business: Business) => (
+            <MyBusinessCard key={business.id} business={business} />
+          ))}
         </ScrollView>
       </View>
     </View>

@@ -23,16 +23,12 @@ import { useBusinessBookingStore } from "@/presentation/store/use-business-booki
 export const BusinessProfessionalDetail = () => {
   const { id } = useLocalSearchParams();
 
-  console.log("idsito", id);
-
   const { professional, addProfessional } = useBusinessBookingStore();
 
   useEffect(() => {
     const professionalSelected = professionals.find(
       (professional) => professional.id === id
     );
-
-    console.log("professionalSelected", professionalSelected);
 
     addProfessional(professionalSelected);
   }, []);

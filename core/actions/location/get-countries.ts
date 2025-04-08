@@ -3,14 +3,10 @@ import { LocationMapper } from "@/core/mappers/location.mapper";
 
 export const getCountriesAction = async () => {
   try {
-    console.log(" getUserAction");
-
     const {
       data: { data },
     } = await axiosClient.get("location/countries");
-
     const countries = LocationMapper.fromCountryDBToCountry(data);
-
     return {
       status: true,
       data: countries,

@@ -5,7 +5,7 @@ const staleTime = 1000 * 60 * 60 * 24;
 
 export const useUser = (userAuthId?: string) => {
   const { data, error, isError, isLoading } = useQuery({
-    queryKey: ["user", "getUser"],
+    queryKey: ["user", userAuthId],
     queryFn: getUserAction,
     staleTime,
     enabled: !!userAuthId,
