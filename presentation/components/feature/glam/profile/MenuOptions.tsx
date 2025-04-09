@@ -95,15 +95,16 @@ export const MENU_OPTIONS = [
       {
         icon: <FileText className="text-foreground" />,
         text: "Terminos y condiciones",
-        href: "/glam/(tabs)/profile/legal-privacity",
+        href: "/glam/(tabs)/profile/legal-privacity/terms",
         roles: ["professional", "admin", "user"],
       },
       {
         icon: <BookLock className="text-foreground" />,
         text: "Politica de privacidad",
-        href: "/glam/(tabs)/profile/legal-privacity",
+        href: "/glam/(tabs)/profile/legal-privacity/privacy",
         roles: ["professional", "admin", "user"],
       },
     ],
   },
 ];
+

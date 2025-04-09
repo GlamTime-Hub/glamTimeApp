@@ -82,11 +82,20 @@ const LayoutScreen = () => {
           presentation: "modal",
         }}
       />
+
       <Stack.Screen
-        name="legal-privacity/index"
+        name="legal-privacity/terms/index"
         options={{
           headerTitleAlign: "center",
-          title: "Privacidad y términos de uso",
+          title: "Terminos y condiciones",
+          presentation: "modal",
+        }}
+      />
+      <Stack.Screen
+        name="legal-privacity/privacy/index"
+        options={{
+          headerTitleAlign: "center",
+          title: "Politica de privacidad",
           presentation: "modal",
         }}
       />
