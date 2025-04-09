@@ -285,17 +285,32 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
         {/* only available after creating a business */}
 
         {id !== "new" && (
-          <Button
-            onPress={() =>
-              router.push({
-                pathname:
-                  "/glam/(tabs)/profile/my-business/my-professionals/[businessId]",
-                params: { businessId: id },
-              })
-            }
-          >
-            <Text>Mis Profesionales</Text>
-          </Button>
+          <View>
+            <Button
+              onPress={() =>
+                router.push({
+                  pathname:
+                    "/glam/(tabs)/profile/my-business/my-professionals/[businessId]",
+                  params: { businessId: id },
+                })
+              }
+            >
+              <Text>Mis Profesionales</Text>
+            </Button>
+
+            <Button
+              className="my-2"
+              onPress={() =>
+                router.push({
+                  pathname:
+                    "/glam/(tabs)/profile/my-business/my-services/[businessId]",
+                  params: { businessId: id },
+                })
+              }
+            >
+              <Text>Mis Servicios</Text>
+            </Button>
+          </View>
         )}
       </ScrollView>
 

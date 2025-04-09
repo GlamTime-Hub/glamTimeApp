@@ -14,8 +14,6 @@ export const AuthService = {
       password,
     });
 
-    console.log("session", session);
-
     if (error) return error;
 
     useAuthStore.getState().setSession(session);

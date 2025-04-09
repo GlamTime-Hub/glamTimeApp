@@ -2,7 +2,7 @@ import { Image, TouchableOpacity, View } from "react-native";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Text } from "@/presentation/components/ui/text";
 import {
-  Heart,
+  ThumbsUp,
   Star,
   MessageCircleMore,
   SquarePen,
@@ -61,20 +61,20 @@ export const MyBusinessCard = ({ business }: Props) => {
               <Text className="text-sm">{business.location.address}</Text>
               <View className="flex flex-row mt-2 gap-2">
                 <View className="flex flex-row items-center gap-1 ">
-                  <Text>150</Text>
-                  <Heart color="red" size={18} fill={"red"} />
+                  <Text className="text-lg">{business.likes}</Text>
+                  <ThumbsUp size={18} />
                 </View>
                 <View className="flex flex-row items-center gap-1">
-                  <Text>{business.rating}</Text>
+                  <Text className="text-lg">{business.rating}</Text>
                   <Star color="#FFD700" size={18} fill={"gold"} />
                 </View>
                 <View className="flex flex-row items-center gap-1">
-                  <Text>{business.receivedReviews}</Text>
+                  <Text className="text-lg">{business.receivedReviews}</Text>
                   <MessageCircleMore size={18} className="text-foreground" />
                 </View>
               </View>
             </View>
-            <View className="absolute top-4 -right-20">
+            <View className="absolute top-4 right-5 ">
               <SquarePen size={20} className="text-foreground" />
             </View>
           </View>

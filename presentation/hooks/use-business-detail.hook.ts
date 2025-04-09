@@ -108,8 +108,6 @@ export const useBusinessDetail = (id: string) => {
   const updateImage = async (publicUrl: string) => {
     await updateImageAction(data!.data.id, publicUrl);
 
-    console.log("id", id);
-
     queryClient.invalidateQueries({ queryKey: ["business", id] });
     queryClient.invalidateQueries({ queryKey: ["business"] });
 

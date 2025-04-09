@@ -54,7 +54,6 @@ export const useBusinessMyProfessionals = (businessId: string) => {
 
   const onDeactivateProfessional = async (professionalId: string) => {
     setLoading(true);
-    console.log("amigooo");
     await deactivateProfessionalAction(professionalId, businessId);
 
     Toast.show({

@@ -17,6 +17,7 @@ export interface Business {
   isActive: boolean;
   urlPhoto: string;
   rating: number;
+  likes: number;
 
   receivedReviews: number;
 }

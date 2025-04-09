@@ -64,6 +64,23 @@ const toastConfig: ToastConfig = {
       text2Style={{ fontSize: 14 }}
     />
   ),
+  info: (props) => (
+    <BaseToast
+      {...props}
+      style={{
+        width: screenWidth,
+        padding: 0,
+        marginTop: 45,
+        borderLeftColor: "#2F80ED",
+        borderRadius: 0,
+      }}
+      text1Style={{ fontSize: 18, color: "#2F80ED" }}
+      text2Style={{ fontSize: 14 }}
+      text2Props={{
+        numberOfLines: 2,
+      }}
+    />
+  ),
 };
 
 export default function RootLayout() {

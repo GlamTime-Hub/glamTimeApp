@@ -59,14 +59,6 @@ const LayoutScreen = () => {
       />
 
       <Stack.Screen
-        name="my-services/index"
-        options={{
-          headerTitleAlign: "center",
-          title: "Mis Servicios",
-        }}
-      />
-
-      <Stack.Screen
         name="my-plan/index"
         options={{
           headerTitleAlign: "center",

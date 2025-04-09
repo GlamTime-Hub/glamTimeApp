@@ -7,8 +7,6 @@ export const getProfessionalByBusinessIdAction = async (businessId: string) => {
       "professional/get-professional-by-business-id/" + businessId
     );
 
-    console.log("data", data);
-
     const professionals = data.data.map((professional: any) =>
       ProfessionalMapper.fromTheProfessionalDBToProfessional(professional)
     );

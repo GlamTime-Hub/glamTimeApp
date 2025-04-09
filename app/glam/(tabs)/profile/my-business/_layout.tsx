@@ -39,6 +39,14 @@ export default function MyBusinessLayout() {
           title: "Mis Profesionales",
         }}
       />
+
+      <Stack.Screen
+        name="my-services/[businessId]"
+        options={{
+          headerTitleAlign: "center",
+          title: "Mis Servicios",
+        }}
+      />
     </Stack>
   );
 }

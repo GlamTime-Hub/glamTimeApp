@@ -23,9 +23,6 @@ import { useBusinessBookingStore } from "@/presentation/store/use-business-booki
 export const BusinessProfessionalDetail = () => {
   const { id, businessId } = useLocalSearchParams();
 
-  console.log("id", id);
-  console.log("businessId", businessId);
-
   const { professional, addProfessional } = useBusinessBookingStore();
 
   useEffect(() => {

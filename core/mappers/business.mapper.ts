@@ -22,6 +22,7 @@ export class BusinessMapper {
       urlPhoto: business.urlPhoto,
       rating: business.rating,
       receivedReviews: business.receivedReviews,
+      likes: business.likes,
     };
   };
 }

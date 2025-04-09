@@ -3,7 +3,6 @@ import { Region } from "@/core/interfaces/region.interface";
 
 export const updateLocationAction = async (id: string, location: Region) => {
   try {
-    console.log("amigooo que pasa chaval?", id);
     await axiosClient.put("business/update-location/" + id, location);
 
     return {
