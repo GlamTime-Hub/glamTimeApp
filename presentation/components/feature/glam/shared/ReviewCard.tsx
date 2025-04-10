@@ -33,7 +33,7 @@ export const ReviewCard = ({
           <Text>ZN</Text>
         </AvatarFallback>
       </Avatar>
-      <View className="w-full ml-6">
+      <View className="w-full ml-4">
         <View className="flex flex-row relative ">
           <Text className="text-md font-bold">{userName}</Text>
           <View className="flex flex-row gap-2 absolute right-14">
@@ -50,7 +50,7 @@ export const ReviewCard = ({
           /> */}
         </View>
         <View className="">
-          <Text className="text-sm italic" numberOfLines={2}>
+          <Text className="text-sm pr-4 italic" numberOfLines={2}>
             "{comment}"
           </Text>
         </View>

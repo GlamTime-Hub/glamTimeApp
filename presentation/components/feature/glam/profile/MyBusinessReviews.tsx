@@ -4,12 +4,31 @@ import { MyBusinessReviewsLoading } from "./MyBusinessReviewsLoading";
 import { BusinessReviews } from "@/core/interfaces/business-reviews.interface";
 import { ReviewCard } from "../shared/ReviewCard";
 import { Card, CardContent } from "@/presentation/components/ui/card";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/presentation/components/ui/alert";
+import { AlertTriangle } from "@/lib/icons/Icons";
 
 export const MyBusinessReviews = ({ id }: { id: string }) => {
   const { businessReviews, isLoading } = useBusinessReviews(id);
 
   if (isLoading) {
     return <MyBusinessReviewsLoading />;
+  }
+
+  if (!businessReviews || businessReviews.length === 0) {
+    return (
+      <View className="p-6">
+        <Alert icon={AlertTriangle} variant="default" className="max-w-xl">
+          <AlertTitle>Info!</AlertTitle>
+          <AlertDescription>
+            No has recibido reseñas de tus clientes.
+          </AlertDescription>
+        </Alert>
+      </View>
+    );
   }
 
   return (
