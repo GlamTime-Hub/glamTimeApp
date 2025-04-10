@@ -7,7 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 export const useProfileHome = () => {
   const { session, logout } = useAuthStore();
-  const { user, error, isError, isLoading } = useUser();
+  const { user, error, isError, isLoading } = useUser(session?.user.id!);
 
   const isProfessional = ["professional", "admin"].includes(user?.role!);
 
@@ -17,8 +17,9 @@ export const useProfileHome = () => {
     router.push(href);
   };
 
-  const onLogout = () => {
-    logout();
+  const onLogout = async () => {
+    await logout();
+    queryClient.clear();
   };
 
   const updateImage = async (publicUrl: string) => {
