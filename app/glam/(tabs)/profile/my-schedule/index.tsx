@@ -1,9 +1,5 @@
-import { View, Text } from "react-native";
+import { MySchedule } from "@/presentation/components/feature";
 
 export default function MyScheduleScreen() {
-  return (
-    <View>
-      <Text>MyScheduleScreen</Text>
-    </View>
-  );
+  return <MySchedule />;
 }

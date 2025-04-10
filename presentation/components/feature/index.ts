@@ -29,6 +29,7 @@ import { MyBusinessMyProfessionals } from "./glam/profile/MyBusinessMyProfession
 import { MyBusinessMyServices } from "./glam/profile/MyBusinessMyServices";
 import { MyBusinessProfile } from "./glam/profile/MyBusinessProfile";
 import { MyBusinessReviews } from "./glam/profile/MyBusinessReviews";
+import { MySchedule } from "./glam/profile/MySchedule";
 
 export {
   Login,
@@ -62,4 +63,5 @@ export {
   MyBusinessMyServices,
   MyBusinessProfile,
   MyBusinessReviews,
+  MySchedule,
 };

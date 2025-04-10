@@ -38,6 +38,7 @@ import {
   AlertTriangle,
   Trash2,
   ShieldUser,
+  Timer,
 } from "lucide-react-native";
 import { iconWithClassName } from "./iconWithClassName";
 
@@ -80,6 +81,7 @@ iconWithClassName(ThumbsUp);
 iconWithClassName(AlertTriangle);
 iconWithClassName(Trash2);
 iconWithClassName(ShieldUser);
+iconWithClassName(Timer);
 
 export {
   Share2,
@@ -121,4 +123,5 @@ export {
   AlertTriangle,
   Trash2,
   ShieldUser,
+  Timer,
 };

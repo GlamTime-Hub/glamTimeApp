@@ -6,6 +6,7 @@ import { useImage } from "./use-image.hook";
 import { useNotifications } from "./use-notifications";
 import { useBusinessDetail } from "./use-business-detail.hook";
 import { useBusiness } from "./use-business.hook";
+import { useMySchedule } from "./use-my-schedule.hook";
 
 export {
   useSignUp,
@@ -16,4 +17,5 @@ export {
   useNotifications,
   useBusinessDetail,
   useBusiness,
+  useMySchedule,
 };
