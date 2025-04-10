@@ -36,12 +36,6 @@ export const MENU_OPTIONS = [
         roles: ["professional", "admin"],
       },
       {
-        icon: <SquareScissors className="text-foreground" />,
-        text: "Mis Servicios",
-        href: "/glam/(tabs)/profile/my-services",
-        roles: ["professional", "admin"],
-      },
-      {
         icon: <CalendarDays className="text-foreground" />,
         text: "Mis Horarios",
         href: "/glam/(tabs)/profile/my-schedule",
@@ -107,4 +101,3 @@ export const MENU_OPTIONS = [
     ],
   },
 ];
-

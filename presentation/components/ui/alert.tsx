@@ -50,7 +50,7 @@ const Alert = React.forwardRef<
         className={alertVariants({ variant, className })}
         {...props}
       >
-        <View className="absolute left-3.5 top-4 -translate-y-0.5">
+        <View className="absolute left-3.5 top-5 -translate-y-0.5">
           <Icon
             size={iconSize}
             color={
@@ -72,7 +72,7 @@ const AlertTitle = React.forwardRef<
   <Text
     ref={ref}
     className={cn(
-      "pl-7 mb-1 font-medium text-base leading-none tracking-tight text-foreground",
+      "pl-7 pt-2 font-medium text-base leading-none tracking-tight text-foreground",
       className
     )}
     {...props}
@@ -86,7 +86,7 @@ const AlertDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <Text
     ref={ref}
-    className={cn("pl-7 text-sm leading-relaxed text-foreground", className)}
+    className={cn("pl-7 leading-relaxed text-foreground", className)}
     {...props}
   />
 ));

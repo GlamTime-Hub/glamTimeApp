@@ -15,16 +15,18 @@ import {
   SquareScissors,
   MessageCircleHeart,
 } from "@/lib/icons/Icons";
+import { CustomDialog } from "@/presentation/components/ui/CustomDialog";
 
 export const MyBusinessDetail = ({ id }: { id: string }) => {
-  const { business, user, isLoading, updateImage } = useBusinessDetail(id);
+  const { business, isLoading, updateImage, handleBusinessStatus } =
+    useBusinessDetail(id);
 
   if (isLoading) {
     return <MyBusinessDetailLoading />;
   }
 
   return (
-    <View className="flex-1 flex-col justify-evenly px-4">
+    <View className="flex-1 flex-col justify-between px-4">
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <View className="flex items-center">
@@ -35,7 +37,7 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
               callback={updateImage}
             />
           </View>
-          <Text className="font-bold my-4 text-xl text-center">
+          <Text className="font-bold my-2 text-xl text-center">
             {business?.name}
           </Text>
         </View>
@@ -122,6 +124,20 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
           </CardContent>
         </Card>
       </ScrollView>
+      <CustomDialog
+        isIcon={false}
+        title={business?.isActive ? "Desactivar Negocio" : "Activar Negocio"}
+        closeLabel={business?.isActive ? "Desactivar" : "Activar"}
+        buttonVariant={business?.isActive ? "destructive" : "default"}
+        callback={() =>
+          handleBusinessStatus(business?.id!, !business?.isActive)
+        }
+      >
+        <Text numberOfLines={2}>
+          Una vez desactivado , los usuarios no podran ver tu negocio ni
+          reservar citas, ¿Estás seguro?
+        </Text>
+      </CustomDialog>
     </View>
   );
 };

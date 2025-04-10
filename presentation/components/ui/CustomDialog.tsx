@@ -8,8 +8,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/presentation/components/ui/dialog";
-import { Button } from "./button";
 import { Text } from "./text";
+import { Button } from "./button";
 
 interface Props {
   title?: string;
@@ -19,6 +19,7 @@ interface Props {
   closeLabel: string;
   callback?: () => void;
   disabled?: boolean;
+  buttonVariant?: "default" | "outline" | "destructive";
 }
 
 export const CustomDialog = ({
@@ -28,13 +29,14 @@ export const CustomDialog = ({
   icon,
   closeLabel,
   disabled = false,
+  buttonVariant = "default",
   callback,
 }: Props) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
         {!isIcon ? (
-          <Button disabled={disabled} variant="default">
+          <Button disabled={disabled} variant={buttonVariant}>
             <Text className="font-bold">{title}</Text>
           </Button>
         ) : (
@@ -50,7 +52,11 @@ export const CustomDialog = ({
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
-            <Button onPress={callback} className="flex flex-row gap-2">
+            <Button
+              onPress={callback}
+              variant={buttonVariant}
+              className="flex flex-row gap-2"
+            >
               <Text>{closeLabel}</Text>
             </Button>
           </DialogClose>

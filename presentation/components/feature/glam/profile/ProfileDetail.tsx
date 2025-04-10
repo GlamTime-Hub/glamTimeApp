@@ -1,4 +1,4 @@
-import { ActivityIndicator, Platform, ScrollView, View } from "react-native";
+import { Platform, ScrollView, View } from "react-native";
 import { Button } from "@/presentation/components/ui/button";
 import { Text } from "@/presentation/components/ui/text";
 import { useProfileDetail } from "@/presentation/hooks/use-profile-detail.hook";
@@ -19,17 +19,18 @@ import { PhoneNumber } from "@/presentation/components/ui/PhoneNumber";
 import { Error } from "../shared/Error";
 import Toast from "react-native-toast-message";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
+import { ProfileDetailLoading } from "./ProfileDetailLoading";
 
 export const ProfileDetail = () => {
   const {
     backendError,
+    isLoading,
     MONTHS,
     DAYS,
     GENDER,
     user,
     loading,
     countries,
-    loadingCountries,
     cities,
     control,
     errors,
@@ -63,10 +64,6 @@ export const ProfileDetail = () => {
     right: 35,
   };
 
-  const country = !loadingCountries
-    ? countries!.find((country) => country.id === user!.country)
-    : undefined;
-
   if (backendError) {
     Toast.show({
       type: "error",
@@ -76,10 +73,14 @@ export const ProfileDetail = () => {
     return <Error />;
   }
 
+  if (isLoading) {
+    return <ProfileDetailLoading />;
+  }
+
   return (
-    <View className="flex-1 px-6">
+    <View className="flex-1 p-6">
       <View className="flex flex-1 flex-col justify-between items-end ">
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View className="my-6">
             <Text className="font-bold text-xl text-center">
               Mantén tus datos actualizados
@@ -287,16 +288,16 @@ export const ProfileDetail = () => {
                   <Controller
                     control={control}
                     name="country"
-                    render={({ field: { onChange } }) => (
+                    render={({ field: { onChange, value } }) => (
                       <Select
                         onValueChange={(value) => {
                           onChange(value?.value);
                         }}
-                        value={
-                          country
-                            ? { value: country.id, label: country.name }
-                            : undefined
-                        }
+                        value={{
+                          value,
+                          label:
+                            countries?.find((c) => c.id === value)?.name ?? "",
+                        }}
                         disabled={true}
                       >
                         <SelectTrigger disabled={true}>
@@ -389,7 +390,7 @@ export const ProfileDetail = () => {
                     ¿Cómo es tu número movil?
                   </Text>
                   <PhoneNumber
-                    initialPhoneNumber={`${user?.phoneNumber}`}
+                    initialPhoneNumber={user ? `${user?.phoneNumber}` : ""}
                     onChangeCountry={onChangeCountry}
                     onChangePhone={onChangePhone}
                     disabled={loading}
@@ -406,7 +407,7 @@ export const ProfileDetail = () => {
         </ScrollView>
         <Button
           onPress={handleSubmit(onSave)}
-          className="mb-5 flex flex-row gap-2 w-full"
+          className="flex flex-row gap-2 w-full"
         >
           {loading && <LoadingIndicator />}
           <Text>Guardar</Text>

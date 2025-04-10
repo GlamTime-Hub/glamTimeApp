@@ -25,7 +25,6 @@ export const MyBusiness = () => {
       <View className="flex flex-row justify-between items-center">
         <Text className="font-bold text-xl">Gestiona tus negocios</Text>
         <Button
-          variant={"outline"}
           size={"sm"}
           onPress={() =>
             router.push({

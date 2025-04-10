@@ -10,12 +10,15 @@ import {
 } from "@/lib/icons/Icons";
 import { router } from "expo-router";
 import { Business } from "@/core/interfaces/business.interface";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 interface Props {
   business: Business;
 }
 
 export const MyBusinessCard = ({ business }: Props) => {
+  const { isDarkColorScheme } = useColorScheme();
+
   const onSelectBusiness = () => {
     router.push({
       pathname: "/glam/(tabs)/profile/my-business/detail/[id]",
@@ -25,7 +28,13 @@ export const MyBusinessCard = ({ business }: Props) => {
 
   return (
     <TouchableOpacity onPress={onSelectBusiness}>
-      <Card className="my-2">
+      <Card
+        className={`my-2 ${
+          business.isActive
+            ? ""
+            : `${isDarkColorScheme ? "bg-red-500" : "bg-red-200"}`
+        }`}
+      >
         <CardContent className="p-0 flex flex-row">
           {business.urlPhoto ? (
             <View className="flex w-32 justify-center items-center">
@@ -54,7 +63,7 @@ export const MyBusinessCard = ({ business }: Props) => {
           )}
 
           <View className="flex flex-row justify-between relative flex-1">
-            <View className="py-4 px-4 ">
+            <View className="py-4 px-2 ">
               <Text className="font-bold text-lg" numberOfLines={2}>
                 {business.name}
               </Text>
@@ -74,7 +83,7 @@ export const MyBusinessCard = ({ business }: Props) => {
                 </View>
               </View>
             </View>
-            <View className="absolute top-4 right-5 ">
+            <View className="absolute top-4 right-2 ">
               <SquarePen size={20} className="text-foreground" />
             </View>
           </View>

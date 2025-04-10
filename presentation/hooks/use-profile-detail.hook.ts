@@ -9,6 +9,7 @@ import { CountryPhone } from "@/core/interfaces/country-phone.interface";
 import Toast from "react-native-toast-message";
 import { updateUser } from "@/core/actions/user/update-user.action";
 import { useQueryClient } from "@tanstack/react-query";
+import useAuthStore from "@/core/store/auth.store";
 
 const schema = z.object({
   name: z.string().nonempty("Debes ingresar tu nombre"),
@@ -25,7 +26,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export const useProfileDetail = () => {
-  const { user, error } = useUser();
+  const { user, error, isLoading } = useUser();
 
   const [loading, setLoading] = useState(false);
 
@@ -37,19 +38,20 @@ export const useProfileDetail = () => {
     setValue,
     clearErrors,
     resetField,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: user!.name,
-      birthMonth: `${user!.birthMonth}`,
-      birthDay: `${user!.birthDay}`,
-      phoneNumber: user!.phoneNumber,
-      phoneNumberExtension: user!.phoneNumberExtension,
-      city: user!.city,
-      gender: user!.gender,
-      email: user!.email,
-      country: user!.country,
+      name: "",
+      birthMonth: "",
+      birthDay: "",
+      phoneNumber: "",
+      phoneNumberExtension: "",
+      city: "",
+      gender: "",
+      email: "",
+      country: "",
     },
   });
 
@@ -64,10 +66,6 @@ export const useProfileDetail = () => {
   useEffect(() => {
     resetField("city");
   }, [countryId]);
-
-  useEffect(() => {
-    setValue("phoneNumber", user?.phoneNumber || "");
-  }, []);
 
   const onChangePhone = (phoneNumber: string) => {
     setValue("phoneNumber", phoneNumber.length === 0 ? "" : `${phoneNumber}`);
@@ -98,14 +96,33 @@ export const useProfileDetail = () => {
       text2: "Los cambios se han guardado correctamente",
     });
 
-    queryClient.invalidateQueries({ queryKey: ["user", "getUser"] });
+    queryClient.invalidateQueries({ queryKey: ["user"] });
     setLoading(false);
   };
+
+  useEffect(() => {}, []);
+
+  useEffect(() => {
+    if (user) {
+      reset({
+        name: user!.name,
+        birthMonth: `${user!.birthMonth}`,
+        birthDay: `${user!.birthDay}`,
+        phoneNumber: user!.phoneNumber,
+        phoneNumberExtension: user!.phoneNumberExtension,
+        city: user!.city,
+        gender: user!.gender,
+        email: user!.email,
+        country: user!.country,
+      });
+    }
+  }, [user]);
 
   return {
     GENDER,
     DAYS,
     MONTHS,
+    isLoading,
     user,
     backendError: error,
     control,

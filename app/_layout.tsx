@@ -1,12 +1,13 @@
 import "../global.css";
 
+import { useFonts } from "expo-font";
 import {
   DarkTheme,
   DefaultTheme,
   Theme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { Stack } from "expo-router";
+import { SplashScreen, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Dimensions, Platform } from "react-native";
 import { PortalHost } from "@rn-primitives/portal";
@@ -83,14 +84,31 @@ const toastConfig: ToastConfig = {
   ),
 };
 
+SplashScreen.preventAutoHideAsync();
+
 export default function RootLayout() {
   const hasMounted = useRef(false);
   const { colorScheme, isDarkColorScheme } = useColorScheme();
+  const [fontsLoaded] = useFonts({
+    "Baloo2-Bold": require("../assets/fonts/Baloo2-Bold.ttf"),
+    "Baloo2-ExtraBold": require("../assets/fonts/Baloo2-ExtraBold.ttf"),
+    "Baloo2-SemiBold": require("../assets/fonts/Baloo2-SemiBold.ttf"),
+    "Baloo2-Medium": require("../assets/fonts/Baloo2-Medium.ttf"),
+    "Baloo2-Regular": require("../assets/fonts/Baloo2-Regular.ttf"),
+  });
+
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = useState(false);
 
   useDeepLinking();
 
   const { restoreSession } = useAuthStore();
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      console.log("loaded fonts");
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
 
   useLayoutEffect(() => {
     if (hasMounted.current) {

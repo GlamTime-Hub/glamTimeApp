@@ -7,9 +7,9 @@ import { useQueryClient } from "@tanstack/react-query";
 
 export const useProfileHome = () => {
   const { session, logout } = useAuthStore();
-  const { user, error, isError, isLoading } = useUser(session?.user.id);
+  const { user, error, isError, isLoading } = useUser();
 
-  const isProfessional = user?.role === "professional";
+  const isProfessional = ["professional", "admin"].includes(user?.role!);
 
   const queryClient = useQueryClient();
 
@@ -30,7 +30,7 @@ export const useProfileHome = () => {
       text2: "La imagen se ha actualizado correctamente",
     });
 
-    queryClient.invalidateQueries({ queryKey: ["user", session?.user.id] });
+    queryClient.invalidateQueries({ queryKey: ["user"] });
   };
 
   return {

@@ -14,6 +14,7 @@ import { getBusinessByIdAction } from "@/core/actions/business/get-business-by-i
 import { updateImageAction } from "@/core/actions/business/update-image.action";
 import { updateBusinessAction } from "@/core/actions/business/update-business.action";
 import { useBusinessLocation } from "./use-business-location";
+import { updateBusinessStatusAction } from "@/core/actions/business/update-business-status.action";
 
 const schema = z.object({
   name: z.string().nonempty("Debes ingresar el nombre"),
@@ -154,6 +155,25 @@ export const useBusinessDetail = (id: string) => {
     router.push("/glam/(tabs)/profile/my-business/location");
   };
 
+  const handleBusinessStatus = async (
+    businessId: string,
+    isActive: boolean
+  ) => {
+    setLoading(true);
+    await updateBusinessStatusAction(businessId, isActive);
+
+    Toast.show({
+      type: "success",
+      text1: "¡Éxito!",
+      text2: `El negocio ha sido ${isActive ? "activado" : "desactivado"}.`,
+    });
+
+    queryClient.invalidateQueries({ queryKey: ["business", businessId] });
+    queryClient.invalidateQueries({ queryKey: ["business"] });
+
+    setLoading(false);
+  };
+
   useEffect(() => {
     resetField("city");
   }, [countryId]);
@@ -197,5 +217,6 @@ export const useBusinessDetail = (id: string) => {
     onChangeCountry,
     onSubmit,
     onUpdateRegion,
+    handleBusinessStatus,
   };
 };

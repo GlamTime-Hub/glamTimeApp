@@ -45,6 +45,13 @@ module.exports = {
       borderWidth: {
         hairline: hairlineWidth(),
       },
+      fontFamily: {
+        "baloo-bold": ["Baloo2-Bold", "sans-serif"],
+        "baloo-regular": ["Baloo2-Regular", "sans-serif"],
+        "baloo-medium": ["Baloo2-Medium", "sans-serif"],
+        "baloo-semibold": ["Baloo2-SemiBold", "sans-serif"],
+        "baloo-extrabold": ["Baloo2-ExtraBold", "sans-serif"],
+      },
     },
   },
   plugins: [],
