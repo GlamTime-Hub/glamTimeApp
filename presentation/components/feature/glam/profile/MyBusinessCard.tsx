@@ -59,7 +59,7 @@ export const MyBusinessCard = ({ business }: Props) => {
                 {business.name}
               </Text>
               <Text className="text-sm">{business.location.address}</Text>
-              <View className="flex flex-row mt-2 gap-2">
+              <View className="flex flex-row mt-2 gap-4">
                 <View className="flex flex-row items-center gap-1 ">
                   <Text className="text-lg">{business.likes}</Text>
                   <ThumbsUp size={18} />

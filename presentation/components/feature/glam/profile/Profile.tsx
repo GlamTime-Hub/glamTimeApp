@@ -61,7 +61,7 @@ export const Profile = ({
         </View>
         <View className="flex-1 mt-4">
           {MENU_OPTIONS.map((section, index) => (
-            <View key={index}>
+            <View key={index} className="my-4">
               <Text className="font-bold text-xl">{section.section}</Text>
 
               <Card className="my-2">

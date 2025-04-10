@@ -29,7 +29,8 @@ export const MyBusiness = () => {
           size={"sm"}
           onPress={() =>
             router.push({
-              pathname: "/glam/(tabs)/profile/my-business/detail/[id]",
+              pathname:
+                "/glam/(tabs)/profile/my-business/business-profile/[id]",
               params: { id: "new" },
             })
           }

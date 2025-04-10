@@ -21,7 +21,7 @@ export default function HomeScreen() {
     updateImage,
   } = useProfileHome();
 
-  if (!session?.user) return <ProfileWelcome />;
+  if (!session) return <ProfileWelcome />;
 
   if (isLoading) return <ProfileLoading />;
 

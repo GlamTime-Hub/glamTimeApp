@@ -21,7 +21,13 @@ export const useLogin = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(schema) });
+  } = useForm({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
   const [loading, setLoading] = useState<boolean>(false);
 

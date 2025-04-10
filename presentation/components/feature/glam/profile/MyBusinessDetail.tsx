@@ -1,49 +1,23 @@
-import { ScrollView, View } from "react-native";
-import { Controller } from "react-hook-form";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import { router } from "expo-router";
 
 import { CustomAvatar } from "@/presentation/components/ui/CustomAvatar";
-import { Input } from "@/presentation/components/ui/input";
 import { Text } from "@/presentation/components/ui/text";
-import { PhoneNumber } from "@/presentation/components/ui/PhoneNumber";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/presentation/components/ui/select";
-import { Card, CardContent } from "@/presentation/components/ui/card";
-import { Button } from "@/presentation/components/ui/button";
-import { SquarePen, AlertTriangle } from "@/lib/icons/Icons";
-import { MyBusinessDetailProfessionalCard } from "./MyBusinessDetailProfessionalCard";
 import { useBusinessDetail } from "@/presentation/hooks";
 import { MyBusinessDetailLoading } from "./MyBusinessDetailLoading";
-import { LoadingIndicator } from "../shared/LoadingIndicator";
+import { Card, CardContent } from "@/presentation/components/ui/card";
+import { Separator } from "@/presentation/components/ui/separator";
+
 import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@/presentation/components/ui/alert";
+  ChevronRight,
+  Store,
+  ShieldUser,
+  SquareScissors,
+  MessageCircleHeart,
+} from "@/lib/icons/Icons";
 
 export const MyBusinessDetail = ({ id }: { id: string }) => {
-  const {
-    business,
-    control,
-    errors,
-    loading,
-    isLoading,
-    contentInsets,
-    countries,
-    cities,
-    updateImage,
-    onChangeCountry,
-    onChangePhone,
-    handleSubmit,
-    onSubmit,
-    onUpdateRegion,
-  } = useBusinessDetail(id);
+  const { business, user, isLoading, updateImage } = useBusinessDetail(id);
 
   if (isLoading) {
     return <MyBusinessDetailLoading />;
@@ -52,241 +26,43 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
   return (
     <View className="flex-1 flex-col justify-evenly px-4">
       <ScrollView showsVerticalScrollIndicator={false}>
-        {id === "new" && (
-          <Text className="my-6 font-bold text-xl">
-            Ingresa los datos básicos de tu negocio
+        <View>
+          <View className="flex items-center">
+            <CustomAvatar
+              defaultImage={business?.urlPhoto}
+              id={business?.id ?? ""}
+              isUserImage={false}
+              callback={updateImage}
+            />
+          </View>
+          <Text className="font-bold my-4 text-xl text-center">
+            {business?.name}
           </Text>
-        )}
-
-        {id !== "new" && (
-          <View>
-            <Text className="font-bold my-4 text-lg text-center">
-              Selecciona la imagen de tu negocio
-            </Text>
-            <View className="flex items-center">
-              <CustomAvatar
-                defaultImage={business?.urlPhoto}
-                id={business?.id ?? ""}
-                isUserImage={false}
-                callback={updateImage}
-              />
-            </View>
-          </View>
-        )}
-        {id !== "new" && !business?.location.address && (
-          <View className="my-4">
-            <Alert
-              icon={AlertTriangle}
-              variant="destructive"
-              className="max-w-xl"
-            >
-              <AlertTitle>Recuerda!</AlertTitle>
-              <AlertDescription>
-                Debes seleccionar la ubicación y la imagen de tu negocio para
-                que los clientes puedan encontrarte.
-              </AlertDescription>
-            </Alert>
-          </View>
-        )}
-
-        <Card className="py-4">
-          <CardContent className="px-4">
-            <View className="my-2">
-              <Text className="font-bold">¿Cómo se llama tu negocio?</Text>
-              <Controller
-                control={control}
-                name="name"
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <Input
-                    readOnly={loading}
-                    onChangeText={onChange}
-                    onBlur={onBlur}
-                    value={value}
-                    placeholder="Nombre"
-                    keyboardType="email-address"
-                  />
-                )}
-              />
-              {errors.name && (
-                <Text className="text-red-500 text-sm">
-                  {errors.name.message}
-                </Text>
-              )}
-            </View>
-
-            <View className="my-2">
-              <Text className="font-bold">Ingresa número de contacto</Text>
-              <PhoneNumber
-                initialPhoneNumber={business ? `${business?.phoneNumber}` : ""}
-                onChangeCountry={onChangeCountry}
-                onChangePhone={onChangePhone}
-                disabled={loading}
-              />
-              {errors.phoneNumber && (
-                <Text className="text-red-500 text-sm">
-                  {errors.phoneNumber.message}
-                </Text>
-              )}
-            </View>
-
-            <View className="my-2">
-              <Text className="font-bold mb-1">Correo electronico</Text>
-              <Controller
-                control={control}
-                name="email"
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <Input
-                    onChangeText={onChange}
-                    onBlur={onBlur}
-                    value={value}
-                    placeholder="Email"
-                    keyboardType="email-address"
-                  />
-                )}
-              />
-              {errors.email && (
-                <Text className="text-red-500 text-sm">
-                  {errors.email.message}
-                </Text>
-              )}
-            </View>
-
-            <View className="my-2">
-              <Text className="font-bold">País donde está tu negocio</Text>
-              <Controller
-                control={control}
-                name="country"
-                render={({ field: { onChange, value } }) => (
-                  <Select
-                    onValueChange={(value) => {
-                      onChange(value?.value);
-                    }}
-                    value={{
-                      value,
-                      label: countries?.find((c) => c.id === value)?.name ?? "",
-                    }}
-                    disabled={true}
-                  >
-                    <SelectTrigger disabled={true}>
-                      <SelectValue
-                        className="text-foreground text-sm native:text-lg"
-                        placeholder="País"
-                      />
-                    </SelectTrigger>
-                    <SelectContent insets={contentInsets} className="w-full">
-                      <ScrollView className="max-h-80 ">
-                        <SelectGroup>
-                          {countries?.map((country) => (
-                            <SelectItem
-                              key={country.id}
-                              label={country.name}
-                              value={country.id}
-                            >
-                              {country.name}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                      </ScrollView>
-                    </SelectContent>
-                  </Select>
-                )}
-              />
-            </View>
-
-            <View className="my-2">
-              <Text className="font-bold mb-1">
-                Ciudad donde está tu negocio
-              </Text>
-              <Controller
-                control={control}
-                name="city"
-                render={({ field: { onChange, value } }) => (
-                  <Select
-                    disabled={loading}
-                    onValueChange={(value) => {
-                      onChange(value?.value);
-                    }}
-                    value={
-                      value
-                        ? {
-                            value,
-                            label:
-                              cities?.find((c) => c.id === value)?.name ?? "",
-                          }
-                        : undefined
-                    }
-                  >
-                    <SelectTrigger disabled={loading}>
-                      <SelectValue
-                        className="text-foreground text-sm native:text-lg"
-                        placeholder="Ciudad"
-                      />
-                    </SelectTrigger>
-                    <SelectContent insets={contentInsets} className="w-full">
-                      <ScrollView className="max-h-80 ">
-                        <SelectGroup>
-                          {cities?.map((city) => (
-                            <SelectItem
-                              key={city.id}
-                              label={city.name}
-                              value={city.id}
-                            >
-                              {city.name}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                      </ScrollView>
-                    </SelectContent>
-                  </Select>
-                )}
-              />
-              {errors.city && (
-                <Text className="text-red-500 text-sm">
-                  {errors.city.message}
-                </Text>
-              )}
-            </View>
-          </CardContent>
-        </Card>
-        <View className="flex-1 my-4">
-          {id !== "new" && !business?.location && (
-            <Button
-              onPress={() =>
-                router.push("/glam/(tabs)/profile/my-business/location")
-              }
-            >
-              <Text>Selecciona la ubicación de tu negocio</Text>
-            </Button>
-          )}
-
-          {business?.location && (
-            <View className="my-4">
-              <Card>
-                <CardContent className="py-4">
-                  <View className="relative">
-                    <Text className="font-bold text-lg">Direccion:</Text>
-                    <Text>{business.location.address}</Text>
-                    <View className="absolute top-0 right-0">
-                      <Button
-                        onPress={onUpdateRegion}
-                        variant={"ghost"}
-                        size={"icon"}
-                      >
-                        <SquarePen className="text-foreground" />
-                      </Button>
-                    </View>
-                  </View>
-                </CardContent>
-              </Card>
-            </View>
-          )}
         </View>
 
-        {/* only available after creating a business */}
-
-        {id !== "new" && (
-          <View>
-            <Button
+        <Card className="my-2">
+          <CardContent className="p-6">
+            <TouchableOpacity
+              className="p-4"
+              onPress={() =>
+                router.push({
+                  pathname:
+                    "/glam/(tabs)/profile/my-business/business-profile/[id]",
+                  params: { id },
+                })
+              }
+            >
+              <View className="flex flex-row justify-between mb-2 ">
+                <View className="flex flex-row items-center gap-2">
+                  <Store className="text-foreground" />
+                  <Text>Perfil del negocio</Text>
+                </View>
+                <ChevronRight className="text-foreground" />
+              </View>
+              <Separator />
+            </TouchableOpacity>
+            <TouchableOpacity
+              className="p-4"
               onPress={() =>
                 router.push({
                   pathname:
@@ -295,11 +71,37 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
                 })
               }
             >
-              <Text>Mis Profesionales</Text>
-            </Button>
+              <View className="flex flex-row justify-between mb-2 ">
+                <View className="flex flex-row items-center gap-2">
+                  <ShieldUser className="text-foreground" />
+                  <Text>Mis Profesionales</Text>
+                </View>
+                <ChevronRight className="text-foreground" />
+              </View>
+              <Separator />
+            </TouchableOpacity>
 
-            <Button
-              className="my-2"
+            <TouchableOpacity
+              className="p-4"
+              onPress={() =>
+                router.push({
+                  pathname: "/glam/(tabs)/profile/my-business/my-reviews/[id]",
+                  params: { id },
+                })
+              }
+            >
+              <View className="flex flex-row justify-between mb-2 ">
+                <View className="flex flex-row items-center gap-2">
+                  <MessageCircleHeart className="text-foreground" />
+                  <Text>Reseñas Recibidas</Text>
+                </View>
+                <ChevronRight className="text-foreground" />
+              </View>
+              <Separator />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              className="p-4"
               onPress={() =>
                 router.push({
                   pathname:
@@ -308,19 +110,18 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
                 })
               }
             >
-              <Text>Mis Servicios</Text>
-            </Button>
-          </View>
-        )}
+              <View className="flex flex-row justify-between mb-2 ">
+                <View className="flex flex-row items-center gap-2">
+                  <SquareScissors className="text-foreground" />
+                  <Text>Mis Servicios</Text>
+                </View>
+                <ChevronRight className="text-foreground" />
+              </View>
+              <Separator />
+            </TouchableOpacity>
+          </CardContent>
+        </Card>
       </ScrollView>
-
-      <Button
-        onPress={handleSubmit(onSubmit)}
-        className="my-5 flex flex-row gap-2"
-      >
-        {loading && <LoadingIndicator />}
-        <Text>Guardar</Text>
-      </Button>
     </View>
   );
 };

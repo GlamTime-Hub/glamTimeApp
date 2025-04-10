@@ -21,7 +21,23 @@ export default function MyBusinessLayout() {
         name="detail/[id]"
         options={{
           headerTitleAlign: "center",
-          title: "Tu negocio ",
+          title: "Gestiona tu negocio",
+        }}
+      />
+
+      <Stack.Screen
+        name="business-profile/[id]"
+        options={{
+          headerTitleAlign: "center",
+          title: "Perfil del negocio",
+        }}
+      />
+
+      <Stack.Screen
+        name="my-reviews/[id]"
+        options={{
+          headerTitleAlign: "center",
+          title: "Reseñas del negocio",
         }}
       />
 

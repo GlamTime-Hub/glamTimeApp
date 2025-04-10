@@ -5,7 +5,7 @@ import {
   AvatarImage,
 } from "@/presentation/components/ui/avatar";
 import { Text } from "@/presentation/components/ui/text";
-import StarRating from "react-native-star-rating-widget";
+import { Star } from "@/lib/icons/Icons";
 
 interface Props {
   userName: string;
@@ -15,14 +15,14 @@ interface Props {
   rating: number;
 }
 
-export const BusinessProfessionalCommentCard = ({
+export const ReviewCard = ({
   userName,
   comment,
   userUrlPhoto,
   rating,
 }: Props) => {
   return (
-    <View className="flex w-full flex-row items-center my-4 ">
+    <View className="flex flex-1 w-full flex-row justify-between  my-4 ">
       <Avatar alt="Imagen de profesional" size="sm">
         <AvatarImage
           source={{
@@ -33,20 +33,27 @@ export const BusinessProfessionalCommentCard = ({
           <Text>ZN</Text>
         </AvatarFallback>
       </Avatar>
-      <View className="pl-2 pr-6">
-        <View className="flex flex-row justify-between">
+      <View className="w-full ml-6">
+        <View className="flex flex-row relative ">
           <Text className="text-md font-bold">{userName}</Text>
-          <View className="mr-2">
-            <StarRating
-              starSize={20}
-              emptyColor="#e0e0e0"
-              rating={rating}
-              starStyle={{ marginHorizontal: 0 }}
-              onChange={() => null}
-            />
+          <View className="flex flex-row gap-2 absolute right-14">
+            <Text>{rating}</Text>
+            <Star color="#FFD700" size={18} fill={"gold"} />
           </View>
+
+          {/*  <StarRating
+            starSize={20}
+            emptyColor="#e0e0e0"
+            rating={rating}
+            starStyle={{ marginHorizontal: 0 }}
+            onChange={() => null}
+          /> */}
         </View>
-        <Text className="text-sm text-wrap pr-4 italic">"{comment}"</Text>
+        <View className="">
+          <Text className="text-sm italic" numberOfLines={2}>
+            "{comment}"
+          </Text>
+        </View>
       </View>
     </View>
   );

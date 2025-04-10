@@ -27,6 +27,8 @@ import { GoogleMaps } from "./glam/shared/GoogleMaps";
 import { MyBusinessLoading } from "./glam/profile/MyBusinessLoading";
 import { MyBusinessMyProfessionals } from "./glam/profile/MyBusinessMyProfessionals";
 import { MyBusinessMyServices } from "./glam/profile/MyBusinessMyServices";
+import { MyBusinessProfile } from "./glam/profile/MyBusinessProfile";
+import { MyBusinessReviews } from "./glam/profile/MyBusinessReviews";
 
 export {
   Login,
@@ -58,4 +60,6 @@ export {
   MyBusinessLoading,
   MyBusinessMyProfessionals,
   MyBusinessMyServices,
+  MyBusinessProfile,
+  MyBusinessReviews,
 };
