@@ -34,9 +34,9 @@ export const BusinessProfessionalCommentCard = ({
         </AvatarFallback>
       </Avatar>
       <View className="pl-2 pr-6">
-        <View className="flex flex-row justify-between">
+        <View className="flex-row justify-between w-full">
           <Text className="text-md font-bold">{userName}</Text>
-          <View className="mr-2">
+          <View className="mr-4">
             <StarRating
               starSize={20}
               emptyColor="#e0e0e0"

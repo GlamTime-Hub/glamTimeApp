@@ -1,9 +1,5 @@
-import { View, Text } from "react-native";
+import { MyReviews } from "@/presentation/components/feature/glam/profile/MyReviews";
 
 export default function MyReviewsScreen() {
-  return (
-    <View>
-      <Text>MyReviewsScreen</Text>
-    </View>
-  );
+  return <MyReviews />;
 }
