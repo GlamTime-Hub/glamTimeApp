@@ -1,4 +1,4 @@
-import { Platform, View } from "react-native";
+import { Platform, View, Pressable } from "react-native";
 import { Text } from "../../ui/text";
 import { Controller } from "react-hook-form";
 import { Input } from "../../ui/input";
@@ -6,12 +6,17 @@ import { Button } from "../../ui/button";
 import { useSignUp } from "@/presentation/hooks/use-sign-up.hook";
 import { CheckCheck, CircleX } from "@/lib/icons/Icons";
 import { router } from "expo-router";
+import { useState } from "react";
+import { Eye, EyeOff } from "@/lib/icons/Icons";
 
 export const Credentials = () => {
   const { control, password, criteria, errors, handleSubmit, onSubmit } =
     useSignUp();
 
   const isIos = Platform.OS === "ios";
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   return (
     <View className="px-10 py-5 flex-1 flex justify-between">
@@ -43,13 +48,26 @@ export const Credentials = () => {
             control={control}
             name="password"
             render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                onChangeText={onChange}
-                onBlur={onBlur}
-                value={value}
-                placeholder="Contraseña"
-                secureTextEntry
-              />
+              <View className="relative">
+                <Input
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  placeholder="Contraseña"
+                  secureTextEntry={!showPassword}
+                  className="pr-10"
+                />
+                <Pressable
+                  className="absolute right-3 top-3"
+                  onPress={() => setShowPassword((prev) => !prev)}
+                >
+                  {showPassword ? (
+                    <EyeOff size={20} color="#6b7280" />
+                  ) : (
+                    <Eye size={20} color="#6b7280" />
+                  )}
+                </Pressable>
+              </View>
             )}
           />
           {errors.password && (
@@ -75,13 +93,26 @@ export const Credentials = () => {
             control={control}
             name="confirmPassword"
             render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                onChangeText={onChange}
-                onBlur={onBlur}
-                value={value}
-                placeholder="Confirmar Contraseña"
-                secureTextEntry
-              />
+              <View className="relative">
+                <Input
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  placeholder="Confirmar Contraseña"
+                  secureTextEntry={!showConfirm}
+                  className="pr-10"
+                />
+                <Pressable
+                  className="absolute right-3 top-3"
+                  onPress={() => setShowConfirm((prev) => !prev)}
+                >
+                  {showConfirm ? (
+                    <EyeOff size={20} color="#6b7280" />
+                  ) : (
+                    <Eye size={20} color="#6b7280" />
+                  )}
+                </Pressable>
+              </View>
             )}
           />
 
