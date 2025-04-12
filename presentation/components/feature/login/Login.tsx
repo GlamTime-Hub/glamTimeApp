@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 import { useLogin } from "../../../hooks/use-login.hook";
 import { Text } from "../../ui/text";
 import { Controller } from "react-hook-form";
@@ -8,9 +8,12 @@ import { router } from "expo-router";
 import { Google } from "@/lib/icons/Google";
 import { Apple } from "@/lib/icons/Apple";
 import { LoadingIndicator } from "../glam/shared/LoadingIndicator";
+import { useState } from "react";
+import { Eye, EyeOff } from "@/lib/icons/Icons";
 
 export const Login = () => {
   const { control, loading, errors, handleSubmit, onSubmit } = useLogin();
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <View className="flex-1 flex flex-col  justify-center items-center">
@@ -46,14 +49,27 @@ export const Login = () => {
               control={control}
               name="password"
               render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  readOnly={loading}
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                  placeholder="Contraseña"
-                  secureTextEntry
-                />
+                <View className="relative">
+                  <Input
+                    readOnly={loading}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    placeholder="Contraseña"
+                    secureTextEntry={!showPassword}
+                    className="pr-10"
+                  />
+                  <Pressable
+                    className="absolute right-3 top-3"
+                    onPress={() => setShowPassword((prev) => !prev)}
+                  >
+                    {showPassword ? (
+                      <EyeOff size={20} color="#6b7280" />
+                    ) : (
+                      <Eye size={20} color="#6b7280" />
+                    )}
+                  </Pressable>
+                </View>
               )}
             />
             {errors.password && (
