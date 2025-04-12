@@ -22,6 +22,7 @@ export const MyBusinessMyProfessionals = () => {
     professionals,
     isLoadingProfessionals,
     loading,
+    email,
     setEmail,
     onSendInvitation,
     onDeactivateProfessional,
@@ -42,6 +43,7 @@ export const MyBusinessMyProfessionals = () => {
           <Input
             placeholder="Email del profesional"
             inputMode="email"
+            value={email}
             onChangeText={setEmail}
           />
         </View>

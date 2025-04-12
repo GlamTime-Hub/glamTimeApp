@@ -1,10 +1,5 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { Notifications } from "@/presentation/components/feature";
 
 export default function NotificationScreen() {
-  return (
-    <View>
-      <Text>NotificationScreen</Text>
-    </View>
-  );
+  return <Notifications />;
 }

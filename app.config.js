@@ -5,6 +5,9 @@ export default ({ config }) => ({
     supabaseAnonKey: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || "",
     googleMapsApiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY || "",
     apiBackendUrl: process.env.EXPO_PUBLIC_API_BACKEND,
+    eas: {
+      projectId: process.env.EXPO_PUBLIC_PROJECT_ID_NOTIFICATIONS,
+    },
   },
   plugins: [
     "expo-router",

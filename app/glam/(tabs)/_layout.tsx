@@ -14,17 +14,14 @@ export default function _layout() {
       initialRouteName="home/index"
       screenOptions={{
         headerRight: () => (
-          <View className="flex flex-row gap-2 justify-end px-0 relative -right-6">
+          <View className="flex flex-row gap-2 justify-end px-0 relative -right-3">
             <NotificationIcon />
             <ThemeToggle />
           </View>
         ),
         headerTitleAlign: "center",
         tabBarShowLabel: false,
-        headerStyle: {
-          borderBottomWidth: 1,
-          borderBottomColor: isDarkColorScheme ? "#FFF" : "transparent",
-        },
+
         tabBarItemStyle: {
           flex: 1,
           alignItems: "center",
@@ -107,7 +104,14 @@ export default function _layout() {
         name="notifications/index"
         options={{
           title: "Notificaciones",
-          headerShown: false,
+          href: null,
+        }}
+      />
+
+      <Tabs.Screen
+        name="invitation/index"
+        options={{
+          title: "Invitaciones",
           href: null,
         }}
       />

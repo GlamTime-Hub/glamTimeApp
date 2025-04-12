@@ -1,12 +1,19 @@
 import { Stack } from "expo-router";
 import { ThemeToggle } from "@/presentation/components/ThemeToggle";
+import { NotificationIcon } from "@/presentation/components/feature";
+import { View } from "react-native";
 
 export default function MyBusinessLayout() {
   return (
     <Stack
       initialRouteName="home/index"
       screenOptions={{
-        headerRight: () => <ThemeToggle />,
+        headerRight: () => (
+          <View className="flex flex-row gap-2 justify-end px-0 relative -right-3">
+            <NotificationIcon />
+            <ThemeToggle />
+          </View>
+        ),
       }}
     >
       <Stack.Screen

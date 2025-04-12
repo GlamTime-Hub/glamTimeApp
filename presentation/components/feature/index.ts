@@ -14,7 +14,6 @@ import { Home } from "./home/Home";
 import { ProfileWelcome } from "./glam/profile/ProfileWelcome";
 import { Profile } from "./glam/profile/Profile";
 import { NotificationIcon } from "./glam/notification/NotificationIcon";
-import { Notifications } from "./glam/notification/Notifications";
 import { MyBusiness } from "./glam/profile/MyBusiness";
 import { MyBusinessDetail } from "./glam/profile/MyBusinessDetail";
 import { MyBusinessLocation } from "./glam/profile/MyBusinessLocation";
@@ -30,6 +29,8 @@ import { MyBusinessMyServices } from "./glam/profile/MyBusinessMyServices";
 import { MyBusinessProfile } from "./glam/profile/MyBusinessProfile";
 import { MyBusinessReviews } from "./glam/profile/MyBusinessReviews";
 import { MySchedule } from "./glam/profile/MySchedule";
+import { Notifications } from "./glam/notification/Notifications";
+import { Invitation } from "./glam/invitation/Invitation";
 
 export {
   Login,
@@ -64,4 +65,5 @@ export {
   MyBusinessProfile,
   MyBusinessReviews,
   MySchedule,
+  Invitation,
 };

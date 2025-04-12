@@ -71,6 +71,7 @@ export const useBusinessMyProfessionals = (businessId: string) => {
     isLoadingProfessionals: isLoading,
     isErrorProfessionals: isError,
     loading,
+    email,
     setEmail,
     onSendInvitation,
     onDeactivateProfessional,
