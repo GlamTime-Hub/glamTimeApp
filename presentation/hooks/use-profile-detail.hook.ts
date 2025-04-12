@@ -9,7 +9,6 @@ import { CountryPhone } from "@/core/interfaces/country-phone.interface";
 import Toast from "react-native-toast-message";
 import { updateUser } from "@/core/actions/user/update-user.action";
 import { useQueryClient } from "@tanstack/react-query";
-import useAuthStore from "@/core/store/auth.store";
 
 const schema = z.object({
   name: z.string().nonempty("Debes ingresar tu nombre"),

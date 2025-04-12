@@ -4,6 +4,7 @@ export class ProfessionalMapper {
   static fromTheProfessionalDBToProfessional(data: any): Professional {
     return {
       id: data._id,
+      userAuthId: data.userAuthId,
       businessId: data.businessId,
       user: {
         id: data.user._id,
@@ -12,7 +13,7 @@ export class ProfessionalMapper {
         phoneNumber: data.user.phoneNumber,
         email: data.user.email,
       },
-      status: data.status,
+      isActive: data.isActive,
       workingHours: {
         monday: {
           start: data.workingHours.monday.start,

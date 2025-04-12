@@ -9,7 +9,6 @@ import {
   Mail,
   BookLock,
   Award,
-  SquareScissors,
   CalendarDays,
 } from "@/lib/icons/Icons";
 

@@ -2,59 +2,77 @@ import { View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 import { Text } from "./text";
+import { useState } from "react";
+import { Card, CardContent } from "./card";
+import { Separator } from "./separator";
 
 interface Props {
   title: string;
-  timeStart: Date;
-  timeEnd: Date;
+  startDate: Date;
+  endDate: Date;
 
-  setTime: (time: Date, type: string) => void;
+  setTime: (startTime: number, endTime: number) => void;
 }
 
 export const IosTimePicker = ({
-  timeStart,
-  timeEnd,
+  startDate,
+  endDate,
   title,
   setTime,
 }: Props) => {
-  console.log("timeEnd", timeEnd);
-  console.log("timeStart", timeStart);
+  const [startTime, setStartTime] = useState<Date>(new Date(startDate));
+  const [endTime, setEndTime] = useState<Date>(new Date(endDate));
 
-  const onChange = (selectedTime: any, type: string) => {
+  const onChangeStartTime = (_: any, selectedTime: Date | undefined) => {
+    if (!selectedTime) return;
     const currentTime = selectedTime;
-    console.log("onChange", currentTime);
 
-    if (type === "start" && currentTime > timeEnd) return;
-    if (type === "end" && currentTime < timeStart) return;
+    setStartTime(currentTime);
+    setTime(new Date(currentTime).getTime(), new Date(endTime).getTime());
+  };
 
-    console.log("cojones", currentTime);
-    console.log("cojones 2", timeEnd);
-
-    setTime(currentTime, type);
+  const onChangeEndTime = (_: any, selectedTime: Date | undefined) => {
+    if (!selectedTime) return;
+    const currentTime = selectedTime;
+    setEndTime(currentTime);
+    setTime(startTime.getTime(), currentTime.getTime());
   };
 
   return (
-    <View className="flex-1">
-      <Text className="my-2">{title}</Text>
-      <View className="flex flex-row gap-2">
-        <DateTimePicker
-          value={timeStart}
-          mode="time"
-          display="default"
-          onChange={(_, selectedTime) => onChange(selectedTime, "start")}
-          is24Hour={false}
-          accentColor="#E91E63"
-        />
-
-        <DateTimePicker
-          value={timeEnd}
-          mode="time"
-          display="default"
-          onChange={(_, selectedTime) => onChange(selectedTime, "end")}
-          is24Hour={false}
-          accentColor="#E91E63"
-        />
-      </View>
-    </View>
+    <Card className="my-4">
+      <CardContent>
+        <View className="flex items-center">
+          <Text className="my-2 font-baloo-bold text-2xl">{title}</Text>
+          <Separator />
+          <View className="flex flex-row gap-2 justify-between items-center">
+            <View>
+              <Text className="font-bold text-center">Desde</Text>
+              <DateTimePicker
+                value={startTime}
+                mode="time"
+                display="default"
+                onChange={onChangeStartTime}
+                is24Hour={false}
+                minuteInterval={30}
+                accentColor="#E91E63"
+              />
+            </View>
+            <View>
+              <Text className="font-bold text-center">Hasta</Text>
+              <DateTimePicker
+                value={endTime}
+                minimumDate={startTime}
+                mode="time"
+                display="default"
+                onChange={onChangeEndTime}
+                is24Hour={false}
+                minuteInterval={30}
+                accentColor="#E91E63"
+              />
+            </View>
+          </View>
+        </View>
+      </CardContent>
+    </Card>
   );
 };

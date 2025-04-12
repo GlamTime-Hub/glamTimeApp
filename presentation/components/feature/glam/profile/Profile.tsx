@@ -42,7 +42,10 @@ export const Profile = ({
           />
 
           <Text
-            className={cn("text-2xl font-bod", isProfessional ? "" : "my-2")}
+            className={cn(
+              "text-2xl font-baloo-bold",
+              isProfessional ? "" : "my-2"
+            )}
           >
             {user?.name}
           </Text>
@@ -62,7 +65,9 @@ export const Profile = ({
         <View className="flex-1 mt-4">
           {MENU_OPTIONS.map((section, index) => (
             <View key={index} className="my-4">
-              <Text className="font-bold text-xl">{section.section}</Text>
+              <Text className="font-baloo-bold text-2xl">
+                {section.section}
+              </Text>
 
               <Card className="my-2">
                 <CardContent className="p-6">

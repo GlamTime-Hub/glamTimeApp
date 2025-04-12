@@ -2,9 +2,10 @@ import { User } from "./user.interface";
 
 export interface Professional {
   id: string;
+  userAuthId: string;
   businessId: string;
   user: Partial<User>;
-  status: boolean;
+  isActive: boolean;
   workingHours: {
     monday: { start: number; end: number };
     tuesday: { start: number; end: number };
