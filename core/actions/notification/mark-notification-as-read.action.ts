@@ -1,10 +1,12 @@
 import axiosClient from "@/core/api/axios-client";
 
-export const getTotalUserNotificationAction = async () => {
+export const markNotificationAsRead = async (notificationId: string) => {
   try {
     const {
       data: { data },
-    } = await axiosClient.get("notification/get-total-notification-by-user-id");
+    } = await axiosClient.get(
+      "notification/mark-notification-as-read/" + notificationId
+    );
 
     return {
       status: true,

@@ -16,7 +16,7 @@ export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <View className="flex-1 flex flex-col  justify-center items-center">
+    <View className="flex-1 flex flex-col   items-center">
       {/* Sección de login */}
       <View className="flex-1 mt-20 ">
         <View className="">
