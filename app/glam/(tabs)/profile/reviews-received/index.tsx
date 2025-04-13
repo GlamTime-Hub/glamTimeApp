@@ -1,9 +1,5 @@
-import { View, Text } from "react-native";
+import { ReviewsReceived } from "@/presentation/components/feature/glam/profile/ReviewsReceived";
 
-export default function HelpSupportScreen() {
-  return (
-    <View>
-      <Text>HelpSupportScreen</Text>
-    </View>
-  );
+export default function ReviewsReceivedScreen() {
+  return <ReviewsReceived />;
 }
