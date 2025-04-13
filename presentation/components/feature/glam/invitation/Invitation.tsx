@@ -1,15 +1,14 @@
+import { Image, View } from "react-native";
+
 import { Button } from "@/presentation/components/ui/button";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Text } from "@/presentation/components/ui/text";
-import { useUserNotificationStore } from "@/presentation/store/use-user-notification.store";
-import { Image, View } from "react-native";
+import { LoadingIndicator } from "../shared/LoadingIndicator";
+import { useInvitation } from "@/presentation/hooks";
 
 export const Invitation = () => {
-  const { notification } = useUserNotificationStore();
-
-  const handleAccept = () => {};
-
-  const handleReject = () => {};
+  const { notification, loading, loadingReject, handleAccept, handleReject } =
+    useInvitation();
 
   return (
     <View className="flex-1 p-4 flex justify-between">
@@ -40,10 +39,20 @@ export const Invitation = () => {
       </Card>
 
       <View className="flex gap-2">
-        <Button onPress={handleAccept}>
+        <Button
+          disabled={loading || loadingReject}
+          onPress={handleAccept}
+          className="flex flex-row gap-2"
+        >
+          {loading && <LoadingIndicator />}
           <Text>Aceptar</Text>
         </Button>
-        <Button onPress={handleReject} variant={"destructive"}>
+        <Button
+          disabled={loading || loadingReject}
+          onPress={handleReject}
+          variant={"destructive"}
+        >
+          {loadingReject && <LoadingIndicator />}
           <Text>Rechazar</Text>
         </Button>
       </View>

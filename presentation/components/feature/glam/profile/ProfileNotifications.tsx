@@ -28,55 +28,64 @@ export const ProfileNotifications = () => {
   return (
     <View className="flex-1 flex justify-between p-6">
       <View>
-        <Text className="text-xl mb-4 font-bold">
+        <Text className="text-xl font-baloo-bold mb-4 font-bold">
           Maneja tus notificaciones
         </Text>
         <View>
           <Card>
-            <CardContent className="flex p-2  flex-row justify-between  items-center">
-              <View className="p-2">
-                <Text className="text-md font-bold">Notificaciones push </Text>
-                <Text className="text-md">
-                  Recibe notificaciones de app incluso
+            <CardContent className="flex p-2">
+              <View className=" ">
+                <View className="relative flex flex-row justify-between">
+                  <Text className="text-md font-baloo-bold">
+                    Notificaciones push
+                  </Text>
+                  <View className="">
+                    <Switch
+                      disabled={loading}
+                      checked={notifications.push}
+                      onCheckedChange={() =>
+                        setNotiications({
+                          ...notifications,
+                          push: !notifications.push,
+                        })
+                      }
+                    />
+                  </View>
+                </View>
+                <Text className="text-md my-2" numberOfLines={2}>
+                  Recibe notificaciones de app incluso cuando no las estás
+                  utilizando activamente.
                 </Text>
-                <Text>cuando no las estás utilizando activamente.</Text>
               </View>
-              <Switch
-                disabled={loading}
-                checked={notifications.push}
-                onCheckedChange={() =>
-                  setNotiications({
-                    ...notifications,
-                    push: !notifications.push,
-                  })
-                }
-              />
             </CardContent>
           </Card>
         </View>
         <View className="mt-2">
           <Card>
-            <CardContent className="flex p-2  flex-row justify-between  items-center">
-              <View className="p-2">
-                <Text className="text-md font-bold">
-                  Promociones y novedades{" "}
+            <CardContent className="flex p-2  ">
+              <View>
+                <View className="flex flex-row justify-between">
+                  <Text className="text-md font-baloo-bold">
+                    Promociones y novedades
+                  </Text>
+                  <View>
+                    <Switch
+                      disabled={loading}
+                      checked={notifications.news}
+                      onCheckedChange={() =>
+                        setNotiications({
+                          ...notifications,
+                          news: !notifications.news,
+                        })
+                      }
+                    />
+                  </View>
+                </View>
+                <Text className="text-md my-2" numberOfLines={3}>
+                  Recibe notificaciones personalizadas sobre lanzamientos y
+                  nuevas funciones que mejoran tu experiencia en GlamTime.
                 </Text>
-                <Text className="text-md">
-                  Recibe notificaciones personalizadas
-                </Text>
-                <Text>sobre lanzamientos y nuevas funciones que </Text>
-                <Text>mejoran tu experiencia en GlamTime</Text>
               </View>
-              <Switch
-                disabled={loading}
-                checked={notifications.news}
-                onCheckedChange={() =>
-                  setNotiications({
-                    ...notifications,
-                    news: !notifications.news,
-                  })
-                }
-              />
             </CardContent>
           </Card>
         </View>

@@ -7,11 +7,17 @@ export class UserNotificationMapper {
     return {
       id: userNotification._id,
       message: userNotification.message,
-      userAuthId: userNotification.userAuthId,
-      user: {
-        id: userNotification.user._id,
-        name: userNotification.user.name,
-        urlPhoto: userNotification.user.urlPhoto,
+      fromUser: {
+        user: userNotification.fromUser._id,
+        name: userNotification.fromUser.name,
+        urlPhoto: userNotification.fromUser.urlPhoto,
+        userAuthId: userNotification.fromUser.userAuthId,
+      },
+      toUser: {
+        user: userNotification.toUser._id,
+        name: userNotification.toUser.name,
+        urlPhoto: userNotification.toUser.urlPhoto,
+        userAuthId: userNotification.toUser.userAuthId,
       },
       business: {
         id: userNotification.business._id,

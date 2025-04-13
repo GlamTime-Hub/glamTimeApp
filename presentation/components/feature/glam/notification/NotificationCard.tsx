@@ -7,7 +7,6 @@ import {
 import { TouchableOpacity, View } from "react-native";
 import { Image } from "@/lib/icons/Icons";
 import { Text } from "@/presentation/components/ui/text";
-import { Button } from "@/presentation/components/ui/button";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { router } from "expo-router";
 import { useUserNotificationStore } from "@/presentation/store/use-user-notification.store";
@@ -18,7 +17,7 @@ interface Props {
 export const NotificationCard = ({ notification }: Props) => {
   const title = ["invitation"].includes(notification.type)
     ? notification.business.name
-    : notification.user.name;
+    : notification.fromUser.name;
 
   const { setNotification } = useUserNotificationStore();
 
@@ -37,7 +36,7 @@ export const NotificationCard = ({ notification }: Props) => {
             <Avatar alt="Imagen de profesional" size="md">
               <AvatarImage
                 source={{
-                  uri: notification.user.urlPhoto || "",
+                  uri: notification.business.urlPhoto || "",
                 }}
               ></AvatarImage>
               <AvatarFallback>

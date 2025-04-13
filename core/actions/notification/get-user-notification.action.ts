@@ -13,6 +13,8 @@ export const getUserNotificationAction = async () => {
       )
     );
 
+    console.log("notifications", notifications);
+
     return {
       status: true,
       data: notifications,

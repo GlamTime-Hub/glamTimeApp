@@ -7,6 +7,7 @@ import { useNotifications } from "./use-notifications";
 import { useBusinessDetail } from "./use-business-detail.hook";
 import { useBusiness } from "./use-business.hook";
 import { useMySchedule } from "./use-my-schedule.hook";
+import { useInvitation } from "./use-invitation.hook";
 
 export {
   useSignUp,
@@ -18,4 +19,5 @@ export {
   useBusinessDetail,
   useBusiness,
   useMySchedule,
+  useInvitation,
 };
