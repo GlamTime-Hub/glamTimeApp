@@ -1,11 +1,14 @@
-import { useUserReviews } from "@/presentation/hooks/use-user-reviews.hook";
 import { ScrollView, Text, View } from "react-native";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { MyReviewsLoading } from "./MyReviewsLoading";
 import { ReviewCard } from "../shared/ReviewCard";
+import { useProfessionalReview } from "@/presentation/hooks/use-professional-reviews.hook";
+import { useUser } from "@/presentation/hooks/use-user.hook";
 
-export const MyReviews = () => {
-  const { data, isLoading }: any = useUserReviews();
+export const ReviewsReceived = () => {
+  const { user } = useUser(null);
+
+  const { data, isLoading } = useProfessionalReview(user!.id);
 
   if (isLoading) {
     return <MyReviewsLoading />;
@@ -21,14 +24,14 @@ export const MyReviews = () => {
             {reviews.length === 0 ? (
               <View className="items-center justify-center py-10">
                 <Text className="text-center text-lg text-gray-500">
-                  Aún no has recibido reseñas.
+                  Aún no se han registrado reseñas.
                 </Text>
               </View>
             ) : (
               reviews.map((review: any) => (
                 <ReviewCard
                   key={review._id}
-                  userUrlPhoto={review.photo}
+                  userUrlPhoto={review.urlPhoto}
                   rating={review.rating}
                   userName={review.name}
                   comment={review.review}
