@@ -119,8 +119,9 @@ export const Booking = () => {
       </Text>
       <ScrollView className="mb-5">
         <View className="p-4">
-          {reservation.map((booking) => (
+          {reservation.map((booking, index) => (
             <BusinessBookingConfirmationCard
+              key={index}
               service={booking.service}
               professional={booking.professional}
               slot={booking.slot}

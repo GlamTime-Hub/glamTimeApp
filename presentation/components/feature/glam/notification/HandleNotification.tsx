@@ -1,5 +1,6 @@
 import { UserNotification } from "@/core/interfaces/user-notification.interface";
 import { NotificationInvitation } from "./NotificationInvitation";
+import { NotificationInvitationRejected } from "./NotificationInvitationRejected";
 
 interface Props {
   notification: UserNotification;
@@ -21,5 +22,15 @@ export const HandleNotification = ({
       />
     );
   }
+
+  if (notification.type === "invitation-rejected") {
+    return (
+      <NotificationInvitationRejected
+        notification={notification}
+        markNotification={markNotification}
+      />
+    );
+  }
+
   return;
 };
