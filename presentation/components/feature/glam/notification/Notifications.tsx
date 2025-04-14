@@ -1,7 +1,6 @@
 import { useUserNotifications } from "@/presentation/hooks/use-user-notification.hook";
 import { ScrollView, View } from "react-native";
 import { NotificationsLoading } from "./NotificationsLoading";
-import { NotificationCard } from "./NotificationCard";
 import { UserNotification } from "@/core/interfaces/user-notification.interface";
 import { Bell } from "@/lib/icons/Icons";
 import {
@@ -9,9 +8,11 @@ import {
   AlertDescription,
   AlertTitle,
 } from "@/presentation/components/ui/alert";
+import { HandleNotification } from "./HandleNotification";
 
 export const Notifications = () => {
-  const { notifications, isLoading } = useUserNotifications();
+  const { notifications, isLoading, markNotificationAsReadById } =
+    useUserNotifications();
 
   if (isLoading) return <NotificationsLoading />;
 
@@ -29,7 +30,11 @@ export const Notifications = () => {
     <View className="flex-1 p-4">
       <ScrollView>
         {notifications.map((notification: UserNotification) => (
-          <NotificationCard key={notification.id} notification={notification} />
+          <HandleNotification
+            key={notification.id}
+            notification={notification}
+            markNotification={markNotificationAsReadById}
+          />
         ))}
       </ScrollView>
     </View>
