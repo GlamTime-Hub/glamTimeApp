@@ -6,7 +6,9 @@ import { Skeleton } from "@/presentation/components/ui/skeleton";
 import { Text } from "@/presentation/components/ui/text";
 
 export const NotificationIcon = () => {
-  const { total, isLoading } = useTotalUserNotifications();
+  const { total, isLoading, session } = useTotalUserNotifications();
+
+  if (!session) return null;
 
   if (isLoading) {
     return <Skeleton className="h-6 w-6 rounded-full" />;

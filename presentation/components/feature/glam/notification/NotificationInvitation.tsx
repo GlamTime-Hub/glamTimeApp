@@ -44,9 +44,10 @@ export const NotificationInvitation = ({
     if (notification.type === "invitation-accepted") {
       await markNotification(notification.id);
       router.push({
-        pathname: "/glam/(tabs)/profile/my-business/business-profile/[id]",
+        pathname:
+          "/glam/(tabs)/profile/my-business/my-professionals/[businessId]",
         params: {
-          id: notification.business.id,
+          businessId: notification.business.id,
         },
       });
     }
