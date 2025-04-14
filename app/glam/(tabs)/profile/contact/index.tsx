@@ -1,9 +1,5 @@
-import { View, Text } from "react-native";
+import { ContactForm } from "@/presentation/components/feature/glam/profile/ContactForm";
 
 export default function ContactScreen() {
-  return (
-    <View>
-      <Text>ContactScreen</Text>
-    </View>
-  );
+  return <ContactForm />;
 }
