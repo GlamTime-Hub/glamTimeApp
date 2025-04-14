@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Toast from "react-native-toast-message";
 import { postContactAction } from "@/core/actions/contact/post-contact.action";
 import { useState } from "react";
-import { router } from "expo-router";
 
 const schema = z.object({
   name: z.string().nonempty("El nombre es requerido"),
@@ -22,6 +21,7 @@ type FormData = z.infer<typeof schema>;
 
 export const useContactForm = () => {
   const [loading, setLoading] = useState(false);
+  const [formKey, setFormKey] = useState(0);
 
   const {
     control,
@@ -63,7 +63,7 @@ export const useContactForm = () => {
       });
 
       reset();
-      router.push("/glam/(tabs)/profile/home");
+      setFormKey((prev) => prev + 1);
     } catch (error) {
       Toast.show({
         type: "error",
@@ -82,5 +82,6 @@ export const useContactForm = () => {
     onChangePhone,
     onChangeCountry,
     loading,
+    formKey,
   };
 };

@@ -18,12 +18,13 @@ export const ContactForm = () => {
     onChangePhone,
     onChangeCountry,
     onSubmit,
+    formKey,
   } = useContactForm();
 
   return (
     <View className="flex-1 p-6">
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Text className="font-bold text-xl my-6 text-center">
+        <Text className="font-bold text-xl my-2 text-center">
           ¿En qué podemos ayudarte?
         </Text>
 
@@ -62,7 +63,6 @@ export const ContactForm = () => {
                     onChangeText={onChange}
                     onBlur={onBlur}
                     placeholder="Correo"
-                    keyboardType="email-address"
                     editable={!loading}
                   />
                 )}
@@ -77,6 +77,7 @@ export const ContactForm = () => {
             <View className="my-2">
               <Text className="font-bold mb-1">Teléfono de contacto</Text>
               <PhoneNumber
+                key={`phone-input-${formKey}`}
                 onChangeCountry={onChangeCountry}
                 onChangePhone={onChangePhone}
                 disabled={loading}
@@ -118,12 +119,11 @@ export const ContactForm = () => {
                 name="description"
                 render={({ field: { onChange, value, onBlur } }) => (
                   <Textarea
-                    className="text-white"
+                    className="h-24"
                     value={value}
                     onChangeText={onChange}
                     onBlur={onBlur}
                     placeholder="Cuéntanos tu situación"
-                    numberOfLines={5}
                     editable={!loading}
                   />
                 )}
