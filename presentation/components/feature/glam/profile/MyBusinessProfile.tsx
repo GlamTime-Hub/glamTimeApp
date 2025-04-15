@@ -22,11 +22,13 @@ import {
 } from "@/presentation/components/ui/select";
 import { Button } from "@/presentation/components/ui/button";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
+import { BusinessType } from "@/core/interfaces/business-type.interface";
 
 export const MyBusinessProfile = () => {
   const { id } = useLocalSearchParams();
 
   const {
+    businessTypes,
     business,
     control,
     errors,
@@ -96,7 +98,7 @@ export const MyBusinessProfile = () => {
             </View>
 
             <View className="my-2">
-              <Text className="font-bold">Ingresa número de contacto</Text>
+              <Text className="font-bold">Número de contacto</Text>
               <PhoneNumber
                 initialPhoneNumber={business ? `${business?.phoneNumber}` : ""}
                 onChangeCountry={onChangeCountry}
@@ -133,7 +135,55 @@ export const MyBusinessProfile = () => {
             </View>
 
             <View className="my-2">
-              <Text className="font-bold">País donde está tu negocio</Text>
+              <Text className="font-bold">Tipo de negocio</Text>
+              <Controller
+                control={control}
+                name="businesstype"
+                render={({ field: { onChange, value } }) => (
+                  <Select
+                    onValueChange={(value) => {
+                      onChange(value?.value);
+                    }}
+                    value={
+                      value
+                        ? {
+                            value,
+                            label:
+                              businessTypes?.find((c: any) => c.id === value)
+                                ?.type ?? "",
+                          }
+                        : undefined
+                    }
+                    disabled={id !== "new"}
+                  >
+                    <SelectTrigger disabled={id !== "new"}>
+                      <SelectValue
+                        className="text-foreground text-sm native:text-lg"
+                        placeholder="Tipo de negocio"
+                      />
+                    </SelectTrigger>
+                    <SelectContent insets={contentInsets} className="w-full">
+                      <ScrollView className="max-h-80 ">
+                        <SelectGroup>
+                          {businessTypes?.map((businessType: BusinessType) => (
+                            <SelectItem
+                              key={businessType.id}
+                              label={businessType.type}
+                              value={businessType.id}
+                            >
+                              {businessType.type}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </ScrollView>
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+            </View>
+
+            <View className="my-2">
+              <Text className="font-bold">Selecciona tu país</Text>
               <Controller
                 control={control}
                 name="country"
@@ -175,9 +225,7 @@ export const MyBusinessProfile = () => {
             </View>
 
             <View className="my-2">
-              <Text className="font-bold mb-1">
-                Ciudad donde está tu negocio
-              </Text>
+              <Text className="font-bold mb-1">Selecciona tu ciudad</Text>
               <Controller
                 control={control}
                 name="city"

@@ -15,12 +15,14 @@ import { updateImageAction } from "@/core/actions/business/update-image.action";
 import { updateBusinessAction } from "@/core/actions/business/update-business.action";
 import { useBusinessLocation } from "./use-business-location";
 import { updateBusinessStatusAction } from "@/core/actions/business/update-business-status.action";
+import { getBusinessTypeAction } from "@/core/actions/util/get-business-type.action";
 
 const schema = z.object({
   name: z.string().nonempty("Debes ingresar el nombre"),
   email: z.string().nonempty("Debes ingresar tu correo electrónico"),
   phoneNumber: z.string().nonempty("Debes ingresar tu número de contacto"),
   phoneNumberExtension: z.string(),
+  businesstype: z.string().nonempty("Debes seleccionar el tipo de negocio"),
   country: z.string(),
   city: z.string().nonempty("Debes ingresar tu ciudad"),
   location: z.object({
@@ -42,6 +44,12 @@ export const useBusinessDetail = (id: string) => {
     queryFn: () => getBusinessByIdAction(id),
     staleTime,
     enabled: id !== "new",
+  });
+
+  const { data: businessTypes } = useQuery({
+    queryKey: ["businessType"],
+    queryFn: getBusinessTypeAction,
+    staleTime,
   });
 
   const { user } = useUser();
@@ -77,6 +85,7 @@ export const useBusinessDetail = (id: string) => {
       country: "67e6ff31e035edd4d7bc6cf0", //Colombia
       city: "",
       email: "",
+      businesstype: "",
       location: {
         address: "",
         latitude: 4.711,
@@ -189,6 +198,7 @@ export const useBusinessDetail = (id: string) => {
         country: business.country,
         city: business.city,
         email: business.email,
+        businesstype: business.businesstype,
         location: {
           address: business.location.address,
           latitude: business.location.latitude,
@@ -201,6 +211,7 @@ export const useBusinessDetail = (id: string) => {
   }, [data]);
 
   return {
+    businessTypes: businessTypes?.data,
     business: data?.data,
     user,
     countries,

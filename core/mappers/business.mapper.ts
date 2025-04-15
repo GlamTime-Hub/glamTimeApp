@@ -13,6 +13,7 @@ export class BusinessMapper {
         latitudeDelta: business.location.latitudeDelta,
         longitudeDelta: business.location.longitudeDelta,
       },
+      businesstype: business.businesstype,
       phoneNumber: business.phoneNumber,
       phoneNumberExtension: business.phoneNumberExtension,
       email: business.email,

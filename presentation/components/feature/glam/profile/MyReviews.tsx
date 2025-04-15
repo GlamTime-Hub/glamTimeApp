@@ -3,6 +3,12 @@ import { ScrollView, Text, View } from "react-native";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { MyReviewsLoading } from "./MyReviewsLoading";
 import { ReviewCard } from "../shared/ReviewCard";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/presentation/components/ui/alert";
+import { MessageCircleMore } from "@/lib/icons/Icons";
 
 export const MyReviews = () => {
   const { data, isLoading }: any = useUserReviews();
@@ -13,28 +19,31 @@ export const MyReviews = () => {
 
   const reviews = data?.data ?? [];
 
+  if (reviews.length === 0) {
+    return (
+      <View className="p-6">
+        <Alert icon={MessageCircleMore} variant="default" className="max-w-xl">
+          <AlertTitle>Info!</AlertTitle>
+          <AlertDescription>Aún no has creado reseñas.</AlertDescription>
+        </Alert>
+      </View>
+    );
+  }
+
   return (
     <View className="flex-1 p-6">
       <ScrollView showsVerticalScrollIndicator={false}>
         <Card className="flex-1 ">
           <CardContent>
-            {reviews.length === 0 ? (
-              <View className="items-center justify-center py-10">
-                <Text className="text-center text-lg text-gray-500">
-                  Aún no has recibido reseñas.
-                </Text>
-              </View>
-            ) : (
-              reviews.map((review: any) => (
-                <ReviewCard
-                  key={review._id}
-                  userUrlPhoto={review.photo}
-                  rating={review.rating}
-                  userName={review.name}
-                  comment={review.review}
-                />
-              ))
-            )}
+            {reviews.map((review: any) => (
+              <ReviewCard
+                key={review._id}
+                userUrlPhoto={review.photo}
+                rating={review.rating}
+                userName={review.name}
+                comment={review.review}
+              />
+            ))}
           </CardContent>
         </Card>
       </ScrollView>

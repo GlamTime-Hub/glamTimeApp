@@ -12,7 +12,7 @@ const defaultDate = new Date();
 defaultDate.setHours(8, 0, 0, 0);
 
 export const useMySchedule = () => {
-  const { user } = useUser(null);
+  const { user } = useUser();
   const { professional, isError, isLoading } = useProfessional(user?.id || "");
   const [loading, setLoading] = useState(false);
 

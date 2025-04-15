@@ -9,6 +9,7 @@ export interface Business {
     latitudeDelta: number;
     longitudeDelta: number;
   };
+  businesstype: string;
   phoneNumber: string;
   phoneNumberExtension: string;
   email: string;
