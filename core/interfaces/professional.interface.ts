@@ -7,12 +7,12 @@ export interface Professional {
   user: Partial<User>;
   isActive: boolean;
   workingHours: {
-    monday: { start: number; end: number };
-    tuesday: { start: number; end: number };
-    wednesday: { start: number; end: number };
-    thursday: { start: number; end: number };
-    friday: { start: number; end: number };
-    saturday: { start: number; end: number };
+    monday: { start: number; end: number; isActive: boolean };
+    tuesday: { start: number; end: number; isActive: boolean };
+    wednesday: { start: number; end: number; isActive: boolean };
+    thursday: { start: number; end: number; isActive: boolean };
+    friday: { start: number; end: number; isActive: boolean };
+    saturday: { start: number; end: number; isActive: boolean };
   };
   invitationStatus: string;
   createdAt: Date;

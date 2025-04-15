@@ -21,30 +21,29 @@ export const MyBusinessMyServices = () => {
   return (
     <View className="flex-1 p-6">
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Text className="my-2 font-bold text-lg" numberOfLines={2}>
+        <Text className="my-2 font-baloo-bold text-xl" numberOfLines={2}>
           Gestiona los servicios que ofreces en tu negocio
         </Text>
-        <Card>
-          <CardContent className="px-0">
-            {services.map((service: Service) => (
-              <CustomCollapsible title={service.name} key={service.id}>
-                <Card>
-                  <CardContent>
-                    {service.subCategories.map((subcategory: SubCategory) => (
+        {services.map((service: Service) => (
+          <Card key={service.id} className="my-2">
+            <CardContent className="p-0 ">
+              <CustomCollapsible title={service.name}>
+                {service.subCategories.map((subcategory: SubCategory) => (
+                  <Card className="my-2" key={subcategory.id}>
+                    <CardContent>
                       <MyBusinessMyServicesCard
-                        key={subcategory.id}
                         subcategory={subcategory}
                         businessId={businessId as string}
                         callback={onActiveService}
                         loading={activeServiceIsLoading}
                       />
-                    ))}
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                ))}
               </CustomCollapsible>
-            ))}
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        ))}
       </ScrollView>
     </View>
   );

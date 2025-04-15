@@ -1,25 +1,20 @@
 import { ActiveService } from "@/core/interfaces/active-service.interface";
 import { SubCategory } from "@/core/interfaces/service.interface";
 import { Input } from "@/presentation/components/ui/input";
-import { Separator } from "@/presentation/components/ui/separator";
 import { Switch } from "@/presentation/components/ui/switch";
 import { Text } from "@/presentation/components/ui/text";
-import { useState } from "react";
 import { View } from "react-native";
-import Toast from "react-native-toast-message";
+import { Save } from "@/lib/icons/Icons";
+import { useBusinessServiceCard } from "@/presentation/hooks";
+import { Button } from "@/presentation/components/ui/button";
+import { LoadingIndicator } from "../shared/LoadingIndicator";
 
 interface Props {
   subcategory: SubCategory;
   businessId: string;
-
   loading: boolean;
   callback: (activeService: ActiveService) => void;
 }
-
-const formatCurrency = (value: string) => {
-  const number = parseInt(value.replace(/\D/g, ""), 10) || 0;
-  return number.toLocaleString("es-CO");
-};
 
 export const MyBusinessMyServicesCard = ({
   subcategory,
@@ -27,65 +22,36 @@ export const MyBusinessMyServicesCard = ({
   loading,
   callback,
 }: Props) => {
-  console.log("subcategory", subcategory);
-
-  const [service, handleService] = useState({
-    checked: subcategory.service.status,
-    price: `${subcategory.service.price}`,
-    duration: `${subcategory.service.duration}`,
-  });
-
-  const onCheckedChange = async () => {
-    if (service.price === "0" || service.duration === "0") {
-      Toast.show({
-        type: "info",
-        text1: "Info",
-        text2:
-          "Por favor, completa todos los campos antes de activar el servicio.",
-      });
-      return;
-    }
-
-    const activeService: ActiveService = {
-      businessId,
-      duration: parseInt(service.duration),
-      price: parseInt(service.price.replace(/\D/g, "")),
-      subcategoryId: subcategory.id,
-      status: !service.checked,
-      name: subcategory.name,
-      categoryId: subcategory.categoryId,
-      serviceId: subcategory.service.id,
-    };
-
-    await callback(activeService);
-
-    handleService({
-      ...service,
-      checked: !service.checked,
-    });
-  };
-
-  const onChangePrice = (value: string) => {
-    const formatted = formatCurrency(value);
-    handleService({
-      ...service,
-      price: formatted,
-    });
-  };
-
-  const onChangeDuration = (value: string) => {
-    handleService({
-      ...service,
-      duration: value,
-    });
-  };
+  const {
+    service,
+    saveLoading,
+    onChangeDuration,
+    onChangePrice,
+    onCheckedChange,
+    onSave,
+  } = useBusinessServiceCard({ subcategory, businessId, callback });
 
   return (
     <View className="my-2">
-      <Text className="my-2 font-bold">{subcategory.name}</Text>
       <View className="flex flex-row justify-between items-center">
-        <View className="w-1/3">
-          <Text>Precio</Text>
+        <Text className="my-2 font-baloo-bold text-xl">{subcategory.name}</Text>
+        <View className="flex flex-row gap-2 items-center">
+          {subcategory.service.id && !saveLoading && (
+            <Button onPress={onSave} variant={"ghost"} size={"icon"}>
+              <Save className="text-foreground" size={30} />
+            </Button>
+          )}
+          {saveLoading && <LoadingIndicator />}
+          <Switch
+            disabled={loading || saveLoading}
+            checked={service.checked}
+            onCheckedChange={onCheckedChange}
+          />
+        </View>
+      </View>
+      <View className="flex flex-row justify-between items-center">
+        <View className="w-full">
+          <Text className="font-baloo-bold">Precio</Text>
           <Input
             readOnly={loading}
             placeholder="Precio"
@@ -93,25 +59,18 @@ export const MyBusinessMyServicesCard = ({
             value={`$${service.price}`}
             onChangeText={onChangePrice}
           />
+          <View>
+            <Text className="font-baloo-bold">Duración (Min)</Text>
+            <Input
+              readOnly={loading}
+              placeholder="Duración"
+              inputMode="numeric"
+              value={`${service.duration}`}
+              onChangeText={onChangeDuration}
+            />
+          </View>
         </View>
-        <View className="w-1/3">
-          <Text>Duración (Min)</Text>
-          <Input
-            readOnly={loading}
-            placeholder="Duración"
-            inputMode="numeric"
-            value={`${service.duration}`}
-            onChangeText={onChangeDuration}
-          />
-        </View>
-
-        <Switch
-          disabled={loading}
-          checked={service.checked}
-          onCheckedChange={onCheckedChange}
-        />
       </View>
-      <Separator className="my-2" />
     </View>
   );
 };

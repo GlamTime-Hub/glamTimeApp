@@ -9,6 +9,7 @@ import { useBusiness } from "./use-business.hook";
 import { useMySchedule } from "./use-my-schedule.hook";
 import { useInvitation } from "./use-invitation.hook";
 import { useContactForm } from "./use-contact-form.hook";
+import { useBusinessServiceCard } from "./use-business-service-card.hook";
 
 export {
   useSignUp,
@@ -21,5 +22,6 @@ export {
   useBusiness,
   useMySchedule,
   useInvitation,
-  useContactForm
+  useContactForm,
+  useBusinessServiceCard,
 };

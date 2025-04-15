@@ -10,8 +10,14 @@ import { LoadingIndicator } from "../shared/LoadingIndicator";
 const isIos = Platform.OS === "ios";
 
 export const MySchedule = () => {
-  const { schedule, isLoading, loading, handleDay, onSaveSchedule } =
-    useMySchedule();
+  const {
+    schedule,
+    isLoading,
+    loading,
+    handleDay,
+    onSaveSchedule,
+    onActiveDay,
+  } = useMySchedule();
 
   if (isLoading || !schedule) {
     return <MyScheduleLoading />;
@@ -29,8 +35,12 @@ export const MySchedule = () => {
               title="Lunes"
               startDate={new Date(schedule.monday.start)}
               endDate={new Date(schedule.monday.end)}
+              isActive={schedule.monday.isActive}
               setTime={(startTime, endTime) =>
                 handleDay(startTime, endTime, "monday")
+              }
+              callback={async (isActive: boolean) =>
+                onActiveDay("monday", isActive)
               }
             />
 
@@ -38,8 +48,12 @@ export const MySchedule = () => {
               title="Martes"
               startDate={new Date(schedule.tuesday.start)}
               endDate={new Date(schedule.tuesday.end)}
+              isActive={schedule.tuesday.isActive}
               setTime={(startTime, endTime) =>
                 handleDay(startTime, endTime, "tuesday")
+              }
+              callback={async (isActive: boolean) =>
+                onActiveDay("tuesday", isActive)
               }
             />
 
@@ -47,8 +61,12 @@ export const MySchedule = () => {
               title="Miercoles"
               startDate={new Date(schedule.wednesday.start)}
               endDate={new Date(schedule.wednesday.end)}
+              isActive={schedule.wednesday.isActive}
               setTime={(startTime, endTime) =>
                 handleDay(startTime, endTime, "wednesday")
+              }
+              callback={async (isActive: boolean) =>
+                onActiveDay("wednesday", isActive)
               }
             />
 
@@ -56,8 +74,12 @@ export const MySchedule = () => {
               title="Jueves"
               startDate={new Date(schedule.thursday.start)}
               endDate={new Date(schedule.thursday.end)}
+              isActive={schedule.thursday.isActive}
               setTime={(startTime, endTime) =>
                 handleDay(startTime, endTime, "thursday")
+              }
+              callback={async (isActive: boolean) =>
+                onActiveDay("thursday", isActive)
               }
             />
 
@@ -65,8 +87,12 @@ export const MySchedule = () => {
               title="Viernes"
               startDate={new Date(schedule.friday.start)}
               endDate={new Date(schedule.friday.end)}
+              isActive={schedule.friday.isActive}
               setTime={(startTime, endTime) =>
                 handleDay(startTime, endTime, "friday")
+              }
+              callback={async (isActive: boolean) =>
+                onActiveDay("friday", isActive)
               }
             />
 
@@ -74,8 +100,12 @@ export const MySchedule = () => {
               title="Sábado"
               startDate={new Date(schedule.saturday.start)}
               endDate={new Date(schedule.saturday.end)}
+              isActive={schedule.saturday.isActive}
               setTime={(startTime, endTime) =>
                 handleDay(startTime, endTime, "saturday")
+              }
+              callback={async (isActive: boolean) =>
+                onActiveDay("saturday", isActive)
               }
             />
           </View>

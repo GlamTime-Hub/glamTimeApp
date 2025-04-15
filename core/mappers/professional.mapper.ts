@@ -18,26 +18,32 @@ export class ProfessionalMapper {
         monday: {
           start: data.workingHours.monday.start,
           end: data.workingHours.monday.end,
+          isActive: data.workingHours.monday.isActive,
         },
         tuesday: {
           start: data.workingHours.tuesday.start,
           end: data.workingHours.tuesday.end,
+          isActive: data.workingHours.tuesday.isActive,
         },
         wednesday: {
           start: data.workingHours.wednesday.start,
           end: data.workingHours.wednesday.end,
+          isActive: data.workingHours.wednesday.isActive,
         },
         thursday: {
           start: data.workingHours.thursday.start,
           end: data.workingHours.thursday.end,
+          isActive: data.workingHours.thursday.isActive,
         },
         friday: {
           start: data.workingHours.friday.start,
           end: data.workingHours.friday.end,
+          isActive: data.workingHours.friday.isActive,
         },
         saturday: {
           start: data.workingHours.saturday.start,
           end: data.workingHours.saturday.end,
+          isActive: data.workingHours.saturday.isActive,
         },
       },
       invitationStatus: data.invitationStatus,
