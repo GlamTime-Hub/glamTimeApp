@@ -19,6 +19,8 @@ import Toast, { BaseToast, ToastConfig } from "react-native-toast-message";
 import { useDeepLinking } from "@/hooks/use-deep-link.hook";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import useAuthStore from "@/core/store/auth.store";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { useLocationPermission } from "@/hooks/use-location-permission.hook";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -99,13 +101,14 @@ export default function RootLayout() {
 
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = useState(false);
 
+  useLocationPermission();
+
   useDeepLinking();
 
   const { restoreSession } = useAuthStore();
 
   useEffect(() => {
     if (fontsLoaded) {
-      console.log("loaded fonts");
       SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
@@ -130,40 +133,42 @@ export default function RootLayout() {
   const queryClient = new QueryClient();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-        <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-        <Stack initialRouteName="glam/(tabs)">
-          <Stack.Screen
-            name="login/index"
-            options={{
-              title: "Conéctate con tu estilo",
-              headerTitleAlign: "center",
-              headerBackButtonDisplayMode: "minimal",
-            }}
-          />
-          <Stack.Screen
-            name="sign-up"
-            options={{
-              headerTitleAlign: "center",
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="glam/(tabs)"
-            options={{
-              headerShown: false,
-            }}
-          />
+    <GestureHandlerRootView>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+          <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
+          <Stack initialRouteName="glam/(tabs)">
+            <Stack.Screen
+              name="login/index"
+              options={{
+                title: "Conéctate con tu estilo",
+                headerTitleAlign: "center",
+                headerBackButtonDisplayMode: "minimal",
+              }}
+            />
+            <Stack.Screen
+              name="sign-up"
+              options={{
+                headerTitleAlign: "center",
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="glam/(tabs)"
+              options={{
+                headerShown: false,
+              }}
+            />
 
-          <Stack.Screen
-            name="confirm-email/index"
-            options={{ title: "Confirmation", headerTitleAlign: "center" }}
-          />
-        </Stack>
-        <PortalHost />
-        <Toast topOffset={0} config={toastConfig} />
-      </ThemeProvider>
-    </QueryClientProvider>
+            <Stack.Screen
+              name="confirm-email/index"
+              options={{ title: "Confirmation", headerTitleAlign: "center" }}
+            />
+          </Stack>
+          <PortalHost />
+          <Toast topOffset={0} config={toastConfig} />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </GestureHandlerRootView>
   );
 }

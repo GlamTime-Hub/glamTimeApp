@@ -4,12 +4,12 @@ import { Text } from "@/presentation/components/ui/text";
 import { Button } from "@/presentation/components/ui/button";
 import { Separator } from "@/presentation/components/ui/separator";
 import { router } from "expo-router";
-import { useBusiness } from "@/presentation/hooks";
+import { useProfileBusiness } from "@/presentation/hooks";
 import { MyBusinessLoading } from "./MyBusinessLoading";
 import { Business } from "@/core/interfaces/business.interface";
 
 export const MyBusiness = () => {
-  const { data, isError, isLoading } = useBusiness();
+  const { data, isError, isLoading } = useProfileBusiness();
 
   if (isError) {
     router.push("/glam/(tabs)/profile/home");

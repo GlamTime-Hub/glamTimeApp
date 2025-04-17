@@ -26,7 +26,7 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
   }
 
   return (
-    <View className="flex-1 flex-col justify-between px-4">
+    <View className="flex-1 flex-col justify-between p-4">
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <View className="flex items-center">

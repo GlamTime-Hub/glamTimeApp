@@ -22,8 +22,6 @@ export const useInvitation = () => {
       businessId: notification?.business.id,
     };
 
-    console.log("accept", accept);
-
     await handleInvitaionAction(accept);
     setLoading(false);
     queryClient.invalidateQueries({ queryKey: ["totalNotifications"] });

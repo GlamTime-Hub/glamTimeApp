@@ -3,7 +3,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/presentation/components/ui/popover";
-import { TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {
   ArrowDownWideNarrow,
@@ -12,6 +12,7 @@ import {
   AArrowDown,
 } from "@/lib/icons/Icons";
 import { Text } from "@/presentation/components/ui/text";
+import { Button } from "@/presentation/components/ui/button";
 
 export const BusinessOrder = () => {
   const insets = useSafeAreaInsets();
@@ -25,13 +26,14 @@ export const BusinessOrder = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <TouchableOpacity
-          className="flex flex-row px-4 items-center gap-2"
+        <Button
+          variant={"ghost"}
+          className="flex flex-row px-4 mr-4 items-center gap-2"
           onPress={() => console.log("")}
         >
           <ArrowDownWideNarrow size={25} className="text-foreground" />
           <Text>Ordenar</Text>
-        </TouchableOpacity>
+        </Button>
       </PopoverTrigger>
       <PopoverContent
         side={"bottom"}

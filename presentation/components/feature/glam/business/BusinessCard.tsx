@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   ImageBackground,
   View,
@@ -6,9 +5,8 @@ import {
   StyleSheet,
 } from "react-native";
 import { Card } from "@/presentation/components/ui/card";
-import { Heart, Star, ThumbsUp } from "@/lib/icons/Icons";
+import { Star, ThumbsUp, MessageCircleMore } from "@/lib/icons/Icons";
 import { Text } from "@/presentation/components/ui/text";
-import { useColorScheme } from "@/lib/useColorScheme";
 import { router } from "expo-router";
 
 interface Props {
@@ -16,18 +14,12 @@ interface Props {
     name: string;
     imageUrl: string;
     rating: number;
-    liked: boolean;
-    likes?: number;
+    likes: number;
+    receivedReviews: number;
   };
 }
 
 const BusinessCard = ({ business }: Props) => {
-  const [liked, setLiked] = useState(business.liked);
-
-  const toggleLike = () => setLiked(!liked);
-
-  const { isDarkColorScheme } = useColorScheme();
-
   return (
     <Card className="my-2">
       <TouchableOpacity
@@ -48,27 +40,30 @@ const BusinessCard = ({ business }: Props) => {
             style={styles.overlay}
           >
             <View>
-              <Text className={"text-white text-xl"}>{business.name}</Text>
+              <Text className={"text-white font-baloo-bold text-xl"}>
+                {business.name}
+              </Text>
               <View className="flex flex-row gap-2">
-                <View className="flex flex-row items-center gap-1">
-                  <Text className={"text-white"}>
-                    {business.rating.toFixed(1)}
+                <View className="flex flex-row justify-center items-center gap-1">
+                  <Text className={"text-white text-xl mt-2"}>
+                    {business.rating}
                   </Text>
-                  <Star color="#FFD700" size={18} fill={"gold"} />
+                  <Star color="#FFD700" size={15} fill={"gold"} />
                 </View>
                 <View className="flex flex-row items-center gap-1">
-                  <Text className={"text-white"}>{business.likes}</Text>
-                  <ThumbsUp size={18} className="color-white" />
+                  <Text className={"text-white mt-2 text-xl"}>
+                    {business.likes}
+                  </Text>
+                  <ThumbsUp size={16} className="color-white" />
+                </View>
+                <View className="flex flex-row items-center gap-1">
+                  <Text className={"text-white mt-2 text-xl"}>
+                    {business.receivedReviews}
+                  </Text>
+                  <MessageCircleMore size={16} className="color-white" />
                 </View>
               </View>
             </View>
-            <TouchableOpacity onPress={toggleLike}>
-              <Heart
-                color={liked ? "red" : "white"}
-                fill={liked ? "red" : "transparent"}
-                size={24}
-              />
-            </TouchableOpacity>
           </View>
         </ImageBackground>
       </TouchableOpacity>

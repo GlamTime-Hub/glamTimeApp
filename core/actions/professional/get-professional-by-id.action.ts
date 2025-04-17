@@ -16,7 +16,6 @@ export const getProfessionalById = async (userId: string) => {
       data: professional,
     };
   } catch (error) {
-    console.log("error", error);
     throw new Error(
       "Ha ocurrido un error inesperado.\npor favor contacte con soporte"
     );

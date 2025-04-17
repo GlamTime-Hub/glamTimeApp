@@ -11,7 +11,6 @@ export const useBusinessLocation = () => {
   const queryClient = useQueryClient();
 
   const onSaveLocation = async () => {
-    console.log("onSaveLocation", region);
     await updateLocationAction(businessId, region);
 
     Toast.show({

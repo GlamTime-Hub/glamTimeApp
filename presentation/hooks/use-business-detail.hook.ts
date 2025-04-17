@@ -16,6 +16,7 @@ import { updateBusinessAction } from "@/core/actions/business/update-business.ac
 import { useBusinessLocation } from "./use-business-location";
 import { updateBusinessStatusAction } from "@/core/actions/business/update-business-status.action";
 import { getBusinessTypeAction } from "@/core/actions/util/get-business-type.action";
+import { useBusinessTypes } from "./use-business-types.hook";
 
 const schema = z.object({
   name: z.string().nonempty("Debes ingresar el nombre"),
@@ -46,11 +47,7 @@ export const useBusinessDetail = (id: string) => {
     enabled: id !== "new",
   });
 
-  const { data: businessTypes } = useQuery({
-    queryKey: ["businessType"],
-    queryFn: getBusinessTypeAction,
-    staleTime,
-  });
+  const { businessTypes } = useBusinessTypes();
 
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
@@ -211,7 +208,7 @@ export const useBusinessDetail = (id: string) => {
   }, [data]);
 
   return {
-    businessTypes: businessTypes?.data,
+    businessTypes,
     business: data?.data,
     user,
     countries,
