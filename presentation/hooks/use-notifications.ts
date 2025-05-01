@@ -1,14 +1,19 @@
 import Toast from "react-native-toast-message";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { updateNotificationAction } from "@/core/actions/user/update-notifications.action";
 import { useQueryClient } from "@tanstack/react-query";
-import { useUserStore } from "../store/use-user.store";
+import { router } from "expo-router";
+import { useUser } from "./use-user.hook";
 
 export const useNotifications = () => {
-  const { user } = useUserStore();
+  const queryClient = useQueryClient();
+  const { user, isLoading } = useUser();
   const [loading, setLoading] = useState(false);
 
-  const queryClient = useQueryClient();
+  const [notifications, setNotiications] = useState({
+    push: user?.notificationPreference.push ?? false,
+    news: user?.notificationPreference.news ?? false,
+  });
 
   const onSaveNotifications = async (
     notificationsPush: boolean,
@@ -23,20 +28,34 @@ export const useNotifications = () => {
       },
     });
 
-    queryClient.invalidateQueries({ queryKey: ["user", "getUser"] });
+    queryClient.invalidateQueries({ queryKey: ["user"] });
 
     Toast.show({
       type: "success",
-      text1: "Notificaciones guardadas",
-      text2: "Tus preferencias de notificaciones han sido guardadas con éxito.",
+      text1: "OK",
+      text2: "Notificaciones actualizadas.",
     });
+
+    router.back();
 
     setLoading(false);
   };
 
+  useEffect(() => {
+    if (user) {
+      setNotiications({
+        push: user?.notificationPreference.push ?? false,
+        news: user?.notificationPreference.news ?? false,
+      });
+    }
+  }, [user]);
+
   return {
     user,
     loading,
+    isLoading,
+    notifications,
+    setNotiications,
     onSaveNotifications,
   };
 };

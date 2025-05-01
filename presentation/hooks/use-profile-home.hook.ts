@@ -4,10 +4,14 @@ import { Href, router } from "expo-router";
 import { updateImageAction } from "@/core/actions/user/update-image.action";
 import { useQueryClient } from "@tanstack/react-query";
 import { useUserStore } from "../store/use-user.store";
+import { useUser } from "./use-user.hook";
 
 export const useProfileHome = () => {
   const { session, logout } = useAuthStore();
-  const { user, logout: removeUserFromStorage } = useUserStore();
+  const { logout: removeUserFromStorage } = useUserStore();
+
+  const { user, isLoading } = useUser();
+
   const isProfessional = ["professional", "admin"].includes(user?.role!);
   const queryClient = useQueryClient();
   const handleOptions = (href: Href) => {
@@ -29,12 +33,13 @@ export const useProfileHome = () => {
       text2: "La imagen se ha actualizado correctamente",
     });
 
-    queryClient.invalidateQueries({ queryKey: ["user"] });
+    await queryClient.refetchQueries({ queryKey: ["user"] });
   };
 
   return {
     session,
     user,
+    isLoading,
     isProfessional,
     handleOptions,
     onLogout,

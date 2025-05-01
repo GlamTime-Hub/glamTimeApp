@@ -116,7 +116,7 @@ export const ProfileDetail = () => {
                     name="email"
                     render={({ field: { onChange, onBlur, value } }) => (
                       <Input
-                        readOnly={true}
+                        readOnly={loading}
                         onChangeText={onChange}
                         onBlur={onBlur}
                         value={value}
@@ -393,7 +393,7 @@ export const ProfileDetail = () => {
                     initialPhoneNumber={user ? `${user?.phoneNumber}` : ""}
                     onChangeCountry={onChangeCountry}
                     onChangePhone={onChangePhone}
-                    disabled={loading}
+                    disabled={true}
                   />
                   {errors.phoneNumber && (
                     <Text className="text-red-500 text-sm">

@@ -13,17 +13,12 @@ import {
 import { Switch } from "@/presentation/components/ui/switch";
 import { Text } from "@/presentation/components/ui/text";
 import { useNotifications } from "@/presentation/hooks";
-import { useState } from "react";
 import { View } from "react-native";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
 
 export const ProfileNotifications = () => {
-  const { user, loading, onSaveNotifications } = useNotifications();
-
-  const [notifications, setNotiications] = useState({
-    push: user?.notificationPreference.push ?? false,
-    news: user?.notificationPreference.news ?? false,
-  });
+  const { user, loading, notifications, setNotiications, onSaveNotifications } =
+    useNotifications();
 
   return (
     <View className="flex-1 flex justify-between p-6">
@@ -114,7 +109,7 @@ export const ProfileNotifications = () => {
               <Button
                 className="flex flex-row gap-2"
                 onPress={() =>
-                  onSaveNotifications(notifications.push, notifications.push)
+                  onSaveNotifications(notifications.push, notifications.news)
                 }
               >
                 {loading && <LoadingIndicator />}

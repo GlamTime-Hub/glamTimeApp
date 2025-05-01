@@ -21,7 +21,7 @@ export const MyReviews = () => {
 
   if (reviews.length === 0) {
     return (
-      <View className="p-6">
+      <View className="p-4">
         <Alert icon={MessageCircleMore} variant="default" className="max-w-xl">
           <AlertTitle>Info!</AlertTitle>
           <AlertDescription>Aún no has creado reseñas.</AlertDescription>
@@ -31,7 +31,7 @@ export const MyReviews = () => {
   }
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-4">
       <ScrollView showsVerticalScrollIndicator={false}>
         <Card className="flex-1 ">
           <CardContent>

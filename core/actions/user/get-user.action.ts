@@ -7,6 +7,7 @@ export const getUserAction = async () => {
       data: { data },
     } = await axiosClient.get("user");
     const user = UserMapper.fromTheUserDBToUser(data);
+
     return {
       status: true,
       data: user,
