@@ -33,8 +33,8 @@ const useAuthStore = create<AuthState>((set) => ({
 
 // Escuchar cambios de sesión y actualizar Zustand
 Supabase.auth.onAuthStateChange(async (event, session) => {
-  console.log("onAuthStateChange", session);
-  console.log("event", event);
+  // console.log("onAuthStateChange", session);
+  // console.log("event", event);
   if (session) {
     await SecureStoreAdapter.setItem("session", JSON.stringify(session));
     useAuthStore.getState().setSession(session);

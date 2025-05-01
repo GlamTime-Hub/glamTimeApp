@@ -78,16 +78,6 @@ const LayoutScreen = () => {
         options={{
           headerTitleAlign: "center",
           title: "Contacto",
-          presentation: "modal",
-        }}
-      />
-
-      <Stack.Screen
-        name="help-support/index"
-        options={{
-          headerTitleAlign: "center",
-          title: "Ayuda y soporte",
-          presentation: "modal",
         }}
       />
 

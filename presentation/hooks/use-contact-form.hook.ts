@@ -6,10 +6,6 @@ import { postContactAction } from "@/core/actions/contact/post-contact.action";
 import { useState } from "react";
 
 const schema = z.object({
-  name: z.string().nonempty("El nombre es requerido"),
-  email: z.string().email("Correo inválido"),
-  phoneNumber: z.string().nonempty("El teléfono es requerido"),
-  phoneNumberExtension: z.string(),
   subject: z
     .string()
     .max(50, "Máximo 50 caracteres")
@@ -21,35 +17,19 @@ type FormData = z.infer<typeof schema>;
 
 export const useContactForm = () => {
   const [loading, setLoading] = useState(false);
-  const [formKey, setFormKey] = useState(0);
 
   const {
     control,
     handleSubmit,
-    setValue,
-    clearErrors,
     formState: { errors },
     reset,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: "",
-      email: "",
-      phoneNumber: "",
-      phoneNumberExtension: "",
       subject: "",
       description: "",
     },
   });
-
-  const onChangePhone = (phone: string) => {
-    setValue("phoneNumber", phone);
-    if (phone.length > 0) clearErrors("phoneNumber");
-  };
-
-  const onChangeCountry = (country: { callingCode: string }) => {
-    setValue("phoneNumberExtension", `${country.callingCode}`);
-  };
 
   const onSubmit = async (data: FormData) => {
     setLoading(true);
@@ -63,7 +43,6 @@ export const useContactForm = () => {
       });
 
       reset();
-      setFormKey((prev) => prev + 1);
     } catch (error) {
       Toast.show({
         type: "error",
@@ -76,12 +55,9 @@ export const useContactForm = () => {
 
   return {
     control,
+    loading,
     errors,
     handleSubmit,
     onSubmit,
-    onChangePhone,
-    onChangeCountry,
-    loading,
-    formKey,
   };
 };

@@ -17,7 +17,7 @@ import { View } from "react-native";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
 
 export const ProfileNotifications = () => {
-  const { user, loading, notifications, setNotiications, onSaveNotifications } =
+  const { loading, notifications, setNotiications, onSaveNotifications } =
     useNotifications();
 
   return (
