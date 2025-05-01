@@ -5,7 +5,6 @@ export const getCategoriesByBusinessTypeAction = async (
   businessType: string
 ) => {
   try {
-    console.log("businessTypezsadasd", businessType);
     const { data } = await axiosClient.get(
       "util/categories-by-business-type/" + businessType
     );

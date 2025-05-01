@@ -13,8 +13,6 @@ export const useBusinessTypes = (
     staleTime,
   });
 
-  console.log("businessTypes", businessTypes);
-
   const { data: cateogries } = useQuery({
     queryKey: ["categories", businessType],
     queryFn: () => getCategoriesByBusinessTypeAction(businessType!),

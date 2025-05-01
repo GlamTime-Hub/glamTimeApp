@@ -1,10 +1,9 @@
 import {
-  CalendarDays,
-  Heart,
   MapPinned,
   MessageCircleMore,
   Star,
   ThumbsUp,
+  NotebookPen,
 } from "@/lib/icons/Icons";
 import Share from "@/lib/icons/Share";
 import { WhatsAppIcon } from "@/lib/icons/WhatsApp";
@@ -12,7 +11,7 @@ import { useColorScheme } from "@/lib/useColorScheme";
 import { cn } from "@/lib/util";
 import { Button } from "@/presentation/components/ui/button";
 import { Text } from "@/presentation/components/ui/text";
-import { router, useLocalSearchParams } from "expo-router";
+import { router } from "expo-router";
 import {
   ImageBackground,
   ScrollView,
@@ -21,10 +20,12 @@ import {
   View,
 } from "react-native";
 import { BusinessTab } from "./BussinessTab";
-import { useBusinessBookingStore } from "@/presentation/store/use-business-booking.store";
-import { useEffect } from "react";
 import { groupedByCategory } from "@/BD/service.constant";
 import { professionals } from "@/BD/professional.constant";
+import { useBusinessDetail } from "@/presentation/hooks";
+import { Card, CardContent } from "@/presentation/components/ui/card";
+import { BusinessDetailLoading } from "./BusinessDetailLoading";
+import { Separator } from "@/presentation/components/ui/separator";
 
 const styles = StyleSheet.create({
   image: {
@@ -35,16 +36,14 @@ const styles = StyleSheet.create({
 });
 
 export const BusinessDetail = () => {
-  const { id } = useLocalSearchParams();
-
   const { isDarkColorScheme } = useColorScheme();
 
-  const { addProfessional, addService } = useBusinessBookingStore();
+  const { id, business, isLoading, openWhatsApp, openLocation } =
+    useBusinessDetail();
 
-  useEffect(() => {
-    addProfessional(null);
-    addService(null);
-  }, []);
+  if (isLoading) {
+    return <BusinessDetailLoading />;
+  }
 
   return (
     <View className="flex-1">
@@ -53,13 +52,21 @@ export const BusinessDetail = () => {
           resizeMode="cover"
           className="relative"
           source={{
-            uri: "https://images.pexels.com/photos/31323301/pexels-photo-31323301/free-photo-of-diseno-interior-de-peluqueria-moderna-y-elegante.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            uri: business?.urlPhoto,
             scale: 0.2,
           }}
           style={styles.image}
         >
           <View className="absolute flex  gap-4 right-6 bottom-4">
-            <TouchableOpacity className="flex justify-between flex-row items-center gap-1">
+            <TouchableOpacity
+              onPress={() =>
+                openWhatsApp(
+                  business?.phoneNumber!,
+                  business?.phoneNumberExtension!
+                )
+              }
+              className="flex justify-between flex-row items-center gap-1"
+            >
               <Text
                 className={cn(
                   " py-1 px-2 text-sm rounded-lg",
@@ -91,67 +98,108 @@ export const BusinessDetail = () => {
       </View>
       <View className="flex-1 mb-5">
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View className="flex flex-row items-center justify-between  px-5 py-4">
-            <Text className="text-2xl font-bold">Peluquería Luxury</Text>
-            <View className="flex flex-row items-center gap-1">
-              <Text className="font-bold text-lg">{4.5}</Text>
-              <Star color="#FFD700" size={25} fill={"gold"} />
-            </View>
-          </View>
-          <View className="flex flex-row justify-between items-center px-5">
-            <View>
-              <Text className="text-md">Calle 54 # 36-e95</Text>
-              <Text className="text-md">Primero de mayo</Text>
-              <Text className="text-md">Barrancabermeja</Text>
-            </View>
-            <TouchableOpacity className="flex flex-row items-center gap-1">
-              <Text
-                className={cn(
-                  " py-1 px-2 text-sm rounded-lg",
-                  isDarkColorScheme
-                    ? "bg-white text-black"
-                    : "bg-black text-white"
-                )}
-              >
-                Ver ubicación
-              </Text>
-              <MapPinned size={25} className="text-foreground" />
-            </TouchableOpacity>
-          </View>
-          <View className="flex mx-5 flex-row my-2 gap-6 justify-center py-2 rounded-lg">
-            <View className="flex flex-row items-center gap-1">
-              <Text className="text-lg ">180</Text>
-              <ThumbsUp size={18} className="text-foreground" />
-            </View>
-            <View className="flex  flex-row gap-1 items-center">
-              <Text className="text-lg ">200</Text>
-              <CalendarDays size={20} className="text-foreground" />
-            </View>
+          <View className="p-5">
+            <Card>
+              <CardContent>
+                <Text className="text-2xl text-center my-3 font-baloo-bold">
+                  {business?.name}
+                </Text>
+                <Separator className="mb-4" />
+                <View className="flex flex-col items-center px-2">
+                  <View>
+                    <Text className="" numberOfLines={3}>
+                      {business?.location.address}
+                    </Text>
+                  </View>
+                  <View className="flex flex-row gap-10 justify-between">
+                    <TouchableOpacity
+                      onPress={() =>
+                        openLocation(
+                          business?.location.latitude!,
+                          business?.location.longitude!,
+                          business?.location.address!
+                        )
+                      }
+                      className="flex my-4 flex-row items-center gap-1"
+                    >
+                      <Text
+                        className={cn(
+                          " py-1 px-2 text-md rounded-lg",
+                          isDarkColorScheme
+                            ? "bg-white text-black"
+                            : "bg-black text-white"
+                        )}
+                      >
+                        Ver ubicación
+                      </Text>
+                      <MapPinned size={30} className="text-foreground" />
+                    </TouchableOpacity>
+                    <View className="flex flex-row items-center  gap-1">
+                      <Text className="font-baloo-bold mt-2 text-2xl">
+                        {business?.rating}
+                      </Text>
+                      <Star color="#FFD700" size={30} fill={"gold"} />
+                    </View>
+                  </View>
+                </View>
+                <View className="flex  flex-row  gap-4 justify-center mt-4 rounded-lg">
+                  <Card>
+                    <CardContent className="py-2 px-4">
+                      <View className="flex flex-row justify-center items-center gap-1 ">
+                        <Text className="text-3xl pt-4">{business?.likes}</Text>
+                        <ThumbsUp size={26} className="text-foreground" />
+                      </View>
+                      <Text className="text-md font-baloo-bold">Me Gusta</Text>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="py-2  px-4">
+                      <View className="flex  flex-row gap-1 justify-center items-center">
+                        <Text className="text-3xl pt-4 ">
+                          {business?.totalBooking}
+                        </Text>
+                        <NotebookPen size={28} className="text-foreground" />
+                      </View>
+                      <Text className="text-md font-baloo-bold">Reservas</Text>
+                    </CardContent>
+                  </Card>
 
-            <View className="flex  flex-row gap-1 items-center">
-              <Text className="text-lg ">5000</Text>
-              <MessageCircleMore size={20} className="text-foreground" />
-            </View>
+                  <Card>
+                    <CardContent className="py-2  px-4">
+                      <View className="flex  flex-row gap-1 justify-center items-center">
+                        <Text className="text-3xl pt-4 ">
+                          {business?.receivedReviews}
+                        </Text>
+                        <MessageCircleMore
+                          size={30}
+                          className="text-foreground"
+                        />
+                      </View>
+                      <Text className="text-md font-baloo-bold">
+                        Comentarios
+                      </Text>
+                    </CardContent>
+                  </Card>
+                </View>
+              </CardContent>
+            </Card>
           </View>
 
-          <View className="px-5 my-2">
+          <View className="px-5 py-3">
             <Button
               variant={"outline"}
               onPress={() =>
                 router.push({
                   pathname: "/glam/(tabs)/business/detail/comments/[id]",
-                  params: { id: "12" },
+                  params: { id: business?.id! },
                 })
               }
             >
               <Text>Ver Comentarios</Text>
             </Button>
           </View>
-          <View className="px-5">
-            <BusinessTab
-              services={groupedByCategory}
-              professionals={professionals}
-            />
+          <View className="px-5 py-2">
+            <BusinessTab id={id as string} />
           </View>
         </ScrollView>
       </View>

@@ -1,23 +1,21 @@
 import Toast from "react-native-toast-message";
 import useAuthStore from "@/core/store/auth.store";
-import { useUser } from "./use-user.hook";
 import { Href, router } from "expo-router";
 import { updateImageAction } from "@/core/actions/user/update-image.action";
 import { useQueryClient } from "@tanstack/react-query";
+import { useUserStore } from "../store/use-user.store";
 
 export const useProfileHome = () => {
   const { session, logout } = useAuthStore();
-  const { user, error, isError, isLoading } = useUser();
-
+  const { user, logout: removeUserFromStorage } = useUserStore();
   const isProfessional = ["professional", "admin"].includes(user?.role!);
-
   const queryClient = useQueryClient();
-
   const handleOptions = (href: Href) => {
     router.push(href);
   };
 
   const onLogout = async () => {
+    await removeUserFromStorage();
     await logout();
     queryClient.clear();
   };
@@ -37,9 +35,6 @@ export const useProfileHome = () => {
   return {
     session,
     user,
-    error,
-    isError,
-    isLoading,
     isProfessional,
     handleOptions,
     onLogout,

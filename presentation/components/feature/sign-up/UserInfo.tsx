@@ -14,8 +14,6 @@ import {
   SelectValue,
 } from "../../ui/select";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { router } from "expo-router";
-import { PhoneNumber } from "../../ui/PhoneNumber";
 
 export const UserInfo = () => {
   const {
@@ -27,8 +25,6 @@ export const UserInfo = () => {
     CITIES,
     handleSubmit,
     onSubmit,
-    onChangeCountry,
-    onChangePhone,
   } = useUserInfo();
 
   const insets = useSafeAreaInsets();
@@ -59,10 +55,6 @@ export const UserInfo = () => {
   return (
     <View className="px-10 py-5 flex-1 flex justify-between">
       <View>
-        <Text className="text-center text-2xl font-bold my-4">
-          ¡Hey! Cuéntanos
-        </Text>
-
         <View className="my-2">
           <Text className="font-bold mb-1">¿Cómo te llamas?</Text>
           <Controller
@@ -81,6 +73,23 @@ export const UserInfo = () => {
           {errors.name && (
             <Text className="text-red-500 text-sm">{errors.name.message}</Text>
           )}
+        </View>
+        <View className="my-2">
+          <Text className="font-bold mb-1">
+            ¿Cuál es tu correo electrónico?
+          </Text>
+          <Controller
+            control={control}
+            name="email"
+            render={({ field: { onChange, value, onBlur } }) => (
+              <Input
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                placeholder="Correo"
+              />
+            )}
+          />
         </View>
         <View className="my-2">
           <Text className="font-bold mb-1">¿Cuándo es tu cumpleaños?</Text>
@@ -243,35 +252,11 @@ export const UserInfo = () => {
             <Text className="text-red-500 text-sm">{errors.city.message}</Text>
           )}
         </View>
-
-        <View className="my-2">
-          <Text className="font-bold mb-1">¿Cómo es tu número movil?</Text>
-          <PhoneNumber
-            initialPhoneNumber=""
-            onChangeCountry={onChangeCountry}
-            onChangePhone={onChangePhone}
-          />
-          {errors.phoneNumber && (
-            <Text className="text-red-500 text-sm">
-              {errors.phoneNumber.message}
-            </Text>
-          )}
-        </View>
       </View>
       <View>
         <Button onPress={handleSubmit(onSubmit)}>
           <Text>Guardar</Text>
         </Button>
-
-        {isIos && (
-          <Button
-            className="mt-4"
-            variant={"outline"}
-            onPress={() => router.push("/sign-up/credentials")}
-          >
-            <Text>Volver</Text>
-          </Button>
-        )}
       </View>
     </View>
   );

@@ -42,6 +42,7 @@ import {
   Eye,
   EyeOff,
   Save,
+  NotebookPen,
 } from "lucide-react-native";
 import { iconWithClassName } from "./iconWithClassName";
 
@@ -88,6 +89,7 @@ iconWithClassName(Timer);
 iconWithClassName(Eye);
 iconWithClassName(EyeOff);
 iconWithClassName(Save);
+iconWithClassName(NotebookPen);
 
 export {
   Share2,
@@ -133,4 +135,5 @@ export {
   Eye,
   EyeOff,
   Save,
+  NotebookPen,
 };

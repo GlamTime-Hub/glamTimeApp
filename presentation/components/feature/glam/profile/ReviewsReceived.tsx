@@ -1,18 +1,18 @@
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { MyReviewsLoading } from "./MyReviewsLoading";
 import { ReviewCard } from "../shared/ReviewCard";
 import { useProfessionalReview } from "@/presentation/hooks/use-professional-reviews.hook";
-import { useUser } from "@/presentation/hooks/use-user.hook";
 import {
   Alert,
   AlertDescription,
   AlertTitle,
 } from "@/presentation/components/ui/alert";
 import { MessageCircleMore } from "@/lib/icons/Icons";
+import { useUserStore } from "@/presentation/store/use-user.store";
 
 export const ReviewsReceived = () => {
-  const { user } = useUser();
+  const { user } = useUserStore();
 
   const { data, isLoading } = useProfessionalReview(user!.id);
 

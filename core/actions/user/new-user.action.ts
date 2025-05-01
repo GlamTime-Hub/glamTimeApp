@@ -1,12 +1,15 @@
 import axiosClient from "@/core/api/axios-client";
+import { UserMapper } from "@/core/mappers/user.mapper";
 
 export const newUserAction = async (user: any) => {
   try {
-    const { data } = await axiosClient.post("user", user);
-
+    const {
+      data: { data },
+    } = await axiosClient.post("user", user);
+    const userFromDB = UserMapper.fromTheUserDBToUser(data);
     return {
       status: true,
-      data,
+      data: userFromDB,
     };
   } catch (error) {
     throw new Error(

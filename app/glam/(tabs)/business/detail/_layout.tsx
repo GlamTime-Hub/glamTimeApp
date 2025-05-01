@@ -36,6 +36,7 @@ const DetailScreen = () => {
           headerTitleAlign: "center",
           presentation: "modal",
           title: "Comentarios",
+          headerRight: () => null,
         }}
       />
       <Stack.Screen
@@ -44,6 +45,7 @@ const DetailScreen = () => {
           headerTitleAlign: "center",
           presentation: "modal",
           title: "Detalle de profesional",
+          headerRight: () => null,
         }}
       />
     </Stack>

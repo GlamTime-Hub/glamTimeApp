@@ -5,7 +5,6 @@ import PhoneInput, {
   ICountry,
   ILanguage,
 } from "react-native-international-phone-number";
-import { ICountryCca2 } from "react-native-international-phone-number/lib/interfaces/countryCca2";
 
 interface Props {
   initialPhoneNumber?: string;
@@ -64,6 +63,7 @@ export const PhoneNumber = ({
       language={languageCodeFinal}
       defaultCountry={countryCodeFinal}
       value={inputValue}
+      placeholder="Número de teléfono"
       onChangePhoneNumber={handleChangePhone}
       selectedCountry={selectedCountry}
       onChangeSelectedCountry={handleChangeCountry}

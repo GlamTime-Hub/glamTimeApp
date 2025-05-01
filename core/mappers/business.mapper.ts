@@ -24,6 +24,7 @@ export class BusinessMapper {
       rating: business.rating,
       receivedReviews: business.receivedReviews,
       likes: business.likes,
+      totalBooking: business.totalBooking,
     };
   };
 }

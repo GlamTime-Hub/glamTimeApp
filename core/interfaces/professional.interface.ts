@@ -16,4 +16,8 @@ export interface Professional {
   };
   invitationStatus: string;
   createdAt: Date;
+  likes: number;
+  rating: number;
+  receivedReviews: number;
+  totalBooking: number;
 }

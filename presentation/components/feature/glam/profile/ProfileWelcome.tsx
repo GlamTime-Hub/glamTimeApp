@@ -16,7 +16,7 @@ export const ProfileWelcome = () => {
       </Text>
       <Button
         className="mt-4 px-6 py-3 w-full rounded-lg shadow-lg"
-        onPress={() => router.push("/login")}
+        onPress={() => router.push("/login/home")}
       >
         <Text>Iniciar Sesión</Text>
       </Button>

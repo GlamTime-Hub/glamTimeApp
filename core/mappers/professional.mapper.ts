@@ -47,6 +47,10 @@ export class ProfessionalMapper {
         },
       },
       invitationStatus: data.invitationStatus,
+      rating: data.rating,
+      receivedReviews: data.receivedReviews,
+      totalBooking: data.totalBooking,
+      likes: data.likes,
       createdAt: new Date(data.createdAt),
     };
   }

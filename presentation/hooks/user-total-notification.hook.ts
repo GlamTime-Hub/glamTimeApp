@@ -14,7 +14,7 @@ export const useTotalUserNotifications = () => {
     queryKey: ["totalNotifications"],
     queryFn: getTotalUserNotificationAction,
     staleTime: 1000 * 60 * 60,
-    enabled: !!session,
+    // enabled: !!session,
   });
 
   useEffect(() => {

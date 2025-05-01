@@ -20,5 +20,7 @@ export interface Business {
   rating: number;
   likes: number;
 
+  totalBooking: number;
+
   receivedReviews: number;
 }

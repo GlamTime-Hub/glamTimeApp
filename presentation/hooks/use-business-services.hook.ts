@@ -17,7 +17,7 @@ export const useBusinessServices = (
   const queryClient = useQueryClient();
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["business-services", businessId],
+    queryKey: ["business-services", `${businessId}-${filterByBusiness}`],
     queryFn: () => getServicesByBusinessAction(businessId, filterByBusiness),
     staleTime,
   });

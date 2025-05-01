@@ -5,17 +5,24 @@ import {
   StyleSheet,
 } from "react-native";
 import { Card } from "@/presentation/components/ui/card";
-import { Star, ThumbsUp, MessageCircleMore } from "@/lib/icons/Icons";
+import {
+  Star,
+  ThumbsUp,
+  MessageCircleMore,
+  CalendarDays,
+} from "@/lib/icons/Icons";
 import { Text } from "@/presentation/components/ui/text";
 import { router } from "expo-router";
 
 interface Props {
   business: {
+    id: string;
     name: string;
     imageUrl: string;
     rating: number;
     likes: number;
     receivedReviews: number;
+    totalBooking: number;
   };
 }
 
@@ -27,7 +34,7 @@ const BusinessCard = ({ business }: Props) => {
         onPress={() =>
           router.push({
             pathname: "/glam/(tabs)/business/detail/home/[id]",
-            params: { id: 1 },
+            params: { id: business.id },
           })
         }
       >
@@ -43,13 +50,20 @@ const BusinessCard = ({ business }: Props) => {
               <Text className={"text-white font-baloo-bold text-xl"}>
                 {business.name}
               </Text>
-              <View className="flex flex-row gap-2">
+              <View className="flex flex-row gap-4">
                 <View className="flex flex-row justify-center items-center gap-1">
                   <Text className={"text-white text-xl mt-2"}>
                     {business.rating}
                   </Text>
                   <Star color="#FFD700" size={15} fill={"gold"} />
                 </View>
+                <View className="flex flex-row justify-center items-center gap-1">
+                  <Text className={"text-white text-xl mt-2"}>
+                    {business.totalBooking}
+                  </Text>
+                  <CalendarDays className="color-white" size={15} />
+                </View>
+
                 <View className="flex flex-row items-center gap-1">
                   <Text className={"text-white mt-2 text-xl"}>
                     {business.likes}

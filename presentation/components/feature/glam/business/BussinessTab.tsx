@@ -9,14 +9,11 @@ import { Text } from "@/presentation/components/ui/text";
 import { useState } from "react";
 import { BusinessTabCollapsible } from "./BusinessTabCollapsible";
 import { BusinessProfessionalList } from "./BusinessProfessionalList";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
+import { BusinessServicesTab } from "./BusinessServicesTab";
+import { BusinessProfessionalTab } from "./BusinessProfessionalTab";
 
-interface Props {
-  services: any;
-  professionals: any;
-}
-
-export const BusinessTab = ({ services, professionals }: Props) => {
+export const BusinessTab = ({ id }: { id: string }) => {
   const [value, setValue] = useState("services");
 
   return (
@@ -34,29 +31,18 @@ export const BusinessTab = ({ services, professionals }: Props) => {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="services">
-        <Card className="flex-1">
-          <CardContent className="gap-4  native:gap-2">
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {Object.keys(services).map((category) => (
-                <BusinessTabCollapsible
-                  key={category}
-                  title={category}
-                  fromBusiness={true}
-                  services={services[category]}
-                />
-              ))}
-            </ScrollView>
-          </CardContent>
-        </Card>
+        <View className="flex-1">
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <BusinessServicesTab id={id} />
+          </ScrollView>
+        </View>
       </TabsContent>
       <TabsContent value="professionals">
-        <Card className="flex-1">
-          <CardContent className="gap-4 native:gap-2 px-2">
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <BusinessProfessionalList professionals={professionals} />
-            </ScrollView>
-          </CardContent>
-        </Card>
+        <View className="flex-1">
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <BusinessProfessionalTab id={id} />
+          </ScrollView>
+        </View>
       </TabsContent>
     </Tabs>
   );

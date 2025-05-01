@@ -1,5 +1,4 @@
 import { Login } from "./login/Login";
-import { Credentials } from "./sign-up/Credentials";
 import { UserInfo } from "./sign-up/UserInfo";
 import { Business } from "./glam/business/Business";
 import { BusinessDetail } from "./glam/business/BusinessDetail";
@@ -31,10 +30,11 @@ import { MyBusinessReviews } from "./glam/profile/MyBusinessReviews";
 import { MySchedule } from "./glam/profile/MySchedule";
 import { Notifications } from "./glam/notification/Notifications";
 import { Invitation } from "./glam/invitation/Invitation";
+import { BusinessReviews } from "./glam/business/BusinessReviews";
+import { VerifyOtp } from "./login/VerifyOtp";
 
 export {
   Login,
-  Credentials,
   UserInfo,
   Business,
   BusinessDetail,
@@ -66,4 +66,6 @@ export {
   MyBusinessReviews,
   MySchedule,
   Invitation,
+  BusinessReviews,
+  VerifyOtp,
 };

@@ -3,6 +3,5 @@ import { Home } from "@/presentation/components/feature";
 
 export default function HomeScreen() {
   const { expoPushToken, notification, channels } = useNotificationsPush();
-
   return <Home />;
 }

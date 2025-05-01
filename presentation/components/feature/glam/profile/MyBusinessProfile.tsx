@@ -4,7 +4,10 @@ import {
   AlertTitle,
 } from "@/presentation/components/ui/alert";
 import { Text } from "@/presentation/components/ui/text";
-import { useBusinessDetail } from "@/presentation/hooks";
+import {
+  useBusinessDetail,
+  useProfileBusinessDetail,
+} from "@/presentation/hooks";
 import { router, useLocalSearchParams } from "expo-router";
 import { ScrollView, View } from "react-native";
 import { AlertTriangle, SquarePen } from "@/lib/icons/Icons";
@@ -41,7 +44,7 @@ export const MyBusinessProfile = () => {
     onChangePhone,
     onSubmit,
     onUpdateRegion,
-  } = useBusinessDetail(id as string);
+  } = useProfileBusinessDetail(id as string);
 
   return (
     <View className="flex-1 p-6">

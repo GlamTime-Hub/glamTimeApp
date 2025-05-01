@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { useProfessional } from "./use-professional.hook";
-import { useUser } from "./use-user.hook";
 import { decimalToDateNumber } from "../utils/decimal-to-date-number.util";
 import { timestampToDecimalHour } from "../utils/timestamp-to-decimal-hour.util";
 import { updateProfessionalById } from "../../core/actions/professional/update-professional.action";
 import Toast from "react-native-toast-message";
 import { handleWorkingHours } from "@/core/actions/professional/handle-working-hours.action";
 import { useQueryClient } from "@tanstack/react-query";
+import { useUserStore } from "../store/use-user.store";
 
 const defaultDate = new Date();
 defaultDate.setHours(8, 0, 0, 0);
 
 export const useMySchedule = () => {
-  const { user } = useUser();
+  const { user } = useUserStore();
   const { professional, isError, isLoading } = useProfessional(user?.id || "");
   const [loading, setLoading] = useState(false);
 

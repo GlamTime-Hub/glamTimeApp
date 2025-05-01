@@ -3,7 +3,7 @@ import { router } from "expo-router";
 
 import { CustomAvatar } from "@/presentation/components/ui/CustomAvatar";
 import { Text } from "@/presentation/components/ui/text";
-import { useBusinessDetail } from "@/presentation/hooks";
+import { useProfileBusinessDetail } from "@/presentation/hooks";
 import { MyBusinessDetailLoading } from "./MyBusinessDetailLoading";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Separator } from "@/presentation/components/ui/separator";
@@ -19,7 +19,7 @@ import { CustomDialog } from "@/presentation/components/ui/CustomDialog";
 
 export const MyBusinessDetail = ({ id }: { id: string }) => {
   const { business, isLoading, updateImage, handleBusinessStatus } =
-    useBusinessDetail(id);
+    useProfileBusinessDetail(id);
 
   if (isLoading) {
     return <MyBusinessDetailLoading />;

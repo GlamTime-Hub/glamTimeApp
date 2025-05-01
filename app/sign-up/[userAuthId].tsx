@@ -1,7 +1,7 @@
 import { UserInfo } from "@/presentation/components/feature";
 
-const UserInfoScreen = () => {
+const SignUpScreen = () => {
   return <UserInfo />;
 };
 
-export default UserInfoScreen;
+export default SignUpScreen;

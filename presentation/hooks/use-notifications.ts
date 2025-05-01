@@ -1,11 +1,11 @@
 import Toast from "react-native-toast-message";
-import { useUser } from "./use-user.hook";
 import { useState } from "react";
 import { updateNotificationAction } from "@/core/actions/user/update-notifications.action";
 import { useQueryClient } from "@tanstack/react-query";
+import { useUserStore } from "../store/use-user.store";
 
 export const useNotifications = () => {
-  const { user } = useUser();
+  const { user } = useUserStore();
   const [loading, setLoading] = useState(false);
 
   const queryClient = useQueryClient();

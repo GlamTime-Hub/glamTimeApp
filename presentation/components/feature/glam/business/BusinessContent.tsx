@@ -40,11 +40,13 @@ export const BusinessContent = ({ drawerRef }: Props) => {
           renderItem={({ item }) => (
             <BusinessCard
               business={{
+                id: item.id,
                 name: item.name,
                 imageUrl: item.urlPhoto,
                 rating: item.rating,
                 likes: item.likes,
                 receivedReviews: item.receivedReviews,
+                totalBooking: item.totalBooking,
               }}
             />
           )}

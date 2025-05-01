@@ -9,7 +9,7 @@ import {
 } from "@react-navigation/native";
 import { SplashScreen, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { Dimensions, Platform } from "react-native";
+import { Dimensions } from "react-native";
 import { PortalHost } from "@rn-primitives/portal";
 import { NAV_THEME } from "@/lib/constants";
 import { useColorScheme } from "@/lib/useColorScheme";
@@ -21,6 +21,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import useAuthStore from "@/core/store/auth.store";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useLocationPermission } from "@/hooks/use-location-permission.hook";
+import { useUserStore } from "@/presentation/store/use-user.store";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -106,6 +107,7 @@ export default function RootLayout() {
   useDeepLinking();
 
   const { restoreSession } = useAuthStore();
+  const { loadUserFromStorage } = useUserStore();
 
   useEffect(() => {
     if (fontsLoaded) {
@@ -124,6 +126,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     restoreSession();
+    loadUserFromStorage();
   }, []);
 
   if (!isColorSchemeLoaded) {
@@ -139,18 +142,17 @@ export default function RootLayout() {
           <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
           <Stack initialRouteName="glam/(tabs)">
             <Stack.Screen
-              name="login/index"
+              name="login"
               options={{
                 title: "Conéctate con tu estilo",
                 headerTitleAlign: "center",
-                headerBackButtonDisplayMode: "minimal",
               }}
             />
             <Stack.Screen
-              name="sign-up"
+              name="sign-up/[userAuthId]"
               options={{
+                title: "¡Hey! Cuéntanos",
                 headerTitleAlign: "center",
-                headerShown: false,
               }}
             />
             <Stack.Screen
@@ -158,11 +160,6 @@ export default function RootLayout() {
               options={{
                 headerShown: false,
               }}
-            />
-
-            <Stack.Screen
-              name="confirm-email/index"
-              options={{ title: "Confirmation", headerTitleAlign: "center" }}
             />
           </Stack>
           <PortalHost />

@@ -4,6 +4,8 @@ import { HomeBusinessCard } from "./HomeBusinessCard";
 import Carousel, { ICarouselInstance } from "react-native-reanimated-carousel";
 import { useRef } from "react";
 import { Separator } from "../../ui/separator";
+import { Button } from "../../ui/button";
+import { AuthService } from "@/presentation/services/login.service";
 
 export const Home = () => {
   const ref = useRef<ICarouselInstance>(null);
@@ -36,6 +38,11 @@ export const Home = () => {
     },
   ];
 
+  const LogOut = async () => {
+    // Logica de logout
+    await AuthService.logout();
+  };
+
   return (
     <View className="px-4">
       <Text className="mt-4 mb-1 text-2xl font-bold">Destacados</Text>
@@ -63,6 +70,9 @@ export const Home = () => {
           defaultIndex={1}
         />
       </View>
+      <Button className="mt-20" onPress={() => LogOut()}>
+        <Text>Cerrar Sesion</Text>
+      </Button>
 
       {/* <View className="mt-10">
         <FlatList
