@@ -24,7 +24,7 @@ export const ReviewsReceived = () => {
 
   if (reviews.length === 0) {
     return (
-      <View className="p-6">
+      <View className="p-4">
         <Alert icon={MessageCircleMore} variant="default" className="max-w-xl">
           <AlertTitle>Info!</AlertTitle>
           <AlertDescription>Aún no has recibido reseñas.</AlertDescription>

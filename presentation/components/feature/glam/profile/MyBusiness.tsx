@@ -7,6 +7,7 @@ import { router } from "expo-router";
 import { useProfileBusiness } from "@/presentation/hooks";
 import { MyBusinessLoading } from "./MyBusinessLoading";
 import { Business } from "@/core/interfaces/business.interface";
+import { MyBusinessEmpty } from "./MyBusinessEmpty";
 
 export const MyBusiness = () => {
   const { data, isError, isLoading } = useProfileBusiness();
@@ -39,13 +40,17 @@ export const MyBusiness = () => {
       </View>
       <Separator className="my-2" />
 
-      <View className="flex-1 ">
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {data.map((business: Business) => (
-            <MyBusinessCard key={business.id} business={business} />
-          ))}
-        </ScrollView>
-      </View>
+      {data.length ? (
+        <View className="flex-1 ">
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {data.map((business: Business) => (
+              <MyBusinessCard key={business.id} business={business} />
+            ))}
+          </ScrollView>
+        </View>
+      ) : (
+        <MyBusinessEmpty />
+      )}
     </View>
   );
 };

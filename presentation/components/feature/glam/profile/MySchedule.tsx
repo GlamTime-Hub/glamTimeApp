@@ -6,11 +6,13 @@ import { Text } from "@/presentation/components/ui/text";
 import { Button } from "@/presentation/components/ui/button";
 import { MyScheduleLoading } from "./MyScheduleLoading";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
+import { MyScheduleEmpty } from "./MyScheduleEmpty";
 
 const isIos = Platform.OS === "ios";
 
 export const MySchedule = () => {
   const {
+    professional,
     schedule,
     isLoading,
     loading,
@@ -19,8 +21,12 @@ export const MySchedule = () => {
     onActiveDay,
   } = useMySchedule();
 
-  if (isLoading || !schedule) {
+  if (isLoading) {
     return <MyScheduleLoading />;
+  }
+
+  if (!professional || !schedule) {
+    return <MyScheduleEmpty />;
   }
 
   return (

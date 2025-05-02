@@ -7,9 +7,13 @@ export const getProfessionalById = async (userId: string) => {
       "professional/get-professional-by-id/" + userId
     );
 
-    const professional = ProfessionalMapper.fromTheProfessionalDBToProfessional(
-      data.data
-    );
+    console.log("data", data);
+
+    const professional = data.data
+      ? ProfessionalMapper.fromTheProfessionalDBToProfessional(data.data)
+      : null;
+
+    console.log("profesiion", professional);
 
     return {
       status: true,
