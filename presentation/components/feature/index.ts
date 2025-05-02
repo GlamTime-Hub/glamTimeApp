@@ -32,6 +32,7 @@ import { Notifications } from "./glam/notification/Notifications";
 import { Invitation } from "./glam/invitation/Invitation";
 import { BusinessReviews } from "./glam/business/BusinessReviews";
 import { VerifyOtp } from "./login/VerifyOtp";
+import { Premium } from "./glam/profile/Premium";
 
 export {
   Login,
@@ -68,4 +69,5 @@ export {
   Invitation,
   BusinessReviews,
   VerifyOtp,
+  Premium,
 };

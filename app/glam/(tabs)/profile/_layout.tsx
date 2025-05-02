@@ -90,6 +90,14 @@ const LayoutScreen = () => {
       />
 
       <Stack.Screen
+        name="premium/index"
+        options={{
+          headerTitleAlign: "center",
+          title: "Premium",
+        }}
+      />
+
+      <Stack.Screen
         name="legal-privacity/terms/index"
         options={{
           headerTitleAlign: "center",

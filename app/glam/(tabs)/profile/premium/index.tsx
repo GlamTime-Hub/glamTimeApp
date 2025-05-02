@@ -1,10 +1,5 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { Premium } from "@/presentation/components/feature";
 
 export default function PremiumScreen() {
-  return (
-    <View>
-      <Text>PremiumScreen</Text>
-    </View>
-  );
+  return <Premium />;
 }

@@ -14,6 +14,7 @@ import { useBusinessTypes } from "./use-business-types.hook";
 import { useBusiness } from "./use-business";
 import { useBusinessDetail } from "./use-business-detail.hook";
 import { useProfessionalDetail } from "./use-professional-detail.hook";
+import { usePremium } from "./use-premium.hook";
 
 export {
   useLogin,
@@ -32,4 +33,5 @@ export {
   useBusiness,
   useBusinessDetail,
   useProfessionalDetail,
+  usePremium,
 };
