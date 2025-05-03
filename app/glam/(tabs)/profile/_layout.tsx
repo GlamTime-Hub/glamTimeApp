@@ -82,7 +82,7 @@ const LayoutScreen = () => {
       />
 
       <Stack.Screen
-        name="my-schedule/index"
+        name="my-schedule"
         options={{
           headerTitleAlign: "center",
           title: "Mis horarios",

@@ -7,13 +7,19 @@ import Toast from "react-native-toast-message";
 import { handleWorkingHours } from "@/core/actions/professional/handle-working-hours.action";
 import { useQueryClient } from "@tanstack/react-query";
 import { useUserStore } from "../store/use-user.store";
+import { useLocalSearchParams } from "expo-router";
 
 const defaultDate = new Date();
 defaultDate.setHours(8, 0, 0, 0);
 
 export const useMySchedule = () => {
   const { user } = useUserStore();
-  const { professional, isError, isLoading } = useProfessional(user?.id || "");
+  const { businessId } = useLocalSearchParams();
+
+  const { professional, isError, isLoading } = useProfessional(
+    user?.id || "",
+    businessId as string
+  );
   const [loading, setLoading] = useState(false);
 
   const queryClient = useQueryClient();
@@ -50,26 +56,32 @@ export const useMySchedule = () => {
       monday: {
         start: timestampToDecimalHour(schedule!.monday.start),
         end: timestampToDecimalHour(schedule!.monday.end),
+        isActive: schedule!.monday.isActive,
       },
       tuesday: {
         start: timestampToDecimalHour(schedule!.tuesday.start),
         end: timestampToDecimalHour(schedule!.tuesday.end),
+        isActive: schedule!.tuesday.isActive,
       },
       wednesday: {
         start: timestampToDecimalHour(schedule!.wednesday.start),
         end: timestampToDecimalHour(schedule!.wednesday.end),
+        isActive: schedule!.wednesday.isActive,
       },
       thursday: {
         start: timestampToDecimalHour(schedule!.thursday.start),
         end: timestampToDecimalHour(schedule!.thursday.end),
+        isActive: schedule!.thursday.isActive,
       },
       friday: {
         start: timestampToDecimalHour(schedule!.friday.start),
         end: timestampToDecimalHour(schedule!.friday.end),
+        isActive: schedule!.friday.isActive,
       },
       saturday: {
         start: timestampToDecimalHour(schedule!.saturday.start),
         end: timestampToDecimalHour(schedule!.saturday.end),
+        isActive: schedule!.saturday.isActive,
       },
     };
 
@@ -79,11 +91,14 @@ export const useMySchedule = () => {
       ...rest,
       user: user.id,
       workingHours: scheduleToSave,
+      businessId,
     };
 
     await updateProfessionalById(professionalToUpdate);
 
-    queryClient.invalidateQueries({ queryKey: ["schedule", user?.id] });
+    queryClient.invalidateQueries({
+      queryKey: ["schedule", `${user.id}-${businessId}`],
+    });
 
     Toast.show({
       type: "success",
@@ -112,7 +127,9 @@ export const useMySchedule = () => {
 
     await handleWorkingHours(active);
 
-    queryClient.invalidateQueries({ queryKey: ["schedule", user?.id] });
+    queryClient.invalidateQueries({
+      queryKey: ["schedule", `${user?.id}-${businessId}`],
+    });
 
     Toast.show({
       type: "success",

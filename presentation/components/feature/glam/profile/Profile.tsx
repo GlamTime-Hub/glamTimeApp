@@ -12,19 +12,29 @@ import { MENU_OPTIONS } from "./MenuOptions";
 
 interface Props {
   user?: User;
-  isProfessional: boolean;
   handleOptions: (href: Href) => void;
   onLogout: () => void;
   updateImage: (publicUrl: string) => void;
 }
 
+const USER_STYLE: { [key: string]: string } = {
+  professional: "border-[3px] border-yellow-600",
+  admin: "border-[3px] border-blue-600",
+};
+
+const USER_STYLE_COLOR: { [key: string]: string } = {
+  professional: "text-yellow-600",
+  admin: "text-blue-600",
+};
+
 export const Profile = ({
   user,
-  isProfessional,
   handleOptions,
   onLogout,
   updateImage,
 }: Props) => {
+  const isProfessonalOrAdmin = ["professional", "admin"].includes(user!.role);
+
   return (
     <View className="p-4 flex-1">
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -35,8 +45,8 @@ export const Profile = ({
             isUserImage={true}
             callback={updateImage}
             className={
-              isProfessional
-                ? "border-[3px] border-yellow-600"
+              isProfessonalOrAdmin
+                ? USER_STYLE[user!.role]
                 : "border-[1px] border-foreground"
             }
           />
@@ -44,14 +54,18 @@ export const Profile = ({
           <Text
             className={cn(
               "text-2xl font-baloo-bold",
-              isProfessional ? "" : "my-2"
+              isProfessonalOrAdmin ? "" : "my-2"
             )}
           >
             {user?.name}
           </Text>
-          {isProfessional && (
-            <Text className=" text-lg text-yellow-600 font-bold mb-2">
-              Profesional
+          {isProfessonalOrAdmin && (
+            <Text
+              className={`text-lg  font-baloo-bold mb-2 ${
+                USER_STYLE_COLOR[user!.role]
+              }`}
+            >
+              {user?.role === "professional" ? "Profesional" : "Administrador"}
             </Text>
           )}
           <Button

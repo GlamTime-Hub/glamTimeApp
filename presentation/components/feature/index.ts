@@ -33,6 +33,7 @@ import { Invitation } from "./glam/invitation/Invitation";
 import { BusinessReviews } from "./glam/business/BusinessReviews";
 import { VerifyOtp } from "./login/VerifyOtp";
 import { Premium } from "./glam/profile/Premium";
+import { MyScheduleBusinessList } from "./glam/profile/MyScheduleBusinessList";
 
 export {
   Login,
@@ -70,4 +71,5 @@ export {
   BusinessReviews,
   VerifyOtp,
   Premium,
+  MyScheduleBusinessList,
 };

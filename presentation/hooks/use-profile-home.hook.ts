@@ -12,7 +12,6 @@ export const useProfileHome = () => {
 
   const { user, isLoading } = useUser();
 
-  const isProfessional = ["professional", "admin"].includes(user?.role!);
   const queryClient = useQueryClient();
   const handleOptions = (href: Href) => {
     router.push(href);
@@ -40,7 +39,6 @@ export const useProfileHome = () => {
     session,
     user,
     isLoading,
-    isProfessional,
     handleOptions,
     onLogout,
     updateImage,

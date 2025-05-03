@@ -7,15 +7,8 @@ import {
 import { useProfileHome } from "@/presentation/hooks";
 
 export default function HomeScreen() {
-  const {
-    session,
-    user,
-    isLoading,
-    isProfessional,
-    handleOptions,
-    onLogout,
-    updateImage,
-  } = useProfileHome();
+  const { session, user, isLoading, handleOptions, onLogout, updateImage } =
+    useProfileHome();
 
   if (isLoading) return <ProfileLoading />;
 
@@ -24,7 +17,6 @@ export default function HomeScreen() {
   return (
     <Profile
       user={user as User | undefined}
-      isProfessional={isProfessional}
       handleOptions={handleOptions}
       onLogout={onLogout}
       updateImage={updateImage}

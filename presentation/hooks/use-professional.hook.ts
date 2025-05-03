@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 
 const staleTime = 1000 * 60 * 60 * 24;
 
-export const useProfessional = (userId: string) => {
+export const useProfessional = (userId: string, businessId: string) => {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["schedule", userId],
-    queryFn: () => getProfessionalById(userId),
+    queryKey: ["schedule", `${userId}-${businessId}`],
+    queryFn: () => getProfessionalById(userId, businessId),
     staleTime,
     enabled: !!userId,
   });

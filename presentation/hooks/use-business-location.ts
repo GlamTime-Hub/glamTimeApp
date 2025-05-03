@@ -3,6 +3,7 @@ import Toast from "react-native-toast-message";
 
 import { useBusinessLocationStore } from "../store/use-busines-location.store";
 import { updateLocationAction } from "@/core/actions/business/update-location.action";
+import { router } from "expo-router";
 
 export const useBusinessLocation = () => {
   const { businessId, region, setRegion, setBusinessId } =
@@ -22,6 +23,8 @@ export const useBusinessLocation = () => {
     if (businessId) {
       queryClient.invalidateQueries({ queryKey: ["business", businessId] });
     }
+
+    router.back();
   };
 
   return {

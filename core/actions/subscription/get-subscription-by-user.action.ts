@@ -6,8 +6,6 @@ export const getSubscriptionByUser = async () => {
       "subscription/get-subscription-by-user"
     );
 
-    console.log("response", data);
-
     return {
       status: true,
       data,

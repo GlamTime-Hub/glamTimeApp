@@ -10,8 +10,6 @@ import { PremiumRequestPending } from "./PremiumRequestPending";
 export const Premium = () => {
   const { data, isLoading, loading, requestPremium } = usePremium();
 
-  console.log("data", data);
-
   if (isLoading) {
     return <PremiumLoading />;
   }

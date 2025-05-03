@@ -1,6 +1,5 @@
 import { useLocationStore } from "@/core/store/location.store";
 import { useBusinessFilterStore } from "../store/use-filter-business.store";
-import { useEffect, useState } from "react";
 import { getHomeBusinessAction } from "@/core/actions/business/get-home-business.action";
 import { useInfiniteQuery } from "@tanstack/react-query";
 

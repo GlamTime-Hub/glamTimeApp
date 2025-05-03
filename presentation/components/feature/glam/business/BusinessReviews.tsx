@@ -3,6 +3,7 @@ import { ReviewCard } from "../shared/ReviewCard";
 import { useLocalSearchParams } from "expo-router";
 import { useBusinessReviews } from "@/presentation/hooks/use-business-reviews.hook";
 import { BusinessReviewLoading } from "./BusinessReviewLoading";
+import { BusinessReviewEmpty } from "./BusinessReviewEmpty";
 
 export const BusinessReviews = () => {
   const { id } = useLocalSearchParams();
@@ -11,6 +12,10 @@ export const BusinessReviews = () => {
 
   if (isLoading) {
     return <BusinessReviewLoading />;
+  }
+
+  if (!businessReviews?.length) {
+    return <BusinessReviewEmpty />;
   }
 
   return (

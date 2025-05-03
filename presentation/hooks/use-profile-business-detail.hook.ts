@@ -130,7 +130,7 @@ export const useProfileBusinessDetail = (id: string) => {
 
     const response =
       id === "new"
-        ? await newBusinessAction(data)
+        ? await newBusinessAction({ ...data, userId: user?.id })
         : await updateBusinessAction({ id, ...data });
 
     Toast.show({

@@ -22,7 +22,7 @@ export const MyBusinessMyServices = () => {
     <View className="flex-1 p-6">
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text className="my-2 font-baloo-bold text-xl" numberOfLines={2}>
-          Gestiona los servicios que ofreces en tu negocio
+          Gestiona los servicios que ofreces en tu negocio.
         </Text>
         {services.map((service: Service) => (
           <Card key={service.id} className="my-2">

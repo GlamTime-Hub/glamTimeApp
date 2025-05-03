@@ -1,4 +1,3 @@
-import { Card, CardContent } from "@/presentation/components/ui/card";
 import {
   Tabs,
   TabsContent,
@@ -7,8 +6,6 @@ import {
 } from "@/presentation/components/ui/tabs";
 import { Text } from "@/presentation/components/ui/text";
 import { useState } from "react";
-import { BusinessTabCollapsible } from "./BusinessTabCollapsible";
-import { BusinessProfessionalList } from "./BusinessProfessionalList";
 import { ScrollView, View } from "react-native";
 import { BusinessServicesTab } from "./BusinessServicesTab";
 import { BusinessProfessionalTab } from "./BusinessProfessionalTab";

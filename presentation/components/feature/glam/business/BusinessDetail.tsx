@@ -20,8 +20,6 @@ import {
   View,
 } from "react-native";
 import { BusinessTab } from "./BussinessTab";
-import { groupedByCategory } from "@/BD/service.constant";
-import { professionals } from "@/BD/professional.constant";
 import { useBusinessDetail } from "@/presentation/hooks";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { BusinessDetailLoading } from "./BusinessDetailLoading";

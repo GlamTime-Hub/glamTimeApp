@@ -36,7 +36,11 @@ export const useBusinessServices = (
     });
 
     queryClient.invalidateQueries({
-      queryKey: ["business-services", businessId],
+      queryKey: ["business-services", `${businessId}-${filterByBusiness}`],
+    });
+
+    queryClient.invalidateQueries({
+      queryKey: ["businesses"],
     });
 
     setLoading(loading);

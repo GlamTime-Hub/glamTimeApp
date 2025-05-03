@@ -47,7 +47,7 @@ export const MyBusinessProfile = () => {
   } = useProfileBusinessDetail(id as string);
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-4">
       <ScrollView showsVerticalScrollIndicator={false}>
         {id === "new" ? (
           <Text className="my-6 font-bold text-xl">
@@ -316,10 +316,7 @@ export const MyBusinessProfile = () => {
         </View>
       </ScrollView>
 
-      <Button
-        onPress={handleSubmit(onSubmit)}
-        className="my-5 flex flex-row gap-2"
-      >
+      <Button onPress={handleSubmit(onSubmit)} className="flex flex-row gap-2">
         {loading && <LoadingIndicator />}
         <Text>Guardar</Text>
       </Button>
