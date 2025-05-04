@@ -20,7 +20,7 @@ export const MyBusinessReviews = ({ id }: { id: string }) => {
 
   if (!businessReviews || businessReviews.length === 0) {
     return (
-      <View className="p-6">
+      <View className="p-4">
         <Alert icon={AlertTriangle} variant="default" className="max-w-xl">
           <AlertTitle>Info!</AlertTitle>
           <AlertDescription>

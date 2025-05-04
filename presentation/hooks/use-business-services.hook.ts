@@ -5,6 +5,9 @@ import Toast from "react-native-toast-message";
 import { getServicesByBusinessAction } from "@/core/actions/services/get-services-by-business.action";
 import { ActiveService } from "@/core/interfaces/active-service.interface";
 import { activeServiceAction } from "@/core/actions/services/active-service.action";
+import { useBusinessBookingStore } from "../store/use-business-booking.store";
+import { SubCategory } from "@/core/interfaces/service.interface";
+import { router } from "expo-router";
 
 const staleTime = 1000 * 60 * 60 * 24;
 
@@ -13,6 +16,7 @@ export const useBusinessServices = (
   filterByBusiness: boolean
 ) => {
   const [loading, setLoading] = useState(false);
+  const { addService } = useBusinessBookingStore();
 
   const queryClient = useQueryClient();
 
@@ -46,11 +50,21 @@ export const useBusinessServices = (
     setLoading(loading);
   };
 
+  const onBookingService = (service: SubCategory) => {
+    addService(service);
+    router.push({
+      pathname:
+        "/glam/(tabs)/business/detail/booking/professional/[businessId]",
+      params: { businessId },
+    });
+  };
+
   return {
     services: data?.data,
     isLoading,
     activeServiceIsLoading: loading,
     isError,
     onActiveService,
+    onBookingService,
   };
 };

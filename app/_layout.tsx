@@ -1,4 +1,5 @@
 import "../global.css";
+import "react-native-url-polyfill/auto";
 
 import { useFonts } from "expo-font";
 import {
@@ -10,7 +11,6 @@ import {
 import { SplashScreen, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Dimensions } from "react-native";
-import { PortalHost } from "@rn-primitives/portal";
 import { NAV_THEME } from "@/lib/constants";
 import { useColorScheme } from "@/lib/useColorScheme";
 import { setAndroidNavigationBar } from "@/lib/android-navigation-bar";
@@ -22,6 +22,7 @@ import useAuthStore from "@/core/store/auth.store";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useLocationPermission } from "@/hooks/use-location-permission.hook";
 import { useUserStore } from "@/presentation/store/use-user.store";
+import { PortalHost } from "@rn-primitives/portal";
 
 const screenWidth = Dimensions.get("window").width;
 

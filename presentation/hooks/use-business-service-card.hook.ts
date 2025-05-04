@@ -23,7 +23,7 @@ export const useBusinessServiceCard = ({
     duration: `${subcategory.service.duration}`,
   });
 
-  const minutes = Array.from({ length: 21 }, (_, i) => i * 5);
+  const minutes = Array.from({ length: 21 }, (_, i) => i * 15);
 
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();

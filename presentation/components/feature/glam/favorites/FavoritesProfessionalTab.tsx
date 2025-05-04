@@ -16,9 +16,8 @@ export const FavoritesProfessionalTab = () => {
       {professionals.map((prof) => (
         <BusinessProfessionalCard
           key={prof.id}
-          professional={prof}
+          professional={prof as any}
           selecteable={false}
-          selected={false}
           callback={() => onSelectProfessional(prof.id)}
         />
       ))}

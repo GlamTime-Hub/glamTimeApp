@@ -1,81 +1,75 @@
-import { router } from "expo-router";
-import { useState } from "react";
-import { View, ScrollView, Platform } from "react-native";
+import { View, ScrollView } from "react-native";
 
-import { useBusinessBookingStore } from "@/presentation/store/use-business-booking.store";
-import { getFullAvailableSlots } from "@/BD/slots";
-import { CustomCollapsible } from "@/presentation/components/ui/CustomCollapsible";
-import { BusinessProfessionalSlot } from "./BusinessProfessionalSlot";
 import { Card, CardContent } from "@/presentation/components/ui/card";
-import { Button } from "@/presentation/components/ui/button";
 import { Text } from "@/presentation/components/ui/text";
+import { useBookingSlots } from "@/presentation/hooks";
+import { BusinessProfessionalSlotsCarousel } from "./BusinessProfessionalSlotsCarousel";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/presentation/components/ui/alert";
+import { Bell } from "@/lib/icons/Icons";
+import { BusinessProfessionalSlot } from "./BusinessProfessionalSlot";
 
 export const BusinessProfessionalSlots = () => {
-  const { slot, professional, service, addSlot } = useBusinessBookingStore();
-  const [error, setError] = useState(false);
-
-  const slots = getFullAvailableSlots(professional, service);
-
-  const isIOS = Platform.OS === "ios";
-
-  if (slots.length === 0) return <Text>No hay slots disponibles</Text>;
-
-  const onSelectSlot = (slot: any) => {
-    addSlot(slot);
-  };
-
-  const onContinue = () => {
-    if (!slot) {
-      setError(true);
-      return;
-    }
-    router.push("/glam/(tabs)/business/detail/booking/confirmation");
-  };
+  const {
+    availableDays,
+    professional,
+    currentSlots,
+    currentDay,
+    onChangeDay,
+    onSelectSlot,
+  } = useBookingSlots();
 
   return (
-    <View className="flex-auto px-4">
-      <Text className="text-center text-xl mt-4 font-bold">A Continuación</Text>
+    <View className="flex-1 p-4">
       <Text className="text-center text-lg mb-4 ">
         Selecciona un horario disponible
       </Text>
 
-      {error && (
-        <Text className="text-center mb-4 text-red-600 text-md">
-          Debe seleccionar un horario antes de continuar
-        </Text>
+      <BusinessProfessionalSlotsCarousel
+        data={availableDays}
+        onChangeDay={onChangeDay}
+      />
+      <Text className="font-baloo-bold text-center text-2xl my-4">
+        {currentDay?.fullDate}
+      </Text>
+      {currentSlots && currentSlots.length > 0 && (
+        <View className="my-4">
+          <Text className="text-center text-lg ">
+            Horarios disponibles con el professional
+          </Text>
+          <Text className="font-baloo-bold text-center text-2xl">
+            {professional?.user.name}
+          </Text>
+        </View>
       )}
+      <View className="flex-1">
+        {currentSlots.length === 0 && (
+          <Alert icon={Bell} variant="default" className="max-w-xl ">
+            <AlertTitle>
+              <Text>Info!</Text>
+            </AlertTitle>
+            <AlertDescription>
+              <Text>No hay horarios disponibles para el día seleccionado.</Text>
+            </AlertDescription>
+          </Alert>
+        )}
 
-      <Card className="flex-1 mb-4 ">
-        <CardContent className="flex-1">
-          <View className=" flex-1">
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {slots.map((slot: any, index: number) => {
-                return (
-                  <CustomCollapsible key={index} title={slot.date}>
-                    <Card className="flex-1">
-                      <CardContent className="p-0">
-                        {slot.slots.map((slot: any, index: number) => {
-                          return (
-                            <BusinessProfessionalSlot
-                              key={index}
-                              slot={slot}
-                              callback={() => onSelectSlot(slot)}
-                            />
-                          );
-                        })}
-                      </CardContent>
-                    </Card>
-                  </CustomCollapsible>
-                );
-              })}
-            </ScrollView>
-          </View>
-        </CardContent>
-      </Card>
-
-      <Button className={isIOS ? "mb-10" : "my-4"} onPress={onContinue}>
-        <Text>Continuar</Text>
-      </Button>
+        {currentSlots.length > 0 && (
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {currentSlots.map((slot, index) => (
+              <View className="flex" key={index}>
+                <BusinessProfessionalSlot
+                  slot={slot}
+                  callback={() => onSelectSlot(slot)}
+                />
+              </View>
+            ))}
+          </ScrollView>
+        )}
+      </View>
     </View>
   );
 };

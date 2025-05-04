@@ -1,7 +1,6 @@
-import { Platform, View } from "react-native";
+import { Platform, View, ScrollView } from "react-native";
 import { useMySchedule } from "@/presentation/hooks";
 import { IosTimePicker } from "@/presentation/components/ui/IosTimePicker";
-import { ScrollView } from "react-native";
 import { Text } from "@/presentation/components/ui/text";
 import { Button } from "@/presentation/components/ui/button";
 import { MyScheduleLoading } from "./MyScheduleLoading";

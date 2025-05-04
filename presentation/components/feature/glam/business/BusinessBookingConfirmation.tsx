@@ -1,30 +1,71 @@
-import { Platform, View } from "react-native";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/presentation/components/ui/avatar";
+import { View } from "react-native";
 import { Button } from "@/presentation/components/ui/button";
-import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Text } from "@/presentation/components/ui/text";
 import { useBusinessBookingStore } from "@/presentation/store/use-business-booking.store";
-import { formatTime } from "@/presentation/utils/format-time.util";
-import { cn } from "@/lib/util";
 import { BusinessBookingConfirmationCard } from "../shared/BusinessBookingConfirmationCard";
+import { Booking } from "@/core/interfaces/booking.interface";
+import { useUserStore } from "@/presentation/store/use-user.store";
+import { addNewBookingAction } from "@/core/actions/booking/add-new-booking.action";
+import { useState } from "react";
+import Toast from "react-native-toast-message";
+import { LoadingIndicator } from "../shared/LoadingIndicator";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/presentation/components/ui/alert";
+import { AlertTriangle } from "@/lib/icons/Icons";
+import { Redirect, router } from "expo-router";
 
 export const BusinessBookingConfirmation = () => {
-  const { slot, service, professional } = useBusinessBookingStore();
+  const { slot, service, professional, clearBooking } =
+    useBusinessBookingStore();
+  const { user } = useUserStore();
 
-  const isIOS = Platform.OS === "ios";
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const onConfirm = () => {
-    //se hace el llamado al backend para guardar
-    // y se limpa el store del booking
+  const onConfirm = async () => {
+    setLoading(true);
+    const booking: Booking = {
+      professionalId: professional?.id || "",
+      businessId: professional?.businessId || "",
+      serviceId: service?.service.id || "",
+      categoryId: service?.categoryId || "",
+      subcategoryId: service?.id || "",
+      serviceName: service?.name || "",
+      userId: user?.id || "",
+      userAuthId: "",
+      fullDate: slot?.fullDate || "",
+      date: slot?.date || new Date(),
+      startTime: slot?.startTime || 0,
+      endTime: slot?.endTime || 0,
+      status: "pending",
+    };
+
+    try {
+      await addNewBookingAction(booking);
+      Toast.show({
+        type: "success",
+        text1: "Reserva creada",
+        text2: "Tu reserva ha sido creada con exito",
+      });
+      clearBooking();
+
+      router.push("/glam/(tabs)/booking");
+    } catch (error: any) {
+      setError(error.message);
+    }
+    setLoading(false);
   };
 
+  if (!service || !professional || !slot) {
+    return <Redirect href="/glam/(tabs)/business/list" />;
+  }
+
   return (
-    <View className="flex-1 flex px-4">
-      <Text className="my-4 text-center font-bold text-xl">
+    <View className="flex-1 flex p-4">
+      <Text className="my-4 text-center font-baloo-bold text-xl">
         !Todo listo para tu cita!
       </Text>
 
@@ -33,7 +74,7 @@ export const BusinessBookingConfirmation = () => {
         <View className="flex flex-row">
           <Text className="text-lg"> y presiona</Text>
 
-          <Text className="font-bold text-lg"> "Confirmar"</Text>
+          <Text className="font-baloo-bold text-lg"> "Confirmar"</Text>
         </View>
       </View>
 
@@ -43,12 +84,34 @@ export const BusinessBookingConfirmation = () => {
           professional={professional}
           slot={slot}
         />
-        <Text className="text-center font-bold text-xl mt-4">
-          !Nos vemos pronto¡
-        </Text>
+        {!error && (
+          <Text className="text-center font-baloo-bold text-xl mt-4">
+            !Nos vemos pronto¡
+          </Text>
+        )}
+
+        {error && (
+          <View>
+            <Alert
+              icon={AlertTriangle}
+              variant="destructive"
+              className="max-w-xl"
+            >
+              <AlertTitle>Info!</AlertTitle>
+              <AlertDescription>
+                Cita reservada por otro usuario, por favor selecciona otro
+                horario.
+              </AlertDescription>
+            </Alert>
+            <Button className="mt-2" onPress={() => router.back()}>
+              <Text>Cambiar Reserva</Text>
+            </Button>
+          </View>
+        )}
       </View>
 
-      <Button onPress={onConfirm} className={cn(isIOS ? "mb-10" : "mb-5")}>
+      <Button className="flex flex-row gap-2" onPress={onConfirm}>
+        {loading && <LoadingIndicator />}
         <Text>Confirmar</Text>
       </Button>
     </View>

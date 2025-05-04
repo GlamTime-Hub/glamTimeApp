@@ -69,6 +69,9 @@ export const getAvailableSlots = (
 };
 
 export const getFullAvailableSlots = (professional: any, service: any) => {
+  console.log("professional", professional);
+  console.log("service", service);
+
   const slots: any = [];
 
   Array.from({ length: 5 }, (_, i) => {
@@ -76,7 +79,6 @@ export const getFullAvailableSlots = (professional: any, service: any) => {
     date.setDate(date.getDate() + i);
 
     const slotsByDay = getAvailableSlots(professional, service, date);
-    console.log("slotsByDay", slotsByDay);
 
     slots.push({
       date: formatDate(date),

@@ -45,57 +45,57 @@ export const BusinessDetail = () => {
 
   return (
     <View className="flex-1">
-      <View className="w-full h-[200px]">
-        <ImageBackground
-          resizeMode="cover"
-          className="relative"
-          source={{
-            uri: business?.urlPhoto,
-            scale: 0.2,
-          }}
-          style={styles.image}
-        >
-          <View className="absolute flex  gap-4 right-6 bottom-4">
-            <TouchableOpacity
-              onPress={() =>
-                openWhatsApp(
-                  business?.phoneNumber!,
-                  business?.phoneNumberExtension!
-                )
-              }
-              className="flex justify-between flex-row items-center gap-1"
-            >
-              <Text
-                className={cn(
-                  " py-1 px-2 text-sm rounded-lg",
-                  isDarkColorScheme
-                    ? "bg-white text-black"
-                    : "bg-black text-white"
-                )}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View className="w-full h-[200px]">
+          <ImageBackground
+            resizeMode="cover"
+            className="relative"
+            source={{
+              uri: business?.urlPhoto,
+              scale: 0.2,
+            }}
+            style={styles.image}
+          >
+            <View className="absolute flex  gap-4 right-6 bottom-4">
+              <TouchableOpacity
+                onPress={() =>
+                  openWhatsApp(
+                    business?.phoneNumber!,
+                    business?.phoneNumberExtension!
+                  )
+                }
+                className="flex justify-between flex-row items-center gap-1"
               >
-                Mensaje
-              </Text>
+                <Text
+                  className={cn(
+                    " py-1 px-2 text-sm rounded-lg",
+                    isDarkColorScheme
+                      ? "bg-white text-black"
+                      : "bg-black text-white"
+                  )}
+                >
+                  Mensaje
+                </Text>
 
-              <WhatsAppIcon size={30} />
-            </TouchableOpacity>
-            <TouchableOpacity className="flex justify-between flex-row items-center gap-1">
-              <Text
-                className={cn(
-                  " py-1 px-2 text-sm rounded-lg",
-                  isDarkColorScheme
-                    ? "bg-white text-black"
-                    : "bg-black text-white"
-                )}
-              >
-                Compartir
-              </Text>
-              <Share size={30} />
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
-      </View>
-      <View className="flex-1 mb-5">
-        <ScrollView showsVerticalScrollIndicator={false}>
+                <WhatsAppIcon size={30} />
+              </TouchableOpacity>
+              <TouchableOpacity className="flex justify-between flex-row items-center gap-1">
+                <Text
+                  className={cn(
+                    " py-1 px-2 text-sm rounded-lg",
+                    isDarkColorScheme
+                      ? "bg-white text-black"
+                      : "bg-black text-white"
+                  )}
+                >
+                  Compartir
+                </Text>
+                <Share size={30} />
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
+        </View>
+        <View className="flex-1 mb-5">
           <View className="p-5">
             <Card>
               <CardContent>
@@ -185,7 +185,6 @@ export const BusinessDetail = () => {
 
           <View className="px-5 py-3">
             <Button
-              variant={"outline"}
               onPress={() =>
                 router.push({
                   pathname: "/glam/(tabs)/business/detail/comments/[id]",
@@ -199,8 +198,8 @@ export const BusinessDetail = () => {
           <View className="px-5 py-2">
             <BusinessTab id={id as string} />
           </View>
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };

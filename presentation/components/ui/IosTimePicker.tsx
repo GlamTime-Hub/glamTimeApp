@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Card, CardContent } from "./card";
 import { Separator } from "./separator";
 import { Switch } from "./switch";
-import { LoadingIndicator } from "../feature";
+import { LoadingIndicator } from "../feature/glam/shared/LoadingIndicator";
 
 interface Props {
   title: string;

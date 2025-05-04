@@ -1,4 +1,5 @@
 import axiosClient from "@/core/api/axios-client";
+import { Service } from "@/core/interfaces/service.interface";
 import { ServiceMapper } from "@/core/mappers/service.mapper";
 
 export const getServicesByBusinessAction = async (
@@ -14,7 +15,7 @@ export const getServicesByBusinessAction = async (
       }
     );
 
-    const service = data.data.map((service: any) =>
+    const service: Service[] = data.data.map((service: any) =>
       ServiceMapper.fromServiceDBToService(service)
     );
 

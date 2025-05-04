@@ -1,13 +1,20 @@
 import axiosClient from "@/core/api/axios-client";
+import { Professional } from "@/core/interfaces/professional.interface";
 import { ProfessionalMapper } from "@/core/mappers/professional.mapper";
 
-export const getProfessionalByBusinessIdAction = async (businessId: string) => {
+export const getProfessionalByBusinessIdAction = async (
+  businessId: string,
+  useIsActive: boolean
+) => {
   try {
     const { data } = await axiosClient.get(
-      "professional/get-professional-by-business-id/" + businessId
+      "professional/get-professional-by-business-id/" +
+        businessId +
+        "/" +
+        useIsActive
     );
 
-    const professionals = data.data.map((professional: any) =>
+    const professionals: Professional[] = data.data.map((professional: any) =>
       ProfessionalMapper.fromTheProfessionalDBToProfessional(professional)
     );
 

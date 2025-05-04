@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
 import { Service, SubCategory } from "@/core/interfaces/service.interface";
 import { Button } from "@/presentation/components/ui/button";
@@ -10,7 +10,10 @@ import { formatCurrency } from "@/presentation/utils/format-currency.util";
 import { BusinessServicesTabLoading } from "./BusinessServicesTabLoading";
 
 export const BusinessServicesTab = ({ id }: { id: string }) => {
-  const { services, isLoading } = useBusinessServices(id, true);
+  const { services, isLoading, onBookingService } = useBusinessServices(
+    id,
+    true
+  );
 
   if (isLoading) {
     return <BusinessServicesTabLoading />;
@@ -18,34 +21,39 @@ export const BusinessServicesTab = ({ id }: { id: string }) => {
 
   return (
     <View>
-      {services.map((service: Service) => (
+      {services?.map((service: Service) => (
         <Card key={service.id} className="my-2">
           <CardContent className="p-0 ">
             <CustomCollapsible title={service.name}>
               {service.subCategories.map((subcategory: SubCategory) => (
-                <Card className="my-2" key={subcategory.id}>
-                  <CardContent className="py-5">
-                    <Text className="font-baloo-bold text-2xl">
-                      {subcategory.name}{" "}
-                    </Text>
-                    <View className="flex flex-row gap-2">
-                      <Text className="text-xl font-baloo-bold">Precio:</Text>
-                      <Text className="text-xl">
-                        {`$ ${formatCurrency(`${subcategory.service.price}`)}`}
+                <TouchableOpacity
+                  onPress={() => onBookingService(subcategory)}
+                  key={subcategory.id}
+                >
+                  <Card className="my-2">
+                    <CardContent className="py-5">
+                      <Text className="font-baloo-bold text-2xl text-center">
+                        {subcategory.name}
                       </Text>
-                    </View>
-                    <View className="flex flex-row gap-2">
-                      <Text className="text-xl font-baloo-bold">Duración:</Text>
-                      <Text className="text-xl">
-                        {`${subcategory.service.duration} minutos`}
-                      </Text>
-                    </View>
-
-                    <Button className="mt-2">
-                      <Text>Reservar</Text>
-                    </Button>
-                  </CardContent>
-                </Card>
+                      <View className="flex flex-row gap-2 justify-center">
+                        <Text className="text-xl font-baloo-bold">Precio:</Text>
+                        <Text className="text-xl">
+                          {`$ ${formatCurrency(
+                            `${subcategory.service.price}`
+                          )}`}
+                        </Text>
+                      </View>
+                      <View className="flex flex-row justify-center gap-2">
+                        <Text className="text-xl font-baloo-bold">
+                          Duración:
+                        </Text>
+                        <Text className="text-xl">
+                          {`${subcategory.service.duration} minutos`}
+                        </Text>
+                      </View>
+                    </CardContent>
+                  </Card>
+                </TouchableOpacity>
               ))}
             </CustomCollapsible>
           </CardContent>

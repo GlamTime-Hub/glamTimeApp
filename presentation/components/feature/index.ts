@@ -19,7 +19,6 @@ import { MyBusinessLocation } from "./glam/profile/MyBusinessLocation";
 import { ProfileLoading } from "./glam/profile/ProfileLoading";
 import { ProfileDetail } from "./glam/profile/ProfileDetail";
 import { Error } from "./glam/shared/Error";
-import { LoadingIndicator } from "./glam/shared/LoadingIndicator";
 import { ProfileNotifications } from "./glam/profile/ProfileNotifications";
 import { GoogleMaps } from "./glam/shared/GoogleMaps";
 import { MyBusinessLoading } from "./glam/profile/MyBusinessLoading";
@@ -34,6 +33,7 @@ import { BusinessReviews } from "./glam/business/BusinessReviews";
 import { VerifyOtp } from "./login/VerifyOtp";
 import { Premium } from "./glam/profile/Premium";
 import { MyScheduleBusinessList } from "./glam/profile/MyScheduleBusinessList";
+import { LoadingIndicator } from "./glam/shared/LoadingIndicator";
 
 export {
   Login,
@@ -58,7 +58,6 @@ export {
   ProfileLoading,
   ProfileDetail,
   Error,
-  LoadingIndicator,
   ProfileNotifications,
   GoogleMaps,
   MyBusinessLoading,
@@ -72,4 +71,5 @@ export {
   VerifyOtp,
   Premium,
   MyScheduleBusinessList,
+  LoadingIndicator,
 };

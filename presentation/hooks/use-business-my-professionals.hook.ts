@@ -16,7 +16,7 @@ export const useBusinessMyProfessionals = (businessId: string) => {
 
   const { data, isError, isLoading } = useQuery({
     queryKey: ["professionals", businessId],
-    queryFn: () => getProfessionalByBusinessIdAction(businessId),
+    queryFn: () => getProfessionalByBusinessIdAction(businessId, false),
     staleTime,
   });
 

@@ -15,6 +15,9 @@ import { useBusiness } from "./use-business";
 import { useBusinessDetail } from "./use-business-detail.hook";
 import { useProfessionalDetail } from "./use-professional-detail.hook";
 import { usePremium } from "./use-premium.hook";
+import { useBookingProfessional } from "./use-booking-professional.hook";
+import { useBookingSlots } from "./use-booking-slots.hook";
+import { useBooking } from "./use-booking";
 
 export {
   useLogin,
@@ -34,4 +37,7 @@ export {
   useBusinessDetail,
   useProfessionalDetail,
   usePremium,
+  useBookingProfessional,
+  useBookingSlots,
+  useBooking,
 };

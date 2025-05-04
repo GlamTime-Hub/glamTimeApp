@@ -1,50 +1,34 @@
 import { TouchableOpacity, View } from "react-native";
-import { Button } from "@/presentation/components/ui/button";
 import { Text } from "@/presentation/components/ui/text";
-import { formatTime } from "../../../../utils/format-time.util";
-import { Separator } from "@/presentation/components/ui/separator";
-import { useBusinessBookingStore } from "@/presentation/store/use-business-booking.store";
-import { cn } from "@/lib/util";
-import { useColorScheme } from "@/lib/useColorScheme";
+import { Slot } from "@/core/interfaces/slot.interface";
+import { Card, CardContent } from "@/presentation/components/ui/card";
+import { formatCurrency } from "@/presentation/utils/format-currency.util";
+import { formatTime } from "@/presentation/utils/format-time.util";
 
 interface Props {
-  slot: any;
+  slot: Slot;
 
   callback: () => void;
 }
 
 export const BusinessProfessionalSlot = ({ slot, callback }: Props) => {
-  const { slot: slotSelected } = useBusinessBookingStore();
-
-  const { isDarkColorScheme } = useColorScheme();
-
-  const isSelected =
-    slotSelected &&
-    slot.startTime === slotSelected.startTime &&
-    slot.endTime === slotSelected.endTime &&
-    slot.date === slotSelected.date;
-
-  const colorText =
-    !isSelected && isDarkColorScheme ? "text-white" : "text-black";
-
   return (
     <TouchableOpacity onPress={callback}>
-      <View className={cn(isSelected ? " bg-green-200 rounded" : "", "px-6")}>
-        <View className="flex my-2 flex-row justify-center items-center">
-          <View>
-            <View className="flex  flex-row gap-2">
-              <Text className={`font-bold ${colorText}`}>
-                {formatTime(slot.startTime)}
-              </Text>
-              <Text className={`font-bold ${colorText}`}>-</Text>
-              <Text className={`font-bold ${colorText}`}>
-                {formatTime(slot.endTime)}
-              </Text>
-            </View>
+      <Card className="my-2">
+        <CardContent className="p-4">
+          <Text className="text-center font-baloo-bold text-2xl">
+            {slot.service.name}
+          </Text>
+          <Text className="text-center text-xl">{`$${formatCurrency(
+            `${slot.service.price}`
+          )}`}</Text>
+          <View className="flex flex-row gap-2 justify-center">
+            <Text className="text-xl">{formatTime(slot.startTime)}</Text>
+            <Text className="text-xl">{"-"}</Text>
+            <Text className="text-xl">{formatTime(slot.endTime)}</Text>
           </View>
-        </View>
-        {!isSelected && <Separator />}
-      </View>
+        </CardContent>
+      </Card>
     </TouchableOpacity>
   );
 };

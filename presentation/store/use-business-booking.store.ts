@@ -1,21 +1,32 @@
+import { Professional } from "@/core/interfaces/professional.interface";
+import { SubCategory } from "@/core/interfaces/service.interface";
+import { Slot } from "@/core/interfaces/slot.interface";
 import { create } from "zustand";
 
 interface BusinessBookingState {
-  professional: any | null;
-  service: any | null;
+  professional: Professional | null;
+  service: SubCategory | null;
 
-  slot: any;
-  addProfessional: (professional: any) => void;
-  addService: (service: any) => void;
+  slot: Slot | null;
+  addProfessional: (professional: Professional) => void;
+  addService: (service: SubCategory) => void;
 
-  addSlot: (slot: any) => void;
+  addSlot: (slot: Slot) => void;
+
+  clearBooking: () => void;
 }
 
 export const useBusinessBookingStore = create<BusinessBookingState>((set) => ({
   professional: null,
   service: null,
   slot: null,
-  addProfessional: (professional) => set({ professional }),
-  addService: (service) => set({ service }),
+  addProfessional: (professional: Professional) => set({ professional }),
+  addService: (service: SubCategory) => set({ service }),
   addSlot: (slot) => set({ slot }),
+  clearBooking: () =>
+    set({
+      professional: null,
+      service: null,
+      slot: null,
+    }),
 }));

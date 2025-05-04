@@ -1,3 +1,6 @@
+import { Professional } from "@/core/interfaces/professional.interface";
+import { SubCategory } from "@/core/interfaces/service.interface";
+import { Slot } from "@/core/interfaces/slot.interface";
 import { cn } from "@/lib/util";
 import {
   Avatar,
@@ -10,10 +13,9 @@ import { formatTime } from "@/presentation/utils/format-time.util";
 import { View } from "react-native";
 
 interface Props {
-  professional: any;
-  slot: any;
-  service: any;
-
+  professional: Professional | null;
+  slot: Slot | null;
+  service: SubCategory | null;
   status?: string;
 }
 
@@ -35,7 +37,7 @@ export const BusinessBookingConfirmationCard = ({
           <Avatar alt="Imagen de profesional" size="xl">
             <AvatarImage
               source={{
-                uri: professional.urlPhoto,
+                uri: professional?.user.urlPhoto,
               }}
             ></AvatarImage>
             <AvatarFallback>
@@ -45,26 +47,26 @@ export const BusinessBookingConfirmationCard = ({
 
           <View>
             <View className="flex flex-row items-center">
-              <Text className="font-bold text-lg">Profesional: </Text>
-              <Text className="text-lg">{professional.name}</Text>
+              <Text className="font-baloo-bold text-lg">Profesional: </Text>
+              <Text className="text-lg">{professional?.user.name}</Text>
             </View>
 
             <View className="flex flex-row items-center">
-              <Text className="font-bold text-lg">Servicio: </Text>
-              <Text className="text-lg">{service.name}</Text>
+              <Text className="font-baloo-bold text-lg">Servicio: </Text>
+              <Text className="text-lg">{service?.name}</Text>
             </View>
 
             <View className="flex flex-row items-center">
-              <Text className="font-bold text-lg">Dia: </Text>
-              <Text className="text-lg">{slot.date}</Text>
+              <Text className="font-baloo-bold text-lg">Dia: </Text>
+              <Text className="text-lg">{slot?.fullDate}</Text>
             </View>
 
             <View className="flex flex-row items-center">
-              <Text className="font-bold text-lg">Hora: </Text>
+              <Text className="font-baloo-bold text-lg">Hora: </Text>
               <View className="flex flex-row">
-                <Text>{formatTime(slot.startTime)}</Text>
+                <Text>{formatTime(slot?.startTime!)}</Text>
                 <Text>-</Text>
-                <Text>{formatTime(slot.endTime)}</Text>
+                <Text>{formatTime(slot?.endTime!)}</Text>
               </View>
             </View>
           </View>
