@@ -28,8 +28,17 @@ export interface UserNotification {
       name: string;
       urlPhoto: string;
     };
-  };
 
+    booking: {
+      id: string;
+      date: Date;
+      fullDate: string;
+      startTime: number;
+      endTime: number;
+      status: string;
+      serviceName: string;
+    };
+  };
   isRead: boolean;
   createdAt: Date;
   readAt: Date;

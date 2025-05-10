@@ -28,6 +28,7 @@ export const BusinessBookingConfirmation = () => {
     setLoading(true);
     const booking: Booking = {
       professionalId: professional?.id || "",
+      professionalUserId: professional?.user.id || "",
       businessId: professional?.businessId || "",
       professionalUserAuthId: professional?.userAuthId || "",
       serviceId: service?.service.id || "",

@@ -102,10 +102,11 @@ export default function _layout() {
         }}
       />
       <Tabs.Screen
-        name="notifications/index"
+        name="notifications"
         options={{
           title: "Notificaciones",
           href: null,
+          headerShown: false,
         }}
       />
 

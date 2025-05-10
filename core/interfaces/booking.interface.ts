@@ -2,6 +2,7 @@ export interface Booking {
   id?: string;
   businessId: string;
   professionalId: string;
+  professionalUserId: string;
   professionalUserAuthId: string;
   userId: string;
   userAuthId: string;

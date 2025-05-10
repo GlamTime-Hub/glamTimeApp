@@ -90,5 +90,13 @@ export const getSlots = (
     currentTime += serviceDuration;
   }
 
-  return slots;
+  const currentDate = new Date();
+  const currentFormatDate = formatDate(currentDate);
+  const currentHour = currentDate.getHours() + currentDate.getMinutes() / 60;
+
+  return slots.filter(
+    (slot) =>
+      (slot.fullDate === currentFormatDate && slot.startTime > currentHour) ||
+      slot.fullDate !== currentFormatDate
+  );
 };

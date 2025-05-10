@@ -12,7 +12,6 @@ import {
   ThumbsUp,
 } from "@/lib/icons/Icons";
 import { BusinessProfessionalTab } from "./BusinessProfessionalTabs";
-import { groupedByCategory } from "@/BD/service.constant";
 import { useProfessionalDetail } from "@/presentation/hooks";
 
 export const BusinessProfessionalDetail = () => {
@@ -60,7 +59,7 @@ export const BusinessProfessionalDetail = () => {
         </View>
       </View>
 
-      <BusinessProfessionalTab services={groupedByCategory} />
+      {/* <BusinessProfessionalTab services={groupedByCategory} /> */}
     </View>
   );
 };

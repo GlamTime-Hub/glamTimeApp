@@ -16,7 +16,7 @@ export const Invitation = () => {
         <CardContent className="p-0">
           <Image
             source={{
-              uri: notification?.business.urlPhoto || "",
+              uri: notification?.meta.business.urlPhoto || "",
             }}
             style={{
               height: 200,
@@ -27,12 +27,12 @@ export const Invitation = () => {
           />
           <View className="p-6">
             <Text className="font-baloo-bold text-xl">
-              {notification?.business.name}
+              {notification?.meta.business.name}
             </Text>
             <Text>Te ha invitado a ser parte de su equipo de trabajo.</Text>
             <Text className="mt-1">
               Una vez aceptada la invitación, estarás en las lista de
-              profesionaless y los usuarios podrán reservar tus servicios.
+              profesionales y los usuarios podrán reservar tus servicios.
             </Text>
           </View>
         </CardContent>

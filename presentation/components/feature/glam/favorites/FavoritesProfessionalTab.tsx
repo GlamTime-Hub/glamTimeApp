@@ -1,6 +1,5 @@
 import { View } from "react-native";
 import { BusinessProfessionalCard } from "../business/BusinessProfessionalCard";
-import { professionals } from "@/BD/professional.constant";
 import { router } from "expo-router";
 
 export const FavoritesProfessionalTab = () => {
@@ -13,13 +12,13 @@ export const FavoritesProfessionalTab = () => {
 
   return (
     <View>
-      {professionals.map((prof) => (
+      {/* {professionals.map((prof) => (
         <BusinessProfessionalCard
           key={prof.id}
           professional={prof as any}
           callback={() => onSelectProfessional(prof.id)}
         />
-      ))}
+      ))} */}
     </View>
   );
 };

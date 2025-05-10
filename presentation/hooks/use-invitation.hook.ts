@@ -19,7 +19,7 @@ export const useInvitation = () => {
       fromUser: notification?.fromUser,
       toUser: notification?.toUser,
       invitationStatus: "invitation-accepted",
-      businessId: notification?.business.id,
+      businessId: notification?.meta.business.id,
     };
 
     await handleInvitaionAction(accept);
@@ -30,7 +30,7 @@ export const useInvitation = () => {
 
     router.push({
       pathname: "/glam/(tabs)/business/detail/home/[id]",
-      params: { id: notification!.business.id },
+      params: { id: notification!.meta.business.id },
     });
   };
 
@@ -41,7 +41,7 @@ export const useInvitation = () => {
       fromUser: notification?.fromUser,
       toUser: notification?.toUser,
       invitationStatus: "invitation-rejected",
-      businessId: notification?.business.id,
+      businessId: notification?.meta.business.id,
     };
 
     await handleInvitaionAction(reject);

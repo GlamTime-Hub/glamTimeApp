@@ -44,6 +44,8 @@ import {
   Save,
   NotebookPen,
   MailCheck,
+  CalendarCheck2,
+  CalendarCheck,
 } from "lucide-react-native";
 import { iconWithClassName } from "./iconWithClassName";
 
@@ -92,6 +94,8 @@ iconWithClassName(EyeOff);
 iconWithClassName(Save);
 iconWithClassName(NotebookPen);
 iconWithClassName(MailCheck);
+iconWithClassName(CalendarCheck2);
+iconWithClassName(CalendarCheck);
 
 export {
   Share2,
@@ -139,4 +143,6 @@ export {
   Save,
   NotebookPen,
   MailCheck,
+  CalendarCheck2,
+  CalendarCheck,
 };

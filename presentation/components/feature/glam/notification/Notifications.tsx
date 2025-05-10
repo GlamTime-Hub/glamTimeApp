@@ -1,9 +1,10 @@
 import { useUserNotifications } from "@/presentation/hooks/use-user-notification.hook";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 import { NotificationsLoading } from "./NotificationsLoading";
-import { UserNotification } from "@/core/interfaces/user-notification.interface";
-import { HandleNotification } from "./HandleNotification";
 import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
+import { FlatList } from "react-native-gesture-handler";
+import { Notification } from "./Notification";
+import { NotificationCard } from "./NotificationCard";
 
 export const Notifications = () => {
   const { notifications, isLoading, markNotificationAsReadById } =
@@ -17,22 +18,22 @@ export const Notifications = () => {
         <CustomAlert
           title="Info!!!"
           description="No has recibido notificaciones."
-          type="destructive"
+          type="info"
         />
       </View>
     );
 
   return (
-    <View className="flex-1 p-4">
-      <ScrollView>
-        {notifications.map((notification: UserNotification) => (
-          <HandleNotification
-            key={notification.id}
-            notification={notification}
-            markNotification={markNotificationAsReadById}
-          />
-        ))}
-      </ScrollView>
+    <View className="flex-1">
+      <FlatList
+        data={notifications}
+        renderItem={({ item }) => (
+          <Notification notification={item}>
+            <NotificationCard notification={item} />
+          </Notification>
+        )}
+        keyExtractor={(_, index) => `message-${index}`}
+      />
     </View>
   );
 };

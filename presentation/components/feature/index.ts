@@ -34,6 +34,8 @@ import { VerifyOtp } from "./login/VerifyOtp";
 import { Premium } from "./glam/profile/Premium";
 import { MyScheduleBusinessList } from "./glam/profile/MyScheduleBusinessList";
 import { LoadingIndicator } from "./glam/shared/LoadingIndicator";
+import { ProfessionalBookingNotification } from "./glam/notification/ProfessionalBookingNotification";
+import { BookingConfirmedNotification } from "./glam/notification/BookingConfirmedNotification";
 
 export {
   Login,
@@ -72,4 +74,6 @@ export {
   Premium,
   MyScheduleBusinessList,
   LoadingIndicator,
+  BookingConfirmedNotification,
+  ProfessionalBookingNotification,
 };
