@@ -8,6 +8,7 @@ import { activeServiceAction } from "@/core/actions/services/active-service.acti
 import { useBusinessBookingStore } from "../store/use-business-booking.store";
 import { SubCategory } from "@/core/interfaces/service.interface";
 import { router } from "expo-router";
+import useAuthStore from "@/core/store/auth.store";
 
 const staleTime = 1000 * 60 * 60 * 24;
 
@@ -15,6 +16,8 @@ export const useBusinessServices = (
   businessId: string,
   filterByBusiness: boolean
 ) => {
+
+  const { session } = useAuthStore();
   const [loading, setLoading] = useState(false);
   const { addService } = useBusinessBookingStore();
 
@@ -51,6 +54,20 @@ export const useBusinessServices = (
   };
 
   const onBookingService = (service: SubCategory) => {
+
+    if (!session) {
+      router.push("/login/home");
+      Toast.show({
+        type: "info",
+        text1: "Info!!",
+        text2: "Para continuar debes iniciar sesión",
+      });
+
+      return;
+    }
+
+
+
     addService(service);
     router.push({
       pathname:

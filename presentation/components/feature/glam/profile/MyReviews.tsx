@@ -1,14 +1,10 @@
 import { useUserReviews } from "@/presentation/hooks/use-user-reviews.hook";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { MyReviewsLoading } from "./MyReviewsLoading";
 import { ReviewCard } from "../shared/ReviewCard";
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@/presentation/components/ui/alert";
-import { MessageCircleMore } from "@/lib/icons/Icons";
+
+import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
 
 export const MyReviews = () => {
   const { data, isLoading }: any = useUserReviews();
@@ -22,10 +18,11 @@ export const MyReviews = () => {
   if (reviews.length === 0) {
     return (
       <View className="p-4">
-        <Alert icon={MessageCircleMore} variant="default" className="max-w-xl">
-          <AlertTitle>Info!</AlertTitle>
-          <AlertDescription>Aún no has creado reseñas.</AlertDescription>
-        </Alert>
+        <CustomAlert
+          title="Info!!!"
+          description="Aún no has creado reseñas."
+          type="info"
+        />
       </View>
     );
   }

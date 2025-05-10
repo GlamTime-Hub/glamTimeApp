@@ -10,6 +10,11 @@ export interface BookingDetail {
     id: string;
     name: string;
     urlPhoto: string;
+    location: {
+      lat: number;
+      lng: number;
+      address: string;
+    };
   };
   fullDate: string;
   createdAt: Date;

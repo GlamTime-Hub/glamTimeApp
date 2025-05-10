@@ -26,6 +26,7 @@ import {
 import { Button } from "@/presentation/components/ui/button";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
 import { BusinessType } from "@/core/interfaces/business-type.interface";
+import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
 
 export const MyBusinessProfile = () => {
   const { id } = useLocalSearchParams();
@@ -61,17 +62,12 @@ export const MyBusinessProfile = () => {
 
         {id !== "new" && !business?.location.address && (
           <View className="my-4">
-            <Alert
-              icon={AlertTriangle}
-              variant="destructive"
-              className="max-w-xl"
-            >
-              <AlertTitle>Recuerda!</AlertTitle>
-              <AlertDescription>
-                Debes seleccionar la ubicación y la imagen de tu negocio para
-                que los clientes puedan encontrarte.
-              </AlertDescription>
-            </Alert>
+            <CustomAlert
+              title="Info!!!"
+              description="Debes seleccionar la ubicación y la imagen de tu negocio para
+                que los clientes puedan encontrarte."
+              type="destructive"
+            />
           </View>
         )}
 

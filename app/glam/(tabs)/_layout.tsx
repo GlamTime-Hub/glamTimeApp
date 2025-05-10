@@ -40,8 +40,9 @@ export default function _layout() {
           tabBarLabel: "Inicio",
           tabBarIcon: ({ focused }) => (
             <House
-              className={cn("text-foreground")}
-              strokeWidth={focused ? 3 : 1.25}
+              className={"text-primary"}
+              size={focused ? 28 : 23}
+              strokeWidth={focused ? 2 : 1.25}
             />
           ),
         }}
@@ -53,9 +54,9 @@ export default function _layout() {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Store
-              className="text-foreground"
-              size={focused ? 30 : 23}
-              strokeWidth={focused ? 3 : 1.25}
+              className="text-primary"
+              size={focused ? 28 : 23}
+              strokeWidth={focused ? 2 : 1.25}
             />
           ),
         }}
@@ -66,9 +67,9 @@ export default function _layout() {
           title: "Mis Reservas",
           tabBarIcon: ({ focused }) => (
             <CalendarDays
-              className="text-foreground"
-              size={focused ? 30 : 23}
-              strokeWidth={focused ? 3 : 1.25}
+              className="text-primary"
+              size={focused ? 28 : 23}
+              strokeWidth={focused ? 2 : 1.25}
             />
           ),
         }}
@@ -79,9 +80,9 @@ export default function _layout() {
           title: "Favoritos",
           tabBarIcon: ({ focused }) => (
             <Heart
-              className="text-foreground"
-              size={focused ? 30 : 23}
-              strokeWidth={focused ? 3 : 1.25}
+              className="text-primary"
+              size={focused ? 28 : 23}
+              strokeWidth={focused ? 2 : 1.25}
             />
           ),
         }}
@@ -93,9 +94,9 @@ export default function _layout() {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <User
-              className="text-foreground"
-              size={focused ? 30 : 23}
-              strokeWidth={focused ? 3 : 1.25}
+              className="text-primary"
+              size={focused ? 28 : 23}
+              strokeWidth={focused ? 2 : 1.25}
             />
           ),
         }}

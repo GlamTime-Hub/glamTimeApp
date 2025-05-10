@@ -68,10 +68,7 @@ export const BusinessDetail = () => {
               >
                 <Text
                   className={cn(
-                    " py-1 px-2 text-sm rounded-lg",
-                    isDarkColorScheme
-                      ? "bg-white text-black"
-                      : "bg-black text-white"
+                    "py-1 px-2 text-sm rounded-lg bg-primary text-white"
                   )}
                 >
                   Mensaje
@@ -82,10 +79,7 @@ export const BusinessDetail = () => {
               <TouchableOpacity className="flex justify-between flex-row items-center gap-1">
                 <Text
                   className={cn(
-                    " py-1 px-2 text-sm rounded-lg",
-                    isDarkColorScheme
-                      ? "bg-white text-black"
-                      : "bg-black text-white"
+                    "py-1 px-2 text-sm rounded-lg bg-primary text-white",
                   )}
                 >
                   Compartir
@@ -122,18 +116,15 @@ export const BusinessDetail = () => {
                     >
                       <Text
                         className={cn(
-                          " py-1 px-2 text-md rounded-lg",
-                          isDarkColorScheme
-                            ? "bg-white text-black"
-                            : "bg-black text-white"
+                          "py-1 px-2 text-md rounded-lg bg-primary text-white"
                         )}
                       >
                         Ver ubicación
                       </Text>
-                      <MapPinned size={30} className="text-foreground" />
+                      <MapPinned size={30} className="text-primary" />
                     </TouchableOpacity>
                     <View className="flex flex-row items-center  gap-1">
-                      <Text className="font-baloo-bold mt-2 text-2xl">
+                      <Text className="mt-2 text-3xl">
                         {business?.rating}
                       </Text>
                       <Star color="#FFD700" size={30} fill={"gold"} />
@@ -145,9 +136,9 @@ export const BusinessDetail = () => {
                     <CardContent className="py-2 px-4">
                       <View className="flex flex-row justify-center items-center gap-1 ">
                         <Text className="text-3xl pt-4">{business?.likes}</Text>
-                        <ThumbsUp size={26} className="text-foreground" />
+                        <ThumbsUp size={26} className="text-primary" />
                       </View>
-                      <Text className="text-md font-baloo-bold">Me Gusta</Text>
+                      <Text className="text-md text-primary font-baloo-bold ">Me Gusta</Text>
                     </CardContent>
                   </Card>
                   <Card>
@@ -156,9 +147,9 @@ export const BusinessDetail = () => {
                         <Text className="text-3xl pt-4 ">
                           {business?.totalBooking}
                         </Text>
-                        <NotebookPen size={28} className="text-foreground" />
+                        <NotebookPen size={28} className="text-primary" />
                       </View>
-                      <Text className="text-md font-baloo-bold">Reservas</Text>
+                      <Text className="text-md font-baloo-bold text-primary">Reservas</Text>
                     </CardContent>
                   </Card>
 
@@ -170,10 +161,10 @@ export const BusinessDetail = () => {
                         </Text>
                         <MessageCircleMore
                           size={30}
-                          className="text-foreground"
+                          className="text-primary"
                         />
                       </View>
-                      <Text className="text-md font-baloo-bold">
+                      <Text className="text-md font-baloo-bold text-primary">
                         Comentarios
                       </Text>
                     </CardContent>

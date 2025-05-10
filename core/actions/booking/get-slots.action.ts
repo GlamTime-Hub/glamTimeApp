@@ -1,3 +1,4 @@
+import { Booking } from "@/core/interfaces/booking.interface";
 import { Professional } from "@/core/interfaces/professional.interface";
 import { SubCategory } from "@/core/interfaces/service.interface";
 import { Slot } from "@/core/interfaces/slot.interface";
@@ -13,7 +14,8 @@ const formatDate = (date: Date) => {
 export const getSlots = (
   professional: Professional | null,
   service: SubCategory | null,
-  startDate = new Date()
+  startDate = new Date(),
+  currentBookings: Booking[] = []
 ): Slot[] => {
   const dayOfWeek = new Date(startDate)
     .toLocaleString("en-us", { weekday: "long" })
@@ -35,13 +37,10 @@ export const getSlots = (
 
   const { start, end } = workingHours;
   const serviceDuration =
-    (service?.service && service?.service.duration / 60) || 0; // Duración del servicio en minutos
-  console.log("serviceDuration", serviceDuration);
-  /* const bookedAppointments = reservas
-      .filter((b: any) => b.date === date)
-      .sort((a, b) => a.startTime - b.startTime); */
-
-  const bookedAppointments: any[] = [];
+    (service?.service && service?.service.duration / 60) || 0;
+  const bookedAppointments = currentBookings
+    .filter((b: Booking) => b.fullDate === date)
+    .sort((a, b) => a.startTime - b.startTime);
 
   const slots: Slot[] = [];
   let currentTime = start;
@@ -88,7 +87,7 @@ export const getSlots = (
         businessId: professional?.businessId,
       },
     });
-    currentTime += serviceDuration; // Avanzamos al siguiente posible bloque
+    currentTime += serviceDuration;
   }
 
   return slots;

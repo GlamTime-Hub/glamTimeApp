@@ -21,11 +21,11 @@ export const CustomCollapsible = ({ title, children }: Props) => {
       className=" px-2 py-4 rounded-lg"
     >
       <CollapsibleTrigger className="flex flex-row justify-between">
-        <Text className="font-baloo-bold ml-2 text-xl">{title}</Text>
+        <Text className="font-baloo-bold ml-2 text-xl text-primary">{title}</Text>
         {open ? (
-          <ChevronUp className="text-foreground" />
+          <ChevronUp className="text-primary" />
         ) : (
-          <ChevronDown className="text-foreground" />
+          <ChevronDown className="text-primary" />
         )}
       </CollapsibleTrigger>
       <CollapsibleContent className="my-2">{children}</CollapsibleContent>

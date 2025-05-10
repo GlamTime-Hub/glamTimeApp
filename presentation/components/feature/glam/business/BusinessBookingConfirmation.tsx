@@ -9,18 +9,17 @@ import { addNewBookingAction } from "@/core/actions/booking/add-new-booking.acti
 import { useState } from "react";
 import Toast from "react-native-toast-message";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@/presentation/components/ui/alert";
-import { AlertTriangle } from "@/lib/icons/Icons";
 import { Redirect, router } from "expo-router";
+import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const BusinessBookingConfirmation = () => {
   const { slot, service, professional, clearBooking } =
     useBusinessBookingStore();
+
   const { user } = useUserStore();
+
+  const queryClient = useQueryClient();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -30,6 +29,7 @@ export const BusinessBookingConfirmation = () => {
     const booking: Booking = {
       professionalId: professional?.id || "",
       businessId: professional?.businessId || "",
+      professionalUserAuthId: professional?.userAuthId || "",
       serviceId: service?.service.id || "",
       categoryId: service?.categoryId || "",
       subcategoryId: service?.id || "",
@@ -41,6 +41,8 @@ export const BusinessBookingConfirmation = () => {
       startTime: slot?.startTime || 0,
       endTime: slot?.endTime || 0,
       status: "pending",
+      reason: "",
+      createdAt: new Date(),
     };
 
     try {
@@ -51,6 +53,12 @@ export const BusinessBookingConfirmation = () => {
         text2: "Tu reserva ha sido creada con exito",
       });
       clearBooking();
+
+      queryClient.invalidateQueries({ queryKey: ["bookings"] });
+
+      queryClient.invalidateQueries({
+        queryKey: ["booking-professionals", professional?.businessId],
+      });
 
       router.push("/glam/(tabs)/booking");
     } catch (error: any) {
@@ -92,17 +100,13 @@ export const BusinessBookingConfirmation = () => {
 
         {error && (
           <View>
-            <Alert
-              icon={AlertTriangle}
-              variant="destructive"
-              className="max-w-xl"
-            >
-              <AlertTitle>Info!</AlertTitle>
-              <AlertDescription>
-                Cita reservada por otro usuario, por favor selecciona otro
-                horario.
-              </AlertDescription>
-            </Alert>
+            <CustomAlert
+              title="Info!!!"
+              description="Cita reservada por otro usuario, por favor selecciona otro
+                horario."
+              type="destructive"
+            />
+
             <Button className="mt-2" onPress={() => router.back()}>
               <Text>Cambiar Reserva</Text>
             </Button>

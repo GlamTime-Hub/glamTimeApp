@@ -1,4 +1,4 @@
-import { BookingDetail } from "../interfaces/booling-detail.interface";
+import { BookingDetail } from "../interfaces/booking-detail.interface";
 
 export class BookingDetailMapper {
   static fromBookingDetailDBToBookingDetail(booking: any): BookingDetail {
@@ -14,6 +14,7 @@ export class BookingDetailMapper {
         id: booking.business.id,
         name: booking.business.name,
         urlPhoto: booking.business.urlPhoto,
+        location: booking.business.location,
       },
       fullDate: booking.fullDate,
       createdAt: new Date(booking.createdAt),

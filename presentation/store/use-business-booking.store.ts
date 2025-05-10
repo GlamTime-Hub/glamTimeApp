@@ -8,8 +8,8 @@ interface BusinessBookingState {
   service: SubCategory | null;
 
   slot: Slot | null;
-  addProfessional: (professional: Professional) => void;
-  addService: (service: SubCategory) => void;
+  addProfessional: (professional: Professional | null) => void;
+  addService: (service: SubCategory | null) => void;
 
   addSlot: (slot: Slot) => void;
 
@@ -20,8 +20,8 @@ export const useBusinessBookingStore = create<BusinessBookingState>((set) => ({
   professional: null,
   service: null,
   slot: null,
-  addProfessional: (professional: Professional) => set({ professional }),
-  addService: (service: SubCategory) => set({ service }),
+  addProfessional: (professional: Professional | null) => set({ professional }),
+  addService: (service: SubCategory | null) => set({ service }),
   addSlot: (slot) => set({ slot }),
   clearBooking: () =>
     set({

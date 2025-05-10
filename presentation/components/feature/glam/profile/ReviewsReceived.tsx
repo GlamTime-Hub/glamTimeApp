@@ -10,6 +10,7 @@ import {
 } from "@/presentation/components/ui/alert";
 import { MessageCircleMore } from "@/lib/icons/Icons";
 import { useUserStore } from "@/presentation/store/use-user.store";
+import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
 
 export const ReviewsReceived = () => {
   const { user } = useUserStore();
@@ -25,10 +26,11 @@ export const ReviewsReceived = () => {
   if (reviews.length === 0) {
     return (
       <View className="p-4">
-        <Alert icon={MessageCircleMore} variant="default" className="max-w-xl">
-          <AlertTitle>Info!</AlertTitle>
-          <AlertDescription>Aún no has recibido reseñas.</AlertDescription>
-        </Alert>
+        <CustomAlert
+          title="Info!!!"
+          description="Aún no has recibido reseñas."
+          type="info"
+        />
       </View>
     );
   }

@@ -2,13 +2,8 @@ import { useUserNotifications } from "@/presentation/hooks/use-user-notification
 import { ScrollView, View } from "react-native";
 import { NotificationsLoading } from "./NotificationsLoading";
 import { UserNotification } from "@/core/interfaces/user-notification.interface";
-import { Bell } from "@/lib/icons/Icons";
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@/presentation/components/ui/alert";
 import { HandleNotification } from "./HandleNotification";
+import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
 
 export const Notifications = () => {
   const { notifications, isLoading, markNotificationAsReadById } =
@@ -19,10 +14,11 @@ export const Notifications = () => {
   if (notifications.length === 0)
     return (
       <View className="p-2">
-        <Alert icon={Bell} variant="default" className="max-w-xl">
-          <AlertTitle>Info!</AlertTitle>
-          <AlertDescription>No has recibido notificaciones.</AlertDescription>
-        </Alert>
+        <CustomAlert
+          title="Info!!!"
+          description="No has recibido notificaciones."
+          type="destructive"
+        />
       </View>
     );
 

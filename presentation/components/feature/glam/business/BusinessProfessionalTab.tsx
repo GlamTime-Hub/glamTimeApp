@@ -17,7 +17,6 @@ export const BusinessProfessionalTab = ({ id }: { id: string }) => {
         <BusinessProfessionalCard
           key={professional.id}
           professional={professional}
-          selecteable={false}
           callback={goPrefessionalDetail}
         />
       ))}

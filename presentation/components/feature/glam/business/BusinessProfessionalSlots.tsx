@@ -1,16 +1,16 @@
 import { View, ScrollView } from "react-native";
 
-import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Text } from "@/presentation/components/ui/text";
 import { useBookingSlots } from "@/presentation/hooks";
 import { BusinessProfessionalSlotsCarousel } from "./BusinessProfessionalSlotsCarousel";
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@/presentation/components/ui/alert";
-import { Bell } from "@/lib/icons/Icons";
 import { BusinessProfessionalSlot } from "./BusinessProfessionalSlot";
+import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
+import { professionals } from "../../../../../BD/professional.constant";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/presentation/components/ui/avatar";
 
 export const BusinessProfessionalSlots = () => {
   const {
@@ -35,41 +35,51 @@ export const BusinessProfessionalSlots = () => {
       <Text className="font-baloo-bold text-center text-2xl my-4">
         {currentDay?.fullDate}
       </Text>
-      {currentSlots && currentSlots.length > 0 && (
-        <View className="my-4">
-          <Text className="text-center text-lg ">
-            Horarios disponibles con el professional
-          </Text>
-          <Text className="font-baloo-bold text-center text-2xl">
-            {professional?.user.name}
-          </Text>
-        </View>
-      )}
-      <View className="flex-1">
-        {currentSlots.length === 0 && (
-          <Alert icon={Bell} variant="default" className="max-w-xl ">
-            <AlertTitle>
-              <Text>Info!</Text>
-            </AlertTitle>
-            <AlertDescription>
-              <Text>No hay horarios disponibles para el día seleccionado.</Text>
-            </AlertDescription>
-          </Alert>
-        )}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {currentSlots && currentSlots.length > 0 && (
+          <View className="flex justify-center items-center">
+            <Text className="text-center text-lg ">
+              Horarios disponibles con el professional
+            </Text>
+            <Text className="font-baloo-bold text-center text-2xl">
+              {professional?.user.name}
+            </Text>
 
-        {currentSlots.length > 0 && (
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {currentSlots.map((slot, index) => (
-              <View className="flex" key={index}>
-                <BusinessProfessionalSlot
-                  slot={slot}
-                  callback={() => onSelectSlot(slot)}
-                />
-              </View>
-            ))}
-          </ScrollView>
+            <Avatar alt="Imagen de profesional" size="xl">
+              <AvatarImage
+                source={{
+                  uri: professional?.user.urlPhoto,
+                }}
+              ></AvatarImage>
+              <AvatarFallback>
+                <Text>ZN</Text>
+              </AvatarFallback>
+            </Avatar>
+          </View>
         )}
-      </View>
+        <View className="flex-1">
+          {currentSlots.length === 0 && (
+            <CustomAlert
+              title="Info!!!"
+              description="No hay horarios disponibles para el día seleccionado."
+              type="info"
+            />
+          )}
+
+          {currentSlots.length > 0 && (
+            <View>
+              {currentSlots.map((slot, index) => (
+                <View className="flex" key={index}>
+                  <BusinessProfessionalSlot
+                    slot={slot}
+                    callback={() => onSelectSlot(slot)}
+                  />
+                </View>
+              ))}
+            </View>
+          )}
+        </View>
+      </ScrollView>
     </View>
   );
 };

@@ -6,7 +6,8 @@ export class UserNotificationMapper {
   ): UserNotification {
     return {
       id: userNotification._id,
-      message: userNotification.message,
+      title: userNotification.title,
+      body: userNotification.body,
       fromUser: {
         user: userNotification.fromUser._id,
         name: userNotification.fromUser.name,
@@ -19,10 +20,17 @@ export class UserNotificationMapper {
         urlPhoto: userNotification.toUser.urlPhoto,
         userAuthId: userNotification.toUser.userAuthId,
       },
-      business: {
-        id: userNotification.business._id,
-        name: userNotification.business.name,
-        urlPhoto: userNotification.business.urlPhoto,
+      meta: {
+        business: {
+          id: userNotification.business._id,
+          name: userNotification.business.name,
+          urlPhoto: userNotification.business.urlPhoto,
+        },
+        professional: {
+          id: userNotification.professional._id,
+          name: userNotification.professional.name,
+          urlPhoto: userNotification.professional.urlPhoto,
+        },
       },
       isRead: userNotification.isRead,
       createdAt: new Date(userNotification.createdAt),

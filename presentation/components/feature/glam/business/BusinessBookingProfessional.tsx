@@ -28,7 +28,6 @@ export const BusinessBookingProfessional = () => {
               key={prof.id}
               professional={prof}
               callback={() => onSelectProfessional(prof)}
-              selecteable={true}
             />
           ))}
         </ScrollView>

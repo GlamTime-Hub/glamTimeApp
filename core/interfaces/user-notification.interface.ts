@@ -1,6 +1,8 @@
 export interface UserNotification {
   id: string;
-  message: string;
+  body: string;
+  title: string;
+
   fromUser: {
     user: string;
     name: string;
@@ -13,10 +15,19 @@ export interface UserNotification {
     urlPhoto: string;
     userAuthId: string;
   };
-  business: {
-    id: string;
-    name: string;
-    urlPhoto: string;
+
+  meta: {
+    business: {
+      id: string;
+      name: string;
+      urlPhoto: string;
+    };
+
+    professional: {
+      id: string;
+      name: string;
+      urlPhoto: string;
+    };
   };
 
   isRead: boolean;

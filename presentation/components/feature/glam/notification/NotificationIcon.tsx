@@ -19,7 +19,7 @@ export const NotificationIcon = () => {
       className="relative"
       onPress={() => router.push("/glam/(tabs)/notifications")}
     >
-      <Bell className="text-foreground" strokeWidth={1.25} />
+      <Bell className="text-primary" strokeWidth={1.25} />
       {total > 0 && (
         <View className="absolute flex items-center justify-center bg-primary h-5 w-5 rounded-full animate-bounce -top-1 -right-1">
           <Text className="text-white text-center absolute">{total}</Text>

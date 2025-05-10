@@ -1,5 +1,5 @@
 import axiosClient from "@/core/api/axios-client";
-import { BookingDetail } from "@/core/interfaces/booling-detail.interface";
+import { BookingDetail } from "@/core/interfaces/booking-detail.interface";
 import { BookingDetailMapper } from "@/core/mappers/booking-detail.mapper";
 
 export const getBookingByUserAction = async () => {

@@ -23,14 +23,9 @@ export const NotificationInvitation = ({
   notification,
   markNotification,
 }: Props) => {
-  const title =
-    notification.type === "invitation"
-      ? notification.business.name
-      : notification.fromUser.name;
-
   const image =
     notification.type === "invitation"
-      ? notification.business.urlPhoto
+      ? notification.meta.business.urlPhoto
       : notification.fromUser.urlPhoto;
 
   const { setNotification } = useUserNotificationStore();
@@ -47,7 +42,7 @@ export const NotificationInvitation = ({
         pathname:
           "/glam/(tabs)/profile/my-business/my-professionals/[businessId]",
         params: {
-          businessId: notification.business.id,
+          businessId: notification.meta.business.id,
         },
       });
     }
@@ -73,9 +68,11 @@ export const NotificationInvitation = ({
               </AvatarFallback>
             </Avatar>
             <View className="w-[300px] px-4 relative">
-              <Text className="font-baloo-bold text-xl">{title}</Text>
+              <Text className="font-baloo-bold text-xl">
+                {notification.title}
+              </Text>
               <Text className="text-md mb-4 text-wrap" numberOfLines={2}>
-                {notification.message}
+                {notification.body}
               </Text>
               <Text className="absolute text-sm -bottom-4 right-4">
                 {formatDistanceToNow(new Date(notification.createdAt), {

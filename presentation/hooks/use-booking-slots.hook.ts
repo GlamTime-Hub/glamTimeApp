@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import { getSlots } from "@/core/actions/booking/get-slots.action";
 import { Slot } from "@/core/interfaces/slot.interface";
 import { router } from "expo-router";
+import { getBookingByProfessionalAction } from "@/core/actions/booking/get-bookings-by-professional.action";
 
 export const useBookingSlots = () => {
-  const { slot, professional, service, addSlot } = useBusinessBookingStore();
+  const { professional, service, addSlot } = useBusinessBookingStore();
   const availableDays = getAvailableDays();
 
   const [currentDay, setCurrentDay] = useState<AvailableDay | null>(
@@ -21,16 +22,38 @@ export const useBookingSlots = () => {
     router.push("/glam/(tabs)/business/detail/booking/confirmation");
   };
 
-  const onChangeDay = (slot: AvailableDay) => {
+  const onChangeDay = async (slot: AvailableDay) => {
     setCurrentDay(slot);
-    const slots = getSlots(professional, service, slot.date);
+
+    const { data: bookings } = await getBookingByProfessionalAction(
+      professional?.id!,
+      professional?.businessId!
+    );
+
+    const slots = getSlots(professional, service, slot.date, bookings);
     setCurrentSlots(slots);
   };
 
   useEffect(() => {
-    if (availableDays) {
-      const slots = getSlots(professional, service, availableDays[0].date);
+    const getInitSlots = async () => {
+      const { data: bookings } = await getBookingByProfessionalAction(
+        professional?.id!,
+        professional?.businessId!
+      );
+
+      console.log("bookings", bookings);
+
+      const slots = getSlots(
+        professional,
+        service,
+        availableDays[0].date,
+        bookings
+      );
       setCurrentSlots(slots);
+    };
+
+    if (availableDays) {
+      getInitSlots();
     }
   }, []);
 

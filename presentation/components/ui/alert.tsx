@@ -50,11 +50,11 @@ const Alert = React.forwardRef<
         className={alertVariants({ variant, className })}
         {...props}
       >
-        <View className="absolute left-3.5 top-5 -translate-y-0.5">
+        <View className="absolute left-3.5 top-8 -translate-y-0.5">
           <Icon
             size={iconSize}
             color={
-              variant === "destructive" ? colors.notification : colors.text
+              variant === "destructive" ? colors.notification : colors.primary
             }
           />
         </View>

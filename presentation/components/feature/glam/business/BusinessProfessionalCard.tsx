@@ -17,16 +17,14 @@ import { Card, CardContent } from "@/presentation/components/ui/card";
 interface Props {
   professional: Professional;
   callback: (id: string) => void;
-  selecteable?: boolean;
 }
 
 export const BusinessProfessionalCard = ({
   professional,
   callback,
-  selecteable = false,
 }: Props) => {
   const onSelectProfessional = () => {
-    selecteable && callback(professional.id);
+    callback(professional.id);
   };
 
   return (
@@ -46,7 +44,7 @@ export const BusinessProfessionalCard = ({
                 </AvatarFallback>
               </Avatar>
               <View>
-                <Text className={"text-xl font-baloo-bold"}>
+                <Text className={"text-xl font-baloo-bold text-primary"}>
                   {professional.user.name}
                 </Text>
 
@@ -55,21 +53,21 @@ export const BusinessProfessionalCard = ({
                     <Text className={"text-2xl mt-2"}>
                       {professional.likes}
                     </Text>
-                    <ThumbsUp size={20} className="text-foreground" />
+                    <ThumbsUp size={20} className="text-primary" />
                   </View>
 
                   <View className="flex flex-row  gap-1 items-center">
                     <Text className={"text-2xl mt-2"}>
                       {professional.totalBooking}
                     </Text>
-                    <NotebookPen size={20} className="text-foreground" />
+                    <NotebookPen size={20} className="text-primary" />
                   </View>
 
                   <View className="flex flex-row gap-1 items-center">
                     <Text className={"text-2xl mt-2"}>
                       {professional.receivedReviews}
                     </Text>
-                    <MessageCircleMore size={20} className="text-foreground" />
+                    <MessageCircleMore size={20} className="text-primary" />
                   </View>
                 </View>
               </View>

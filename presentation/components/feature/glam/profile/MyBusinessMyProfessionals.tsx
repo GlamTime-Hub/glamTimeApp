@@ -8,12 +8,7 @@ import { useBusinessMyProfessionals } from "@/presentation/hooks/use-business-my
 import { LoadingIndicator } from "../shared/LoadingIndicator";
 import { useLocalSearchParams } from "expo-router";
 import { MyBusinessMyProfessionalsLoading } from "./MyBusinessMyProfessionalsLoading";
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@/presentation/components/ui/alert";
-import { AlertTriangle } from "@/lib/icons/Icons";
+import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
 
 export const MyBusinessMyProfessionals = () => {
   const { businessId } = useLocalSearchParams();
@@ -57,19 +52,14 @@ export const MyBusinessMyProfessionals = () => {
         </Button>
       </View>
 
-      {professionals.length === 0 ? (
+      {professionals?.length === 0 ? (
         <View>
           <Text className="text"></Text>
-          <Alert
-            icon={AlertTriangle}
-            variant="destructive"
-            className="max-w-xl"
-          >
-            <AlertTitle>Info!</AlertTitle>
-            <AlertDescription>
-              Actualmente no tienes profesionales en tu negocio
-            </AlertDescription>
-          </Alert>
+          <CustomAlert
+            title="Info!!!"
+            description="Actualmente no tienes profesionales en tu negocio."
+            type="destructive"
+          />
         </View>
       ) : (
         <View>
@@ -80,7 +70,7 @@ export const MyBusinessMyProfessionals = () => {
             </View>
           </View>
           <View>
-            {professionals.map((professional: any) => (
+            {professionals?.map((professional: any) => (
               <MyBusinessDetailProfessionalCard
                 key={professional.id}
                 professional={professional}
