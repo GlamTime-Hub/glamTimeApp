@@ -8,7 +8,7 @@ import { Text } from "@/presentation/components/ui/text";
 export const NotificationIcon = () => {
   const { total, isLoading, session } = useTotalUserNotifications();
 
-  if (!session) return null;
+  // if (!session) return null;
 
   if (isLoading) {
     return <Skeleton className="h-6 w-6 rounded-full" />;
@@ -16,15 +16,17 @@ export const NotificationIcon = () => {
 
   return (
     <TouchableOpacity
-      className="relative"
-      onPress={() => router.push("/glam/(tabs)/notifications")}
+      className="relative h-12 w-10 items-center justify-center "
+      onPress={() => router.push("/glam/(tabs)/notifications/home")}
     >
-      <Bell className="text-primary" strokeWidth={1.25} />
-      {total > 0 && (
-        <View className="absolute flex items-center justify-center bg-primary h-5 w-5 rounded-full animate-bounce -top-1 -right-1">
-          <Text className="text-white text-center absolute">{total}</Text>
-        </View>
-      )}
+      <View>
+        <Bell className="text-primary" strokeWidth={1.25} />
+        {total > 0 && (
+          <View className="absolute flex items-center justify-center bg-primary  h-5 w-5 rounded-full animate-bounce -top-1 -right-1">
+            <Text className="text-white text-center absolute">{total}</Text>
+          </View>
+        )}
+      </View>
     </TouchableOpacity>
   );
 };

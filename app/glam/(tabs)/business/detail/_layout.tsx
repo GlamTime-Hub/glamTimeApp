@@ -43,7 +43,6 @@ const DetailScreen = () => {
         name="professional-detail/[id]"
         options={{
           headerTitleAlign: "center",
-          presentation: "modal",
           title: "Detalle de profesional",
           headerRight: () => null,
         }}

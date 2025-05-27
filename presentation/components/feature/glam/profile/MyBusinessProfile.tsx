@@ -51,11 +51,11 @@ export const MyBusinessProfile = () => {
     <View className="flex-1 p-4">
       <ScrollView showsVerticalScrollIndicator={false}>
         {id === "new" ? (
-          <Text className="my-6 font-bold text-xl">
+          <Text className="my-6 font-baloo-bold text-xl">
             Ingresa los datos básicos de tu negocio
           </Text>
         ) : (
-          <Text className="font-bold text-xl my-6">
+          <Text className="font-baloo-bold text-xl my-6">
             Mantén actualizada la información de tu negocio
           </Text>
         )}
@@ -74,7 +74,9 @@ export const MyBusinessProfile = () => {
         <Card className="py-4">
           <CardContent className="px-4">
             <View className="my-2">
-              <Text className="font-bold">¿Cómo se llama tu negocio?</Text>
+              <Text className="font-baloo-bold">
+                ¿Cómo se llama tu negocio?
+              </Text>
               <Controller
                 control={control}
                 name="name"
@@ -97,7 +99,7 @@ export const MyBusinessProfile = () => {
             </View>
 
             <View className="my-2">
-              <Text className="font-bold">Número de contacto</Text>
+              <Text className="font-baloo-bold">Número de contacto</Text>
               <PhoneNumber
                 initialPhoneNumber={business ? `${business?.phoneNumber}` : ""}
                 onChangeCountry={onChangeCountry}
@@ -112,7 +114,7 @@ export const MyBusinessProfile = () => {
             </View>
 
             <View className="my-2">
-              <Text className="font-bold mb-1">Correo electronico</Text>
+              <Text className="font-baloo-bold mb-1">Correo electronico</Text>
               <Controller
                 control={control}
                 name="email"
@@ -134,7 +136,7 @@ export const MyBusinessProfile = () => {
             </View>
 
             <View className="my-2">
-              <Text className="font-bold">Tipo de negocio</Text>
+              <Text className="font-baloo-bold">Tipo de negocio</Text>
               <Controller
                 control={control}
                 name="businesstype"
@@ -182,7 +184,7 @@ export const MyBusinessProfile = () => {
             </View>
 
             <View className="my-2">
-              <Text className="font-bold">Selecciona tu país</Text>
+              <Text className="font-baloo-bold">Selecciona tu país</Text>
               <Controller
                 control={control}
                 name="country"
@@ -224,7 +226,7 @@ export const MyBusinessProfile = () => {
             </View>
 
             <View className="my-2">
-              <Text className="font-bold mb-1">Selecciona tu ciudad</Text>
+              <Text className="font-baloo-bold mb-1">Selecciona tu ciudad</Text>
               <Controller
                 control={control}
                 name="city"
@@ -293,7 +295,7 @@ export const MyBusinessProfile = () => {
               <Card>
                 <CardContent className="py-4">
                   <View className="relative">
-                    <Text className="font-bold text-lg">Direccion:</Text>
+                    <Text className="font-baloo-bold text-lg">Dirección:</Text>
                     <Text>{business.location.address}</Text>
                     <View className="absolute top-0 right-0">
                       <Button

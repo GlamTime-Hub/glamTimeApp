@@ -82,13 +82,13 @@ export const ProfileDetail = () => {
       <View className="flex flex-1 flex-col justify-between items-end ">
         <ScrollView showsVerticalScrollIndicator={false}>
           <View className="my-6">
-            <Text className="font-bold text-xl text-center">
+            <Text className="font-baloo-bold text-xl text-center">
               Mantén tus datos actualizados
             </Text>
             <Card className="mt-5">
               <CardContent>
                 <View className="mt-4 mb-2">
-                  <Text className="font-bold mb-1">Tu Nombre</Text>
+                  <Text className="font-baloo-bold mb-1">Tu Nombre</Text>
                   <Controller
                     control={control}
                     name="name"
@@ -110,7 +110,9 @@ export const ProfileDetail = () => {
                   )}
                 </View>
                 <View className="my-2">
-                  <Text className="font-bold mb-1">Tu Correo electronico</Text>
+                  <Text className="font-baloo-bold mb-1">
+                    Tu Correo electronico
+                  </Text>
                   <Controller
                     control={control}
                     name="email"
@@ -127,7 +129,9 @@ export const ProfileDetail = () => {
                   />
                 </View>
                 <View className="my-2">
-                  <Text className="font-bold mb-1">Tu fecha de cumpleaños</Text>
+                  <Text className="font-baloo-bold mb-1">
+                    Tu fecha de cumpleaños
+                  </Text>
                   <View className="flex flex-row">
                     <View className="w-1/2 pr-2">
                       <Controller
@@ -232,7 +236,9 @@ export const ProfileDetail = () => {
                   </View>
                 </View>
                 <View className="my-2">
-                  <Text className="font-bold mb-1">Como te identificas</Text>
+                  <Text className="font-baloo-bold mb-1">
+                    Como te identificas
+                  </Text>
                   <Controller
                     control={control}
                     name="gender"
@@ -284,7 +290,9 @@ export const ProfileDetail = () => {
                 </View>
 
                 <View className="my-2">
-                  <Text className="font-bold mb-1">Te encuentras en:</Text>
+                  <Text className="font-baloo-bold mb-1">
+                    Te encuentras en:
+                  </Text>
                   <Controller
                     control={control}
                     name="country"
@@ -335,7 +343,7 @@ export const ProfileDetail = () => {
                 </View>
 
                 <View className="my-2">
-                  <Text className="font-bold mb-1">En la ciudad de:</Text>
+                  <Text className="font-baloo-bold mb-1">En la ciudad de:</Text>
                   <Controller
                     control={control}
                     name="city"
@@ -386,7 +394,7 @@ export const ProfileDetail = () => {
                 </View>
 
                 <View className="my-2">
-                  <Text className="font-bold mb-1">
+                  <Text className="font-baloo-bold mb-1">
                     ¿Cómo es tu número movil?
                   </Text>
                   <PhoneNumber

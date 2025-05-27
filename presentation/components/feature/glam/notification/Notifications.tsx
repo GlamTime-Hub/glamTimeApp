@@ -7,8 +7,20 @@ import { Notification } from "./Notification";
 import { NotificationCard } from "./NotificationCard";
 
 export const Notifications = () => {
-  const { notifications, isLoading, markNotificationAsReadById } =
+  const { notifications, isLoading, session, markNotificationAsReadById } =
     useUserNotifications();
+
+  if (!session) {
+    return (
+      <View className="p-2">
+        <CustomAlert
+          title="Info!!!"
+          description="Inicia sesión para revisar tus notificaciones."
+          type="info"
+        />
+      </View>
+    );
+  }
 
   if (isLoading) return <NotificationsLoading />;
 

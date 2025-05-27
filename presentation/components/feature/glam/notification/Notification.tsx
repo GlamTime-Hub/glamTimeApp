@@ -23,7 +23,12 @@ interface Props {
 
 const NOTIFICATION_ROUTES: { [key: string]: Href } = {
   "professional-booking": "/glam/(tabs)/notifications/professional-booking",
-  "booking-confirmed": "/glam/(tabs)/notifications/booking-confirmed",
+  "booking-cancelled-by-user":
+    "/glam/(tabs)/notifications/booking-cancelled-by-user",
+  "booking-cancelled-by-professional":
+    "/glam/(tabs)/notifications/booking-cancelled-by-professional",
+  invitation: "/glam/(tabs)/notifications/invitation",
+  "invitation-accepted": "/glam/(tabs)/notifications/invitation-accepted",
 };
 
 const renderRightAction = (
@@ -86,7 +91,7 @@ const renderRightActions = (
     setNotification(null);
     Toast.show({
       type: "success",
-      text1: "Notificación leída",
+      text1: "Notificación eliminada.",
       text2: "La notificación ha sido marcada como leída.",
     });
 

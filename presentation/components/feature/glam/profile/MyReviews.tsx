@@ -30,19 +30,15 @@ export const MyReviews = () => {
   return (
     <View className="flex-1 p-4">
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Card className="flex-1 ">
-          <CardContent>
-            {reviews.map((review: any) => (
-              <ReviewCard
-                key={review._id}
-                userUrlPhoto={review.photo}
-                rating={review.rating}
-                userName={review.name}
-                comment={review.review}
-              />
-            ))}
-          </CardContent>
-        </Card>
+        {reviews.map((review: any) => (
+          <ReviewCard
+            key={review.id}
+            userUrlPhoto={review.photo}
+            rating={review.rating}
+            userName={review.name}
+            comment={review.review}
+          />
+        ))}
       </ScrollView>
     </View>
   );

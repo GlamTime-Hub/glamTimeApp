@@ -3,6 +3,7 @@ import { useUserNotificationStore } from "../store/use-user-notification.store";
 import { useQueryClient } from "@tanstack/react-query";
 import { handleInvitaionAction } from "@/core/actions/professional/handle-invitation.action";
 import { router } from "expo-router";
+import Toast from "react-native-toast-message";
 
 export const useInvitation = () => {
   const { notification } = useUserNotificationStore();
@@ -28,6 +29,12 @@ export const useInvitation = () => {
     queryClient.invalidateQueries({ queryKey: ["notifications"] });
     queryClient.invalidateQueries({ queryKey: ["user"] });
 
+    Toast.show({
+      type: "success",
+      text1: "Invitación aceptada",
+      text2: "La invitación ha sido aceptada con éxito.",
+    });
+
     router.push({
       pathname: "/glam/(tabs)/business/detail/home/[id]",
       params: { id: notification!.meta.business.id },
@@ -45,6 +52,12 @@ export const useInvitation = () => {
     };
 
     await handleInvitaionAction(reject);
+
+    Toast.show({
+      type: "success",
+      text1: "Invitación rechazada",
+      text2: "La invitación ha sido rechazada con éxito.",
+    });
 
     setLoadingReject(false);
     queryClient.invalidateQueries({ queryKey: ["totalNotifications"] });

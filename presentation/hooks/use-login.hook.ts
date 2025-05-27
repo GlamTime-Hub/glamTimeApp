@@ -72,7 +72,7 @@ export const useLogin = () => {
       router.push({
         pathname: "/sign-up/[userAuthId]",
         params: {
-          userAuthId: session.session?.user.id,
+          userAuthId: session.session?.user.id!,
         },
       });
       return;

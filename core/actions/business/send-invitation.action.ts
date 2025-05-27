@@ -3,10 +3,14 @@ import { isAxiosError } from "axios";
 
 export const sendInvitationAction = async (
   businessId: string,
-  email: string
+  phoneNumber: string,
+  phoneNumberExtension: string
 ) => {
   try {
-    await axiosClient.put("business/send-invitation/" + businessId, { email });
+    await axiosClient.put("business/send-invitation/" + businessId, {
+      phoneNumber,
+      phoneNumberExtension,
+    });
     return {
       status: true,
     };

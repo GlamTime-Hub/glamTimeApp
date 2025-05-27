@@ -19,23 +19,14 @@ import {
 
 import { X, MapPinned, ShieldUser, Store } from "@/lib/icons/Icons";
 import { router } from "expo-router";
+import { isMoreThan } from "@/presentation/utils/compare-dates-by-min.util";
 
 interface Props {
   booking: BookingDetail;
   loading: boolean;
-  onCancelBooking: (id: string) => void;
+  onCancelBooking?: (id: string) => void;
+  onFeedback?: (id: string, bookingId: string, isBusiness: boolean) => void;
 }
-
-const STATUS_STYLE: { [key: string]: { bgColor: string; label: string } } = {
-  pending: {
-    bgColor: "bg-yellow-100",
-    label: "Pendiente de ser confirmada.",
-  },
-  confirmed: {
-    bgColor: "bg-green-100",
-    label: "Confirmada.",
-  },
-};
 
 const Label = ({
   title,
@@ -52,9 +43,12 @@ const Label = ({
   );
 };
 
-export const BookingCard = ({ booking, loading, onCancelBooking }: Props) => {
-  const statusStyle = STATUS_STYLE[booking.status] || STATUS_STYLE.pending;
-
+export const BookingCard = ({
+  booking,
+  loading,
+  onCancelBooking,
+  onFeedback,
+}: Props) => {
   const openLocation = async () => {
     const url = Platform.select({
       ios: `maps:0,0?q=${booking.business.location.address}@${booking.business.location.lat},${booking.business.location.lng}`,
@@ -83,8 +77,10 @@ export const BookingCard = ({ booking, loading, onCancelBooking }: Props) => {
     });
   };
 
+  const isMore = isMoreThan(booking.date, 30);
+
   return (
-    <View className="p-4 flex-1">
+    <View className="flex-1 mb-2">
       <Card className="flex-1">
         <CardContent className="flex-1 p-0">
           <View className="flex p-4">
@@ -106,72 +102,109 @@ export const BookingCard = ({ booking, loading, onCancelBooking }: Props) => {
               </View>
             </View>
           </View>
-          <View className={`mx-4 rounded-md ${statusStyle.bgColor}`}>
-            <Text className="text-black text-center">{statusStyle.label}</Text>
-          </View>
 
-          <View className="w-full flex flex-row justify-between p-4">
-            <TouchableOpacity onPress={goToBusiness}>
-              <Card className="w-[70px] bg-primary border-primary">
-                <CardContent className="flex p-2 justify-center items-center">
-                  <Store size={18} className="text-white" />
-                  <Text className="text-xs text-white">Salón</Text>
-                </CardContent>
-              </Card>
-            </TouchableOpacity>
+          {booking.status === "completed" && !booking.hasBusinessReview && (
+            <Button
+              className="mb-2 mx-4 mt-4"
+              onPress={() =>
+                onFeedback && onFeedback(booking.business.id, booking.id, true)
+              }
+            >
+              <Text>Calificar negocio</Text>
+            </Button>
+          )}
 
-            <TouchableOpacity onPress={goToProfessional}>
-              <Card className="w-[70px] bg-primary border-primary">
-                <CardContent className="flex p-2 justify-center items-center">
-                  <ShieldUser size={18} className="text-white" />
-                  <Text className="text-xs text-white">Profesional</Text>
-                </CardContent>
-              </Card>
-            </TouchableOpacity>
+          {booking.status === "completed" && !booking.hasProfessionalReview && (
+            <Button
+              className="mx-4 mb-2"
+              variant={"secondary"}
+              onPress={() =>
+                onFeedback &&
+                onFeedback(booking.professional.id, booking.id, false)
+              }
+            >
+              <Text>Calificar profesional</Text>
+            </Button>
+          )}
 
-            <TouchableOpacity onPress={openLocation}>
-              <Card className="w-[70px] bg-primary border-primary">
-                <CardContent className="flex p-2 justify-center items-center">
-                  <MapPinned size={18} className="text-white" />
-                  <Text className="text-xs text-white">Ubicación</Text>
-                </CardContent>
-              </Card>
-            </TouchableOpacity>
+          {booking.status === "cancelled" && (
+            <View>
+              <Text className="text-red-500 text-center font-baloo-bold my-2">
+                {booking.reason}
+              </Text>
+            </View>
+          )}
 
-            <Dialog>
-              <DialogTrigger asChild>
-                <TouchableOpacity>
-                  <Card className="bg-destructive border-destructive w-[70px]">
-                    <CardContent className="flex p-2 justify-center items-center">
-                      <X size={18} className="text-white" />
-                      <Text className="text-xs text-white">Cancelar</Text>
-                    </CardContent>
-                  </Card>
-                </TouchableOpacity>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle>Cancelar Notificación</DialogTitle>
-                  <DialogDescription>
-                    <View>
-                      <Text>¿Estás seguro de que deseas cancelar la cita?</Text>
-                    </View>
-                  </DialogDescription>
-                </DialogHeader>
-                <DialogFooter>
-                  <DialogClose asChild>
-                    <Button
-                      className="flex flex-row gap-2"
-                      onPress={() => onCancelBooking(booking.id)}
-                    >
-                      {loading && <LoadingIndicator />}
-                      <Text>Continuar</Text>
-                    </Button>
-                  </DialogClose>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </View>
+          {booking.status === "confirmed" && (
+            <View className="w-full flex flex-row justify-center gap-2 p-4">
+              <TouchableOpacity onPress={goToBusiness}>
+                <Card className="w-[70px] bg-primary border-primary">
+                  <CardContent className="flex p-2 justify-center items-center">
+                    <Store size={18} className="text-white" />
+                    <Text className="text-xs text-white">Salón</Text>
+                  </CardContent>
+                </Card>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={goToProfessional}>
+                <Card className="w-[70px] bg-primary border-primary">
+                  <CardContent className="flex p-2 justify-center items-center">
+                    <ShieldUser size={18} className="text-white" />
+                    <Text className="text-xs text-white">Profesional</Text>
+                  </CardContent>
+                </Card>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={openLocation}>
+                <Card className="w-[70px] bg-primary border-primary">
+                  <CardContent className="flex p-2 justify-center items-center">
+                    <MapPinned size={18} className="text-white" />
+                    <Text className="text-xs text-white">Ubicación</Text>
+                  </CardContent>
+                </Card>
+              </TouchableOpacity>
+
+              {!isMore && (
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <TouchableOpacity>
+                      <Card className="bg-destructive border-destructive w-[70px]">
+                        <CardContent className="flex p-2 justify-center items-center">
+                          <X size={18} className="text-white" />
+                          <Text className="text-xs text-white">Cancelar</Text>
+                        </CardContent>
+                      </Card>
+                    </TouchableOpacity>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle>Cancelar Reserva</DialogTitle>
+                      <DialogDescription>
+                        <View>
+                          <Text>
+                            ¿Estás seguro de que deseas cancelar la reserva?
+                          </Text>
+                        </View>
+                      </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                      <DialogClose asChild>
+                        <Button
+                          className="flex flex-row gap-2"
+                          onPress={() =>
+                            onCancelBooking && onCancelBooking(booking.id)
+                          }
+                        >
+                          {loading && <LoadingIndicator />}
+                          <Text>Continuar</Text>
+                        </Button>
+                      </DialogClose>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              )}
+            </View>
+          )}
         </CardContent>
       </Card>
     </View>

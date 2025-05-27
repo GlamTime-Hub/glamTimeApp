@@ -41,7 +41,7 @@ export const BusinessBookingConfirmation = () => {
       date: slot?.date || new Date(),
       startTime: slot?.startTime || 0,
       endTime: slot?.endTime || 0,
-      status: "pending",
+      status: "confirmed",
       reason: "",
       createdAt: new Date(),
     };
@@ -61,7 +61,7 @@ export const BusinessBookingConfirmation = () => {
         queryKey: ["booking-professionals", professional?.businessId],
       });
 
-      router.push("/glam/(tabs)/booking");
+      router.push("/glam/(tabs)/booking/home");
     } catch (error: any) {
       setError(error.message);
     }

@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+
 import { getTotalUserNotificationAction } from "@/core/actions/notification/get-total-user-notification.action";
 import useAuthStore from "@/core/store/auth.store";
 import { useUserNotificationStore } from "../store/use-user-notification.store";
-import { useEffect } from "react";
 
 export const useTotalUserNotifications = () => {
   const { session } = useAuthStore();
@@ -14,7 +15,7 @@ export const useTotalUserNotifications = () => {
     queryKey: ["totalNotifications"],
     queryFn: getTotalUserNotificationAction,
     staleTime: 1000 * 60 * 60,
-    // enabled: !!session,
+    enabled: !!session,
   });
 
   useEffect(() => {

@@ -56,7 +56,7 @@ export const UserInfo = () => {
     <View className="px-10 py-5 flex-1 flex justify-between">
       <View>
         <View className="my-2">
-          <Text className="font-bold mb-1">¿Cómo te llamas?</Text>
+          <Text className="font-baloo-bold mb-1">¿Cómo te llamas?</Text>
           <Controller
             control={control}
             name="name"
@@ -75,7 +75,7 @@ export const UserInfo = () => {
           )}
         </View>
         <View className="my-2">
-          <Text className="font-bold mb-1">
+          <Text className="font-baloo-bold mb-1">
             ¿Cuál es tu correo electrónico?
           </Text>
           <Controller
@@ -92,7 +92,9 @@ export const UserInfo = () => {
           />
         </View>
         <View className="my-2">
-          <Text className="font-bold mb-1">¿Cuándo es tu cumpleaños?</Text>
+          <Text className="font-baloo-bold mb-1">
+            ¿Cuándo es tu cumpleaños?
+          </Text>
           <View className="flex flex-row">
             <View className="w-1/2 pr-2">
               <Controller
@@ -175,7 +177,7 @@ export const UserInfo = () => {
           </View>
         </View>
         <View>
-          <Text className="font-bold mb-1">¿Cómo te identificas?</Text>
+          <Text className="font-baloo-bold mb-1">¿Cómo te identificas?</Text>
           <Controller
             control={control}
             name="gender"
@@ -217,7 +219,9 @@ export const UserInfo = () => {
           )}
         </View>
         <View className="my-2">
-          <Text className="font-bold mb-1">¿En que ciudad te encuentras?</Text>
+          <Text className="font-baloo-bold mb-1">
+            ¿En que ciudad te encuentras?
+          </Text>
           <Controller
             control={control}
             name="city"

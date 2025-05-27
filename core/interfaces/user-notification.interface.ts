@@ -46,8 +46,7 @@ export interface UserNotification {
     | "invitation"
     | "invitation-accepted"
     | "invitation-rejected"
-    | "reservation"
-    | "reservation-accepted"
-    | "reservation-rejected"
-    | "review-received";
+    | "professional-booking"
+    | "booking-cancelled-by-professional"
+    | "booking-cancelled-by-user";
 }

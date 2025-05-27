@@ -9,7 +9,7 @@ export default function MyBusinessLayout() {
       initialRouteName="home/index"
       screenOptions={{
         headerRight: () => (
-          <View className="flex flex-row gap-2 justify-end px-0 relative -right-3">
+          <View className="flex-row items-center  relative -mr-1">
             <NotificationIcon />
             <ThemeToggle />
           </View>
@@ -56,10 +56,11 @@ export default function MyBusinessLayout() {
         }}
       />
       <Stack.Screen
-        name="my-professionals/[businessId]"
+        name="my-professionals"
         options={{
           headerTitleAlign: "center",
           title: "Mis Profesionales",
+          headerShown: false,
         }}
       />
 

@@ -7,7 +7,6 @@ import {
 } from "@/lib/icons/Icons";
 import Share from "@/lib/icons/Share";
 import { WhatsAppIcon } from "@/lib/icons/WhatsApp";
-import { useColorScheme } from "@/lib/useColorScheme";
 import { cn } from "@/lib/util";
 import { Button } from "@/presentation/components/ui/button";
 import { Text } from "@/presentation/components/ui/text";
@@ -34,8 +33,6 @@ const styles = StyleSheet.create({
 });
 
 export const BusinessDetail = () => {
-  const { isDarkColorScheme } = useColorScheme();
-
   const { id, business, isLoading, openWhatsApp, openLocation } =
     useBusinessDetail();
 
@@ -79,7 +76,7 @@ export const BusinessDetail = () => {
               <TouchableOpacity className="flex justify-between flex-row items-center gap-1">
                 <Text
                   className={cn(
-                    "py-1 px-2 text-sm rounded-lg bg-primary text-white",
+                    "py-1 px-2 text-sm rounded-lg bg-primary text-white"
                   )}
                 >
                   Compartir
@@ -124,9 +121,7 @@ export const BusinessDetail = () => {
                       <MapPinned size={30} className="text-primary" />
                     </TouchableOpacity>
                     <View className="flex flex-row items-center  gap-1">
-                      <Text className="mt-2 text-3xl">
-                        {business?.rating}
-                      </Text>
+                      <Text className="mt-2 text-3xl">{business?.rating}</Text>
                       <Star color="#FFD700" size={30} fill={"gold"} />
                     </View>
                   </View>
@@ -138,7 +133,9 @@ export const BusinessDetail = () => {
                         <Text className="text-3xl pt-4">{business?.likes}</Text>
                         <ThumbsUp size={26} className="text-primary" />
                       </View>
-                      <Text className="text-md text-primary font-baloo-bold ">Me Gusta</Text>
+                      <Text className="text-md text-primary font-baloo-bold ">
+                        Me Gusta
+                      </Text>
                     </CardContent>
                   </Card>
                   <Card>
@@ -149,7 +146,9 @@ export const BusinessDetail = () => {
                         </Text>
                         <NotebookPen size={28} className="text-primary" />
                       </View>
-                      <Text className="text-md font-baloo-bold text-primary">Reservas</Text>
+                      <Text className="text-md font-baloo-bold text-primary">
+                        Reservas
+                      </Text>
                     </CardContent>
                   </Card>
 
@@ -159,10 +158,7 @@ export const BusinessDetail = () => {
                         <Text className="text-3xl pt-4 ">
                           {business?.receivedReviews}
                         </Text>
-                        <MessageCircleMore
-                          size={30}
-                          className="text-primary"
-                        />
+                        <MessageCircleMore size={30} className="text-primary" />
                       </View>
                       <Text className="text-md font-baloo-bold text-primary">
                         Comentarios

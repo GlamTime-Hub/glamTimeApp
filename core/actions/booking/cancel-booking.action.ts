@@ -1,12 +1,9 @@
 import axiosClient from "@/core/api/axios-client";
 
-export const cancelBookingAction = async (
-  bookingId: string,
-  reason: string
-) => {
+export const cancelBookingAction = async (booking: any) => {
   try {
-    await axiosClient.put("booking/cancel-booking/" + bookingId, {
-      reason,
+    await axiosClient.post("booking/cancel-booking", {
+      ...booking,
     });
 
     return {

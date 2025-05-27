@@ -35,7 +35,14 @@ import { Premium } from "./glam/profile/Premium";
 import { MyScheduleBusinessList } from "./glam/profile/MyScheduleBusinessList";
 import { LoadingIndicator } from "./glam/shared/LoadingIndicator";
 import { ProfessionalBookingNotification } from "./glam/notification/ProfessionalBookingNotification";
-import { BookingConfirmedNotification } from "./glam/notification/BookingConfirmedNotification";
+import { BookingCancelledByUserNotification } from "./glam/notification/BookingCancelledByUserNotification";
+import { BookingProfessional } from "./glam/booking/BookingProfessional";
+import { Agenda } from "./glam/booking/Agenda";
+import { BusinessFeedback } from "./glam/booking/BusinessFeedback";
+import { ProfessionalFeedback } from "./glam/booking/ProfessionalFeedback";
+import { InvitationNotification } from "./glam/notification/InvitationNotification";
+import { InvitationAccepted } from "./glam/notification/InvitationAccepted";
+import { MyBusinessProfessionalDetail } from "./glam/profile/MyBusinessProfessionalDetail";
 
 export {
   Login,
@@ -74,6 +81,13 @@ export {
   Premium,
   MyScheduleBusinessList,
   LoadingIndicator,
-  BookingConfirmedNotification,
   ProfessionalBookingNotification,
+  BookingCancelledByUserNotification,
+  BookingProfessional,
+  Agenda,
+  BusinessFeedback,
+  ProfessionalFeedback,
+  InvitationNotification,
+  InvitationAccepted,
+  MyBusinessProfessionalDetail,
 };

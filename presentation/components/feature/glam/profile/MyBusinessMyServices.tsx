@@ -24,7 +24,7 @@ export const MyBusinessMyServices = () => {
         <Text className="my-2 font-baloo-bold text-xl" numberOfLines={2}>
           Gestiona los servicios que ofreces en tu negocio.
         </Text>
-        {services.map((service: Service) => (
+        {services?.map((service: Service) => (
           <Card key={service.id} className="my-2">
             <CardContent className="p-0 ">
               <CustomCollapsible title={service.name}>

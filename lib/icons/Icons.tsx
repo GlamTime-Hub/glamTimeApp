@@ -46,6 +46,8 @@ import {
   MailCheck,
   CalendarCheck2,
   CalendarCheck,
+  CalendarX,
+  PartyPopper,
 } from "lucide-react-native";
 import { iconWithClassName } from "./iconWithClassName";
 
@@ -96,6 +98,8 @@ iconWithClassName(NotebookPen);
 iconWithClassName(MailCheck);
 iconWithClassName(CalendarCheck2);
 iconWithClassName(CalendarCheck);
+iconWithClassName(CalendarX);
+iconWithClassName(PartyPopper);
 
 export {
   Share2,
@@ -145,4 +149,6 @@ export {
   MailCheck,
   CalendarCheck2,
   CalendarCheck,
+  CalendarX,
+  PartyPopper,
 };

@@ -38,11 +38,11 @@ export const CustomDialog = ({
   callback,
 }: Props) => {
   return (
-    <Dialog>
+    <Dialog className={className}>
       <DialogTrigger asChild>
         {!isIcon ? (
           <Button disabled={disabled} variant={buttonVariant}>
-            <Text className="font-bold">{title}</Text>
+            <Text className="font-baloo-bold">{title}</Text>
           </Button>
         ) : (
           <Button

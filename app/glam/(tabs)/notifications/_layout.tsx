@@ -9,7 +9,7 @@ const NotificationLayout = () => {
       initialRouteName="home/index"
       screenOptions={{
         headerRight: () => (
-          <View className="flex flex-row gap-2 justify-end px-0 relative -right-2">
+          <View className="flex-row items-center  relative -mr-1">
             <NotificationIcon />
             <ThemeToggle />
           </View>
@@ -36,6 +36,37 @@ const NotificationLayout = () => {
         options={{
           headerTitleAlign: "center",
           title: "Reserva Confirmada",
+        }}
+      />
+
+      <Stack.Screen
+        name="booking-cancelled-by-user/index"
+        options={{
+          headerTitleAlign: "center",
+          title: "Reserva Cancelada",
+        }}
+      />
+
+      <Stack.Screen
+        name="booking-cancelled-by-professional/index"
+        options={{
+          headerTitleAlign: "center",
+          title: "Reserva Cancelada",
+        }}
+      />
+
+      <Stack.Screen
+        name="invitation/index"
+        options={{
+          headerTitleAlign: "center",
+          title: "Nueva invitación",
+        }}
+      />
+      <Stack.Screen
+        name="invitation-accepted/index"
+        options={{
+          headerTitleAlign: "center",
+          title: "Invitación aceptada",
         }}
       />
     </Stack>

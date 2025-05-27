@@ -1,15 +1,14 @@
 import axiosClient from "@/core/api/axios-client";
 
-export const confirmBookingAction = async (confirm: any) => {
+export const newBusinessReviewAction = async (review: any) => {
   try {
-    await axiosClient.post("booking/confirm-booking", {
-      ...confirm,
+    await axiosClient.post("business/review", {
+      ...review,
     });
-
     return {
       status: true,
     };
-  } catch (error: any) {
+  } catch (error) {
     throw new Error(
       "Ha ocurrido un error inesperado.\npor favor contacte con soporte"
     );

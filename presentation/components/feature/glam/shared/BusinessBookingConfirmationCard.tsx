@@ -26,12 +26,7 @@ export const BusinessBookingConfirmationCard = ({
   status,
 }: Props) => {
   return (
-    <Card
-      className={cn(
-        "my-2",
-        status === "pending" ? "border-2 border-green-200" : ""
-      )}
-    >
+    <Card className="my-2">
       <CardContent className="p-0 m-0">
         <View className="flex p-6 gap-4 flex-row items-center justify-center">
           <Avatar alt="Imagen de profesional" size="xl">
@@ -71,11 +66,6 @@ export const BusinessBookingConfirmationCard = ({
             </View>
           </View>
         </View>
-        {status === "pending" && (
-          <View className="flex flex-row justify-center items-center py-2">
-            <Text className="text-green-200 text-lg">Pendiente</Text>
-          </View>
-        )}
       </CardContent>
     </Card>
   );

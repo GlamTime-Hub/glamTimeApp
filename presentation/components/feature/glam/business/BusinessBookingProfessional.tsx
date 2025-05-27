@@ -14,10 +14,10 @@ export const BusinessBookingProfessional = () => {
 
   return (
     <View className="flex-1 p-6">
-      <Text className="text-center font-bold text-2xl">
+      <Text className="text-center font-baloo-bold text-2xl">
         Un paso más y tu reserva estará lista
       </Text>
-      <Text className="text-center font-bold text-xl my-2">
+      <Text className="text-center font-baloo-bold text-xl my-2">
         ¿Con quién quieres tu cita?
       </Text>
 

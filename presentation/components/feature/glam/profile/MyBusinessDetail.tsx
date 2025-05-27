@@ -37,7 +37,7 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
               callback={updateImage}
             />
           </View>
-          <Text className="font-bold my-2 text-xl text-center">
+          <Text className="font-baloo-bold my-2 text-xl text-center">
             {business?.name}
           </Text>
         </View>
@@ -68,7 +68,7 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
               onPress={() =>
                 router.push({
                   pathname:
-                    "/glam/(tabs)/profile/my-business/my-professionals/[businessId]",
+                    "/glam/(tabs)/profile/my-business/my-professionals/home/[businessId]",
                   params: { businessId: id },
                 })
               }

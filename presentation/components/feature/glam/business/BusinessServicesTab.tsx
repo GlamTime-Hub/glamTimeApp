@@ -8,10 +8,17 @@ import { useBusinessServices } from "@/presentation/hooks/use-business-services.
 import { formatCurrency } from "@/presentation/utils/format-currency.util";
 import { BusinessServicesTabLoading } from "./BusinessServicesTabLoading";
 
-export const BusinessServicesTab = ({ id }: { id: string }) => {
+export const BusinessServicesTab = ({
+  id,
+  fromProfessional = false,
+}: {
+  id: string;
+  fromProfessional: boolean;
+}) => {
   const { services, isLoading, onBookingService } = useBusinessServices(
     id,
-    true
+    true,
+    fromProfessional
   );
 
   if (isLoading) {
@@ -23,7 +30,7 @@ export const BusinessServicesTab = ({ id }: { id: string }) => {
       {services?.map((service: Service) => (
         <Card key={service.id} className="my-2">
           <CardContent className="p-0 ">
-            <CustomCollapsible title={service.name} >
+            <CustomCollapsible title={service.name}>
               {service.subCategories.map((subcategory: SubCategory) => (
                 <TouchableOpacity
                   onPress={() => onBookingService(subcategory)}
@@ -35,7 +42,9 @@ export const BusinessServicesTab = ({ id }: { id: string }) => {
                         {subcategory.name}
                       </Text>
                       <View className="flex flex-row gap-2 justify-center">
-                        <Text className="text-xl font-baloo-bold text-primary">Precio:</Text>
+                        <Text className="text-xl font-baloo-bold text-primary">
+                          Precio:
+                        </Text>
                         <Text className="text-xl">
                           {`$ ${formatCurrency(
                             `${subcategory.service.price}`

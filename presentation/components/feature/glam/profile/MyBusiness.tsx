@@ -24,7 +24,7 @@ export const MyBusiness = () => {
   return (
     <View className="flex-1 px-4 my-4">
       <View className="flex flex-row justify-between items-center">
-        <Text className="font-bold text-xl">Gestiona tus negocios</Text>
+        <Text className="font-baloo-bold text-xl">Gestiona tus negocios</Text>
         <Button
           size={"sm"}
           onPress={() =>

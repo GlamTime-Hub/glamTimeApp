@@ -41,8 +41,6 @@ export const useBookingSlots = () => {
         professional?.businessId!
       );
 
-      console.log("bookings", bookings);
-
       const slots = getSlots(
         professional,
         service,

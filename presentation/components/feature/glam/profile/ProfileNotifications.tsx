@@ -23,7 +23,7 @@ export const ProfileNotifications = () => {
   return (
     <View className="flex-1 flex justify-between p-6">
       <View>
-        <Text className="text-xl font-baloo-bold mb-4 font-bold">
+        <Text className="text-xl font-baloo-bold mb-4 font-baloo-bold">
           Maneja tus notificaciones
         </Text>
         <View>

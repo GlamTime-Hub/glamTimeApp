@@ -6,6 +6,16 @@ export interface BookingDetail {
   status: string;
   serviceName: string;
   serviceId: string;
+  reason: string;
+  hasBusinessReview: boolean;
+  hasProfessionalReview: boolean;
+  user: {
+    id: string;
+    name: string;
+    urlPhoto: string;
+    userAuthId: string;
+    userId: string;
+  };
   business: {
     id: string;
     name: string;
@@ -22,5 +32,7 @@ export interface BookingDetail {
     id: string;
     name: string;
     urlPhoto: string;
+    userAuthId: string;
+    userId: string;
   };
 }

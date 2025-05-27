@@ -3,14 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 
 const staleTime = 1000 * 60 * 60 * 24;
 
-export const useProfessionalReview = (professionalId: string) => {
+export const useProfessionalReview = (userId: string) => {
   const { data, isLoading } = useQuery({
     queryKey: ["review-received"],
-    queryFn: () => getProfessionalReviewsReceivedAction(professionalId),
+    queryFn: () => getProfessionalReviewsReceivedAction(userId),
     staleTime,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
-    enabled: !!professionalId,
+    enabled: !!userId,
   });
 
   return {

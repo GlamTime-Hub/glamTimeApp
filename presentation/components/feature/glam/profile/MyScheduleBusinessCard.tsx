@@ -59,7 +59,7 @@ export const MyScheduleBusinessCard = ({ businessProfessional }: Props) => {
 
           <View className="flex flex-row justify-between relative flex-1">
             <View className="py-4 px-2 ">
-              <Text className="font-bold text-lg" numberOfLines={2}>
+              <Text className="font-baloo-bold text-lg" numberOfLines={2}>
                 {businessProfessional.business.name}
               </Text>
               <Text className="text-sm">

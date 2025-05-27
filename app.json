@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "glamTimeApps",
-    "slug": "glamTimeApps",
+    "name": "glamTimeApp",
+    "slug": "glamTimeApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -10,14 +10,24 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.glamTime.glamTimeApp",
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIBackgroundModes": ["remote-notification"]
+      },
+      "entitlements": {
+        "aps-environment": "development",
+        "com.apple.security.application-groups": [
+          "group.${ios.bundleIdentifier}.onesignal"
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.glamTimeApps",
+      "package": "com.glamTime.glamTimeApp",
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyAsW7SWTUZDXYgQpn67ifBBY3c-vghx2XQ"
@@ -31,6 +41,7 @@
     },
     "plugins": [
       "expo-router",
+      "onesignal-expo-plugin",
       [
         "expo-splash-screen",
         {
@@ -61,9 +72,7 @@
       [
         "expo-asset",
         {
-          "assets": [
-            "./assets/images/default.png"
-          ]
+          "assets": ["./assets/images/default.png"]
         }
       ]
     ],

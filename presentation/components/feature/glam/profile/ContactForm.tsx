@@ -14,14 +14,14 @@ export const ContactForm = () => {
   return (
     <View className="flex-1 p-4">
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Text className="font-bold text-xl my-2 text-center">
+        <Text className="font-baloo-bold text-xl my-2 text-center">
           ¿En qué podemos ayudarte?
         </Text>
 
         <Card className="py-4">
           <CardContent className="px-4">
             <View className="my-2">
-              <Text className="font-bold mb-1">Asunto</Text>
+              <Text className="font-baloo-bold mb-1">Asunto</Text>
               <Controller
                 control={control}
                 name="subject"
@@ -44,7 +44,7 @@ export const ContactForm = () => {
             </View>
 
             <View className="my-2">
-              <Text className="font-bold mb-1">Descripción</Text>
+              <Text className="font-baloo-bold mb-1">Descripción</Text>
               <Controller
                 control={control}
                 name="description"

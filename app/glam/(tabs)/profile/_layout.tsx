@@ -9,7 +9,7 @@ const LayoutScreen = () => {
       initialRouteName="home/index"
       screenOptions={{
         headerRight: () => (
-          <View className="flex flex-row gap-2 justify-end px-0 relative -right-2">
+          <View className="flex-row items-center  relative -mr-1">
             <NotificationIcon />
             <ThemeToggle />
           </View>

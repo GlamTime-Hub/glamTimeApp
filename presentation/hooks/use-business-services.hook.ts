@@ -14,12 +14,12 @@ const staleTime = 1000 * 60 * 60 * 24;
 
 export const useBusinessServices = (
   businessId: string,
-  filterByBusiness: boolean
+  filterByBusiness: boolean,
+  fromProfessional: boolean = false
 ) => {
-
   const { session } = useAuthStore();
   const [loading, setLoading] = useState(false);
-  const { addService } = useBusinessBookingStore();
+  const { professional, addService } = useBusinessBookingStore();
 
   const queryClient = useQueryClient();
 
@@ -54,7 +54,6 @@ export const useBusinessServices = (
   };
 
   const onBookingService = (service: SubCategory) => {
-
     if (!session) {
       router.push("/login/home");
       Toast.show({
@@ -66,9 +65,22 @@ export const useBusinessServices = (
       return;
     }
 
-
+    if (!professional && fromProfessional) {
+      Toast.show({
+        type: "error",
+        text1: "No puedes reservarte a ti mismo.",
+        text2: "Selecciona otro profesional.",
+      });
+      return;
+    }
 
     addService(service);
+
+    if (professional && fromProfessional) {
+      router.push("/glam/(tabs)/business/detail/booking/slots");
+      return;
+    }
+
     router.push({
       pathname:
         "/glam/(tabs)/business/detail/booking/professional/[businessId]",

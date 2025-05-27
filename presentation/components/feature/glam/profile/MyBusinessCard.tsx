@@ -46,9 +46,6 @@ export const MyBusinessCard = ({ business }: Props) => {
                   width: 100,
                   height: 100,
                   justifyContent: "flex-end",
-                  borderTopLeftRadius: 5,
-                  borderBottomLeftRadius: 5,
-                  padding: 10,
                 }}
               />
             </View>
@@ -64,27 +61,27 @@ export const MyBusinessCard = ({ business }: Props) => {
 
           <View className="flex flex-row justify-between relative flex-1">
             <View className="py-4 px-2 ">
-              <Text className="font-bold text-lg" numberOfLines={2}>
+              <Text className="font-baloo-bold text-lg" numberOfLines={2}>
                 {business.name}
               </Text>
               <Text className="text-sm">{business.location.address}</Text>
               <View className="flex flex-row mt-2 gap-4">
                 <View className="flex flex-row items-center gap-1 ">
                   <Text className="text-lg">{business.likes}</Text>
-                  <ThumbsUp size={18} />
+                  <ThumbsUp className="text-primary" size={18} />
+                </View>
+                <View className="flex flex-row items-center gap-1">
+                  <Text className="text-lg">{business.receivedReviews}</Text>
+                  <MessageCircleMore size={18} className="text-primary" />
                 </View>
                 <View className="flex flex-row items-center gap-1">
                   <Text className="text-lg">{business.rating}</Text>
                   <Star color="#FFD700" size={18} fill={"gold"} />
                 </View>
-                <View className="flex flex-row items-center gap-1">
-                  <Text className="text-lg">{business.receivedReviews}</Text>
-                  <MessageCircleMore size={18} className="text-foreground" />
-                </View>
               </View>
             </View>
             <View className="absolute top-4 right-2 ">
-              <SquarePen size={20} className="text-foreground" />
+              <SquarePen size={20} className="text-primary" />
             </View>
           </View>
         </CardContent>

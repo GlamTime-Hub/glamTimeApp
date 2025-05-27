@@ -10,6 +10,9 @@ export class BookingDetailMapper {
       status: booking.status,
       serviceName: booking.serviceName,
       serviceId: booking.serviceId,
+      reason: booking.reason,
+      hasBusinessReview: booking.hasBusinessReview,
+      hasProfessionalReview: booking.hasProfessionalReview,
       business: {
         id: booking.business.id,
         name: booking.business.name,
@@ -18,10 +21,19 @@ export class BookingDetailMapper {
       },
       fullDate: booking.fullDate,
       createdAt: new Date(booking.createdAt),
+      user: {
+        id: booking.user.id,
+        name: booking.user.name,
+        urlPhoto: booking.user.urlPhoto,
+        userAuthId: booking.user.userAuthId,
+        userId: booking.user.userId,
+      },
       professional: {
         id: booking.professional.id,
         name: booking.professional.name,
         urlPhoto: booking.professional.urlPhoto,
+        userAuthId: booking.professional.userAuthId,
+        userId: booking.professional.userId,
       },
     };
   }

@@ -45,7 +45,7 @@ export const Home = () => {
 
   return (
     <View className="px-4">
-      <Text className="mt-4 mb-1 text-2xl font-bold">Destacados</Text>
+      <Text className="mt-4 mb-1 text-2xl font-baloo-bold">Destacados</Text>
       <Separator />
       <View className="h-[250px] w-full">
         <Carousel

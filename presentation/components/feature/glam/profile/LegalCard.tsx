@@ -17,7 +17,7 @@ const LegalCard = ({ title, lastUpdated, sections }: Props) => {
   return (
     <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
       <View className="px-4 pt-6">
-        <Text className="text-xl font-bold mb-1">{title}</Text>
+        <Text className="text-xl font-baloo-bold mb-1">{title}</Text>
         <Text className="text-xs text-muted-foreground mb-5">
           {lastUpdated}
         </Text>

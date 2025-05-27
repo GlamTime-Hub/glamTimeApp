@@ -1,24 +1,25 @@
-import { confirmBookingAction } from "@/core/actions/booking/confirm-booking.action";
+import { useState } from "react";
+import { View } from "react-native";
+import Toast from "react-native-toast-message";
+import { router } from "expo-router";
+import { useQueryClient } from "@tanstack/react-query";
+
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/presentation/components/ui/avatar";
-import { Button } from "@/presentation/components/ui/button";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { CustomDialog } from "@/presentation/components/ui/CustomDialog";
 import { Text } from "@/presentation/components/ui/text";
 import { useUserNotificationStore } from "@/presentation/store/use-user-notification.store";
 import { formatTime } from "@/presentation/utils/format-time.util";
-import { useState } from "react";
-import { View } from "react-native";
-import { LoadingIndicator } from "../shared/LoadingIndicator";
-import Toast from "react-native-toast-message";
-import { router } from "expo-router";
-import { useQueryClient } from "@tanstack/react-query";
+import { cancelBookingAction } from "@/core/actions/booking/cancel-booking.action";
+import { formatDate } from "@/presentation/utils/format-date.util";
+import { Button } from "@/presentation/components/ui/button";
 
 export const ProfessionalBookingNotification = () => {
-  const { notification, setNotification } = useUserNotificationStore();
+  const { notification } = useUserNotificationStore();
   const [loading, setLoading] = useState(false);
 
   const queryClient = useQueryClient();
@@ -28,29 +29,38 @@ export const ProfessionalBookingNotification = () => {
     return null;
   }
 
-  const onConfirm = async () => {
+  const currentDate = new Date();
+  const currentFormatDate = formatDate(currentDate);
+  const currentHour = currentDate.getHours() + currentDate.getMinutes() / 60;
+
+  const canCancel =
+    (currentFormatDate !== notification?.meta.booking.fullDate &&
+      currentDate < notification.meta.booking.date) ||
+    (currentFormatDate === notification?.meta.booking.fullDate &&
+      currentHour < notification?.meta.booking.startTime);
+
+  const onCancel = async () => {
     setLoading(true);
 
-    const confirm = {
+    const cancel = {
       bookingId: notification?.meta.booking.id,
       notificationId: notification?.id,
       to: notification?.fromUser,
       from: notification?.toUser,
       business: notification?.meta.business.id,
       professional: notification?.meta.professional.id,
+      reason: "El profesional ha cancelado la reserva",
     };
 
-    await confirmBookingAction(confirm);
+    await cancelBookingAction(cancel);
 
     Toast.show({
       type: "success",
-      text1: "Reserva confirmada",
-      text2: "El cliente ha sido notificado",
+      text1: "Reserva cancelada",
+      text2: "El cliente ha sido notificado.",
     });
 
     router.push("/glam/(tabs)/notifications/home");
-
-    setNotification(null);
 
     queryClient.invalidateQueries({ queryKey: ["notifications"] });
 
@@ -58,8 +68,6 @@ export const ProfessionalBookingNotification = () => {
 
     setLoading(false);
   };
-
-  const onCancel = () => {};
 
   return (
     <View className="flex-1 p-4 justify-between">
@@ -83,8 +91,9 @@ export const ProfessionalBookingNotification = () => {
             {notification?.fromUser.name}
           </Text>
           <Text className="text-justify">
-            Quiere reservar contigo, revisa la información del servicio y
-            confirma para asegurarlo.
+            {canCancel
+              ? "Ha reservado una cita contigo, revisa los detalles de la reserva."
+              : "La fecha de la reserva ya ha pasado."}
           </Text>
           <View className="flex flex-row gap-2 mt-2">
             <Text className="text-primary font-baloo-bold">Salón:</Text>
@@ -109,28 +118,30 @@ export const ProfessionalBookingNotification = () => {
         </CardContent>
       </Card>
 
-      <View className="gap-2">
-        <Button
-          variant={"default"}
-          onPress={onConfirm}
-          className="flex flex-row gap-2"
-        >
-          {loading && <LoadingIndicator />}
-          <Text>Confirmar</Text>
-        </Button>
-        <CustomDialog
-          isIcon={false}
-          disabled={loading}
-          title={"Cancelar"}
-          closeLabel={"Cancelar"}
-          buttonVariant={"destructive"}
-          callback={() => onCancel()}
-        >
-          <Text numberOfLines={2}>
-            ¿Estás seguro que deseas cancelar la reserva?
-          </Text>
-        </CustomDialog>
-      </View>
+      {!canCancel && (
+        <View>
+          <Button onPress={() => router.push("/glam/(tabs)/booking/home")}>
+            <Text>Ir a reservas</Text>
+          </Button>
+        </View>
+      )}
+
+      {canCancel && (
+        <View className="gap-2">
+          <CustomDialog
+            isIcon={false}
+            disabled={loading}
+            title={"Cancelar Reserva"}
+            closeLabel={"Cancelar"}
+            buttonVariant={"destructive"}
+            callback={() => onCancel()}
+          >
+            <Text numberOfLines={2}>
+              ¿Estás seguro que deseas cancelar la reserva?
+            </Text>
+          </CustomDialog>
+        </View>
+      )}
     </View>
   );
 };

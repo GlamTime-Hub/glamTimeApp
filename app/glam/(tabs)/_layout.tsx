@@ -2,7 +2,6 @@ import { ThemeToggle } from "@/presentation/components/ThemeToggle";
 import { Tabs } from "expo-router";
 import { CalendarDays, House, User, Heart, Store } from "@/lib/icons/Icons";
 import { useColorScheme } from "@/lib/useColorScheme";
-import { cn } from "@/lib/util";
 import { View } from "react-native";
 import { NotificationIcon } from "@/presentation/components/feature";
 
@@ -14,23 +13,16 @@ export default function _layout() {
       initialRouteName="home/index"
       screenOptions={{
         headerRight: () => (
-          <View className="flex flex-row gap-2 justify-end px-0 relative -right-3">
+          <View className="flex-row items-center py-0 relative mr-4">
             <NotificationIcon />
             <ThemeToggle />
           </View>
         ),
         headerTitleAlign: "center",
-        tabBarShowLabel: false,
-
-        tabBarItemStyle: {
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop: 10,
+        tabBarShowLabel: true,
+        tabBarLabelStyle: {
+          color: isDarkColorScheme ? "#fff" : "#000",
         },
-        tabBarActiveTintColor: "inherit",
-        tabBarInactiveTintColor: "inherit",
-        tabBarActiveBackgroundColor: "inherit",
       }}
     >
       <Tabs.Screen
@@ -62,9 +54,10 @@ export default function _layout() {
         }}
       />
       <Tabs.Screen
-        name="booking/index"
+        name="booking"
         options={{
           title: "Mis Reservas",
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <CalendarDays
               className="text-primary"

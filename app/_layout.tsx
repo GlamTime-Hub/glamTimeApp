@@ -10,19 +10,22 @@ import {
 } from "@react-navigation/native";
 import { SplashScreen, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { Dimensions } from "react-native";
+import { Dimensions, View } from "react-native";
 import { NAV_THEME } from "@/lib/constants";
 import { useColorScheme } from "@/lib/useColorScheme";
 import { setAndroidNavigationBar } from "@/lib/android-navigation-bar";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Toast, { BaseToast, ToastConfig } from "react-native-toast-message";
-import { useDeepLinking } from "@/hooks/use-deep-link.hook";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import useAuthStore from "@/core/store/auth.store";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useLocationPermission } from "@/hooks/use-location-permission.hook";
 import { useUserStore } from "@/presentation/store/use-user.store";
 import { PortalHost } from "@rn-primitives/portal";
+import { useNetInfo } from "@/hooks/use-net-info.hook";
+import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useNotificationPush } from "@/hooks/use-notifications-push.hook";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -35,10 +38,7 @@ const DARK_THEME: Theme = {
   colors: NAV_THEME.dark,
 };
 
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from "expo-router";
+export { ErrorBoundary } from "expo-router";
 
 const toastConfig: ToastConfig = {
   success: (props) => (
@@ -65,7 +65,7 @@ const toastConfig: ToastConfig = {
         borderLeftColor: "red",
         borderRadius: 0,
       }}
-      text1Style={{ fontSize: 18, color: "red" }}
+      text1Style={{ fontSize: 14, color: "red" }}
       text2Style={{ fontSize: 14 }}
     />
   ),
@@ -79,7 +79,7 @@ const toastConfig: ToastConfig = {
         borderLeftColor: "#2F80ED",
         borderRadius: 0,
       }}
-      text1Style={{ fontSize: 18, color: "#2F80ED" }}
+      text1Style={{ fontSize: 14, color: "#2F80ED" }}
       text2Style={{ fontSize: 14 }}
       text2Props={{
         numberOfLines: 2,
@@ -103,9 +103,12 @@ export default function RootLayout() {
 
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = useState(false);
 
-  useLocationPermission();
+  const { showInternetError } = useNetInfo();
 
-  useDeepLinking();
+  useLocationPermission();
+  useNotificationPush();
+
+  console.log("no paso");
 
   const { restoreSession } = useAuthStore();
   const { loadUserFromStorage } = useUserStore();
@@ -132,6 +135,20 @@ export default function RootLayout() {
 
   if (!isColorSchemeLoaded) {
     return null;
+  }
+
+  if (showInternetError) {
+    return (
+      <SafeAreaView>
+        <View className="p-4">
+          <CustomAlert
+            title="Conexión a Internet"
+            description="Por favor, verifica tu conexión a Internet y vuelve a intentarlo."
+            type="destructive"
+          />
+        </View>
+      </SafeAreaView>
+    );
   }
 
   const queryClient = new QueryClient();

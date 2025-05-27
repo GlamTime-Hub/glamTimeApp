@@ -1,15 +1,15 @@
 import axiosClient from "@/core/api/axios-client";
 
-export const handleWorkingHours = async (activeWorkingHours: any) => {
+export const cancelBookingByUserAction = async (booking: any) => {
   try {
-    await axiosClient.post(
-      "professional/handle-working-hours",
-      activeWorkingHours
-    );
+    await axiosClient.post("booking/cancel-booking-by-user", {
+      ...booking,
+    });
+
     return {
       status: true,
     };
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(
       "Ha ocurrido un error inesperado.\npor favor contacte con soporte"
     );

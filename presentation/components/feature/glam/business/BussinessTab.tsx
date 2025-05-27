@@ -30,7 +30,7 @@ export const BusinessTab = ({ id }: { id: string }) => {
       <TabsContent value="services">
         <View className="flex-1">
           <ScrollView showsVerticalScrollIndicator={false}>
-            <BusinessServicesTab id={id} />
+            <BusinessServicesTab id={id} fromProfessional={false} />
           </ScrollView>
         </View>
       </TabsContent>

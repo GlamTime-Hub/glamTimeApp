@@ -18,6 +18,8 @@ import { usePremium } from "./use-premium.hook";
 import { useBookingProfessional } from "./use-booking-professional.hook";
 import { useBookingSlots } from "./use-booking-slots.hook";
 import { useBooking } from "./use-booking";
+import { useAgenda } from "./use-agenda";
+import { useProfessionalFeedback } from "./use-professional-feedback";
 
 export {
   useLogin,
@@ -40,4 +42,6 @@ export {
   useBookingProfessional,
   useBookingSlots,
   useBooking,
+  useAgenda,
+  useProfessionalFeedback,
 };

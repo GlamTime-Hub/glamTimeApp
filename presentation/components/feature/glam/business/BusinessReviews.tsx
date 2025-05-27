@@ -2,7 +2,7 @@ import { ScrollView, View } from "react-native";
 import { ReviewCard } from "../shared/ReviewCard";
 import { useLocalSearchParams } from "expo-router";
 import { useBusinessReviews } from "@/presentation/hooks/use-business-reviews.hook";
-import { BusinessReviewLoading } from "./BusinessReviewLoading";
+import { ReviewLoading } from "./BusinessReviewLoading";
 import { BusinessReviewEmpty } from "./BusinessReviewEmpty";
 
 export const BusinessReviews = () => {
@@ -11,7 +11,7 @@ export const BusinessReviews = () => {
   const { businessReviews, isLoading } = useBusinessReviews(id as string);
 
   if (isLoading) {
-    return <BusinessReviewLoading />;
+    return <ReviewLoading />;
   }
 
   if (!businessReviews?.length) {
@@ -19,7 +19,7 @@ export const BusinessReviews = () => {
   }
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-4">
       <View className="flex-1">
         <View className="flex-1">
           <ScrollView showsVerticalScrollIndicator={false}>

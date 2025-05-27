@@ -8,12 +8,16 @@ const BusinessScreen = () => {
     <Stack
       initialRouteName="list/index"
       screenOptions={{
+        headerTitleAlign: "center",
         headerRight: () => (
-          <View className="flex flex-row gap-2 justify-end px-0 relative -right-2">
+          <View className="flex-row items-center  relative -mr-1">
             <NotificationIcon />
             <ThemeToggle />
           </View>
         ),
+        contentStyle: {
+          height: "180%",
+        },
       }}
     >
       <Stack.Screen

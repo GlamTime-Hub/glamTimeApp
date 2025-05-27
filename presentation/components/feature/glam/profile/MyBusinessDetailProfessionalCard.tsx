@@ -6,10 +6,10 @@ import {
 } from "@/presentation/components/ui/avatar";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Text } from "@/presentation/components/ui/text";
-import { router } from "expo-router";
 import { TouchableOpacity, View } from "react-native";
 import { Trash2 } from "@/lib/icons/Icons";
 import { CustomDialog } from "@/presentation/components/ui/CustomDialog";
+import { router } from "expo-router";
 
 interface Props {
   professional: Partial<Professional>;
@@ -29,13 +29,15 @@ export const MyBusinessDetailProfessionalCard = ({
   return (
     <TouchableOpacity
       onPress={() =>
-        router.push(
-          `/glam/(tabs)/business/detail/professional-detail/${professional.id}?businessId=${professional.businessId}`
-        )
+        router.push({
+          pathname:
+            "/glam/(tabs)/profile/my-business/my-professionals/detail/[id]",
+          params: { id: professional.id },
+        })
       }
     >
       <Card className={`${className} my-2 `}>
-        <CardContent className="  p-4 flex flex-row gap-4 justify-between  items-center">
+        <CardContent className=" relative p-4  flex-row gap-4  items-center">
           <Avatar alt="">
             <AvatarImage
               source={{
@@ -47,11 +49,14 @@ export const MyBusinessDetailProfessionalCard = ({
             </AvatarFallback>
           </Avatar>
           <View className="px-4">
-            <Text className="font-bold text-lg">{professional.user?.name}</Text>
+            <Text className="font-baloo-bold text-lg">
+              {professional.user?.name}
+            </Text>
             <Text className="text-sm">{professional.user?.email}</Text>
             <Text className="text-sm">{professional.user?.phoneNumber}</Text>
           </View>
           <CustomDialog
+            className="absolute top-7 right-0"
             isIcon={true}
             icon={<Trash2 color={"red"} />}
             closeLabel="continuar"

@@ -7,16 +7,16 @@ import {
 } from "@/presentation/components/ui/tabs";
 import { Text } from "@/presentation/components/ui/text";
 import { useState } from "react";
-import { BusinessTabCollapsible } from "./BusinessTabCollapsible";
 import { BusinessProfessionalComments } from "./BusinessProfessionalComments";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
+import { BusinessServicesTab } from "./BusinessServicesTab";
 
 interface Props {
-  services: any;
-  comments?: any;
+  id: string;
+  businessId: string;
 }
 
-export const BusinessProfessionalTab = ({ services }: Props) => {
+export const BusinessProfessionalTab = ({ id, businessId }: Props) => {
   const [value, setValue] = useState("services");
 
   return (
@@ -34,27 +34,18 @@ export const BusinessProfessionalTab = ({ services }: Props) => {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="services" className="flex-1">
-        <Card className="flex-1">
-          <CardContent className="gap-4 flex-1 my-4 native:gap-2">
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {Object.keys(services).map((category) => (
-                <BusinessTabCollapsible
-                  key={category}
-                  title={category}
-                  fromBusiness={false}
-                  services={services[category]}
-                />
-              ))}
-            </ScrollView>
-          </CardContent>
-        </Card>
+        <View className="flex-1">
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <BusinessServicesTab id={businessId} fromProfessional={true} />
+          </ScrollView>
+        </View>
       </TabsContent>
       <TabsContent value="comments" className="flex-1">
-        <Card className="mb-10 flex-1 ">
-          <CardContent className="gap-4 flex-1 native:gap-2">
-            <BusinessProfessionalComments />
-          </CardContent>
-        </Card>
+        <View className="flex-1">
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <BusinessProfessionalComments professionalId={id} />
+          </ScrollView>
+        </View>
       </TabsContent>
     </Tabs>
   );

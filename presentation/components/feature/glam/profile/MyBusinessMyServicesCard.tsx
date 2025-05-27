@@ -5,7 +5,6 @@ import { Input } from "@/presentation/components/ui/input";
 import { Switch } from "@/presentation/components/ui/switch";
 import { Text } from "@/presentation/components/ui/text";
 import { Modal, Pressable, TouchableWithoutFeedback, View } from "react-native";
-import { Save } from "@/lib/icons/Icons";
 import { useBusinessServiceCard } from "@/presentation/hooks";
 import { Button } from "@/presentation/components/ui/button";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
@@ -41,12 +40,6 @@ export const MyBusinessMyServicesCard = ({
       <View className="flex flex-row justify-between items-center">
         <Text className="my-2 font-baloo-bold text-xl">{subcategory.name}</Text>
         <View className="flex flex-row gap-2 items-center">
-          {subcategory.service.id && !saveLoading && (
-            <Button onPress={onSave} variant={"ghost"} size={"icon"}>
-              <Save className="text-foreground" size={30} />
-            </Button>
-          )}
-          {saveLoading && <LoadingIndicator />}
           <Switch
             disabled={loading || saveLoading}
             checked={service.checked}
@@ -114,6 +107,12 @@ export const MyBusinessMyServicesCard = ({
           </View>
         </View>
       </View>
+      {subcategory.service.id && (
+        <Button size={"sm"} className="mt-2 flex-row gap-2" onPress={onSave}>
+          {saveLoading && <LoadingIndicator />}
+          <Text>Guardar</Text>
+        </Button>
+      )}
     </View>
   );
 };
