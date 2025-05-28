@@ -15,7 +15,6 @@ export default ({ config }) => ({
       "expo-splash-screen",
       {
         image: "./assets/images/splash-icon.png",
-        imageWidth: 200,
         resizeMode: "contain",
         backgroundColor: "#ffffff",
       },
@@ -26,10 +25,15 @@ export default ({ config }) => ({
         android: {
           timePicker: {
             background: { light: "#FF5722", dark: "#383838" },
-            headerBackground: { light: "#000000", dark: "#FFFFFF" },
             numbersBackgroundColor: { light: "#FF5722", dark: "#383838" },
           },
         },
+      },
+    ],
+    [
+      "expo-asset",
+      {
+        assets: ["./assets/images/default.png"],
       },
     ],
   ],

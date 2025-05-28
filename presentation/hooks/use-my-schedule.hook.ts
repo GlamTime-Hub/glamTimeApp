@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useProfessional } from "./use-professional.hook";
-import { decimalToDateNumber } from "../utils/decimal-to-date-number.util";
-import { timestampToDecimalHour } from "../utils/timestamp-to-decimal-hour.util";
 import { updateProfessionalById } from "../../core/actions/professional/update-professional.action";
 import Toast from "react-native-toast-message";
 import { useQueryClient } from "@tanstack/react-query";
@@ -57,16 +55,14 @@ export const useMySchedule = () => {
   };
 
   const addTime = (end: number, day: string) => {
-    const newEnd = timestampToDecimalHour(end);
-
     setSchedule((prevSchedule: any) => {
       return {
         ...prevSchedule,
         [day]: [
           ...(prevSchedule ? prevSchedule[day] : []),
           {
-            start: decimalToDateNumber(newEnd),
-            end: decimalToDateNumber(newEnd + 1),
+            start: end,
+            end: end + 1,
           },
         ],
       };
@@ -90,38 +86,38 @@ export const useMySchedule = () => {
     const scheduleToSave = {
       monday:
         schedule?.monday.map((monday) => ({
-          start: timestampToDecimalHour(monday.start),
-          end: timestampToDecimalHour(monday.end),
+          start: monday.start,
+          end: monday.end,
         })) || [],
       tuesday:
         schedule?.tuesday.map((tuesday) => ({
-          start: timestampToDecimalHour(tuesday.start),
-          end: timestampToDecimalHour(tuesday.end),
+          start: tuesday.start,
+          end: tuesday.end,
         })) || [],
       wednesday:
         schedule?.wednesday.map((wednesday) => ({
-          start: timestampToDecimalHour(wednesday.start),
-          end: timestampToDecimalHour(wednesday.end),
+          start: wednesday.start,
+          end: wednesday.end,
         })) || [],
       thursday:
         schedule?.thursday.map((thursday) => ({
-          start: timestampToDecimalHour(thursday.start),
-          end: timestampToDecimalHour(thursday.end),
+          start: thursday.start,
+          end: thursday.end,
         })) || [],
       friday:
         schedule?.friday.map((friday) => ({
-          start: timestampToDecimalHour(friday.start),
-          end: timestampToDecimalHour(friday.end),
+          start: friday.start,
+          end: friday.end,
         })) || [],
       saturday:
         schedule?.saturday.map((saturday) => ({
-          start: timestampToDecimalHour(saturday.start),
-          end: timestampToDecimalHour(saturday.end),
+          start: saturday.start,
+          end: saturday.end,
         })) || [],
       sunday:
         schedule?.sunday.map((sunday) => ({
-          start: timestampToDecimalHour(sunday.start),
-          end: timestampToDecimalHour(sunday.end),
+          start: sunday.start,
+          end: sunday.end,
         })) || [],
     };
 
@@ -153,32 +149,32 @@ export const useMySchedule = () => {
     if (professional) {
       const newSchedule = {
         monday: professional.workingHours.monday.map((monday) => ({
-          start: decimalToDateNumber(monday.start),
-          end: decimalToDateNumber(monday.end),
+          start: monday.start,
+          end: monday.end,
         })),
         tuesday: professional.workingHours.tuesday.map((tuesday) => ({
-          start: decimalToDateNumber(tuesday.start),
-          end: decimalToDateNumber(tuesday.end),
+          start: tuesday.start,
+          end: tuesday.end,
         })),
         wednesday: professional.workingHours.wednesday.map((wednesday) => ({
-          start: decimalToDateNumber(wednesday.start),
-          end: decimalToDateNumber(wednesday.end),
+          start: wednesday.start,
+          end: wednesday.end,
         })),
         thursday: professional.workingHours.thursday.map((thursday) => ({
-          start: decimalToDateNumber(thursday.start),
-          end: decimalToDateNumber(thursday.end),
+          start: thursday.start,
+          end: thursday.end,
         })),
         friday: professional.workingHours.friday.map((friday) => ({
-          start: decimalToDateNumber(friday.start),
-          end: decimalToDateNumber(friday.end),
+          start: friday.start,
+          end: friday.end,
         })),
         saturday: professional.workingHours.saturday.map((saturday) => ({
-          start: decimalToDateNumber(saturday.start),
-          end: decimalToDateNumber(saturday.end),
+          start: saturday.start,
+          end: saturday.end,
         })),
         sunday: professional.workingHours.sunday.map((sunday) => ({
-          start: decimalToDateNumber(sunday.start),
-          end: decimalToDateNumber(sunday.end),
+          start: sunday.start,
+          end: sunday.end,
         })),
       };
 

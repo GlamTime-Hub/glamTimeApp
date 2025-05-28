@@ -178,7 +178,7 @@ export default function RootLayout() {
               }}
             />
           </Stack>
-          {/* <PortalHost /> */}
+          <PortalHost />
           <Toast topOffset={0} config={toastConfig} />
         </ThemeProvider>
       </QueryClientProvider>

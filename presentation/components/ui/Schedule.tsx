@@ -2,12 +2,13 @@ import { View } from "react-native";
 import { Text } from "./text";
 import { Card, CardContent } from "./card";
 import { Separator } from "./separator";
-import { IosTimePicker } from "./IosTimePicker";
 import { Button } from "./button";
 import { Trash2 } from "@/lib/icons/Icons";
+import { TimePicker } from "./TimePicker";
 
 interface Props {
   title: string;
+  day: string;
   schedule: {
     end: number;
     start: number;
@@ -17,9 +18,10 @@ interface Props {
   onDelete: (index: number) => void;
 }
 
-export const IosSchedule = ({
+export const Schedule = ({
   title,
   schedule,
+  day,
   add,
   handleDay,
   onDelete,
@@ -43,7 +45,7 @@ export const IosSchedule = ({
             key={title + index + item.start + item.end}
             className="flex-row gap-2 items-center justify-center"
           >
-            <IosTimePicker
+            {/* <IosTimePicker
               start={new Date(item.start)}
               end={new Date(item.end)}
               index={index}
@@ -51,6 +53,15 @@ export const IosSchedule = ({
                 index === 0 ? undefined : new Date(schedule[index - 1].end)
               }
               handleDay={handleDay}
+            /> */}
+
+            <TimePicker
+              minTime={index === 0 ? 5.5 : schedule[index - 1].end}
+              start={item.start}
+              end={item.end}
+              handleDay={handleDay}
+              index={index}
+              day={day}
             />
             <Button
               onPress={() => onDelete(index)}

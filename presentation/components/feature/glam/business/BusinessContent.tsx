@@ -21,8 +21,6 @@ export const BusinessContent = ({ drawerRef }: Props) => {
     return <BusinessContentLoading />;
   }
 
-  console.log("businesses", businesses);
-
   return (
     <View className="p-2 flex-1">
       <Text className="font-baloo-bold text-center my-2">

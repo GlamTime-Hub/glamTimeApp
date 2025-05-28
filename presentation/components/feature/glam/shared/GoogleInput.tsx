@@ -52,9 +52,6 @@ export const GoogleInput = ({ setRegion }: Props) => {
 
   const fetchPlace = async (placeId: string) => {
     try {
-      console.log(
-        `https://places.googleapis.com/v1/places/${placeId}?key=${GOOGLE_PLACES_API_KEY}&languageCode=es`
-      );
       const response = await axios.get(
         `https://places.googleapis.com/v1/places/${placeId}?key=${GOOGLE_PLACES_API_KEY}&languageCode=es`,
         {

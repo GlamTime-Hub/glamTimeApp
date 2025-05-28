@@ -18,8 +18,6 @@ interface Props {
 export const GoogleMaps = ({ region, setRegion, callback }: Props) => {
   const mapRef = useRef<any>(null);
 
-  console.log("entréee?", region);
-
   return (
     <View className="flex flex-1 flex-col justify-between">
       <View className="">
