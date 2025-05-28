@@ -6,7 +6,7 @@ export default ({ config }) => ({
     googleMapsApiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY || "",
     apiBackendUrl: process.env.EXPO_PUBLIC_API_BACKEND,
     eas: {
-      projectId: process.env.EXPO_PUBLIC_PROJECT_ID_NOTIFICATIONS,
+      projectId: "09907518-f6ae-463a-b3f9-2390f4f43e31",
     },
   },
   plugins: [

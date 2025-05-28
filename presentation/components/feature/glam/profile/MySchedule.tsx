@@ -7,6 +7,7 @@ import { MyScheduleLoading } from "./MyScheduleLoading";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
 import { MyScheduleEmpty } from "./MyScheduleEmpty";
 import { IosSchedule } from "@/presentation/components/ui/IosSchedule";
+import { AndroidSchedule } from "@/presentation/components/ui/AndroidSchedule";
 
 const isIos = Platform.OS === "ios";
 
@@ -93,7 +94,64 @@ export const MySchedule = () => {
             />
           </View>
         )}
-        {!isIos && <View></View>}
+        {!isIos && (
+          <View className="flex-1">
+            <AndroidSchedule
+              title="Lunes"
+              schedule={schedule.monday}
+              add={(end) => addTime(end, "monday")}
+              handleDay={handleDay}
+              onDelete={(index) => onDelete("monday", index)}
+            />
+
+            <AndroidSchedule
+              title="Martes"
+              schedule={schedule.tuesday}
+              add={(end) => addTime(end, "tuesday")}
+              handleDay={handleDay}
+              onDelete={(index) => onDelete("tuesday", index)}
+            />
+
+            <AndroidSchedule
+              title="Miercoles"
+              schedule={schedule.wednesday}
+              add={(end) => addTime(end, "wednesday")}
+              handleDay={handleDay}
+              onDelete={(index) => onDelete("wednesday", index)}
+            />
+
+            <AndroidSchedule
+              title="Jueves"
+              schedule={schedule.thursday}
+              add={(end) => addTime(end, "thursday")}
+              handleDay={handleDay}
+              onDelete={(index) => onDelete("thursday", index)}
+            />
+
+            <AndroidSchedule
+              title="Viernes"
+              schedule={schedule.friday}
+              add={(end) => addTime(end, "friday")}
+              handleDay={handleDay}
+              onDelete={(index) => onDelete("friday", index)}
+            />
+
+            <AndroidSchedule
+              title="Sábado"
+              schedule={schedule.saturday}
+              add={(end) => addTime(end, "saturday")}
+              handleDay={handleDay}
+              onDelete={(index) => onDelete("saturday", index)}
+            />
+            <AndroidSchedule
+              title="Domingo"
+              schedule={schedule.sunday}
+              add={(end) => addTime(end, "sunday")}
+              handleDay={handleDay}
+              onDelete={(index) => onDelete("sunday", index)}
+            />
+          </View>
+        )}
       </ScrollView>
       <Button
         disabled={loading}

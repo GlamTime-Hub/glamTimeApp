@@ -32,7 +32,7 @@ export const MyBusinessDetailProfessionalCard = ({
         router.push({
           pathname:
             "/glam/(tabs)/profile/my-business/my-professionals/detail/[id]",
-          params: { id: professional.id },
+          params: { id: professional.id! },
         })
       }
     >

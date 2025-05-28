@@ -1,11 +1,10 @@
 import { Text } from "@/presentation/components/ui/text";
-import { FlatList, ScrollView, View } from "react-native";
+import { FlatList, View } from "react-native";
 import { BusinessOrder } from "./BusinessOrder";
 import BusinessCard from "./BusinessCard";
 import { BusinessFilter } from "./BusinessFilter";
 import { useBusiness } from "@/presentation/hooks";
 import { BusinessContentLoading } from "./BusinessContentLoading";
-import { Business } from "@/core/interfaces/business.interface";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
 
 interface Props {
@@ -21,6 +20,8 @@ export const BusinessContent = ({ drawerRef }: Props) => {
   if (isLoading) {
     return <BusinessContentLoading />;
   }
+
+  console.log("businesses", businesses);
 
   return (
     <View className="p-2 flex-1">

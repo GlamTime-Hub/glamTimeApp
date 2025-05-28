@@ -51,7 +51,6 @@ export const MyBusinessMyProfessionals = () => {
 
         <Button
           onPress={handleSubmit(onSendInvitation)}
-          variant={"outline"}
           className="mb-5 flex flex-row gap-2"
         >
           {loading && <LoadingIndicator />}

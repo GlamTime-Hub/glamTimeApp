@@ -106,9 +106,7 @@ export default function RootLayout() {
   const { showInternetError } = useNetInfo();
 
   useLocationPermission();
-  useNotificationPush();
-
-  console.log("no paso");
+  // useNotificationPush();
 
   const { restoreSession } = useAuthStore();
   const { loadUserFromStorage } = useUserStore();
@@ -180,7 +178,7 @@ export default function RootLayout() {
               }}
             />
           </Stack>
-          <PortalHost />
+          {/* <PortalHost /> */}
           <Toast topOffset={0} config={toastConfig} />
         </ThemeProvider>
       </QueryClientProvider>

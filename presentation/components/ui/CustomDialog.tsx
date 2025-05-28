@@ -10,7 +10,7 @@ import {
 } from "@/presentation/components/ui/dialog";
 import { Text } from "./text";
 import { Button } from "./button";
-import { View } from "react-native";
+import { Pressable, TouchableOpacity, View } from "react-native";
 
 interface Props {
   title?: string;
@@ -45,15 +45,9 @@ export const CustomDialog = ({
             <Text className="font-baloo-bold">{title}</Text>
           </Button>
         ) : (
-          <Button
-            className="flex flex-row gap-2 px-4 text-end "
-            disabled={disabled}
-            variant="ghost"
-            size={"lg"}
-          >
+          <TouchableOpacity className="flex-row gap-2 px-4 text-end">
             {icon}
-            <Text>{labelIcon}</Text>
-          </Button>
+          </TouchableOpacity>
         )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
