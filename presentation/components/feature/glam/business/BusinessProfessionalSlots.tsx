@@ -5,15 +5,16 @@ import { useBookingSlots } from "@/presentation/hooks";
 import { BusinessProfessionalSlotsCarousel } from "./BusinessProfessionalSlotsCarousel";
 import { BusinessProfessionalSlot } from "./BusinessProfessionalSlot";
 import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
-import { professionals } from "../../../../../BD/professional.constant";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/presentation/components/ui/avatar";
+import { LoadingIndicator } from "../shared/LoadingIndicator";
 
 export const BusinessProfessionalSlots = () => {
   const {
+    loading,
     availableDays,
     professional,
     currentSlots,
@@ -58,6 +59,12 @@ export const BusinessProfessionalSlots = () => {
           </View>
         )}
         <View className="flex-1">
+          {loading && (
+            <View className="mt-10 justify-center items-center">
+              <LoadingIndicator />
+            </View>
+          )}
+
           {currentSlots.length === 0 && (
             <CustomAlert
               title="Info!!!"
@@ -66,7 +73,7 @@ export const BusinessProfessionalSlots = () => {
             />
           )}
 
-          {currentSlots.length > 0 && (
+          {currentSlots.length > 0 && !loading && (
             <View>
               {currentSlots.map((slot, index) => (
                 <View className="flex" key={index}>

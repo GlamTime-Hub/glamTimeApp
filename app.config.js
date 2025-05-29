@@ -20,17 +20,6 @@ export default ({ config }) => ({
       },
     ],
     [
-      "@react-native-community/datetimepicker",
-      {
-        android: {
-          timePicker: {
-            background: { light: "#FF5722", dark: "#383838" },
-            numbersBackgroundColor: { light: "#FF5722", dark: "#383838" },
-          },
-        },
-      },
-    ],
-    [
       "expo-asset",
       {
         assets: ["./assets/images/default.png"],

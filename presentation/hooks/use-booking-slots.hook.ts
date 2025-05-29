@@ -2,13 +2,13 @@ import { getAvailableDays } from "@/core/actions/booking/get-available-days.acti
 import { useBusinessBookingStore } from "../store/use-business-booking.store";
 import { AvailableDay } from "@/core/interfaces/available-day.interface";
 import { useEffect, useState } from "react";
-import { getSlots } from "@/core/actions/booking/get-slots.action";
 import { Slot } from "@/core/interfaces/slot.interface";
 import { router } from "expo-router";
-import { getBookingByProfessionalAction } from "@/core/actions/booking/get-bookings-by-professional.action";
+import { getSlotsServerAction } from "@/core/actions/booking/get-slots-server.action";
 
 export const useBookingSlots = () => {
   const { professional, service, addSlot } = useBusinessBookingStore();
+  const [loading, setLoading] = useState<boolean>(false);
   const availableDays = getAvailableDays();
 
   const [currentDay, setCurrentDay] = useState<AvailableDay | null>(
@@ -24,30 +24,27 @@ export const useBookingSlots = () => {
 
   const onChangeDay = async (slot: AvailableDay) => {
     setCurrentDay(slot);
+    setLoading(true);
 
-    const { data: bookings } = await getBookingByProfessionalAction(
-      professional?.id!,
-      professional?.businessId!
-    );
+    const slots = await getSlotsServerAction(professional, service, slot.date);
 
-    const slots = getSlots(professional, service, slot.date, bookings);
-    setCurrentSlots(slots);
+    setCurrentSlots(slots.data);
+
+    setLoading(false);
   };
 
   useEffect(() => {
     const getInitSlots = async () => {
-      const { data: bookings } = await getBookingByProfessionalAction(
-        professional?.id!,
-        professional?.businessId!
-      );
+      setLoading(true);
 
-      const slots = getSlots(
+      const slots = await getSlotsServerAction(
         professional,
         service,
-        availableDays[0].date,
-        bookings
+        availableDays[0].date
       );
-      setCurrentSlots(slots);
+
+      setCurrentSlots(slots.data);
+      setLoading(false);
     };
 
     if (availableDays) {
@@ -56,6 +53,7 @@ export const useBookingSlots = () => {
   }, []);
 
   return {
+    loading,
     availableDays,
     professional,
     currentSlots,
