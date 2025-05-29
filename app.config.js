@@ -22,7 +22,7 @@ export default ({ config }) => ({
     [
       "expo-asset",
       {
-        assets: ["./assets/images/default.png"],
+        assets: ["./assets/images/default-custom.png"],
       },
     ],
   ],
