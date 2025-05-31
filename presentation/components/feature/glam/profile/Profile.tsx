@@ -108,7 +108,7 @@ export const Profile = ({
             </View>
           ))}
           <Button onPress={onLogout}>
-            <Text> Cerrar Session</Text>
+            <Text> Cerrar Sesión</Text>
           </Button>
         </View>
       </ScrollView>

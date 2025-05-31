@@ -90,6 +90,8 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     justifyContent: "flex-end",
+    borderRadius: 4,
+    overflow: "hidden",
   },
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)",

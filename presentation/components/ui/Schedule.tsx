@@ -33,7 +33,13 @@ export const Schedule = ({
           <Text className=" font-baloo-bold text-2xl">{title}</Text>
           <Button
             size={"sm"}
-            onPress={() => add(schedule[schedule.length - 1].end)}
+            onPress={() =>
+              add(
+                schedule[schedule.length - 1]
+                  ? schedule[schedule.length - 1].end
+                  : 6
+              )
+            }
           >
             <Text>Agregar franja</Text>
           </Button>
@@ -45,16 +51,6 @@ export const Schedule = ({
             key={title + index + item.start + item.end}
             className="flex-row gap-2 items-center justify-center"
           >
-            {/* <IosTimePicker
-              start={new Date(item.start)}
-              end={new Date(item.end)}
-              index={index}
-              minDate={
-                index === 0 ? undefined : new Date(schedule[index - 1].end)
-              }
-              handleDay={handleDay}
-            /> */}
-
             <TimePicker
               minTime={index === 0 ? 5.5 : schedule[index - 1].end}
               start={item.start}

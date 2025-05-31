@@ -1,18 +1,18 @@
 import { create } from "zustand";
 
+interface BusinessFilter {
+  name: string;
+  country: string;
+  city: string;
+  category: string;
+  businessType: string;
+}
+
 interface BusinessFilterState {
-  filter: {
-    name: string;
-    city: string;
-    category: string;
-    businessType: string;
-  };
-  setFilter: (filter: {
-    name: string;
-    city: string;
-    category: string;
-    businessType: string;
-  }) => void;
+  filter: BusinessFilter;
+  setFilter: (filter: Partial<BusinessFilter>) => void;
+  isInitialized: boolean;
+  initializeDefaults: (city?: string, country?: string) => void;
 }
 
 export const useBusinessFilterStore = create<BusinessFilterState>((set) => ({
@@ -20,7 +20,24 @@ export const useBusinessFilterStore = create<BusinessFilterState>((set) => ({
     name: "",
     city: "",
     category: "",
+    country: "",
     businessType: "",
   },
-  setFilter: (filter) => set({ filter }),
+  isInitialized: false,
+  setFilter: (newFilter) =>
+    set((state) => ({
+      filter: {
+        ...state.filter,
+        ...newFilter,
+      },
+    })),
+  initializeDefaults: (city, country) =>
+    set((state) => ({
+      filter: {
+        ...state.filter,
+        city: city ?? "",
+        country: country ?? "",
+      },
+      isInitialized: true,
+    })),
 }));

@@ -22,8 +22,11 @@ export const getAvailableDays = (): AvailableDay[] => {
   Array.from({ length: 10 }, (_, i) => {
     const date = new Date();
     date.setDate(date.getDate() + i);
+    date.setHours(0, 0, 0, 0);
     slots.push(formatDate(date));
   });
+
+  console.log("slots", slots);
 
   return slots;
 };
