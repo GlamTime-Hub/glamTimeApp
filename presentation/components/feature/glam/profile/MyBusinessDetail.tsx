@@ -16,10 +16,14 @@ import {
   MessageCircleHeart,
 } from "@/lib/icons/Icons";
 import { CustomDialog } from "@/presentation/components/ui/CustomDialog";
+import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 export const MyBusinessDetail = ({ id }: { id: string }) => {
   const { business, isLoading, updateImage, handleBusinessStatus } =
     useProfileBusinessDetail(id);
+
+  const { titleColor } = useColorScheme();
 
   if (isLoading) {
     return <MyBusinessDetailLoading />;
@@ -37,10 +41,18 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
               callback={updateImage}
             />
           </View>
-          <Text className="font-baloo-bold my-2 text-xl text-center">
+          <Text
+            className={`font-baloo-bold mb-1 text-2xl text-center ${titleColor}`}
+          >
             {business?.name}
           </Text>
         </View>
+
+        <CustomAlert
+          title="Info!!!"
+          description="Recuerda mantener tus servicios activos para que tu negocio sea visible."
+          type="info"
+        />
 
         <Card className="my-2">
           <CardContent className="p-6">
@@ -108,7 +120,10 @@ export const MyBusinessDetail = ({ id }: { id: string }) => {
                 router.push({
                   pathname:
                     "/glam/(tabs)/profile/my-business/my-services/[businessId]",
-                  params: { businessId: id },
+                  params: {
+                    businessId: id,
+                    businessType: business?.businesstype,
+                  },
                 })
               }
             >

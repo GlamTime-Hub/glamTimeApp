@@ -6,6 +6,8 @@ import { BusinessFilter } from "./BusinessFilter";
 import { useBusiness } from "@/presentation/hooks";
 import { BusinessContentLoading } from "./BusinessContentLoading";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
+import { Separator } from "@/presentation/components/ui/separator";
+import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
 
 interface Props {
   drawerRef: React.RefObject<any>;
@@ -27,11 +29,25 @@ export const BusinessContent = ({ drawerRef }: Props) => {
         Usa los filtros y encuentra justo lo que buscas.
       </Text>
 
-      <View className="mt-4 flex-row items-center justify-between">
-        <BusinessFilter callback={() => drawerRef.current?.openDrawer()} />
-        <BusinessOrder />
+      <View className="px-4">
+        <View className="mt-4 flex-row items-center justify-between">
+          <BusinessFilter callback={() => drawerRef.current?.openDrawer()} />
+          <BusinessOrder />
+        </View>
+        <Separator className="mt-2" />
       </View>
-      <View className="flex-1 px-4">
+
+      {businesses.length === 0 && (
+        <View className="px-4 mt-4">
+          <CustomAlert
+            title="Sin resultados"
+            description="No se encontraron resultados, intenta con otros filtros."
+            type="info"
+          />
+        </View>
+      )}
+
+      <View className="flex-1 px-4 mt-2">
         <FlatList
           data={businesses}
           showsVerticalScrollIndicator={false}
@@ -46,6 +62,7 @@ export const BusinessContent = ({ drawerRef }: Props) => {
                 likes: item.likes,
                 receivedReviews: item.receivedReviews,
                 totalBooking: item.totalBooking,
+                address: item.location.address,
               }}
             />
           )}

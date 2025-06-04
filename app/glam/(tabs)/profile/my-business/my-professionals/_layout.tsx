@@ -1,11 +1,15 @@
+import { useColorScheme } from "@/lib/useColorScheme";
 import { Stack } from "expo-router";
 
 const MyProfessionalLayout = () => {
+  const { isDarkColorScheme } = useColorScheme();
+
   return (
     <Stack
       initialRouteName="home/[businessId]"
       screenOptions={{
         headerShown: true,
+        headerTintColor: isDarkColorScheme ? "white" : "black",
       }}
     >
       <Stack.Screen

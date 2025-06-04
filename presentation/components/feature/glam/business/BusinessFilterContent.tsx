@@ -24,6 +24,7 @@ export const BusinessFilterContent = () => {
     contentInsets,
     handleSubmit,
     onSubmit,
+    onResetFilters,
   } = useBusinessFilter();
 
   return (
@@ -156,9 +157,14 @@ export const BusinessFilterContent = () => {
           />
         </View>
       </View>
-      <Button onPress={handleSubmit(onSubmit)}>
-        <Text>Aplicar</Text>
-      </Button>
+      <View className="gap-2">
+        <Button onPress={handleSubmit(onSubmit)}>
+          <Text>Aplicar</Text>
+        </Button>
+        <Button variant={"secondary"} onPress={onResetFilters}>
+          <Text>Limpiar</Text>
+        </Button>
+      </View>
     </View>
   );
 };

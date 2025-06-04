@@ -9,7 +9,7 @@ import useAuthStore from "@/core/store/auth.store";
 import { useUserStore } from "../store/use-user.store";
 import { cancelBookingByUserAction } from "@/core/actions/booking/cancel-booking-by-user.action";
 
-const staleTime = 1000 * 60 * 60 * 24;
+const staleTime = 0;
 
 export const useBooking = () => {
   const [loading, setLoading] = useState(false);

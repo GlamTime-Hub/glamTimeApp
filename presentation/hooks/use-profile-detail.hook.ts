@@ -29,6 +29,20 @@ export const useProfileDetail = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const [openModal, setOpenModal] = useState({
+    day: false,
+    month: false,
+    gender: false,
+    city: false,
+  });
+
+  const [valuesModal, setValuesModal] = useState({
+    day: user?.birthDay,
+    month: `${user?.birthMonth}`,
+    gender: user?.gender,
+    city: user?.city,
+  });
+
   const queryClient = useQueryClient();
 
   const {
@@ -37,6 +51,7 @@ export const useProfileDetail = () => {
     setValue,
     clearErrors,
     resetField,
+    getValues,
     reset,
     formState: { errors },
   } = useForm({
@@ -114,11 +129,20 @@ export const useProfileDetail = () => {
         email: user!.email,
         country: user!.country,
       });
+
+      setValuesModal({
+        city: user!.city,
+        day: user!.birthDay,
+        month: `${user!.birthMonth}`,
+        gender: user.gender,
+      });
     }
   }, [user]);
 
   return {
+    valuesModal,
     GENDER,
+    openModal,
     DAYS,
     MONTHS,
     isLoading,
@@ -136,5 +160,8 @@ export const useProfileDetail = () => {
     onSave,
     onChangePhone,
     onChangeCountry,
+    setOpenModal,
+    getValues,
+    setValuesModal,
   };
 };

@@ -4,8 +4,11 @@ import { TouchableOpacity, View } from "react-native";
 
 import { ChevronRight } from "@/lib/icons/Icons";
 import { router } from "expo-router";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 export const BookingProfessional = () => {
+  const { titleColor } = useColorScheme();
+
   return (
     <View className="flex-1 gap-2 p-4">
       <TouchableOpacity
@@ -13,10 +16,10 @@ export const BookingProfessional = () => {
       >
         <Card>
           <CardContent className="relative py-4">
-            <Text className="font-baloo-bold text-xl text-primary">
+            <Text className={`font-baloo-bold text-xl ${titleColor}`}>
               Mi Agenda
             </Text>
-            <Text>
+            <Text className="text-muted-foreground">
               Aquí podrás ver todas tus reservas hechas por los usuarios y
               gestionar tu agenda de trabajo como profesional.
             </Text>
@@ -29,10 +32,10 @@ export const BookingProfessional = () => {
       >
         <Card>
           <CardContent className="relative py-4">
-            <Text className="font-baloo-bold text-xl text-primary">
+            <Text className={`font-baloo-bold text-xl ${titleColor}`}>
               Mis Reservas
             </Text>
-            <Text>
+            <Text className="text-muted-foreground">
               Aquí podrás ver todas tus reservas hechas como usuario de la
               aplicación.
             </Text>

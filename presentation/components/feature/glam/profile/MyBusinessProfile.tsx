@@ -27,6 +27,7 @@ import { Button } from "@/presentation/components/ui/button";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
 import { BusinessType } from "@/core/interfaces/business-type.interface";
 import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
+import { CustomInputPicker } from "@/presentation/components/ui/CustomInputPicker";
 
 export const MyBusinessProfile = () => {
   const { id } = useLocalSearchParams();
@@ -40,11 +41,16 @@ export const MyBusinessProfile = () => {
     contentInsets,
     countries,
     cities,
+    valuesModal,
+    openCityModal,
     handleSubmit,
     onChangeCountry,
     onChangePhone,
     onSubmit,
     onUpdateRegion,
+    setValue,
+    setValuesModal,
+    setOpenCityModal,
   } = useProfileBusinessDetail(id as string);
 
   return (
@@ -227,48 +233,32 @@ export const MyBusinessProfile = () => {
 
             <View className="my-2">
               <Text className="font-baloo-bold mb-1">Selecciona tu ciudad</Text>
-              <Controller
-                control={control}
-                name="city"
-                render={({ field: { onChange, value } }) => (
-                  <Select
-                    disabled={loading}
-                    onValueChange={(value) => {
-                      onChange(value?.value);
-                    }}
-                    value={
-                      value
-                        ? {
-                            value,
-                            label:
-                              cities?.find((c) => c.id === value)?.name ?? "",
-                          }
-                        : undefined
-                    }
-                  >
-                    <SelectTrigger disabled={loading}>
-                      <SelectValue
-                        className="text-foreground text-sm native:text-lg"
-                        placeholder="Ciudad"
-                      />
-                    </SelectTrigger>
-                    <SelectContent insets={contentInsets} className="w-full">
-                      <ScrollView className="max-h-80 ">
-                        <SelectGroup>
-                          {cities?.map((city) => (
-                            <SelectItem
-                              key={city.id}
-                              label={city.name}
-                              value={city.id}
-                            >
-                              {city.name}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                      </ScrollView>
-                    </SelectContent>
-                  </Select>
-                )}
+              <CustomInputPicker
+                label="Ciudad"
+                placeHolder="Selecciona la ciudad"
+                value={
+                  cities
+                    ?.filter((m) => m.id === `${valuesModal.city}`)
+                    ?.map((city) => ({
+                      label: city.name,
+                      value: city.id,
+                    }))[0] || { value: "", label: "" }
+                }
+                callback={(itemValue) => {
+                  setValuesModal((prev) => ({
+                    ...prev,
+                    city: `${itemValue}`,
+                  }));
+                  setValue("city", itemValue);
+                }}
+                openModal={openCityModal}
+                setOpenModal={(open) => setOpenCityModal(open)}
+                items={
+                  cities?.map((city) => ({
+                    label: city.name,
+                    value: `${city.id}`,
+                  })) ?? []
+                }
               />
               {errors.city && (
                 <Text className="text-red-500 text-sm">

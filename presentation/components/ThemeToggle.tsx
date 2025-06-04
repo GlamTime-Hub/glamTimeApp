@@ -27,9 +27,9 @@ export function ThemeToggle() {
           )}
         >
           {isDarkColorScheme ? (
-            <MoonStar className="text-primary" size={23} strokeWidth={1.25} />
+            <MoonStar className="text-white" size={23} strokeWidth={2} />
           ) : (
-            <Sun className="text-primary" size={24} strokeWidth={1.25} />
+            <Sun className="text-primary" size={24} strokeWidth={2} />
           )}
         </View>
       )}

@@ -14,12 +14,27 @@ import { useColorScheme } from "@/lib/useColorScheme";
 
 interface Props {
   business: Business;
+  fromProfessional?: boolean;
 }
 
-export const MyBusinessCard = ({ business }: Props) => {
-  const { isDarkColorScheme } = useColorScheme();
+export const MyBusinessCard = ({
+  business,
+  fromProfessional = false,
+}: Props) => {
+  const { isDarkColorScheme, colorIcons, titleColor } = useColorScheme();
 
   const onSelectBusiness = () => {
+    if (fromProfessional) {
+      router.push({
+        pathname: "/glam/(tabs)/profile/my-services/my-service/[businessId]",
+        params: {
+          businessId: business.id,
+          businessType: business.businesstype,
+        },
+      });
+      return;
+    }
+
     router.push({
       pathname: "/glam/(tabs)/profile/my-business/detail/[id]",
       params: { id: business.id },
@@ -64,24 +79,32 @@ export const MyBusinessCard = ({ business }: Props) => {
               <Text className="font-baloo-bold text-lg" numberOfLines={2}>
                 {business.name}
               </Text>
-              <Text className="text-sm">{business.location.address}</Text>
+              <Text className="text-sm text-muted-foreground">
+                {business.location.address}
+              </Text>
               <View className="flex flex-row mt-2 gap-4">
                 <View className="flex flex-row items-center gap-1 ">
-                  <Text className="text-lg">{business.likes}</Text>
-                  <ThumbsUp className="text-primary" size={18} />
+                  <Text className={`text-lg ${titleColor}`}>
+                    {business.likes}
+                  </Text>
+                  <ThumbsUp className={colorIcons} size={18} />
                 </View>
                 <View className="flex flex-row items-center gap-1">
-                  <Text className="text-lg">{business.receivedReviews}</Text>
-                  <MessageCircleMore size={18} className="text-primary" />
+                  <Text className={`text-lg ${titleColor}`}>
+                    {business.receivedReviews}
+                  </Text>
+                  <MessageCircleMore size={18} className={colorIcons} />
                 </View>
                 <View className="flex flex-row items-center gap-1">
-                  <Text className="text-lg">{business.rating}</Text>
+                  <Text className={`text-lg ${titleColor}`}>
+                    {business.rating}
+                  </Text>
                   <Star color="#FFD700" size={18} fill={"gold"} />
                 </View>
               </View>
             </View>
             <View className="absolute top-4 right-2 ">
-              <SquarePen size={20} className="text-primary" />
+              <SquarePen size={20} className={colorIcons} />
             </View>
           </View>
         </CardContent>

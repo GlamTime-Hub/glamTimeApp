@@ -1,4 +1,4 @@
-import { Platform, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Button } from "@/presentation/components/ui/button";
 import { Text } from "@/presentation/components/ui/text";
 import { useProfileDetail } from "@/presentation/hooks/use-profile-detail.hook";
@@ -10,7 +10,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/presentation/components/ui/select";
@@ -20,6 +19,7 @@ import { Error } from "../shared/Error";
 import Toast from "react-native-toast-message";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
 import { ProfileDetailLoading } from "./ProfileDetailLoading";
+import { CustomInputPicker } from "@/presentation/components/ui/CustomInputPicker";
 
 export const ProfileDetail = () => {
   const {
@@ -28,39 +28,29 @@ export const ProfileDetail = () => {
     MONTHS,
     DAYS,
     GENDER,
+    valuesModal,
     user,
     loading,
     countries,
     cities,
     control,
     errors,
+    openModal,
+    setOpenModal,
     onChangeCountry,
     onChangePhone,
     handleSubmit,
     onSave,
+    setValuesModal,
+    setValue,
   } = useProfileDetail();
 
   const insets = useSafeAreaInsets();
-  const isIos = Platform.OS === "ios";
-
-  const contentInsets1 = {
-    top: insets.top,
-    bottom: insets.bottom,
-    left: 35,
-    right: isIos ? 200 : 230,
-  };
 
   const contentInsets = {
     top: insets.top,
     bottom: insets.bottom,
     left: 35,
-    right: 35,
-  };
-
-  const contentInsets2 = {
-    top: insets.top,
-    bottom: insets.bottom,
-    left: isIos ? 195 : 225,
     right: 35,
   };
 
@@ -132,49 +122,27 @@ export const ProfileDetail = () => {
                   <Text className="font-baloo-bold mb-1">
                     Tu fecha de cumpleaños
                   </Text>
-                  <View className="flex flex-row">
-                    <View className="w-1/2 pr-2">
-                      <Controller
-                        control={control}
-                        name="birthDay"
-                        render={({ field: { onChange, value } }) => (
-                          <Select
-                            disabled={loading}
-                            onValueChange={(value) => {
-                              onChange(value?.value);
-                            }}
-                            value={{
-                              value,
-                              label: value,
-                            }}
-                          >
-                            <SelectTrigger disabled={loading}>
-                              <SelectValue
-                                className="text-foreground text-sm native:text-lg"
-                                placeholder="Día"
-                              />
-                            </SelectTrigger>
-                            <SelectContent
-                              insets={contentInsets1}
-                              className="w-full"
-                            >
-                              <ScrollView className="max-h-80">
-                                <SelectGroup>
-                                  <SelectLabel>Día</SelectLabel>
-                                  {DAYS.map((day) => (
-                                    <SelectItem
-                                      key={day}
-                                      label={day}
-                                      value={day}
-                                    >
-                                      {day}
-                                    </SelectItem>
-                                  ))}
-                                </SelectGroup>
-                              </ScrollView>
-                            </SelectContent>
-                          </Select>
-                        )}
+                  <View className="flex-row justify-between ">
+                    <View className="w-1/2">
+                      <CustomInputPicker
+                        label="Día"
+                        placeHolder="Selecciona el día"
+                        value={{
+                          label: `${valuesModal.day}`,
+                          value: `${valuesModal.day}`,
+                        }}
+                        callback={(itemValue) => {
+                          setValuesModal((prev) => ({
+                            ...prev,
+                            day: Number(itemValue),
+                          }));
+                          setValue("birthDay", itemValue);
+                        }}
+                        openModal={openModal.day}
+                        setOpenModal={(open) =>
+                          setOpenModal((prev) => ({ ...prev, day: open }))
+                        }
+                        items={DAYS.map((day) => ({ label: day, value: day }))}
                       />
                       {errors.birthDay && (
                         <Text className="text-red-500 text-sm">
@@ -182,54 +150,35 @@ export const ProfileDetail = () => {
                         </Text>
                       )}
                     </View>
-                    <View className="w-1/2 ">
-                      <Controller
-                        control={control}
-                        name="birthMonth"
-                        render={({ field: { onChange, value } }) => (
-                          <Select
-                            disabled={loading}
-                            onValueChange={(value) => {
-                              onChange(value?.value);
-                            }}
-                            value={{
-                              value: `${value}`,
-                              label:
-                                MONTHS.find((m) => m.value === parseInt(value))
-                                  ?.label ?? "",
-                            }}
-                          >
-                            <SelectTrigger disabled={loading}>
-                              <SelectValue
-                                className="text-foreground text-sm native:text-lg"
-                                placeholder="Mes"
-                              />
-                            </SelectTrigger>
-                            <SelectContent
-                              insets={contentInsets2}
-                              className="w-full"
-                            >
-                              <ScrollView className="max-h-80">
-                                <SelectGroup>
-                                  <SelectLabel>Mes</SelectLabel>
-                                  {MONTHS.map((month) => (
-                                    <SelectItem
-                                      key={month.label}
-                                      label={month.label}
-                                      value={`${month.value}`}
-                                    >
-                                      <Text>{month.label}</Text>
-                                    </SelectItem>
-                                  ))}
-                                </SelectGroup>
-                              </ScrollView>
-                            </SelectContent>
-                          </Select>
-                        )}
+
+                    <View className="w-1/2">
+                      <CustomInputPicker
+                        label="Mes"
+                        placeHolder="Selecciona el mes"
+                        value={
+                          MONTHS.find(
+                            (m) => m.value === `${valuesModal.month}`
+                          ) || { value: "", label: "" }
+                        }
+                        callback={(itemValue) => {
+                          setValuesModal((prev) => ({
+                            ...prev,
+                            month: `${itemValue}`,
+                          }));
+                          setValue("birthMonth", itemValue);
+                        }}
+                        openModal={openModal.month}
+                        setOpenModal={(open) =>
+                          setOpenModal((prev) => ({ ...prev, month: open }))
+                        }
+                        items={MONTHS.map((month) => ({
+                          label: month.label,
+                          value: `${month.value}`,
+                        }))}
                       />
-                      {errors.birthMonth && (
+                      {errors.birthDay && (
                         <Text className="text-red-500 text-sm">
-                          {errors.birthMonth.message}
+                          {errors.birthDay.message}
                         </Text>
                       )}
                     </View>
@@ -239,48 +188,29 @@ export const ProfileDetail = () => {
                   <Text className="font-baloo-bold mb-1">
                     Como te identificas
                   </Text>
-                  <Controller
-                    control={control}
-                    name="gender"
-                    render={({ field: { onChange, value } }) => (
-                      <Select
-                        disabled={loading}
-                        value={{
-                          value,
-                          label:
-                            GENDER.find((g) => g.value === value)?.label ?? "",
-                        }}
-                        onValueChange={(value) => {
-                          onChange(value?.value);
-                        }}
-                      >
-                        <SelectTrigger disabled={loading}>
-                          <SelectValue
-                            className="text-foreground text-sm native:text-lg"
-                            placeholder="Género"
-                          />
-                        </SelectTrigger>
-                        <SelectContent
-                          insets={contentInsets}
-                          className="w-full"
-                        >
-                          <ScrollView className="max-h-80">
-                            <SelectGroup>
-                              <SelectLabel>Género</SelectLabel>
-                              {GENDER.map((gender) => (
-                                <SelectItem
-                                  key={gender.value}
-                                  label={gender.label}
-                                  value={gender.value}
-                                >
-                                  {gender.label}
-                                </SelectItem>
-                              ))}
-                            </SelectGroup>
-                          </ScrollView>
-                        </SelectContent>
-                      </Select>
-                    )}
+                  <CustomInputPicker
+                    label="Género"
+                    placeHolder="Cómo te identificas"
+                    value={
+                      GENDER.find(
+                        (m) => m.value === `${valuesModal.gender}`
+                      ) || { value: "", label: "" }
+                    }
+                    callback={(itemValue) => {
+                      setValuesModal((prev) => ({
+                        ...prev,
+                        gender: `${itemValue}`,
+                      }));
+                      setValue("gender", itemValue);
+                    }}
+                    openModal={openModal.gender}
+                    setOpenModal={(open) =>
+                      setOpenModal((prev) => ({ ...prev, gender: open }))
+                    }
+                    items={GENDER.map((month) => ({
+                      label: month.label,
+                      value: `${month.value}`,
+                    }))}
                   />
                   {errors.gender && (
                     <Text className="text-red-500 text-sm">
@@ -291,7 +221,7 @@ export const ProfileDetail = () => {
 
                 <View className="my-2">
                   <Text className="font-baloo-bold mb-1">
-                    Te encuentras en:
+                    Te encuentras ubicado en:
                   </Text>
                   <Controller
                     control={control}
@@ -344,47 +274,34 @@ export const ProfileDetail = () => {
 
                 <View className="my-2">
                   <Text className="font-baloo-bold mb-1">En la ciudad de:</Text>
-                  <Controller
-                    control={control}
-                    name="city"
-                    render={({ field: { onChange, value } }) => (
-                      <Select
-                        disabled={loading}
-                        onValueChange={(value) => {
-                          onChange(value?.value);
-                        }}
-                        value={{
-                          value,
-                          label:
-                            cities?.find((c) => c.id === value)?.name ?? "",
-                        }}
-                      >
-                        <SelectTrigger disabled={loading}>
-                          <SelectValue
-                            className="text-foreground text-sm native:text-lg"
-                            placeholder="Ciudad"
-                          />
-                        </SelectTrigger>
-                        <SelectContent
-                          insets={contentInsets}
-                          className="w-full"
-                        >
-                          <ScrollView className="max-h-80 ">
-                            <SelectGroup>
-                              {cities?.map((city) => (
-                                <SelectItem
-                                  key={city.id}
-                                  label={city.name}
-                                  value={city.id}
-                                >
-                                  {city.name}
-                                </SelectItem>
-                              ))}
-                            </SelectGroup>
-                          </ScrollView>
-                        </SelectContent>
-                      </Select>
-                    )}
+                  <CustomInputPicker
+                    label="Ciudad"
+                    placeHolder="Selecciona la ciudad"
+                    value={
+                      cities
+                        ?.filter((m) => m.id === `${valuesModal.city}`)
+                        ?.map((city) => ({
+                          label: city.name,
+                          value: city.id,
+                        }))[0] || { value: "", label: "" }
+                    }
+                    callback={(itemValue) => {
+                      setValuesModal((prev) => ({
+                        ...prev,
+                        city: `${itemValue}`,
+                      }));
+                      setValue("city", itemValue);
+                    }}
+                    openModal={openModal.city}
+                    setOpenModal={(open) =>
+                      setOpenModal((prev) => ({ ...prev, city: open }))
+                    }
+                    items={
+                      cities?.map((city) => ({
+                        label: city.name,
+                        value: `${city.id}`,
+                      })) ?? []
+                    }
                   />
                   {errors.city && (
                     <Text className="text-red-500 text-sm">

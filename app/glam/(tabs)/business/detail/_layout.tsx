@@ -1,15 +1,19 @@
+import { useColorScheme } from "@/lib/useColorScheme";
 import { NotificationIcon } from "@/presentation/components/feature";
 import { ThemeToggle } from "@/presentation/components/ThemeToggle";
 import { Stack } from "expo-router";
 import { View } from "react-native";
 
 const DetailScreen = () => {
+  const { isDarkColorScheme } = useColorScheme();
+
   return (
     <Stack
       initialRouteName="home/[id]"
       screenOptions={{
+        headerTintColor: isDarkColorScheme ? "white" : "black",
         headerRight: () => (
-          <View className="flex flex-row gap-2 justify-end px-0 relative -right-3">
+          <View className="flex-row items-center  relative -mr-1">
             <NotificationIcon />
             <ThemeToggle />
           </View>

@@ -26,7 +26,5 @@ export const getAvailableDays = (): AvailableDay[] => {
     slots.push(formatDate(date));
   });
 
-  console.log("slots", slots);
-
   return slots;
 };

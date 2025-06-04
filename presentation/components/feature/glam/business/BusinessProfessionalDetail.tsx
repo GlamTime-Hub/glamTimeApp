@@ -13,9 +13,11 @@ import {
 } from "@/lib/icons/Icons";
 import { BusinessProfessionalTab } from "./BusinessProfessionalTabs";
 import { useProfessionalDetail } from "@/presentation/hooks";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 export const BusinessProfessionalDetail = () => {
   const { id, professional, isLoading } = useProfessionalDetail();
+  const { titleColor, colorIcons } = useColorScheme();
 
   if (isLoading) return <Text>Searching...</Text>;
 
@@ -34,24 +36,30 @@ export const BusinessProfessionalDetail = () => {
             </AvatarFallback>
           </Avatar>
         </View>
-        <Text className="text-center text-primary text-2xl my-2 font-baloo-bold">
+        <Text
+          className={`text-center text-2xl my-2 font-baloo-bold ${titleColor}`}
+        >
           {professional?.user.name}
         </Text>
         <View className="flex  mx-5 flex-row mb-2 gap-6 justify-center  rounded-lg">
           <View className="flex-row gap-1 items-center">
-            <Text className="text-2xl mt-2 ">{professional?.likes}</Text>
-            <ThumbsUp size={25} className="text-primary" />
+            <Text className={`text-2xl mt-2 ${titleColor}`}>
+              {professional?.likes}
+            </Text>
+            <ThumbsUp size={25} className={colorIcons} />
           </View>
           <View className="flex-row gap-1  items-center">
-            <Text className="text-2xl mt-2 ">{professional?.totalBooking}</Text>
-            <CalendarDays size={25} className="text-primary" />
+            <Text className={`text-2xl mt-2 ${titleColor}`}>
+              {professional?.totalBooking}
+            </Text>
+            <CalendarDays size={25} className={colorIcons} />
           </View>
 
           <View className="flex-row gap-1 items-center">
-            <Text className="text-2xl mt-2">
+            <Text className={`text-2xl mt-2 ${titleColor}`}>
               {professional?.receivedReviews}
             </Text>
-            <MessageCircleMore size={25} className="text-primary" />
+            <MessageCircleMore size={25} className={colorIcons} />
           </View>
 
           <View className="flex-row items-center gap-1">
@@ -65,6 +73,7 @@ export const BusinessProfessionalDetail = () => {
         <BusinessProfessionalTab
           id={id as string}
           businessId={professional?.businessId!}
+          businessType=""
         />
       </ScrollView>
     </View>

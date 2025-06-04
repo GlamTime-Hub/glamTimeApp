@@ -10,12 +10,13 @@ import { SubCategory } from "@/core/interfaces/service.interface";
 import { router } from "expo-router";
 import useAuthStore from "@/core/store/auth.store";
 
-const staleTime = 1000 * 60 * 60 * 24;
+const staleTime = 1000 * 60 * 60;
 
 export const useBusinessServices = (
   businessId: string,
   filterByBusiness: boolean,
-  fromProfessional: boolean = false
+  fromProfessional: boolean = false,
+  businessType: string
 ) => {
   const { session } = useAuthStore();
   const [loading, setLoading] = useState(false);
@@ -25,7 +26,8 @@ export const useBusinessServices = (
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["business-services", `${businessId}-${filterByBusiness}`],
-    queryFn: () => getServicesByBusinessAction(businessId, filterByBusiness),
+    queryFn: () =>
+      getServicesByBusinessAction(businessId, filterByBusiness, businessType),
     staleTime,
   });
 

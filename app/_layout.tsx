@@ -25,7 +25,7 @@ import { PortalHost } from "@rn-primitives/portal";
 import { useNetInfo } from "@/hooks/use-net-info.hook";
 import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNotificationPush } from "@/hooks/use-notifications-push.hook";
+// import { useNotificationPush } from "@/hooks/use-notifications-push.hook";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -51,8 +51,8 @@ const toastConfig: ToastConfig = {
         borderLeftColor: "#28a745",
         borderRadius: 0,
       }}
-      text1Style={{ fontSize: 18, color: "#28a745" }}
-      text2Style={{ fontSize: 14 }}
+      text1Style={{ fontSize: 14, color: "#28a745" }}
+      text2Style={{ fontSize: 12 }}
     />
   ),
   error: (props) => (
@@ -66,7 +66,7 @@ const toastConfig: ToastConfig = {
         borderRadius: 0,
       }}
       text1Style={{ fontSize: 14, color: "red" }}
-      text2Style={{ fontSize: 14 }}
+      text2Style={{ fontSize: 12 }}
     />
   ),
   info: (props) => (
@@ -80,7 +80,7 @@ const toastConfig: ToastConfig = {
         borderRadius: 0,
       }}
       text1Style={{ fontSize: 14, color: "#2F80ED" }}
-      text2Style={{ fontSize: 14 }}
+      text2Style={{ fontSize: 12 }}
       text2Props={{
         numberOfLines: 2,
       }}

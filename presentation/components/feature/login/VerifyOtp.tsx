@@ -18,19 +18,26 @@ export const VerifyOtp = () => {
   return (
     <View className="flex m-6 ">
       <View className="mt-20">
-        <Text className="text-2xl mb-4 text-center font-baloo-bold ">
+        <Text className="text-xl mb-4 text-center font-baloo-bold ">
           Ingresa el código de verificación
         </Text>
-        <OTPTextInput
-          inputCellLength={1}
-          inputCount={6}
-          autoFocus={true}
-          textInputStyle={{
-            color: isDarkColorScheme ? "#F5F5F5" : "#09090A",
-          }}
-          tintColor={"#9D84B3"}
-          handleTextChange={(text) => setOtp(text)}
-        />
+        <View className="flex-row  items-center ">
+          <OTPTextInput
+            inputCellLength={1}
+            inputCount={6}
+            autoFocus={true}
+            textInputStyle={{
+              color: isDarkColorScheme ? "#F5F5F5" : "#09090A",
+              width: 40,
+            }}
+            tintColor={"#9D84B3"}
+            containerStyle={{
+              width: 120,
+              marginLeft: 25,
+            }}
+            handleTextChange={(text) => setOtp(text)}
+          />
+        </View>
 
         <Button
           className="mt-4 flex flex-row gap-2"

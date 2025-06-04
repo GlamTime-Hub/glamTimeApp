@@ -5,7 +5,7 @@ import { useBusinessBookingStore } from "../store/use-business-booking.store";
 import { useEffect } from "react";
 import { useUserStore } from "../store/use-user.store";
 
-const staleTime = 1000 * 60 * 60 * 24;
+const staleTime = 0;
 export const useProfessionalDetail = () => {
   const { id, businessId } = useLocalSearchParams();
 

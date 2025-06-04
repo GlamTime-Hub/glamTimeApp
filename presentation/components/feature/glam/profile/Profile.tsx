@@ -69,7 +69,6 @@ export const Profile = ({
             </Text>
           )}
           <Button
-            variant={"outline"}
             size={"sm"}
             onPress={() => router.push("/glam/(tabs)/profile/profile-detail")}
           >

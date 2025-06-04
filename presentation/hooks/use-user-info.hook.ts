@@ -9,9 +9,7 @@ import { useState } from "react";
 import { DAYS, GENDER, MONTHS } from "@/core/constants/profile.constant";
 import { useLoginStore } from "../store/use-login.store";
 import { useUserStore } from "../store/use-user.store";
-import { add } from "date-fns";
-
-const CITIES = ["Barrancabermeja"];
+import { useLocation } from "./use-location.hook";
 
 const schema = z.object({
   name: z.string().nonempty("Debes ingresar tu nombre"),
@@ -31,6 +29,22 @@ export const useUserInfo = () => {
   const { phoneNumber, phoneNumberExtension } = useLoginStore();
   const { userAuthId } = useLocalSearchParams();
   const { addUser } = useUserStore();
+
+  const { cities } = useLocation("67e6ff31e035edd4d7bc6cf0");
+
+  const [valuesModal, setValuesModal] = useState({
+    day: "",
+    month: "",
+    gender: "",
+    city: "",
+  });
+
+  const [openModal, setOpenModal] = useState({
+    day: false,
+    month: false,
+    gender: false,
+    city: false,
+  });
 
   const {
     control,
@@ -79,14 +93,18 @@ export const useUserInfo = () => {
 
   return {
     MONTHS,
+    valuesModal,
     DAYS,
     GENDER,
-    CITIES,
+    cities,
     control,
     loading,
     errors,
+    openModal,
+    setOpenModal,
     handleSubmit,
     onSubmit,
     setValue,
+    setValuesModal,
   };
 };

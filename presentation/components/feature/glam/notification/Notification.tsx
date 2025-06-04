@@ -1,19 +1,21 @@
-import { markNotificationAsRead } from "@/core/actions/notification/mark-notification-as-read.action";
-import { UserNotification } from "@/core/interfaces/user-notification.interface";
-import { useColorScheme } from "@/lib/useColorScheme";
-import { Text } from "@/presentation/components/ui/text";
-import { useUserNotificationStore } from "@/presentation/store/use-user-notification.store";
-import { useQueryClient } from "@tanstack/react-query";
-import { Href, router } from "expo-router";
-import { useRef, useState } from "react";
-import { I18nManager, StyleSheet, View } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
-import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import Reanimated, {
   SharedValue,
   useAnimatedStyle,
 } from "react-native-reanimated";
 import Toast from "react-native-toast-message";
+import { useQueryClient } from "@tanstack/react-query";
+import { Href, router } from "expo-router";
+import { useRef, useState } from "react";
+import { I18nManager, StyleSheet, View } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
+
+import { markNotificationAsRead } from "@/core/actions/notification/mark-notification-as-read.action";
+import { UserNotification } from "@/core/interfaces/user-notification.interface";
+import { useColorScheme } from "@/lib/useColorScheme";
+import { Text } from "@/presentation/components/ui/text";
+import { useUserNotificationStore } from "@/presentation/store/use-user-notification.store";
+import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+
 import { LoadingIndicator } from "../shared/LoadingIndicator";
 
 interface Props {
@@ -92,7 +94,6 @@ const renderRightActions = (
     Toast.show({
       type: "success",
       text1: "Notificación eliminada.",
-      text2: "La notificación ha sido marcada como leída.",
     });
 
     queryClient.invalidateQueries({ queryKey: ["notifications"] });

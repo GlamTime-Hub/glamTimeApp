@@ -43,6 +43,8 @@ import { ProfessionalFeedback } from "./glam/booking/ProfessionalFeedback";
 import { InvitationNotification } from "./glam/notification/InvitationNotification";
 import { InvitationAccepted } from "./glam/notification/InvitationAccepted";
 import { MyBusinessProfessionalDetail } from "./glam/profile/MyBusinessProfessionalDetail";
+import { MyServiceHome } from "./glam/profile/MyServicesHome";
+import { MyProfessionalServiceDetail } from "./glam/profile/MyProfessionalServicesDetail";
 
 export {
   Login,
@@ -90,4 +92,6 @@ export {
   InvitationNotification,
   InvitationAccepted,
   MyBusinessProfessionalDetail,
+  MyServiceHome,
+  MyProfessionalServiceDetail,
 };

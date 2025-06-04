@@ -14,9 +14,14 @@ import { BusinessServicesTab } from "./BusinessServicesTab";
 interface Props {
   id: string;
   businessId: string;
+  businessType: string;
 }
 
-export const BusinessProfessionalTab = ({ id, businessId }: Props) => {
+export const BusinessProfessionalTab = ({
+  id,
+  businessId,
+  businessType,
+}: Props) => {
   const [value, setValue] = useState("services");
 
   return (
@@ -36,7 +41,11 @@ export const BusinessProfessionalTab = ({ id, businessId }: Props) => {
       <TabsContent value="services" className="flex-1">
         <View className="flex-1">
           <ScrollView showsVerticalScrollIndicator={false}>
-            <BusinessServicesTab id={businessId} fromProfessional={true} />
+            <BusinessServicesTab
+              id={businessId}
+              fromProfessional={true}
+              businessType={businessType}
+            />
           </ScrollView>
         </View>
       </TabsContent>

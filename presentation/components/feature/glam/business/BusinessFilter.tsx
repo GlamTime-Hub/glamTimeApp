@@ -7,7 +7,7 @@ interface Props {
 }
 export const BusinessFilter = ({ callback }: Props) => {
   return (
-    <TouchableOpacity className="flex flex-row gap-2 ml-4" onPress={callback}>
+    <TouchableOpacity className="flex flex-row gap-2" onPress={callback}>
       <ListFilter className="text-foreground" size={25} />
       <Text>Filtrar</Text>
     </TouchableOpacity>

@@ -1,14 +1,14 @@
-import { Picker } from "@react-native-picker/picker";
 import { ActiveService } from "@/core/interfaces/active-service.interface";
 import { SubCategory } from "@/core/interfaces/service.interface";
 import { Input } from "@/presentation/components/ui/input";
 import { Switch } from "@/presentation/components/ui/switch";
 import { Text } from "@/presentation/components/ui/text";
-import { Modal, Pressable, TouchableWithoutFeedback, View } from "react-native";
+import { View } from "react-native";
 import { useBusinessServiceCard } from "@/presentation/hooks";
 import { Button } from "@/presentation/components/ui/button";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
 import { useState } from "react";
+import { CustomInputPicker } from "@/presentation/components/ui/CustomInputPicker";
 
 interface Props {
   subcategory: SubCategory;
@@ -59,51 +59,23 @@ export const MyBusinessMyServicesCard = ({
           />
           <View>
             <Text className="font-baloo-bold">Duración (Min)</Text>
-            <Pressable
-              onPress={() => setModalVisible(true)}
-              className="px-4 py-2 bg-gray-200 rounded-lg"
-            >
-              <Text className="text-l">{service.duration} minutos</Text>
-            </Pressable>
 
-            <Modal
-              animationType="slide"
-              transparent={true}
-              visible={modalVisible}
-              onRequestClose={() => setModalVisible(false)}
-            >
-              <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-                <View className="flex-1 justify-end">
-                  <TouchableWithoutFeedback onPress={() => {}}>
-                    <View className="bg-white rounded-t-2xl p-4 shadow-lg">
-                      <Text className="text-center text-xl font-baloo-bold mb-2">
-                        Duración del servicio
-                      </Text>
-                      <Picker
-                        selectedValue={service.duration}
-                        onValueChange={(itemValue) =>
-                          onChangeDuration(itemValue)
-                        }
-                      >
-                        {minutes.map((val) => (
-                          <Picker.Item
-                            key={val}
-                            label={`${val} minutos`}
-                            value={val}
-                          />
-                        ))}
-                      </Picker>
-
-                      <View className="flex gap-2  my-4">
-                        <Button onPress={() => setModalVisible(false)}>
-                          <Text className="text-white">Cerrar</Text>
-                        </Button>
-                      </View>
-                    </View>
-                  </TouchableWithoutFeedback>
-                </View>
-              </TouchableWithoutFeedback>
-            </Modal>
+            <CustomInputPicker
+              label="Ciudad"
+              placeHolder="Selecciona la ciudad"
+              value={{ value: service.duration, label: service.duration }}
+              callback={(itemValue) => {
+                onChangeDuration(itemValue);
+              }}
+              openModal={modalVisible}
+              setOpenModal={(open) => setModalVisible(open)}
+              items={
+                minutes?.map((minutes) => ({
+                  label: `${minutes}`,
+                  value: `${minutes}`,
+                })) ?? []
+              }
+            />
           </View>
         </View>
       </View>

@@ -21,7 +21,7 @@ export const useBusiness = () => {
 
   const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useInfiniteQuery({
-      queryKey: ["businesses"],
+      queryKey: ["businesses", filter],
       queryFn: async ({ pageParam = 1 }) => {
         const res = await getHomeBusinessAction({
           filter,

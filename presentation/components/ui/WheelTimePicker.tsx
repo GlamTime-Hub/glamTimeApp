@@ -1,3 +1,6 @@
+import { NAV_THEME } from "@/lib/constants";
+import { useColorScheme } from "@/lib/useColorScheme";
+import { cn } from "@/lib/util";
 import React, { useState, useRef, useEffect } from "react";
 import { View, StyleSheet, Dimensions, Text, ScrollView } from "react-native";
 
@@ -34,6 +37,8 @@ export const WheelTimePicker = ({
     value: t,
   }));
 
+  const { titleColor } = useColorScheme();
+
   const defaultIndex = initialTime
     ? Math.max(
         0,
@@ -61,10 +66,6 @@ export const WheelTimePicker = ({
       justifyContent: "center",
       alignItems: "center",
     },
-    itemText: {
-      fontSize: 18,
-      color: "#999",
-    },
     selectedItem: {
       borderBottomWidth: 1,
       borderTopWidth: 1,
@@ -72,10 +73,6 @@ export const WheelTimePicker = ({
     },
     scrollView: {
       height: ITEM_HEIGHT * VISIBLE_ITEMS,
-    },
-    selectedText: {
-      fontSize: 20,
-      color: "#9f8ac2",
     },
   });
 
@@ -97,10 +94,10 @@ export const WheelTimePicker = ({
       ]}
     >
       <Text
-        style={[
-          styles.itemText,
-          item.value === selected.value && styles.selectedText,
-        ]}
+        className={cn(
+          "text-md text-muted-foreground",
+          item.value === selected.value ? `${titleColor} text-lg` : ""
+        )}
       >
         {item.label}
       </Text>

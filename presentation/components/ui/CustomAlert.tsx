@@ -1,3 +1,4 @@
+import { useColorScheme } from "@/lib/useColorScheme";
 import { Alert, AlertDescription, AlertTitle } from "./alert";
 import { Text } from "./text";
 
@@ -12,18 +13,19 @@ interface Props {
 export const CustomAlert = ({ title, description, type }: Props) => {
   const isDefault = type === "info";
 
+  const { titleColor } = useColorScheme();
+
   return (
     <Alert
       icon={isDefault ? Bell : AlertTriangle}
-      iconClassName="text-primary mt-4"
       variant={isDefault ? "default" : "destructive"}
-      className="max-w-xl  "
+      className="max-w-xl"
     >
       <AlertTitle>
-        <Text className="text-primary font-baloo-bold">{title}</Text>
+        <Text className={`${titleColor} text-sm font-baloo-bold`}>{title}</Text>
       </AlertTitle>
       <AlertDescription>
-        <Text>{description}</Text>
+        <Text className="text-md text-muted-foreground">{description}</Text>
       </AlertDescription>
     </Alert>
   );

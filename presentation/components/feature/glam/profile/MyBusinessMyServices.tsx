@@ -7,23 +7,30 @@ import { ScrollView, View } from "react-native";
 import { MyBusinessMyServicesCard } from "./MyBusinessMyServicesCard";
 import { Service, SubCategory } from "@/core/interfaces/service.interface";
 import { MyBusinessMyServicesLoading } from "./MyBusinessMyServicesLoading";
+import { Separator } from "@/presentation/components/ui/separator";
 
 export const MyBusinessMyServices = () => {
-  const { businessId } = useLocalSearchParams();
+  const { businessId, businessType } = useLocalSearchParams();
 
   const { services, isLoading, activeServiceIsLoading, onActiveService } =
-    useBusinessServices(businessId as string, false);
+    useBusinessServices(
+      businessId as string,
+      false,
+      false,
+      businessType as string
+    );
 
   if (isLoading) {
     return <MyBusinessMyServicesLoading />;
   }
 
   return (
-    <View className="flex-1 p-6">
+    <View className="flex-1 p-4">
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Text className="my-2 font-baloo-bold text-xl" numberOfLines={2}>
+        <Text className="my-2 font-baloo-bold" numberOfLines={2}>
           Gestiona los servicios que ofreces en tu negocio.
         </Text>
+        <Separator className="mb-2" />
         {services?.map((service: Service) => (
           <Card key={service.id} className="my-2">
             <CardContent className="p-0 ">

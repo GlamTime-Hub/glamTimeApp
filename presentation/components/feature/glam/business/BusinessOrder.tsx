@@ -26,7 +26,7 @@ export const BusinessOrder = () => {
     <Popover>
       <PopoverTrigger asChild>
         <TouchableOpacity
-          className="flex flex-row px-4 mr-4 items-center gap-2"
+          className="flex flex-row items-center gap-2"
           onPress={() => console.log("")}
         >
           <ArrowDownWideNarrow size={25} className="text-foreground" />

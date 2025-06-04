@@ -1,12 +1,18 @@
 import { ThemeToggle } from "@/presentation/components/ThemeToggle";
 import { Tabs } from "expo-router";
-import { CalendarDays, House, User, Heart, Store } from "@/lib/icons/Icons";
+import {
+  CalendarDays,
+  House,
+  CircleUserRound,
+  Heart,
+  Store,
+} from "@/lib/icons/Icons";
 import { useColorScheme } from "@/lib/useColorScheme";
 import { View } from "react-native";
 import { NotificationIcon } from "@/presentation/components/feature";
 
 export default function _layout() {
-  const { isDarkColorScheme } = useColorScheme();
+  const { isDarkColorScheme, titleColor } = useColorScheme();
 
   return (
     <Tabs
@@ -32,9 +38,9 @@ export default function _layout() {
           tabBarLabel: "Inicio",
           tabBarIcon: ({ focused }) => (
             <House
-              className={"text-primary"}
+              className={titleColor}
               size={focused ? 28 : 23}
-              strokeWidth={focused ? 2 : 1.25}
+              strokeWidth={focused ? 2.5 : 1.25}
             />
           ),
         }}
@@ -46,9 +52,9 @@ export default function _layout() {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Store
-              className="text-primary"
+              className={titleColor}
               size={focused ? 28 : 23}
-              strokeWidth={focused ? 2 : 1.25}
+              strokeWidth={focused ? 2.5 : 1.25}
             />
           ),
         }}
@@ -60,9 +66,9 @@ export default function _layout() {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <CalendarDays
-              className="text-primary"
+              className={titleColor}
               size={focused ? 28 : 23}
-              strokeWidth={focused ? 2 : 1.25}
+              strokeWidth={focused ? 2.5 : 1.25}
             />
           ),
         }}
@@ -73,9 +79,9 @@ export default function _layout() {
           title: "Favoritos",
           tabBarIcon: ({ focused }) => (
             <Heart
-              className="text-primary"
+              className={titleColor}
               size={focused ? 28 : 23}
-              strokeWidth={focused ? 2 : 1.25}
+              strokeWidth={focused ? 2.5 : 1.25}
             />
           ),
         }}
@@ -86,10 +92,10 @@ export default function _layout() {
           title: "Perfil",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <User
-              className="text-primary"
+            <CircleUserRound
+              className={titleColor}
               size={focused ? 28 : 23}
-              strokeWidth={focused ? 2 : 1.25}
+              strokeWidth={focused ? 2.5 : 1.25}
             />
           ),
         }}

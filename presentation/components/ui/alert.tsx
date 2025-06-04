@@ -36,7 +36,7 @@ const Alert = React.forwardRef<
       variant,
       children,
       icon: Icon,
-      iconSize = 16,
+      iconSize = 18,
       iconClassName,
       ...props
     },

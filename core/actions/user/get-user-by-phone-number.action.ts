@@ -11,7 +11,9 @@ export const getUserByPhoneNumberAction = async (
     } = await axiosClient.get(
       `user/by-phone/${phoneNumber}/${phoneNumberExtension}`
     );
+
     const user = data ? UserMapper.fromTheUserDBToUser(data) : null;
+
     return {
       status: true,
       data: user,

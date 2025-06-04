@@ -9,8 +9,8 @@ import { useColorScheme } from "@/lib/useColorScheme";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   image: {
     width: 200,
@@ -33,14 +33,15 @@ export const Login = () => {
   return (
     <View className="flex-1  m-6">
       <View className="mt-20 flex flex-col justify-center items-center">
-
-
-         <Image
-        source={isDarkColorScheme ? require(`@/assets/images/icon.png`) : require(`@/assets/images/icon-light.png`)}
+        <Image
+          source={
+            isDarkColorScheme
+              ? require(`@/assets/images/icon-light.png`)
+              : require(`@/assets/images/icon.png`)
+          }
           resizeMode="contain"
           style={styles.image}
-
-      />
+        />
 
         <Text className="text-2xl mb-4 text-center font-baloo-bold ">
           Iniciar Sesión

@@ -2,12 +2,16 @@ import { Stack } from "expo-router";
 import { ThemeToggle } from "@/presentation/components/ThemeToggle";
 import { NotificationIcon } from "@/presentation/components/feature";
 import { View } from "react-native";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 export default function MyBusinessLayout() {
+  const { isDarkColorScheme } = useColorScheme();
+
   return (
     <Stack
       initialRouteName="home/index"
       screenOptions={{
+        headerTintColor: isDarkColorScheme ? "white" : "black",
         headerRight: () => (
           <View className="flex-row items-center  relative -mr-1">
             <NotificationIcon />

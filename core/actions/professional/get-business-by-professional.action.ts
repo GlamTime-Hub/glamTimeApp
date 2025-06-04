@@ -8,8 +8,6 @@ export const getBusinessByProfessionalAction = async () => {
       "professional/business-by-professional"
     );
 
-    console.log("data", data);
-
     const professionalBusiness: ProfessionalWithBusiness[] = data.data.map(
       (professionalBusiness: any) =>
         ProfessionalWithBusinessMapper.fromProfessionalWithBusinessDBtoProfessionalWithBusiness(
@@ -22,7 +20,6 @@ export const getBusinessByProfessionalAction = async () => {
       data: professionalBusiness,
     };
   } catch (error) {
-    console.log("error", error);
     throw new Error(
       "Ha ocurrido un error inesperado.\npor favor contacte con soporte"
     );

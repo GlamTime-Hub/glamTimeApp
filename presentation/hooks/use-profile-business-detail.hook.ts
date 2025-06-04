@@ -1,20 +1,20 @@
+import { z } from "zod";
+import { router } from "expo-router";
+import { useForm, useWatch } from "react-hook-form";
+import { useEffect, useState } from "react";
+import Toast from "react-native-toast-message";
+
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useLocation } from "./use-location.hook";
-import { z } from "zod";
-import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
 import { CountryPhone } from "@/core/interfaces/country-phone.interface";
-import Toast from "react-native-toast-message";
 import { newBusinessAction } from "@/core/actions/business/new-business.action";
-import { router } from "expo-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getBusinessByIdAction } from "@/core/actions/business/get-business-by-id.action";
 import { updateImageAction } from "@/core/actions/business/update-image.action";
 import { updateBusinessAction } from "@/core/actions/business/update-business.action";
 import { useBusinessLocation } from "./use-business-location";
 import { updateBusinessStatusAction } from "@/core/actions/business/update-business-status.action";
-import { getBusinessTypeAction } from "@/core/actions/util/get-business-type.action";
 import { useBusinessTypes } from "./use-business-types.hook";
 import { useUserStore } from "../store/use-user.store";
 
@@ -35,7 +35,7 @@ const schema = z.object({
   }),
 });
 
-const staleTime = 1000 * 60 * 60 * 24;
+const staleTime = 0;
 
 type FormData = z.infer<typeof schema>;
 
@@ -51,6 +51,10 @@ export const useProfileBusinessDetail = (id: string) => {
 
   const { user } = useUserStore();
   const [loading, setLoading] = useState(false);
+  const [openCityModal, setOpenCityModal] = useState(false);
+  const [valuesModal, setValuesModal] = useState({
+    city: data?.data.city,
+  });
 
   const { region, setRegion, setBusinessId } = useBusinessLocation();
 
@@ -208,6 +212,7 @@ export const useProfileBusinessDetail = (id: string) => {
   }, [data]);
 
   return {
+    valuesModal,
     businessTypes,
     business: data?.data,
     user,
@@ -219,12 +224,16 @@ export const useProfileBusinessDetail = (id: string) => {
     loading,
     isLoading,
     region,
+    openCityModal,
     handleSubmit,
     updateImage,
+    setValuesModal,
     onChangePhone,
     onChangeCountry,
     onSubmit,
     onUpdateRegion,
+    setValue,
+    setOpenCityModal,
     handleBusinessStatus,
   };
 };

@@ -23,6 +23,7 @@ interface Props {
     likes: number;
     receivedReviews: number;
     totalBooking: number;
+    address: string;
   };
 }
 
@@ -50,6 +51,9 @@ const BusinessCard = ({ business }: Props) => {
             <View>
               <Text className={"text-white font-baloo-bold text-xl"}>
                 {business.name}
+              </Text>
+              <Text className={"text-white py-0 my-0 font-baloo-bold text-sm"}>
+                {business.address}
               </Text>
               <View className="flex flex-row gap-4">
                 <View className="flex flex-row justify-center items-center gap-1">

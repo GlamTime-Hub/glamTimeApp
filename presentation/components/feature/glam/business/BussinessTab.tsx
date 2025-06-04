@@ -10,7 +10,13 @@ import { ScrollView, View } from "react-native";
 import { BusinessServicesTab } from "./BusinessServicesTab";
 import { BusinessProfessionalTab } from "./BusinessProfessionalTab";
 
-export const BusinessTab = ({ id }: { id: string }) => {
+export const BusinessTab = ({
+  id,
+  businessType,
+}: {
+  id: string;
+  businessType: string;
+}) => {
   const [value, setValue] = useState("services");
 
   return (
@@ -30,7 +36,11 @@ export const BusinessTab = ({ id }: { id: string }) => {
       <TabsContent value="services">
         <View className="flex-1">
           <ScrollView showsVerticalScrollIndicator={false}>
-            <BusinessServicesTab id={id} fromProfessional={false} />
+            <BusinessServicesTab
+              id={id}
+              fromProfessional={false}
+              businessType={businessType}
+            />
           </ScrollView>
         </View>
       </TabsContent>

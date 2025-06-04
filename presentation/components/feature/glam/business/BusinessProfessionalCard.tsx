@@ -13,16 +13,16 @@ import {
 } from "@/lib/icons/Icons";
 import { Professional } from "@/core/interfaces/professional.interface";
 import { Card, CardContent } from "@/presentation/components/ui/card";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 interface Props {
   professional: Professional;
   callback: (id: string) => void;
 }
 
-export const BusinessProfessionalCard = ({
-  professional,
-  callback,
-}: Props) => {
+export const BusinessProfessionalCard = ({ professional, callback }: Props) => {
+  const { titleColor, colorIcons } = useColorScheme();
+
   const onSelectProfessional = () => {
     callback(professional.id);
   };
@@ -44,36 +44,36 @@ export const BusinessProfessionalCard = ({
                 </AvatarFallback>
               </Avatar>
               <View>
-                <Text className={"text-xl font-baloo-bold text-primary"}>
+                <Text className={`text-xl font-baloo-bold ${titleColor} `}>
                   {professional.user.name}
                 </Text>
 
                 <View className="flex flex-row gap-4">
                   <View className="flex flex-row gap-1 items-center">
-                    <Text className={"text-2xl mt-2"}>
+                    <Text className={`text-2xl mt-2 ${titleColor}`}>
                       {professional.likes}
                     </Text>
-                    <ThumbsUp size={20} className="text-primary" />
+                    <ThumbsUp size={20} className={colorIcons} />
                   </View>
 
                   <View className="flex flex-row  gap-1 items-center">
-                    <Text className={"text-2xl mt-2"}>
+                    <Text className={`text-2xl mt-2 ${titleColor}`}>
                       {professional.totalBooking}
                     </Text>
-                    <NotebookPen size={20} className="text-primary" />
+                    <NotebookPen size={20} className={colorIcons} />
                   </View>
 
                   <View className="flex flex-row gap-1 items-center">
-                    <Text className={"text-2xl mt-2"}>
+                    <Text className={`text-2xl mt-2 ${titleColor}`}>
                       {professional.receivedReviews}
                     </Text>
-                    <MessageCircleMore size={20} className="text-primary" />
+                    <MessageCircleMore size={20} className={colorIcons} />
                   </View>
                 </View>
               </View>
             </View>
             <View className="flex flex-row items-center gap-1 pr-4">
-              <Text className={"text-xl mt-1 font-baloo-bold"}>
+              <Text className={"text-2xl mt-1 font-baloo-bold"}>
                 {professional.rating}
               </Text>
               <Star color="#FFD700" size={25} fill={"gold"} />

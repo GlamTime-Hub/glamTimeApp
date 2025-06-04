@@ -7,6 +7,7 @@ import {
   AvatarImage,
 } from "@/presentation/components/ui/avatar";
 import { useImage } from "@/presentation/hooks";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 interface Props {
   isUserImage: boolean;
@@ -28,6 +29,8 @@ export const CustomAvatar = ({
     id,
     defaultImage ?? ""
   );
+
+  const { colorIcons } = useColorScheme();
 
   const onSelectImage = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -67,7 +70,7 @@ export const CustomAvatar = ({
           </AvatarFallback>
         </Avatar>
 
-        <SquarePen className="text-foreground absolute top-0 -right-5 " />
+        <SquarePen className={`absolute top-0 -right-5 ${colorIcons}`} />
       </View>
     </TouchableOpacity>
   );

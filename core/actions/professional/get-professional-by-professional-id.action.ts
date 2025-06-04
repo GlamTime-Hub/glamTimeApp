@@ -18,7 +18,6 @@ export const getProfessionalByProfessionalIdAction = async (
       data: professional,
     };
   } catch (error) {
-    console.log("error perrro", error);
     throw new Error(
       "Ha ocurrido un error inesperado.\npor favor contacte con soporte"
     );

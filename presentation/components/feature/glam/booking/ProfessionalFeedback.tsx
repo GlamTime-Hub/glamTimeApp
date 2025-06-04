@@ -29,8 +29,6 @@ export const ProfessionalFeedback = () => {
     handleSubmit,
   } = useProfessionalFeedback();
 
-  console.log("professional", professional);
-
   if (isLoading) {
     return <FeedbackLoading />;
   }

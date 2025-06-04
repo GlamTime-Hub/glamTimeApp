@@ -1,3 +1,4 @@
+import { useColorScheme } from "@/lib/useColorScheme";
 import { NotificationIcon } from "@/presentation/components/feature";
 import { ThemeToggle } from "@/presentation/components/ThemeToggle";
 import { useUserStore } from "@/presentation/store/use-user.store";
@@ -6,6 +7,7 @@ import { View } from "react-native";
 
 const BookingScreen = () => {
   const { user } = useUserStore();
+  const { isDarkColorScheme } = useColorScheme();
 
   return (
     <Stack
@@ -15,6 +17,7 @@ const BookingScreen = () => {
           : "home/index"
       }
       screenOptions={{
+        headerTintColor: isDarkColorScheme ? "white" : "black",
         headerRight: () => (
           <View className="flex-row items-center  relative -mr-1">
             <NotificationIcon />

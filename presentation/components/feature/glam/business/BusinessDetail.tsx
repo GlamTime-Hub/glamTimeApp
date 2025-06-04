@@ -23,6 +23,7 @@ import { useBusinessDetail } from "@/presentation/hooks";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { BusinessDetailLoading } from "./BusinessDetailLoading";
 import { Separator } from "@/presentation/components/ui/separator";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 const styles = StyleSheet.create({
   image: {
@@ -35,6 +36,8 @@ const styles = StyleSheet.create({
 export const BusinessDetail = () => {
   const { id, business, isLoading, openWhatsApp, openLocation } =
     useBusinessDetail();
+
+  const { titleColor, colorIcons, backgroundColors } = useColorScheme();
 
   if (isLoading) {
     return <BusinessDetailLoading />;
@@ -90,13 +93,15 @@ export const BusinessDetail = () => {
           <View className="p-5">
             <Card>
               <CardContent>
-                <Text className="text-2xl text-center my-3 font-baloo-bold">
+                <Text
+                  className={`text-2xl text-center my-3 font-baloo-bold ${titleColor}`}
+                >
                   {business?.name}
                 </Text>
                 <Separator className="mb-4" />
                 <View className="flex flex-col items-center px-2">
                   <View>
-                    <Text className="" numberOfLines={3}>
+                    <Text className="text-muted-foreground" numberOfLines={3}>
                       {business?.location.address}
                     </Text>
                   </View>
@@ -112,13 +117,11 @@ export const BusinessDetail = () => {
                       className="flex my-4 flex-row items-center gap-1"
                     >
                       <Text
-                        className={cn(
-                          "py-1 px-2 text-md rounded-lg bg-primary text-white"
-                        )}
+                        className={`py-1 px-2 text-md rounded-lg text-white ${backgroundColors}`}
                       >
                         Ver ubicación
                       </Text>
-                      <MapPinned size={30} className="text-primary" />
+                      <MapPinned size={30} className={colorIcons} />
                     </TouchableOpacity>
                     <View className="flex flex-row items-center  gap-1">
                       <Text className="mt-2 text-3xl">{business?.rating}</Text>
@@ -130,10 +133,14 @@ export const BusinessDetail = () => {
                   <Card>
                     <CardContent className="py-2 px-4">
                       <View className="flex flex-row justify-center items-center gap-1 ">
-                        <Text className="text-3xl pt-4">{business?.likes}</Text>
-                        <ThumbsUp size={26} className="text-primary" />
+                        <Text className={`text-3xl pt-4 ${titleColor}`}>
+                          {business?.likes}
+                        </Text>
+                        <ThumbsUp size={26} className={colorIcons} />
                       </View>
-                      <Text className="text-md text-primary font-baloo-bold ">
+                      <Text
+                        className={`text-md text-primary font-baloo-bold ${titleColor} `}
+                      >
                         Me Gusta
                       </Text>
                     </CardContent>
@@ -141,12 +148,14 @@ export const BusinessDetail = () => {
                   <Card>
                     <CardContent className="py-2  px-4">
                       <View className="flex  flex-row gap-1 justify-center items-center">
-                        <Text className="text-3xl pt-4 ">
+                        <Text className={`text-3xl pt-4 ${titleColor}`}>
                           {business?.totalBooking}
                         </Text>
-                        <NotebookPen size={28} className="text-primary" />
+                        <NotebookPen size={28} className={colorIcons} />
                       </View>
-                      <Text className="text-md font-baloo-bold text-primary">
+                      <Text
+                        className={`text-md text-primary font-baloo-bold ${titleColor}`}
+                      >
                         Reservas
                       </Text>
                     </CardContent>
@@ -155,12 +164,14 @@ export const BusinessDetail = () => {
                   <Card>
                     <CardContent className="py-2  px-4">
                       <View className="flex  flex-row gap-1 justify-center items-center">
-                        <Text className="text-3xl pt-4 ">
+                        <Text className={`text-3xl pt-4 ${titleColor}`}>
                           {business?.receivedReviews}
                         </Text>
-                        <MessageCircleMore size={30} className="text-primary" />
+                        <MessageCircleMore size={30} className={colorIcons} />
                       </View>
-                      <Text className="text-md font-baloo-bold text-primary">
+                      <Text
+                        className={`text-md text-primary font-baloo-bold ${titleColor}`}
+                      >
                         Comentarios
                       </Text>
                     </CardContent>
@@ -183,7 +194,10 @@ export const BusinessDetail = () => {
             </Button>
           </View>
           <View className="px-5 py-2">
-            <BusinessTab id={id as string} />
+            <BusinessTab
+              id={id as string}
+              businessType={business?.businesstype!}
+            />
           </View>
         </View>
       </ScrollView>

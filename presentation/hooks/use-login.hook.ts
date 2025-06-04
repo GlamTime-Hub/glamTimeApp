@@ -66,6 +66,8 @@ export const useLogin = () => {
         text1: "Error",
         text2: "Código de verificación incorrecto",
       });
+      setLoading(false);
+      return;
     }
 
     if (!user.data) {
@@ -75,6 +77,8 @@ export const useLogin = () => {
           userAuthId: session.session?.user.id!,
         },
       });
+      setLoading(false);
+
       return;
     }
 

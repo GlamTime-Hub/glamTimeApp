@@ -48,6 +48,8 @@ import {
   CalendarCheck,
   CalendarX,
   PartyPopper,
+  MessageCircleWarning,
+  CircleUserRound,
 } from "lucide-react-native";
 import { iconWithClassName } from "./iconWithClassName";
 
@@ -100,6 +102,8 @@ iconWithClassName(CalendarCheck2);
 iconWithClassName(CalendarCheck);
 iconWithClassName(CalendarX);
 iconWithClassName(PartyPopper);
+iconWithClassName(MessageCircleWarning);
+iconWithClassName(CircleUserRound);
 
 export {
   Share2,
@@ -151,4 +155,6 @@ export {
   CalendarCheck,
   CalendarX,
   PartyPopper,
+  MessageCircleWarning,
+  CircleUserRound,
 };

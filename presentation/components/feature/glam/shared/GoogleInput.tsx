@@ -1,11 +1,13 @@
 import React, { useState, useRef, useCallback } from "react";
-import { FlatList, TouchableOpacity, View, Text } from "react-native";
+import { FlatList, TouchableOpacity, View } from "react-native";
 import axios from "axios";
 import { debounce } from "lodash-es";
+
 import { Input } from "@/presentation/components/ui/input";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Separator } from "@/presentation/components/ui/separator";
 import { Region } from "@/core/interfaces/region.interface";
+import { Text } from "@/presentation/components/ui/text";
 
 const GOOGLE_PLACES_API_KEY = "AIzaSyAA-V6ywYjHy6f1ULs927u7mMUVjx1DF0o";
 

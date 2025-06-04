@@ -4,7 +4,8 @@ import { ServiceMapper } from "@/core/mappers/service.mapper";
 
 export const getServicesByBusinessAction = async (
   businessId: string,
-  filterByBusiness: boolean
+  filterByBusiness: boolean,
+  businessType: string
 ) => {
   try {
     const { data } = await axiosClient.post(
@@ -12,6 +13,7 @@ export const getServicesByBusinessAction = async (
       {
         businessId,
         filterByBusiness,
+        businessType,
       }
     );
 
