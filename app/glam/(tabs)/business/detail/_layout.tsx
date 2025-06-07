@@ -1,6 +1,6 @@
 import { useColorScheme } from "@/lib/useColorScheme";
-import { NotificationIcon } from "@/presentation/components/feature";
-import { ThemeToggle } from "@/presentation/components/ThemeToggle";
+import { BusinessFavoriteIcon } from "@/presentation/components/feature/glam/shared/BusinessFavoriteIcon";
+import { ProfessionalFavoriteIcon } from "@/presentation/components/feature/glam/shared/ProfessionalFavoriteIcon";
 import { Stack } from "expo-router";
 import { View } from "react-native";
 
@@ -12,12 +12,6 @@ const DetailScreen = () => {
       initialRouteName="home/[id]"
       screenOptions={{
         headerTintColor: isDarkColorScheme ? "white" : "black",
-        headerRight: () => (
-          <View className="flex-row items-center  relative -mr-1">
-            <NotificationIcon />
-            <ThemeToggle />
-          </View>
-        ),
       }}
     >
       <Stack.Screen
@@ -25,6 +19,11 @@ const DetailScreen = () => {
         options={{
           headerTitleAlign: "center",
           title: "Detalle",
+          headerRight: () => (
+            <View className="flex-row items-center  relative -mr-1">
+              <BusinessFavoriteIcon />
+            </View>
+          ),
         }}
       />
       <Stack.Screen
@@ -44,11 +43,15 @@ const DetailScreen = () => {
         }}
       />
       <Stack.Screen
-        name="professional-detail/[id]"
+        name="professional-detail/[professionalId]"
         options={{
           headerTitleAlign: "center",
-          title: "Detalle de profesional",
-          headerRight: () => null,
+          title: "Perfil del Profesional",
+          headerRight: () => (
+            <View className="flex-row items-center  relative -mr-1">
+              <ProfessionalFavoriteIcon />
+            </View>
+          ),
         }}
       />
     </Stack>

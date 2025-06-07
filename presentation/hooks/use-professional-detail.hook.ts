@@ -7,16 +7,19 @@ import { useUserStore } from "../store/use-user.store";
 
 const staleTime = 0;
 export const useProfessionalDetail = () => {
-  const { id, businessId } = useLocalSearchParams();
+  const { professionalId, businessId } = useLocalSearchParams();
 
   const { addProfessional } = useBusinessBookingStore();
 
   const { user } = useUserStore();
 
   const { data, isLoading } = useQuery({
-    queryKey: ["professional-detail", `${id}-${businessId}`],
+    queryKey: ["professional-detail", `${professionalId}-${businessId}`],
     queryFn: () =>
-      getProfessionalDetailAction(id as string, businessId as string),
+      getProfessionalDetailAction(
+        professionalId as string,
+        businessId as string
+      ),
     staleTime,
   });
 
@@ -27,7 +30,7 @@ export const useProfessionalDetail = () => {
   }, [data]);
 
   return {
-    id,
+    id: professionalId,
     professional: data?.data,
     isLoading,
   };

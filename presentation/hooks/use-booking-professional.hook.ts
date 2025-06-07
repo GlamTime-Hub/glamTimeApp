@@ -1,23 +1,25 @@
-import { getProfessionalByBusinessIdAction } from "@/core/actions/professional/get-professional-by-business-id.action";
 import { useQuery } from "@tanstack/react-query";
 import { router, useLocalSearchParams } from "expo-router";
 import { useBusinessBookingStore } from "../store/use-business-booking.store";
 import { useUserStore } from "../store/use-user.store";
 import { Professional } from "@/core/interfaces/professional.interface";
 import Toast from "react-native-toast-message";
-
-const staleTime = 1000 * 60 * 60 * 24;
+import { getProfessionalWithActiveServiceAction } from "@/core/actions/professional/get-professional-with-active-service.action";
 
 export const useBookingProfessional = () => {
   const { businessId } = useLocalSearchParams();
-  const { professional, addProfessional } = useBusinessBookingStore();
+  const { professional, service, addProfessional } = useBusinessBookingStore();
   const { user } = useUserStore();
 
   const { data, isError, isLoading } = useQuery({
     queryKey: ["booking-professionals", businessId],
     queryFn: () =>
-      getProfessionalByBusinessIdAction(businessId as string, true),
-    staleTime,
+      getProfessionalWithActiveServiceAction(
+        businessId as string,
+        service?.service.id!
+      ),
+    staleTime: 0,
+    enabled: !!service,
   });
 
   const onSelectProfessional = (professional: Professional) => {

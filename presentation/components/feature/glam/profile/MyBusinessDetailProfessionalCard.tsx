@@ -10,6 +10,7 @@ import { TouchableOpacity, View } from "react-native";
 import { Trash2 } from "@/lib/icons/Icons";
 import { CustomDialog } from "@/presentation/components/ui/CustomDialog";
 import { router } from "expo-router";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 interface Props {
   professional: Partial<Professional>;
@@ -25,6 +26,8 @@ export const MyBusinessDetailProfessionalCard = ({
   deactivate,
 }: Props) => {
   const className = CLASS[professional.invitationStatus as string] ?? "";
+
+  const { titleColor } = useColorScheme();
 
   return (
     <TouchableOpacity
@@ -49,11 +52,15 @@ export const MyBusinessDetailProfessionalCard = ({
             </AvatarFallback>
           </Avatar>
           <View className="px-4">
-            <Text className="font-baloo-bold text-lg">
+            <Text className={`font-baloo-bold text-lg ${titleColor}`}>
               {professional.user?.name}
             </Text>
-            <Text className="text-sm">{professional.user?.email}</Text>
-            <Text className="text-sm">{professional.user?.phoneNumber}</Text>
+            <Text className="text-sm text-muted-foreground">
+              {professional.user?.email}
+            </Text>
+            <Text className="text-sm text-muted-foreground">
+              {professional.user?.phoneNumber}
+            </Text>
           </View>
           <CustomDialog
             className="absolute top-7 right-0"
@@ -63,7 +70,7 @@ export const MyBusinessDetailProfessionalCard = ({
             callback={deactivate}
             title={"Desactivar invitación"}
           >
-            <Text numberOfLines={2}>
+            <Text numberOfLines={2} className="text-muted-foreground">
               ¿Estás seguro que deseas desactivar la invitación a{" "}
               {professional.user?.name}?
             </Text>

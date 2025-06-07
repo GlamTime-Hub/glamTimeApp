@@ -20,6 +20,7 @@ import {
 import { X, MapPinned, ShieldUser, Store } from "@/lib/icons/Icons";
 import { router } from "expo-router";
 import { isMoreThan } from "@/presentation/utils/compare-dates-by-min.util";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 interface Props {
   booking: BookingDetail;
@@ -35,10 +36,14 @@ const Label = ({
   title: string;
   description: string;
 }) => {
+  const { titleColor } = useColorScheme();
+
   return (
     <View className="flex flex-row gap-2">
-      <Text className="text-primary font-baloo-bold">{title}:</Text>
-      <Text>{description}</Text>
+      <Text className={`text-primary font-baloo-bold ${titleColor}`}>
+        {title}:
+      </Text>
+      <Text className="text-muted-foreground">{description}</Text>
     </View>
   );
 };
@@ -49,6 +54,8 @@ export const BookingCard = ({
   onCancelBooking,
   onFeedback,
 }: Props) => {
+  const { titleColor } = useColorScheme();
+
   const openLocation = async () => {
     const url = Platform.select({
       ios: `maps:0,0?q=${booking.business.location.address}@${booking.business.location.lat},${booking.business.location.lng}`,
@@ -60,9 +67,10 @@ export const BookingCard = ({
 
   const goToProfessional = () => {
     router.push({
-      pathname: "/glam/(tabs)/business/detail/professional-detail/[id]",
+      pathname:
+        "/glam/(tabs)/business/detail/professional-detail/[professionalId]",
       params: {
-        id: booking.professional.id,
+        professionalId: booking.professional.id,
         businessId: booking.business.id,
       },
     });
@@ -94,11 +102,17 @@ export const BookingCard = ({
             <Label title="Día" description={booking.fullDate} />
 
             <View className="flex flex-row gap-2">
-              <Text className="text-primary font-baloo-bold">Hora:</Text>
+              <Text className={`text-primary font-baloo-bold ${titleColor}`}>
+                Hora:
+              </Text>
               <View className="flex flex-row gap-2">
-                <Text>{formatTime(booking.startTime)}</Text>
-                <Text>-</Text>
-                <Text>{formatTime(booking.endTime)}</Text>
+                <Text className="text-muted-foreground">
+                  {formatTime(booking.startTime)}
+                </Text>
+                <Text className="text-muted-foreground">-</Text>
+                <Text className="text-muted-foreground">
+                  {formatTime(booking.endTime)}
+                </Text>
               </View>
             </View>
           </View>
@@ -136,7 +150,7 @@ export const BookingCard = ({
           )}
 
           {booking.status === "confirmed" && (
-            <View className="w-full flex flex-row justify-center gap-2 p-4">
+            <View className="w-full flex flex-row justify-around p-4">
               <TouchableOpacity onPress={goToBusiness}>
                 <Card className="w-[70px] bg-primary border-primary">
                   <CardContent className="flex p-2 justify-center items-center">

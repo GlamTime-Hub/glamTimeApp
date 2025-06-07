@@ -16,4 +16,6 @@ export interface User {
   role: string;
   birthDay: number;
   birthMonth: number;
+  likedBusinessIds: string[];
+  likedProfessionalIds: string[];
 }

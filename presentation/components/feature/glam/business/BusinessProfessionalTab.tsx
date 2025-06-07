@@ -2,6 +2,7 @@ import { useBusinessProfessional } from "@/presentation/hooks/use-business-profe
 import { View } from "react-native";
 import { BusinessProfessionalTabLoading } from "./BusinessProfessionalTabLoading";
 import { BusinessProfessionalCard } from "./BusinessProfessionalCard";
+import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
 
 export const BusinessProfessionalTab = ({ id }: { id: string }) => {
   const { professionals, isLoading, goPrefessionalDetail } =
@@ -9,6 +10,16 @@ export const BusinessProfessionalTab = ({ id }: { id: string }) => {
 
   if (isLoading) {
     return <BusinessProfessionalTabLoading />;
+  }
+
+  if (professionals?.length === 0) {
+    return (
+      <CustomAlert
+        title="Info!!!"
+        description="El negocio no tiene profesionales activos."
+        type="info"
+      />
+    );
   }
 
   return (

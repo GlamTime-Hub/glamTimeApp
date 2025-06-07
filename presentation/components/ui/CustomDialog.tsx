@@ -30,7 +30,6 @@ export const CustomDialog = ({
   title,
   children,
   icon,
-  labelIcon,
   closeLabel,
   className,
   disabled = false,

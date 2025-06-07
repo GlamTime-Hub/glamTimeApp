@@ -20,6 +20,8 @@ export class UserMapper {
         news: user.notificationPreference.news,
       },
       role: user.role,
+      likedBusinessIds: user.likedBusinessIds || [],
+      likedProfessionalIds: user.likedProfessionalIds || [],
     };
   };
 }

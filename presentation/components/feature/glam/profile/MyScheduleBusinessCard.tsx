@@ -62,7 +62,7 @@ export const MyScheduleBusinessCard = ({ businessProfessional }: Props) => {
               <Text className="font-baloo-bold text-lg" numberOfLines={2}>
                 {businessProfessional.business.name}
               </Text>
-              <Text className="text-sm">
+              <Text className="text-sm text-muted-foreground">
                 {businessProfessional.business.location?.address}
               </Text>
             </View>

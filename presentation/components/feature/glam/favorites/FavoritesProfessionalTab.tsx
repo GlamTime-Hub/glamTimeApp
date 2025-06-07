@@ -5,8 +5,9 @@ import { router } from "expo-router";
 export const FavoritesProfessionalTab = () => {
   const onSelectProfessional = (id: string) => {
     router.push({
-      pathname: "/glam/(tabs)/business/detail/professional-detail/[id]",
-      params: { id },
+      pathname:
+        "/glam/(tabs)/business/detail/professional-detail/[professionalId]",
+      params: { professionalId: id },
     });
   };
 

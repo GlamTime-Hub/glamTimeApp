@@ -13,11 +13,9 @@ export const useBusinessProfessional = (businessId: string) => {
     staleTime,
   });
 
-
   const { session } = useAuthStore();
 
   const goPrefessionalDetail = (id: string) => {
-
     if (!session) {
       router.push("/login/home");
       Toast.show({
@@ -28,10 +26,10 @@ export const useBusinessProfessional = (businessId: string) => {
       return;
     }
 
-
     router.push({
-      pathname: "/glam/(tabs)/business/detail/professional-detail/[id]",
-      params: { id, businessId },
+      pathname:
+        "/glam/(tabs)/business/detail/professional-detail/[professionalId]",
+      params: { professionalId: id, businessId },
     });
   };
 
