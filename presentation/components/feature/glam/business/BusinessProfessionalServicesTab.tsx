@@ -11,6 +11,7 @@ import {
   ProfessionalService,
   SubCategoryWithService,
 } from "@/core/interfaces/professional-service.interface";
+import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
 
 interface Props {
   professionalId: string;
@@ -28,6 +29,16 @@ export const BusinessProfessionalServicesTab = ({
 
   if (isLoading) {
     return <BusinessServicesTabLoading />;
+  }
+
+  if (services?.length === 0) {
+    return (
+      <CustomAlert
+        title="Info!!!"
+        description="No hay servicios disponibles para este profesional."
+        type="info"
+      />
+    );
   }
 
   return (

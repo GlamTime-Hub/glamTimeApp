@@ -14,6 +14,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/presentation/components/ui/avatar";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 export const ProfessionalFeedback = () => {
   const {
@@ -28,6 +29,8 @@ export const ProfessionalFeedback = () => {
     onSubmit,
     handleSubmit,
   } = useProfessionalFeedback();
+
+  const { titleColor } = useColorScheme();
 
   if (isLoading) {
     return <FeedbackLoading />;
@@ -51,7 +54,7 @@ export const ProfessionalFeedback = () => {
               </Avatar>
             </View>
 
-            <Text className="font-baloo-bold text-primary my-2">
+            <Text className={`font-baloo-bold my-2 ${titleColor}`}>
               ¿Que tal tu experiencia con {professional?.user.name} ?
             </Text>
             <View className="mb-2">
@@ -76,7 +79,7 @@ export const ProfessionalFeedback = () => {
               )}
             </View>
 
-            <Text className="font-baloo-bold text-primary">
+            <Text className={`font-baloo-bold my-2 ${titleColor}`}>
               ¿Cómo calificarías el servicio?
             </Text>
 

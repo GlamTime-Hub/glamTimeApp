@@ -8,6 +8,7 @@ import { useBusinessServices } from "@/presentation/hooks/use-business-services.
 import { formatCurrency } from "@/presentation/utils/format-currency.util";
 import { BusinessServicesTabLoading } from "./BusinessServicesTabLoading";
 import { useColorScheme } from "@/lib/useColorScheme";
+import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
 
 export const BusinessServicesTab = ({
   id,
@@ -29,6 +30,16 @@ export const BusinessServicesTab = ({
 
   if (isLoading) {
     return <BusinessServicesTabLoading />;
+  }
+
+  if (services?.length === 0) {
+    return (
+      <CustomAlert
+        title="Info!!!"
+        description="No hay servicios disponibles para este negocio."
+        type="info"
+      />
+    );
   }
 
   return (

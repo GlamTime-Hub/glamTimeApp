@@ -22,7 +22,7 @@ export const useBooking = () => {
 
   const { data, isError, isLoading } = useQuery({
     queryKey: ["bookings"],
-    queryFn: getBookingByUserAction,
+    queryFn: () => getBookingByUserAction(1, 10, "confirmed"),
     staleTime,
     enabled: !!session,
   });
@@ -68,6 +68,7 @@ export const useBooking = () => {
           bookingId,
         },
       });
+      return;
     }
 
     router.push({

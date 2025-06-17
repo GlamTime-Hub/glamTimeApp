@@ -50,6 +50,7 @@ import {
   PartyPopper,
   MessageCircleWarning,
   CircleUserRound,
+  UserX,
 } from "lucide-react-native";
 import { iconWithClassName } from "./iconWithClassName";
 
@@ -104,6 +105,7 @@ iconWithClassName(CalendarX);
 iconWithClassName(PartyPopper);
 iconWithClassName(MessageCircleWarning);
 iconWithClassName(CircleUserRound);
+iconWithClassName(UserX);
 
 export {
   Share2,
@@ -157,4 +159,5 @@ export {
   PartyPopper,
   MessageCircleWarning,
   CircleUserRound,
+  UserX,
 };

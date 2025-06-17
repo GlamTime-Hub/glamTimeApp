@@ -11,6 +11,7 @@ import { Trash2 } from "@/lib/icons/Icons";
 import { CustomDialog } from "@/presentation/components/ui/CustomDialog";
 import { router } from "expo-router";
 import { useColorScheme } from "@/lib/useColorScheme";
+import { useUserStore } from "@/presentation/store/use-user.store";
 
 interface Props {
   professional: Partial<Professional>;
@@ -28,6 +29,8 @@ export const MyBusinessDetailProfessionalCard = ({
   const className = CLASS[professional.invitationStatus as string] ?? "";
 
   const { titleColor } = useColorScheme();
+
+  const { user } = useUserStore();
 
   return (
     <TouchableOpacity
@@ -62,19 +65,22 @@ export const MyBusinessDetailProfessionalCard = ({
               {professional.user?.phoneNumber}
             </Text>
           </View>
-          <CustomDialog
-            className="absolute top-7 right-0"
-            isIcon={true}
-            icon={<Trash2 color={"red"} />}
-            closeLabel="continuar"
-            callback={deactivate}
-            title={"Desactivar invitación"}
-          >
-            <Text numberOfLines={2} className="text-muted-foreground">
-              ¿Estás seguro que deseas desactivar la invitación a{" "}
-              {professional.user?.name}?
-            </Text>
-          </CustomDialog>
+          {user?.userAuthId !== professional.userAuthId &&
+            professional.invitationStatus !== "pending" && (
+              <CustomDialog
+                className="absolute top-7 right-0"
+                isIcon={true}
+                icon={<Trash2 color={"red"} />}
+                closeLabel="continuar"
+                callback={deactivate}
+                title={"Desactivar invitación"}
+              >
+                <Text numberOfLines={2} className="text-muted-foreground">
+                  ¿Estás seguro que deseas desactivar la invitación a{" "}
+                  {professional.user?.name}?
+                </Text>
+              </CustomDialog>
+            )}
         </CardContent>
       </Card>
     </TouchableOpacity>

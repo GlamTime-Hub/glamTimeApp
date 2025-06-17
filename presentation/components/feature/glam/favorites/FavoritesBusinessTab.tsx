@@ -1,39 +1,43 @@
 import { View } from "react-native";
 import BusinessCard from "../business/BusinessCard";
+import { useBusinessFavorites } from "@/presentation/hooks/use-business-favorites.hook";
+import { BusinessFavoriteLoadingCard } from "../business/BusinessFavoriteLoadingCard";
+import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
 
 export const FavoritesBusinessTab = () => {
+  const { business, isLoading } = useBusinessFavorites();
+
+  if (isLoading) {
+    return <BusinessFavoriteLoadingCard />;
+  }
+
+  if (business.length === 0) {
+    return (
+      <CustomAlert
+        title="Info!!!"
+        description="No tienes negocios favoritos."
+        type="info"
+      />
+    );
+  }
+
   return (
     <View>
-      <BusinessCard
-        business={{
-          name: "Peluquería Luxury",
-          imageUrl:
-            "https://images.pexels.com/photos/31323301/pexels-photo-31323301/free-photo-of-diseno-interior-de-peluqueria-moderna-y-elegante.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-          rating: 5,
-          liked: true,
-          likes: 120,
-        }}
-      />
-      <BusinessCard
-        business={{
-          name: "Spa y Masajes",
-          imageUrl:
-            "https://images.pexels.com/photos/1813272/pexels-photo-1813272.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-          rating: 5,
-          liked: true,
-          likes: 120,
-        }}
-      />
-      <BusinessCard
-        business={{
-          name: "Belleza y algo más",
-          imageUrl:
-            "https://images.pexels.com/photos/2061820/pexels-photo-2061820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-          rating: 5,
-          liked: true,
-          likes: 120,
-        }}
-      />
+      {business.map((item) => (
+        <BusinessCard
+          key={item.id}
+          business={{
+            id: item.id,
+            name: item.name,
+            imageUrl: item.urlPhoto,
+            rating: item.rating,
+            likes: item.likes,
+            receivedReviews: item.receivedReviews,
+            totalBooking: item.totalBooking,
+            address: item.location.address,
+          }}
+        />
+      ))}
     </View>
   );
 };

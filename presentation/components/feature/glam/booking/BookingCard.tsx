@@ -1,10 +1,10 @@
-import { BookingDetail } from "@/core/interfaces/booking-detail.interface";
+import { Linking, Platform, TouchableOpacity, View } from "react-native";
 
+import { BookingDetail } from "@/core/interfaces/booking-detail.interface";
 import { Button } from "@/presentation/components/ui/button";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Text } from "@/presentation/components/ui/text";
 import { formatTime } from "@/presentation/utils/format-time.util";
-import { Linking, Platform, TouchableOpacity, View } from "react-native";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
 import {
   Dialog,
@@ -17,7 +17,7 @@ import {
   DialogTrigger,
 } from "@/presentation/components/ui/dialog";
 
-import { X, MapPinned, ShieldUser, Store } from "@/lib/icons/Icons";
+import { X, MapPinned, ShieldUser, Store, SquarePen } from "@/lib/icons/Icons";
 import { router } from "expo-router";
 import { isMoreThan } from "@/presentation/utils/compare-dates-by-min.util";
 import { useColorScheme } from "@/lib/useColorScheme";
@@ -27,6 +27,7 @@ interface Props {
   loading: boolean;
   onCancelBooking?: (id: string) => void;
   onFeedback?: (id: string, bookingId: string, isBusiness: boolean) => void;
+  isHistory: boolean;
 }
 
 const Label = ({
@@ -51,10 +52,11 @@ const Label = ({
 export const BookingCard = ({
   booking,
   loading,
+  isHistory = false,
   onCancelBooking,
   onFeedback,
 }: Props) => {
-  const { titleColor } = useColorScheme();
+  const { titleColor, colorIcons } = useColorScheme();
 
   const openLocation = async () => {
     const url = Platform.select({
@@ -90,7 +92,7 @@ export const BookingCard = ({
   return (
     <View className="flex-1 mb-2">
       <Card className="flex-1">
-        <CardContent className="flex-1 p-0">
+        <CardContent className="flex-1 p-0 relative">
           <View className="flex p-4">
             <Label title="Salón" description={booking.business.name} />
 
@@ -218,6 +220,12 @@ export const BookingCard = ({
                 </Dialog>
               )}
             </View>
+          )}
+
+          {isHistory && (
+            <TouchableOpacity className="absolute top-2 right-2">
+              <SquarePen className={colorIcons} />
+            </TouchableOpacity>
           )}
         </CardContent>
       </Card>

@@ -5,12 +5,7 @@ import {
 } from "@/presentation/components/ui/avatar";
 import { Text } from "@/presentation/components/ui/text";
 import { TouchableOpacity, View } from "react-native";
-import {
-  MessageCircleMore,
-  Star,
-  ThumbsUp,
-  NotebookPen,
-} from "@/lib/icons/Icons";
+import { MessageCircleMore, Star, Heart, NotebookPen } from "@/lib/icons/Icons";
 import { Professional } from "@/core/interfaces/professional.interface";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { useColorScheme } from "@/lib/useColorScheme";
@@ -53,7 +48,7 @@ export const BusinessProfessionalCard = ({ professional, callback }: Props) => {
                     <Text className={`text-2xl mt-2 ${titleColor}`}>
                       {professional.likes}
                     </Text>
-                    <ThumbsUp size={20} className={colorIcons} />
+                    <Heart size={20} className={colorIcons} />
                   </View>
 
                   <View className="flex flex-row  gap-1 items-center">

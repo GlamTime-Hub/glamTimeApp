@@ -2,7 +2,7 @@ import { Image, TouchableOpacity, View } from "react-native";
 import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Text } from "@/presentation/components/ui/text";
 import {
-  ThumbsUp,
+  Heart,
   Star,
   MessageCircleMore,
   SquarePen,
@@ -87,7 +87,7 @@ export const MyBusinessCard = ({
                   <Text className={`text-lg ${titleColor}`}>
                     {business.likes}
                   </Text>
-                  <ThumbsUp className={colorIcons} size={18} />
+                  <Heart className={colorIcons} size={18} />
                 </View>
                 <View className="flex flex-row items-center gap-1">
                   <Text className={`text-lg ${titleColor}`}>

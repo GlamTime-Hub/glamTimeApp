@@ -30,7 +30,7 @@ export const VerifyOtp = () => {
               color: isDarkColorScheme ? "#F5F5F5" : "#09090A",
               width: 40,
             }}
-            tintColor={"#9D84B3"}
+            tintColor={isDarkColorScheme ? "#F5F5F5" : "#09090A"}
             containerStyle={{
               width: 120,
               marginLeft: 25,

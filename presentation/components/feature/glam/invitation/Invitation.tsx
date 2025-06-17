@@ -5,10 +5,12 @@ import { Card, CardContent } from "@/presentation/components/ui/card";
 import { Text } from "@/presentation/components/ui/text";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
 import { useInvitation } from "@/presentation/hooks";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 export const Invitation = () => {
   const { notification, loading, loadingReject, handleAccept, handleReject } =
     useInvitation();
+  const { titleColor } = useColorScheme();
 
   return (
     <View className="flex-1 p-4 flex justify-between">
@@ -26,11 +28,13 @@ export const Invitation = () => {
             }}
           />
           <View className="p-6">
-            <Text className="font-baloo-bold text-xl">
+            <Text className={`font-baloo-bold text-xl ${titleColor}`}>
               {notification?.meta.business.name}
             </Text>
-            <Text>Te ha invitado a ser parte de su equipo de trabajo.</Text>
-            <Text className="mt-1">
+            <Text className="text-muted-foreground">
+              Te ha invitado a ser parte de su equipo de trabajo.
+            </Text>
+            <Text className="mt-1 text-muted-foreground">
               Una vez aceptada la invitación, estarás en las lista de
               profesionales y los usuarios podrán reservar tus servicios.
             </Text>

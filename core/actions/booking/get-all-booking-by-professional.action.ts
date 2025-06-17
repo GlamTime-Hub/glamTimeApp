@@ -2,10 +2,19 @@ import axiosClient from "@/core/api/axios-client";
 import { BookingDetail } from "@/core/interfaces/booking-detail.interface";
 import { BookingDetailMapper } from "@/core/mappers/booking-detail.mapper";
 
-export const getAllBookingByProfessionalAction = async () => {
+export const getAllBookingByProfessionalAction = async (
+  page: number,
+  limit: number,
+  status: string
+) => {
   try {
-    const { data } = await axiosClient.get(
-      "booking/bookings-by-professional-user-auth"
+    const { data } = await axiosClient.post(
+      "booking/bookings-by-professional-user-auth",
+      {
+        page,
+        limit,
+        status,
+      }
     );
 
     const bookings: BookingDetail[] = data.data.map((booking: any) =>

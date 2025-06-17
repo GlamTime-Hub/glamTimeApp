@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { View } from "react-native";
+
 import { CustomAlert } from "@/presentation/components/ui/CustomAlert";
 import {
   Tabs,
@@ -6,21 +9,14 @@ import {
   TabsTrigger,
 } from "@/presentation/components/ui/tabs";
 import { Text } from "@/presentation/components/ui/text";
-import { useAgenda } from "@/presentation/hooks";
-import { useState } from "react";
-import { ScrollView, View } from "react-native";
-import { BookingLoading } from "./BookingLoading";
-import { BookingProfessionalCard } from "./BookingProfessionalCard";
+import useAuthStore from "@/core/store/auth.store";
+import { AgendaList } from "./AgendaList";
+import { AgendaHistoryList } from "./AgendaHistoryList";
 
 export const Agenda = () => {
-  const { bookings, isLoading, loading, session } = useAgenda();
+  const { session } = useAuthStore();
 
   const [value, setValue] = useState("booking");
-
-  const bookingConfirmed = bookings?.filter(
-    (booking) => booking.status === "confirmed"
-  );
-  const history = bookings?.filter((booking) => booking.status !== "confirmed");
 
   if (!session) {
     return (
@@ -32,10 +28,6 @@ export const Agenda = () => {
         />
       </View>
     );
-  }
-
-  if (isLoading) {
-    return <BookingLoading />;
   }
 
   return (
@@ -55,36 +47,12 @@ export const Agenda = () => {
         </TabsList>
         <TabsContent value="booking" className="flex-1">
           <View className="flex-1">
-            {bookingConfirmed?.length === 0 && (
-              <CustomAlert
-                title="Info!!!"
-                description="No tienes ninguna reserva pendiente."
-                type="info"
-              />
-            )}
-
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {bookingConfirmed?.map((booking) => (
-                <BookingProfessionalCard booking={booking} key={booking.id} />
-              ))}
-            </ScrollView>
+            <AgendaList />
           </View>
         </TabsContent>
         <TabsContent value="history" className="flex-1">
           <View className="flex-1">
-            {history?.length === 0 && (
-              <CustomAlert
-                title="Info!!!"
-                description="No tienes reservas en el historial."
-                type="info"
-              />
-            )}
-
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {history?.map((booking) => (
-                <Text key={booking.id}></Text>
-              ))}
-            </ScrollView>
+            <AgendaHistoryList />
           </View>
         </TabsContent>
       </Tabs>

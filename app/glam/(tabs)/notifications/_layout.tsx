@@ -36,14 +36,6 @@ const NotificationLayout = () => {
       />
 
       <Stack.Screen
-        name="booking-confirmed/index"
-        options={{
-          headerTitleAlign: "center",
-          title: "Reserva Confirmada",
-        }}
-      />
-
-      <Stack.Screen
         name="booking-cancelled-by-user/index"
         options={{
           headerTitleAlign: "center",

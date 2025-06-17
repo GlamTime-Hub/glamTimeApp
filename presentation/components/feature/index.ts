@@ -45,6 +45,7 @@ import { InvitationAccepted } from "./glam/notification/InvitationAccepted";
 import { MyBusinessProfessionalDetail } from "./glam/profile/MyBusinessProfessionalDetail";
 import { MyServiceHome } from "./glam/profile/MyServicesHome";
 import { MyProfessionalServiceDetail } from "./glam/profile/MyProfessionalServicesDetail";
+import { BookingHistoryDetail } from "./glam/booking/BookingHistoryDetail";
 
 export {
   Login,
@@ -94,4 +95,5 @@ export {
   MyBusinessProfessionalDetail,
   MyServiceHome,
   MyProfessionalServiceDetail,
+  BookingHistoryDetail,
 };

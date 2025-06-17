@@ -10,6 +10,7 @@ import { deactivateProfessionalAction } from "@/core/actions/professional/deacti
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CountryPhone } from "@/core/interfaces/country-phone.interface";
+import { useUserStore } from "../store/use-user.store";
 
 const staleTime = 1000 * 60 * 60 * 24;
 
@@ -25,6 +26,8 @@ type FormData = z.infer<typeof schema>;
 export const useBusinessMyProfessionals = (businessId: string) => {
   const [loading, setLoading] = useState<boolean>(false);
 
+  const { user } = useUserStore();
+
   const queryClient = useQueryClient();
 
   const { data, isError, isLoading } = useQuery({
@@ -37,6 +40,7 @@ export const useBusinessMyProfessionals = (businessId: string) => {
     handleSubmit,
     setValue,
     clearErrors,
+    getValues,
     reset,
     formState: { errors },
   } = useForm({
@@ -75,6 +79,7 @@ export const useBusinessMyProfessionals = (businessId: string) => {
       });
 
       reset();
+      onChangePhone("");
 
       queryClient.invalidateQueries({
         queryKey: ["professionals", businessId],
@@ -91,7 +96,7 @@ export const useBusinessMyProfessionals = (businessId: string) => {
 
   const onDeactivateProfessional = async (professionalId: string) => {
     setLoading(true);
-    await deactivateProfessionalAction(professionalId, businessId);
+    await deactivateProfessionalAction(professionalId, businessId, user?.id!);
 
     Toast.show({
       type: "success",
@@ -113,6 +118,7 @@ export const useBusinessMyProfessionals = (businessId: string) => {
     onSendInvitation,
     onDeactivateProfessional,
     onChangeCountry,
+    getValues,
     onChangePhone,
   };
 };

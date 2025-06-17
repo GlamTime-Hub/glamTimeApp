@@ -29,22 +29,14 @@ export const FavoritesTabs = () => {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="business" className="flex-1">
-        <Card className="flex-1">
-          <CardContent className="gap-4  native:gap-2">
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <FavoritesBusinessTab />
-            </ScrollView>
-          </CardContent>
-        </Card>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <FavoritesBusinessTab />
+        </ScrollView>
       </TabsContent>
       <TabsContent value="professionals" className="flex-1">
-        <Card className="flex-1">
-          <CardContent className="gap-4 native:gap-2">
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <FavoritesProfessionalTab />
-            </ScrollView>
-          </CardContent>
-        </Card>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <FavoritesProfessionalTab />
+        </ScrollView>
       </TabsContent>
     </Tabs>
   );

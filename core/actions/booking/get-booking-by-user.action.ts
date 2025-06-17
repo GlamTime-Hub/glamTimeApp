@@ -2,9 +2,17 @@ import axiosClient from "@/core/api/axios-client";
 import { BookingDetail } from "@/core/interfaces/booking-detail.interface";
 import { BookingDetailMapper } from "@/core/mappers/booking-detail.mapper";
 
-export const getBookingByUserAction = async () => {
+export const getBookingByUserAction = async (
+  page: number,
+  limit: number,
+  status: string
+) => {
   try {
-    const { data } = await axiosClient.get("booking/bookings-by-user");
+    const { data } = await axiosClient.post("booking/bookings-by-user", {
+      status,
+      page,
+      limit,
+    });
 
     const bookings: BookingDetail[] = data.data.map((booking: any) =>
       BookingDetailMapper.fromBookingDetailDBToBookingDetail(booking)

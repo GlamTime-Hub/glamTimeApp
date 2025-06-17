@@ -156,7 +156,12 @@ export default function RootLayout() {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
           <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-          <Stack initialRouteName="glam/(tabs)">
+          <Stack
+            initialRouteName="glam/(tabs)"
+            screenOptions={{
+              headerTintColor: isDarkColorScheme ? "white" : "black",
+            }}
+          >
             <Stack.Screen
               name="login"
               options={{

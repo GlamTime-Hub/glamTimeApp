@@ -7,6 +7,7 @@ import {
 import { Text } from "@/presentation/components/ui/text";
 import { Star } from "@/lib/icons/Icons";
 import { Card, CardContent } from "@/presentation/components/ui/card";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 interface Props {
   userName: string;
@@ -22,6 +23,8 @@ export const ReviewCard = ({
   userUrlPhoto,
   rating,
 }: Props) => {
+  const { titleColor } = useColorScheme();
+
   return (
     <Card className="my-2 flex-1">
       <CardContent className="px-4 py-0 flex-1">
@@ -37,8 +40,11 @@ export const ReviewCard = ({
             </AvatarFallback>
           </Avatar>
           <View className="relative  flex-1 ">
-            <Text className="font-baloo-bold">{userName}</Text>
-            <Text className="text-sm   italic" numberOfLines={3}>
+            <Text className={`font-baloo-bold ${titleColor}`}>{userName}</Text>
+            <Text
+              className="text-sm text-muted-foreground italic"
+              numberOfLines={3}
+            >
               "{comment}"
             </Text>
             <View className="flex-1 items-center flex-row gap-1 absolute top-0 right-0">

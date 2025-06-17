@@ -8,6 +8,7 @@ import { Image, ScrollView, View } from "react-native";
 import StarRating from "react-native-star-rating-widget";
 import { FeedbackLoading } from "./FeedbackLoading";
 import { LoadingIndicator } from "../shared/LoadingIndicator";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 export const BusinessFeedback = () => {
   const {
@@ -22,6 +23,8 @@ export const BusinessFeedback = () => {
     onSubmit,
     handleSubmit,
   } = useBusinessFeedback();
+
+  const { titleColor } = useColorScheme();
 
   if (isLoading) {
     return <FeedbackLoading />;
@@ -42,7 +45,7 @@ export const BusinessFeedback = () => {
               }}
             />
 
-            <Text className="font-baloo-bold text-primary my-2">
+            <Text className={`font-baloo-bold my-2 ${titleColor}`}>
               ¿Que tal tu experiencia con {business?.name} ?
             </Text>
             <View className="mb-2">
@@ -67,7 +70,7 @@ export const BusinessFeedback = () => {
               )}
             </View>
 
-            <Text className="font-baloo-bold text-primary">
+            <Text className={`font-baloo-bold my-2 ${titleColor}`}>
               ¿Cómo calificarías el servicio?
             </Text>
 

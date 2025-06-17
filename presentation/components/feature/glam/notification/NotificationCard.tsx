@@ -10,33 +10,41 @@ import {
   CalendarX,
   SquareScissors,
   PartyPopper,
+  UserX,
 } from "@/lib/icons/Icons";
 import { formatDistanceToNow } from "date-fns";
+import { useColorScheme } from "@/lib/useColorScheme";
 
 interface Props {
   notification: UserNotification;
 }
 
-const NOTIFICATION_ICON: { [key: string]: React.ReactNode } = {
-  "professional-booking": <CalendarCheck2 className="text-primary" />,
-  "booking-confirmed": <CalendarCheck className="text-primary" />,
-  "booking-cancelled-by-user": <CalendarX className="text-primary" />,
-  "booking-cancelled-by-professional": <CalendarX className="text-primary" />,
-  invitation: <SquareScissors className="text-primary" />,
-  "invitation-accepted": <PartyPopper className="text-primary" />,
-};
-
 export const NotificationCard = ({ notification }: Props) => {
+  const { titleColor, colorIcons } = useColorScheme();
+
+  const NOTIFICATION_ICON: { [key: string]: React.ReactNode } = {
+    "professional-booking": <CalendarCheck2 className={colorIcons} />,
+    "booking-confirmed": <CalendarCheck className={colorIcons} />,
+    "booking-cancelled-by-user": <CalendarX className={colorIcons} />,
+    "booking-cancelled-by-professional": <CalendarX className={colorIcons} />,
+    invitation: <SquareScissors className={colorIcons} />,
+    "invitation-accepted": <PartyPopper className={colorIcons} />,
+    "invitation-rejected": <UserX className={colorIcons} />,
+    "invitation-removed": <UserX className={colorIcons} />,
+  };
+
   return (
-    <View className=" px-2 border-b-[1px] border-b-gray-400">
+    <View className=" px-2 border-b-[1px] border-b-muted">
       <View className="flex flex-row items-center justify-center">
         {NOTIFICATION_ICON[notification.type]}
         <View style={styles.rectButton} className=" py-2">
-          <Text className="text-primary text-md">{notification.title}</Text>
+          <Text className={`text-primary mt-4 ${titleColor}`}>
+            {notification.title}
+          </Text>
           <Text
             numberOfLines={3}
             ellipsizeMode={"tail"}
-            className="mb-2 text-md"
+            className="mb-2 text-md text-muted-foreground"
           >
             {notification.body}
           </Text>

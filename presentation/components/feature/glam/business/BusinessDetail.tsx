@@ -2,7 +2,7 @@ import {
   MapPinned,
   MessageCircleMore,
   Star,
-  ThumbsUp,
+  Heart,
   NotebookPen,
 } from "@/lib/icons/Icons";
 import Share from "@/lib/icons/Share";
@@ -136,7 +136,7 @@ export const BusinessDetail = () => {
                         <Text className={`text-3xl pt-4 ${titleColor}`}>
                           {business?.likes}
                         </Text>
-                        <ThumbsUp size={26} className={colorIcons} />
+                        <Heart size={26} className={colorIcons} />
                       </View>
                       <Text
                         className={`text-md text-primary font-baloo-bold ${titleColor} `}

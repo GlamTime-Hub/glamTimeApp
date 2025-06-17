@@ -26,6 +26,7 @@ export const MyBusinessMyProfessionals = () => {
     onChangeCountry,
     handleSubmit,
     onDeactivateProfessional,
+    getValues,
   } = useBusinessMyProfessionals(businessId as string);
 
   if (isLoadingProfessionals) {
@@ -45,6 +46,7 @@ export const MyBusinessMyProfessionals = () => {
         </Text>
         <View className="my-2">
           <PhoneNumber
+            initialPhoneNumber={getValues("phoneNumber")}
             onChangeCountry={onChangeCountry}
             onChangePhone={onChangePhone}
             disabled={loading}
@@ -80,7 +82,7 @@ export const MyBusinessMyProfessionals = () => {
             <View className="flex flex-row gap-2">
               <View className="w-8 h-6 border-2 border-yellow-200"></View>
               <Text className="text-muted-foreground">
-                Invitación pendiente
+                Invitación Pendiente
               </Text>
             </View>
           </View>

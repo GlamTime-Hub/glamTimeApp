@@ -7,7 +7,7 @@ import {
 import { Card } from "@/presentation/components/ui/card";
 import {
   Star,
-  ThumbsUp,
+  Heart,
   MessageCircleMore,
   CalendarDays,
 } from "@/lib/icons/Icons";
@@ -73,7 +73,7 @@ const BusinessCard = ({ business }: Props) => {
                   <Text className={"text-white mt-2 text-xl"}>
                     {business.likes}
                   </Text>
-                  <ThumbsUp size={16} className="color-white" />
+                  <Heart size={16} className="color-white" />
                 </View>
                 <View className="flex flex-row items-center gap-1">
                   <Text className={"text-white mt-2 text-xl"}>

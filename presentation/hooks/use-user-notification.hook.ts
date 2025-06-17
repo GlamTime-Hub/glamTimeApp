@@ -10,8 +10,6 @@ export const useUserNotifications = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["notifications"],
     queryFn: getUserNotificationAction,
-    staleTime: 1000 * 60 * 60,
-    enabled: !!session,
   });
 
   const markNotificationAsReadById = async (notificationId: string) => {

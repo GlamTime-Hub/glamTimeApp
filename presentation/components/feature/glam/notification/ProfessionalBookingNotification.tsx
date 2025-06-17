@@ -74,7 +74,7 @@ export const ProfessionalBookingNotification = () => {
       <Card>
         <CardContent className="flex flex-col items-center">
           <Text className="text-primary font-baloo-bold my-2 text-xl">
-            !Buenas Noticias!
+            {!canCancel ? "Reserva Caducada" : "¡Buenas Noticias!"}
           </Text>
           <Avatar alt="Imagen de profesional">
             <AvatarImage

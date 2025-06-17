@@ -9,7 +9,7 @@ import {
   CalendarDays,
   MessageCircleMore,
   Star,
-  ThumbsUp,
+  Heart,
 } from "@/lib/icons/Icons";
 import { BusinessProfessionalTab } from "./BusinessProfessionalTabs";
 import { useProfessionalDetail } from "@/presentation/hooks";
@@ -46,7 +46,7 @@ export const BusinessProfessionalDetail = () => {
             <Text className={`text-2xl mt-2 ${titleColor}`}>
               {professional?.likes}
             </Text>
-            <ThumbsUp size={25} className={colorIcons} />
+            <Heart size={25} className={colorIcons} />
           </View>
           <View className="flex-row gap-1  items-center">
             <Text className={`text-2xl mt-2 ${titleColor}`}>

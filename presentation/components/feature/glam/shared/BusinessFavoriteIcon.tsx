@@ -9,12 +9,15 @@ import { Text } from "@/presentation/components/ui/text";
 import { addBusinessLikeAction } from "@/core/actions/business/add-like.action";
 import { User } from "@/core/interfaces/user.interface";
 import { useColorScheme } from "@/lib/useColorScheme";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const BusinessFavoriteIcon = () => {
   const { user, addUser } = useUserStore();
   const { id } = useLocalSearchParams();
 
   const { colorIcons } = useColorScheme();
+
+  const queryClient = useQueryClient();
 
   const isFavorite = user?.likedBusinessIds?.includes(id as string) || false;
 
@@ -24,6 +27,8 @@ export const BusinessFavoriteIcon = () => {
     await addBusinessLikeAction(id as string, user?.id as string);
     const updateFavorite = !favorite;
     setFavorite(updateFavorite);
+
+    queryClient.invalidateQueries({ queryKey: ["businessFavorites"] });
 
     const newLikedBusinessIds = updateFavorite
       ? [...user!.likedBusinessIds, id as string]

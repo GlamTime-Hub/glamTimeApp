@@ -7,8 +7,7 @@ import { Notification } from "./Notification";
 import { NotificationCard } from "./NotificationCard";
 
 export const Notifications = () => {
-  const { notifications, isLoading, session, markNotificationAsReadById } =
-    useUserNotifications();
+  const { notifications, isLoading, session } = useUserNotifications();
 
   if (!session) {
     return (
@@ -38,6 +37,7 @@ export const Notifications = () => {
   return (
     <View className="flex-1">
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={notifications}
         renderItem={({ item }) => (
           <Notification notification={item}>

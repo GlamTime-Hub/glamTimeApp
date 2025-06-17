@@ -2,7 +2,7 @@ import axiosClient from "@/core/api/axios-client";
 
 export const cancelBookingAction = async (booking: any) => {
   try {
-    await axiosClient.post("booking/cancel-booking", {
+    await axiosClient.post("booking/cancel-booking-by-professional", {
       ...booking,
     });
 

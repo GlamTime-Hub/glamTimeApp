@@ -47,6 +47,7 @@ const BookingScreen = () => {
         options={{
           headerTitleAlign: "center",
           title: "Calificar Reserva",
+          headerShown: false,
         }}
       />
 
@@ -55,6 +56,14 @@ const BookingScreen = () => {
         options={{
           headerTitleAlign: "center",
           title: "Mi Agenda",
+        }}
+      />
+
+      <Stack.Screen
+        name="history-detail/[bookingId]"
+        options={{
+          headerTitleAlign: "center",
+          title: "Detalle de Reserva",
         }}
       />
     </Stack>

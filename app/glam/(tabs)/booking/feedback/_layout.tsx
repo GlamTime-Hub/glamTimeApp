@@ -2,12 +2,7 @@ import { Stack } from "expo-router";
 
 const FeedbackScreen = () => {
   return (
-    <Stack
-      initialRouteName="business/[id]"
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
+    <Stack initialRouteName="business/[id]">
       <Stack.Screen
         name="business/[id]"
         options={{
